@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hệ thống Tư vấn Bệnh Cây trồng AI - SIC Group 5</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #2e7d32;
+      --primary-dark: #1b5e20;
+      --primary-light: #e8f5e9;
+      --accent: #ff9800;
+      --danger: #d32f2f;
+      --text-main: #212121;
+      --text-muted: #666666;
+      --bg: #f4f6f8;
+      --card-bg: #ffffff;
+      --border: #e0e0e0;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+    body { background-color: var(--bg); color: var(--text-main); line-height: 1.6; padding-bottom: 50px; }
+
+    header {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    header h1 { font-size: 26px; font-weight: 700; margin-bottom: 6px; }
+    header p { font-size: 14px; opacity: 0.9; }
+
+    .container { max-width: 1000px; margin: 25px auto; padding: 0 15px; }
+
+    .status-bar {
+      background: var(--card-bg);
+      border-radius: 10px;
+      padding: 12px 20px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      border: 1px solid var(--border);
+    }
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .badge-online { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+    .badge-offline { background: #ffebee; color: #c62828; border: 1px solid #ef9a9a; }
+
+    .grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 20px; }
+    @media (max-width: 800px) { .grid { grid-template-columns: 1fr; } }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      border: 1px solid var(--border);
+    }
+    .card h2 { font-size: 18px; margin-bottom: 16px; color: var(--primary-dark); display: flex; align-items: center; gap: 8px; }
+
+    .upload-zone {
+      border: 2px dashed #81c784;
+      border-radius: 12px;
+      padding: 30px 20px;
+      text-align: center;
+      background: var(--primary-light);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .upload-zone:hover { border-color: var(--primary); background: #c8e6c9; }
+    .upload-zone svg { width: 48px; height: 48px; fill: var(--primary); margin-bottom: 10px; }
+    .upload-zone p { font-size: 14px; color: var(--text-muted); }
+
+    #image-preview {
+      display: none;
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-top: 15px;
+      border: 1px solid var(--border);
+    }
+
+    .threshold-control { margin-top: 20px; }
+    .threshold-control label { display: flex; justify-content: space-between; font-size: 14px; font-weight: 500; margin-bottom: 8px; }
+    .threshold-control input[type="range"] { width: 100%; accent-color: var(--primary); cursor: pointer; }
+
+    .btn-submit {
+      width: 100%;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 14px;
+      font-size: 16px;
+      font-weight: 600;
+      margin-top: 20px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-submit:hover { background: var(--primary-dark); }
+    .btn-submit:disabled { background: #b0bec5; cursor: not-allowed; }
+
+    .sample-buttons { margin-top: 15px; display: flex; flex-wrap: wrap; gap: 8px; }
+    .btn-sample {
+      background: #f1f8e9;
+      color: var(--primary-dark);
+      border: 1px solid #c5e1a5;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+      font-weight: 500;
+    }
+    .btn-sample:hover { background: #dcedc8; }
+
+    /* Results section */
+    .empty-state { text-align: center; padding: 60px 20px; color: var(--text-muted); }
+    .empty-state svg { width: 64px; height: 64px; fill: #bdbdbd; margin-bottom: 15px; }
+
+    .result-box { display: none; }
+    .diagnosis-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--primary-light);
+    }
+    .disease-title { font-size: 20px; font-weight: 700; color: #1b5e20; }
+    .scientific-name { font-size: 13px; font-style: italic; color: var(--text-muted); }
+
+    .metrics-row {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+    .metric-pill {
+      flex: 1;
+      background: #f5f5f5;
+      padding: 10px;
+      border-radius: 8px;
+      text-align: center;
+    }
+    .metric-pill .label { font-size: 12px; color: var(--text-muted); }
+    .metric-pill .val { font-size: 16px; font-weight: 700; color: var(--text-main); }
+
+    .section-title { font-size: 15px; font-weight: 700; margin: 15px 0 8px 0; color: #37474f; }
+
+    .treatment-table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 13px; }
+    .treatment-table th { background: #e8f5e9; color: #2e7d32; text-align: left; padding: 8px; font-weight: 600; }
+    .treatment-table td { padding: 8px; border-bottom: 1px solid #eeeeee; }
+
+    .alert-box {
+      border-radius: 8px;
+      padding: 12px;
+      margin-top: 12px;
+      font-size: 13px;
+    }
+    .alert-warning { background: #fff3e0; border-left: 4px solid var(--accent); color: #e65100; }
+    .alert-success { background: #e8f5e9; border-left: 4px solid var(--primary); color: #2e7d32; }
+
+    .guidance-list { padding-left: 20px; font-size: 13px; color: #424242; }
+    .guidance-list li { margin-bottom: 5px; }
+
+    .disclaimer-text {
+      margin-top: 20px;
+      padding: 10px;
+      background: #fafafa;
+      border: 1px solid #eeeeee;
+      border-radius: 6px;
+      font-size: 11px;
+      color: #757575;
+      line-height: 1.5;
+    }
+
+    .spinner {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      border: 3px solid rgba(255,255,255,.3);
+      border-radius: 50%;
+      border-top-color: #fff;
+      animation: spin 1s ease-in-out infinite;
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🌿 Hệ Thống Chẩn Đoán & Tư Vấn Bệnh Cây Trồng AI</h1>
+    <p>Samsung Innovation Campus (SIC) Capstone Project - Group 5 | Backend Developer: <strong>Nguyễn Quốc Khánh</strong></p>
+  </header>
+
+  <div class="container">
+    
+    <!-- Status bar -->
+    <div class="status-bar">
+      <div>
+        <strong>FastAPI Backend Server:</strong>
+        <span id="server-status" class="badge badge-offline">Đang kiểm tra kết nối...</span>
+      </div>
+      <div style="font-size: 13px; color: var(--text-muted);">
+        Base URL: <code>http://127.0.0.1:8000</code>
+      </div>
+    </div>
+
+    <div class="grid">
+      
+      <!-- Left Column: Input Form -->
+      <div class="card">
+        <h2>📸 Chụp / Tải ảnh lá cây</h2>
+
+        <div class="upload-zone" onclick="document.getElementById('file-input').click()">
+          <svg viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/></svg>
+          <p><strong>Bấm vào đây để chọn ảnh lá cây</strong></p>
+          <p>Hỗ trợ định dạng JPG, PNG (Tối đa 10MB)</p>
+          <input type="file" id="file-input" accept="image/jpeg,image/png" style="display: none;" onchange="handleFileSelect(event)">
+        </div>
+
+        <img id="image-preview" alt="Xem trước ảnh">
+
+        <div class="threshold-control">
+          <label>
+            <span>Ngưỡng tin cậy an toàn (Threshold):</span>
+            <span id="threshold-val" style="color: var(--primary); font-weight: 700;">75%</span>
+          </label>
+          <input type="range" id="threshold-range" min="50" max="95" value="75" oninput="updateThreshold(this.value)">
+        </div>
+
+        <button id="btn-submit" class="btn-submit" onclick="submitDiagnosis()" disabled>
+          🔍 Bắt đầu Chẩn đoán Bệnh
+        </button>
+
+        <div style="margin-top: 20px;">
+          <p style="font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 6px;">Thử nhanh bằng ảnh mẫu có sẵn:</p>
+          <div class="sample-buttons">
+            <button class="btn-sample" onclick="loadSample('sample_images/tomato_leaf_sample.jpg')">🍅 Cà chua đốm vòng</button>
+            <button class="btn-sample" onclick="loadSample('sample_images/corn_leaf_sample.png')">🌽 Ngô gỉ sắt</button>
+            <button class="btn-sample" onclick="loadSample('sample_images/potato_leaf_sample.jpg')">🥔 Khoai tây khỏe mạnh</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Results -->
+      <div class="card">
+        <h2>📋 Kết quả Chẩn đoán & Tư vấn</h2>
+
+        <div id="empty-state" class="empty-state">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+          <p>Vui lòng tải lên một bức ảnh lá cây (Cà chua, Khoai tây, Ngô) để nhận kết quả phân tích AI và phác đồ điều trị.</p>
+        </div>
+
+        <div id="result-box" class="result-box">
+          
+          <div class="diagnosis-header">
+            <div>
+              <div id="disease-name" class="disease-title">Tên bệnh</div>
+              <div id="scientific-name" class="scientific-name">Scientific Name</div>
+            </div>
+            <div id="status-badge" class="badge">CONFIRMED</div>
+          </div>
+
+          <div class="metrics-row">
+            <div class="metric-pill">
+              <div class="label">Độ tin cậy AI</div>
+              <div id="metric-conf" class="val" style="color: var(--primary);">94.5%</div>
+            </div>
+            <div class="metric-pill">
+              <div class="label">Thời gian đáp ứng</div>
+              <div id="metric-latency" class="val" style="color: #0288d1;">32.5 ms</div>
+            </div>
+            <div class="metric-pill">
+              <div class="label">Chuẩn Capstone</div>
+              <div class="val" style="color: #2e7d32;">&lt; 200 ms ✅</div>
+            </div>
+          </div>
+
+          <div id="alert-container"></div>
+
+          <!-- Symptoms -->
+          <div class="section-title">🔍 Triệu chứng nhận biết:</div>
+          <p id="symptoms-text" style="font-size: 13px; color: #424242;"></p>
+
+          <!-- Chemical Treatments -->
+          <div id="chemical-section">
+            <div class="section-title">💊 Thuốc BVTV khuyến cáo (Phác đồ chuẩn FAO):</div>
+            <table class="treatment-table">
+              <thead>
+                <tr>
+                  <th>Hoạt chất & Biệt dược</th>
+                  <th>Liều lượng</th>
+                  <th>Cách ly (PHI)</th>
+                </tr>
+              </thead>
+              <tbody id="chemical-tbody"></tbody>
+            </table>
+          </div>
+
+          <!-- Cultural controls -->
+          <div id="cultural-section">
+            <div class="section-title">🌱 Biện pháp canh tác phòng ngừa:</div>
+            <ul id="cultural-list" class="guidance-list"></ul>
+          </div>
+
+          <!-- Safety PPE -->
+          <div id="safety-section">
+            <div class="section-title">⚠️ Quy chuẩn bảo hộ an toàn (PPE):</div>
+            <div id="safety-box" class="alert-box alert-warning"></div>
+          </div>
+
+          <!-- Disclaimer -->
+          <div id="disclaimer-text" class="disclaimer-text"></div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    const API_BASE = "http://127.0.0.1:8000";
+    let selectedFile = null;
+
+    // Check server status
+    async function checkServerHealth() {
+      const statusEl = document.getElementById("server-status");
+      try {
+        const res = await fetch(`${API_BASE}/api/health`, { method: "GET" });
+        if (res.ok) {
+          statusEl.textContent = "ONLINE (Kết nối máy chủ tốt)";
+          statusEl.className = "badge badge-online";
+        } else {
+          throw new Error();
+        }
+      } catch (e) {
+        statusEl.textContent = "OFFLINE (Chưa bật server uvicorn)";
+        statusEl.className = "badge badge-offline";
+      }
+    }
+
+    checkServerHealth();
+    setInterval(checkServerHealth, 5000);
+
+    function updateThreshold(val) {
+      document.getElementById("threshold-val").textContent = val + "%";
+    }
+
+    function handleFileSelect(event) {
+      const file = event.target.files[0];
+      if (file) {
+        selectedFile = file;
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const preview = document.getElementById("image-preview");
+          preview.src = e.target.result;
+          preview.style.display = "block";
+          document.getElementById("btn-submit").disabled = false;
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    async function loadSample(samplePath) {
+      try {
+        const res = await fetch(samplePath);
+        const blob = await res.blob();
+        selectedFile = new File([blob], samplePath.split("/").pop(), { type: blob.type });
+        const preview = document.getElementById("image-preview");
+        preview.src = URL.createObjectURL(blob);
+        preview.style.display = "block";
+        document.getElementById("btn-submit").disabled = false;
+      } catch (e) {
+        alert("Không thể nạp ảnh mẫu: " + e.message);
+      }
+    }
+
+    async function submitDiagnosis() {
+      if (!selectedFile) return;
+
+      const btn = document.getElementById("btn-submit");
+      btn.disabled = true;
+      btn.innerHTML = `<span class="spinner"></span> Đang xử lý AI...`;
+
+      const threshold = parseFloat(document.getElementById("threshold-range").value) / 100.0;
+      const formData = new FormData();
+      formData.append("file", selectedFile);
+
+      try {
+        const response = await fetch(`${API_BASE}/api/diagnose?custom_threshold=${threshold}`, {
+          method: "POST",
+          body: formData,
+        });
+
+        if (!response.ok) {
+          const err = await response.json();
+          throw new Error(err.detail || "Lỗi khi gọi API");
+        }
+
+        const data = await response.json();
+        renderResult(data);
+      } catch (err) {
+        alert("Lỗi: " + err.message + "\n(Hãy đảm bảo bạn đã chạy lệnh: python -m uvicorn backend.main:app)");
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = `🔍 Bắt đầu Chẩn đoán Bệnh`;
+      }
+    }
+
+    function renderResult(data) {
+      document.getElementById("empty-state").style.display = "none";
+      document.getElementById("result-box").style.display = "block";
+
+      const isConfirmed = data.diagnosis_status === "CONFIRMED";
+      const statusBadge = document.getElementById("status-badge");
+      statusBadge.textContent = isConfirmed ? "CONFIRMED (XÁC NHẬN)" : "UNCERTAIN (CẦN KIỂM TRA LẠI)";
+      statusBadge.className = isConfirmed ? "badge badge-online" : "badge badge-offline";
+
+      document.getElementById("metric-conf").textContent = data.prediction.confidence_percentage;
+      document.getElementById("metric-latency").textContent = data.prediction.latency_ms + " ms";
+
+      const alertContainer = document.getElementById("alert-container");
+      alertContainer.innerHTML = "";
+
+      if (!isConfirmed) {
+        alertContainer.innerHTML = `
+          <div class="alert-box alert-warning">
+            <strong>⚠️ Cảnh báo an toàn:</strong> ${data.message}
+            <br><em>${data.remediation_notice || ""}</em>
+          </div>
+        `;
+      }
+
+      const adv = data.advisory_details;
+      if (isConfirmed && adv) {
+        document.getElementById("disease-name").textContent = adv.vietnamese_name;
+        document.getElementById("scientific-name").textContent = `${adv.scientific_name} | ${adv.pathogen_type}`;
+        document.getElementById("symptoms-text").textContent = adv.visual_symptoms || "Không có";
+
+        // Chemical
+        const tbody = document.getElementById("chemical-tbody");
+        tbody.innerHTML = "";
+        if (adv.chemical_controls && adv.chemical_controls.length > 0) {
+          document.getElementById("chemical-section").style.display = "block";
+          adv.chemical_controls.forEach(c => {
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+              <td><strong>${c.active_ingredient}</strong><br><small style="color:#666">${c.trade_names.join(", ")}</small></td>
+              <td>${c.dosage}</td>
+              <td><span style="color:#d32f2f; font-weight:600;">${c.pre_harvest_interval_days} ngày</span></td>
+            `;
+            tbody.appendChild(tr);
+          });
+        } else {
+          document.getElementById("chemical-section").style.display = "none";
+        }
+
+        // Cultural
+        const cultList = document.getElementById("cultural-list");
+        cultList.innerHTML = "";
+        if (adv.cultural_preventions) {
+          adv.cultural_preventions.forEach(item => {
+            const li = document.createElement("li");
+            li.textContent = item;
+            cultList.appendChild(li);
+          });
+        }
+
+        // Safety
+        const safetyBox = document.getElementById("safety-box");
+        if (adv.safety_precautions && adv.safety_precautions.length > 0) {
+          safetyBox.textContent = adv.safety_precautions[0];
+          document.getElementById("safety-section").style.display = "block";
+        } else {
+          document.getElementById("safety-section").style.display = "none";
+        }
+
+      } else {
+        // Fallback Uncertain view
+        document.getElementById("disease-name").textContent = adv.preliminary_assessment || "Chưa xác định";
+        document.getElementById("scientific-name").textContent = "Độ tin cậy chưa đạt ngưỡng cho phép";
+        document.getElementById("symptoms-text").textContent = "Ảnh lá cây chưa đủ độ rõ nét hoặc vết bệnh không điển hình.";
+
+        document.getElementById("chemical-section").style.display = "none";
+        document.getElementById("safety-section").style.display = "none";
+
+        const cultList = document.getElementById("cultural-list");
+        cultList.innerHTML = "";
+        if (adv.guidance_for_farmer) {
+          adv.guidance_for_farmer.forEach(item => {
+            const li = document.createElement("li");
+            li.textContent = item;
+            cultList.appendChild(li);
+          });
+        }
+      }
+
+      document.getElementById("disclaimer-text").textContent = "⚖️ " + (data.regulatory_disclaimer || "");
+    }
+  </script>
+</body>
+</html>
