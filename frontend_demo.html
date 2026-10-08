@@ -247,9 +247,9 @@
         <div style="margin-top: 20px;">
           <p style="font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 6px;">Thử nhanh bằng ảnh mẫu có sẵn:</p>
           <div class="sample-buttons">
-            <button class="btn-sample" onclick="loadSample('sample_images/tomato_leaf_sample.jpg')">🍅 Cà chua đốm vòng</button>
-            <button class="btn-sample" onclick="loadSample('sample_images/corn_leaf_sample.png')">🌽 Ngô gỉ sắt</button>
-            <button class="btn-sample" onclick="loadSample('sample_images/potato_leaf_sample.jpg')">🥔 Khoai tây khỏe mạnh</button>
+            <button class="btn-sample" onclick="loadSample('tomato_leaf_sample.jpg')">🍅 Cà chua đốm vòng</button>
+            <button class="btn-sample" onclick="loadSample('corn_leaf_sample.png')">🌽 Ngô gỉ sắt</button>
+            <button class="btn-sample" onclick="loadSample('potato_leaf_sample.jpg')">🥔 Khoai tây khỏe mạnh</button>
           </div>
         </div>
       </div>
@@ -375,17 +375,35 @@
       }
     }
 
-    async function loadSample(samplePath) {
+    const SAMPLE_DATA = {
+      'tomato_leaf_sample.jpg': 'data:image/jpeg;base64,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6ksfbgUeYR90BfpTKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKUEqcgkfSkooAfvz95QfccGjarfdbHs3+NMooAcyMvUcevaiP/AFifUUisyn5SRUiOC65UZyORx3oEJP8A65vw/lTACTgDJqWYqJW+XLe/SozIxGM4HoOKQIXZj7zAew5NG5V+6ufdv8KZRTGOZ2bqePTtTaKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACnR/wCsT6im06P/AFifUUAOn/1zfh/Ko6kn/wBc34fyqOgSCiiopZcfKvXuaDpw2GqYmoqdNf8AAJCyr1IFN81P71VqKVz6OHD9FR9+Tv5W/wCCXAQRkHNFVFYqcg1ZRw4yPyoPIx+V1MJ7yd49+3qOooopnlhRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAU6P/AFifUU2nR/6xPqKAHT/65vw/lUdST/65vw/lUdAkIx2qTVSrMv8AqzVakz6zh+EVRlPre34f8EKKKKR74U+Jtrj0PFMpyffX60HPi4RnQnGW1mWqKKKo/PQooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKdH/AKxPqKbTo/8AWJ9RQA6f/XN+H8qjqSf/AFzfh/Ko6BICMjBqoylWINW6a6Bxg/nSPVyvH/VKjUvhe/l5lWintEy9sj2pNjf3T+VI+uhi6E480Zq3qNqWFOdx/ChIT1b8qnppHiZrmsHB0aLvfd/1vcKKKKZ8wFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABTo/8AWJ9RTadH/rE+ooAdP/rm/D+VR1JP/rm/D+VR0CQUUUUDCiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAp0f+sT6im06P8A1ifUUAOn/wBc34fyqOpJ/wDXN+H8qjoEgooooGFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABTo/9Yn1FNp0f+sT6igB0/wDrm/D+VR1JP/rm/D+VR0CQUUUUDCiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAozg5FFFACkknJOT70lFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQB//2Q==',
+      'corn_leaf_sample.png': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOAAAADgCAIAAACVT/22AAAEWElEQVR4nO3csa0dVRSG0QdCogHohh7IHBC6AURCEc5owKEDMkRZdgPOyEaaM3vGvCt05xNeK7QMsuCTzn2Xn/3NT3//9vKoH378/tPHzw//5f5W/ll90bdf/i1wH4GSJlDSBEqaQEkTKGkCJU2gpAmUNIGSJlDSBEqaQEkTKGkCJU2gpAmUNIGSJlDSBEqaQEkTKGkCJU2gpAmUNIGSJlDSBEqaQEkTKGkCJU2gpAmUNIGSJlDSBEqaQEkTKGkCJe27u/8AaW9/+XP5lXd//HzTn+UrJdDZ77/+dfHrMn0aT/wr6vz3v4H/ikAfjE+jzyHQx7PT6BMIlDSBkibQnVf9eO5n+ScQ6IPZqfM5BPpIfOp8Gl/UXyV4/Dldmk8m0CvvP7z59PHz0/5lcOSJJ02gpAmUNJ9Bi/xwthFoi5nfwhMfYuZ3JNAKM7+RQBNetdx7e/gfUf7HBEqaQEkTaMKr/hP/+w9vXr4aAq0w8xsJNMTM78gX9S1mfguBFlmdbjzxpAmUNIGS5jPoFdftbifQmdlbhCd+YPbWIdCV2VuKQHdct6sRKGkCJU2gO67b1Qh0ZfaWItCB2VuHL+pnZm8RAr3iut3tPPGkCZQ0gZLmM2iR63YbgbaY+S088SFmfkcCrTDzGwk0wXW7MwIlTaCkCTTBdbszAq0w8xsJNMTM78gX9S1mfguBFrlut/HEkyZQ0gRKms+gV1y3u51AZ2ZvEZ74gdlbh0BXZm8pAt1x3a5GoKQJlDSB7rhuVyPQldlbikAHZm8dvqifmb1FCPSK63a388STJlDSBEqaz6BFrtttBNpi5rfwxIeY+R0JtMLMbyTQBNftzgiUNIGSJtAE1+3OCLTCzG8k0BAzvyNf1LeY+S0EWuS63cYTT5pASRMoaT6DXnHd7nYCnZm9RXjiB2ZvHQJdmb2lCHTHdbsagZImUNIEuuO6XY1AV2ZvKQIdmL11+KJ+ZvYWIdArrtvdzhNPmkBJEyhpPoMWuW63EWiLmd/CEx9i5nck0Aozv5FAE1y3OyNQ0gRKmkATXLc7I9AKM7+RQEPM/I58Ud9i5rcQaJHrdhtPPGkCJU2gpPkMesV1u9sJdGb2FuGJH5i9dQh0ZfaWItAd1+1qBEqaQEkT6I7rdjUCXZm9pQh0YPbW4Yv6mdlbhECvuG53O088aQIlTaCk+Qxa5LrdRqAtZn4LT3yImd+RQCvM/EYCTXDd7oxASRMoaQJNcN3ujEArzPxGAg0x8zvyRX2Lmd9CoEWu22088aQJlDSBkuYz6BXX7W4n0JnZW4QnfmD21iHQldlbikB3XLerEShpAiVNoDuu29UIdGX2liLQgdlbhy/qZ2ZvEQK94rrd7TzxpAmUNIGS5jNoket2G4G2mPktPPEhZn5HAq0w8xsJNMF1uzMCJU2gpAk0wXW7MwKtMPMbCTTEzO/IF/UtZn4LgRa5brfxxJMmUNIESppASRMoaQIlTaC8lP0DKTulZ/nfPgYAAAAASUVORK5CYII=',
+      'potato_leaf_sample.jpg': 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAEsASwDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDIooormPmgooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiipc4rclySCiiis3WXQnnQUUUUvbeQe0CiiiqVZD50FFFFaKSexSaewUUUUxhRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFKUlFXYm7BRRRXPKo3sZObYUUUVmSFFFFABRRRQAUUUUAFFFFABRRRWsarW5an3CiiiuhO+qNAooooGFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUpSUVdibsFFFFckpOTuzFu4UUUUhBRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRVwm4scZWCiiiupO5sFFFFAwooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKK5Zy5mYyd2FFFFQSFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUVrSlbRlwfQKKKK6DUKKKKACiiigAooooAKKKKACiiigAooooAKKKKzqStEibsgooormMgooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKK7Iu6ubp3QUUUUxhRRRQAUUUUAFFFFABRRRQAUUUUAFFFFc9V62MpvUKKKKyICiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooorei9LGkH0CiiitjQKKKKACiiigAooooAKKKKACiiigAooorkm7yZhLcKKKKkQUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFa0n7xcNwoooroNQooooAKKKKACiiigAooooAKKKKACiiiuOXxMwe4UUUUhBRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUVpS+IqG4UUUV0mwUUUUAFFFFABRRRQAUUUUAFFFFABRRRXLU+JmEtwoooqBBRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUVrRWpcNwoooroNQooooAKKKKACiiigAooooAKKKKACiiiuestbmU1rcKKKKyICiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAoooropLS5rBaBRRRWpYUUUUAFFFFABRRRQAUUUUAFFFFABRRRUTjzRJkroKKKK5TEKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKEruwLUKKKK7ErKxulYKKKKYwooooAKKKKACiiigAooooAKKKKACiiigAooornqQs7mU421CiiisiAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiit6UOrNIR6hRRRWxoFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQ1fQQUUUVyzg4mUo2CiiioJCiiigAooooAKKKKACiiigAooooAKKKKACiiitadO+rLjG+rCiiiug1CiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiihq4gooorCVL+Uhw7BRRRWLTW5nawUUUUAFFFFABRRRQAUUUU1FvYaTYUUUVvGklqy1C24UUUVqaBRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQ1cQUUUVDpxfQXKgooopeyiLkQUUUU1CK6D5UFFFFWUFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAf/9k='
+    };
+
+    function dataURLtoFile(dataurl, filename) {
+      const arr = dataurl.split(',');
+      const mime = arr[0].match(/:(.*?);/)[1];
+      const bstr = atob(arr[1]);
+      let n = bstr.length;
+      const u8arr = new Uint8Array(n);
+      while (n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+      }
+      return new File([u8arr], filename, { type: mime });
+    }
+
+    function loadSample(filename) {
       try {
-        const res = await fetch(samplePath);
-        const blob = await res.blob();
-        selectedFile = new File([blob], samplePath.split("/").pop(), { type: blob.type });
+        const b64 = SAMPLE_DATA[filename];
+        if (!b64) throw new Error("Không tìm thấy ảnh mẫu: " + filename);
+        selectedFile = dataURLtoFile(b64, filename);
         const preview = document.getElementById("image-preview");
-        preview.src = URL.createObjectURL(blob);
+        preview.src = b64;
         preview.style.display = "block";
         document.getElementById("btn-submit").disabled = false;
       } catch (e) {
-        alert("Không thể nạp ảnh mẫu: " + e.message);
+        alert("Lỗi nạp ảnh: " + e.message);
       }
     }
 
