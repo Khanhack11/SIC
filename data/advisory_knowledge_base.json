@@ -1,0 +1,394 @@
+{
+  "version": "1.0.0",
+  "project": "AI-Integrated Crop Disease Advisory and Image-Based Diagnosis System",
+  "organization": "Samsung Innovation Campus (SIC) - Capstone Group 5",
+  "disclaimer_default": "Thông tin tư vấn mang tính chất hỗ trợ quyết định (Decision-Support Guidance). Người canh tác cần tuân thủ quy tắc 4 đúng khi sử dụng thuốc BVTV, mang trang bị bảo hộ (PPE) và tham vấn cán bộ khuyến nông địa phương trước khi triển khai diện rộng.",
+  "confidence_threshold": 0.75,
+  "diseases": {
+    "Tomato_Early_blight": {
+      "disease_id": "Tomato_Early_blight",
+      "crop": "Cà chua (Tomato)",
+      "vietnamese_name": "Bệnh đốm vòng / Cháy lá sớm cà chua",
+      "english_name": "Early Blight on Tomato",
+      "scientific_name": "Alternaria solani",
+      "pathogen_type": "Nấm (Fungus)",
+      "pathogen_name": "Alternaria solani Sorauer",
+      "visual_symptoms": "Xuất hiện các đốm nâu đen hình tròn hoặc bầu dục có các vòng tròn đồng tâm đặc trưng như hình bia bắn (target-board). Bệnh xuất hiện đầu tiên trên lá già phía dưới rồi lan dần lên trên. Quanh vết bệnh có quầng vàng hẹp.",
+      "environmental_triggers": "Nhiệt độ thích hợp từ 24 - 29°C, độ ẩm không khí cao trên 85%, mưa nhiều xen kẽ nắng ấm hoặc đọng sương kéo dài trên bề mặt lá.",
+      "severity_level": "Trung bình - Cao (gây rụng lá hàng loạt nếu không can thiệp)",
+      "chemical_controls": [
+        {
+          "active_ingredient": "Azoxystrobin + Difenoconazole",
+          "trade_names": ["Amistar Top 325SC", "Score 250EC"],
+          "dosage": "15 - 20 ml/bình 16 lít nước",
+          "pre_harvest_interval_days": 7,
+          "application_notes": "Phun ướt đều tán lá khi phát hiện 5% số lá chớm có đốm bệnh, phun nhắc lại sau 7-10 ngày nếu thời tiết tiếp tục ẩm ướt."
+        },
+        {
+          "active_ingredient": "Mancozeb",
+          "trade_names": ["Dithane M-45 80WP", "Manzate 200"],
+          "dosage": "50 - 60 g/bình 16 lít nước",
+          "pre_harvest_interval_days": 10,
+          "application_notes": "Thuốc phòng trừ tiếp xúc, phun định kỳ vào đầu mùa mưa hoặc khi lá có sương đọng."
+        }
+      ],
+      "organic_biological_controls": [
+        "Sử dụng chế phẩm nấm đối kháng Trichoderma harzianum tưới gốc hoặc phun qua lá.",
+        "Phun dung dịch Baking soda 0.5% (5g/lít nước) kết hợp dầu neem để ức chế nấm bám dính."
+      ],
+      "cultural_preventions": [
+        "Luân canh với cây trồng khác họ cà (lúa nước, ngô, đậu đỗ) tối thiểu 2-3 năm.",
+        "Tỉa bỏ các lá già sát gốc, cành nhánh phụ để tạo độ thông thoáng.",
+        "Sử dụng màng phủ nông nghiệp và tưới nhỏ giọt, tránh tưới phun mưa lên tán lá vào chiều tối.",
+        "Thu gom và tiêu hủy tàn dư cây bệnh sau mỗi vụ thu hoạch."
+      ],
+      "safety_precautions": [
+        "Bắt buộc trang bị khẩu trang than hoạt tính, găng tay cao su, kính bảo hộ và áo mưa khi pha và phun thuốc.",
+        "Tuyệt đối không phun ngược chiều gió và không phun khi nhiệt độ ngoài trời vượt quá 35°C.",
+        "Tuân thủ nghiêm ngặt thời gian cách ly (PHI) 7 - 10 ngày trước khi thu hoạch quả."
+      ]
+    },
+    "Tomato_Late_blight": {
+      "disease_id": "Tomato_Late_blight",
+      "crop": "Cà chua (Tomato)",
+      "vietnamese_name": "Bệnh mốc sương / Sương mai cà chua",
+      "english_name": "Late Blight on Tomato",
+      "scientific_name": "Phytophthora infestans",
+      "pathogen_type": "Nấm giả / Noãn khuẩn (Oomycete)",
+      "pathogen_name": "Phytophthora infestans (Mont.) de Bary",
+      "visual_symptoms": "Vết bệnh ban đầu là những đốm màu xanh tái hoặc nâu đậm úng nước ở mép lá hoặc chóp lá. Trong điều kiện ẩm ướt, mặt dưới lá xuất hiện lớp mốc trắng như nhung. Bệnh lây lan rất nhanh làm thối đen cả thân và quả.",
+      "environmental_triggers": "Nhiệt độ mát từ 15 - 22°C, độ ẩm không khí rất cao trên 90%, sương mù dày đặc hoặc mưa phùn kéo dài liên tục.",
+      "severity_level": "Rất nghiêm trọng (có thể tàn phá toàn bộ ruộng trong vòng vài ngày)",
+      "chemical_controls": [
+        {
+          "active_ingredient": "Metalaxyl-M + Mancozeb",
+          "trade_names": ["Ridomil Gold 68WG"],
+          "dosage": "50 g/bình 16 lít nước",
+          "pre_harvest_interval_days": 7,
+          "application_notes": "Phun ngay khi thời tiết âm u kéo dài có sương mù hoặc khi xuất hiện vết bệnh đầu tiên."
+        },
+        {
+          "active_ingredient": "Dimethomorph",
+          "trade_names": ["Acrobat MZ 90/600 WP", "Insignia"],
+          "dosage": "25 - 30 g/bình 16 lít nước",
+          "pre_harvest_interval_days": 5,
+          "application_notes": "Có tính nội hấp lưu dẫn mạnh, đặc trị noãn khuẩn sương mai."
+        }
+      ],
+      "organic_biological_controls": [
+        "Phun dung dịch Booc-đô 1% (Đồng sunfat + vôi tôi) để phòng bệnh sớm.",
+        "Ứng dụng chế phẩm vi sinh Bacillus subtilis để đối kháng và tăng sức đề kháng mô tế bào lá."
+      ],
+      "cultural_preventions": [
+        "Chọn giống cà chua kháng hoặc chống chịu bệnh mốc sương.",
+        "Lên luống cao, tạo rãnh thoát nước sâu tránh đọng nước mưa.",
+        "Giữ khoảng cách trồng hợp lý, không trồng quá dày làm vườn ẩm ướt.",
+        "Cắt bỏ và đem tiêu hủy xa ruộng ngay lập tức khi phát hiện chồi, lá bị úng nước."
+      ],
+      "safety_precautions": [
+        "Sử dụng đầy đủ đồ bảo hộ PPE đạt chuẩn, rửa sạch bình phun và tắm rửa sau khi phun.",
+        "Không đổ tàn dư dung dịch thuốc xuống mương tưới hoặc nguồn nước sinh hoạt gia đình.",
+        "Cách ly đúng thời hạn ghi trên nhãn thuốc trước khi thu hái bán ra thị trường."
+      ]
+    },
+    "Tomato_Septoria_leaf_spot": {
+      "disease_id": "Tomato_Septoria_leaf_spot",
+      "crop": "Cà chua (Tomato)",
+      "vietnamese_name": "Bệnh đốm lá Septoria cà chua",
+      "english_name": "Septoria Leaf Spot on Tomato",
+      "scientific_name": "Septoria lycopersici",
+      "pathogen_type": "Nấm (Fungus)",
+      "pathogen_name": "Septoria lycopersici Speg.",
+      "visual_symptoms": "Nhiều đốm nhỏ hình tròn đường kính 1 - 3mm, viền nâu đậm, tâm màu xám trắng hoặc nâu nhạt. Ở giữa vết bệnh có thể thấy các chấm đen li ti (ổ bào tử nấm). Thường không gây hại trực tiếp lên quả nhưng làm rụng trụi lá khiến quả bị cháy nắng.",
+      "environmental_triggers": "Nhiệt độ ấm 20 - 25°C, độ ẩm cao kèm theo mưa bắn giọt đất lên mặt lá dưới.",
+      "severity_level": "Trung bình (làm suy giảm năng suất quang hợp nghiêm trọng)",
+      "chemical_controls": [
+        {
+          "active_ingredient": "Chlorothalonil",
+          "trade_names": ["Daconil 75WP", "Bravo 720SC"],
+          "dosage": "30 - 40 ml/bình 16 lít nước",
+          "pre_harvest_interval_days": 7,
+          "application_notes": "Phun phòng ngừa bao phủ mặt lá khi cây bước vào giai đoạn ra hoa đậu quả."
+        },
+        {
+          "active_ingredient": "Copper Hydroxide",
+          "trade_names": ["Kocide 2000 53.8DF", "Champion 77WP"],
+          "dosage": "25 - 30 g/bình 16 lít nước",
+          "pre_harvest_interval_days": 3,
+          "application_notes": "Phun khi lá khô ráo, không pha chung với thuốc có tính kiềm mạnh."
+        }
+      ],
+      "organic_biological_controls": [
+        "Phun chế phẩm sinh học Chitosan để tạo màng bảo vệ sinh học trên phiến lá.",
+        "Sử dụng phân bón hữu cơ vi sinh ủ hoai mục có chứa nấm đối kháng Chaetomium."
+      ],
+      "cultural_preventions": [
+        "Làm giàn chống đỡ cho cây để tán lá không tiếp xúc với mặt đất ẩm.",
+        "Phủ bạt nilon hoặc rơm rạ sạch quanh gốc để ngăn bào tử nấm bắn từ đất lên lá khi mưa.",
+        "Tránh chạm vào hoặc tỉa cành khi lá còn ướt sương để tránh làm lây lan bào tử."
+      ],
+      "safety_precautions": [
+        "Bảo hộ lao động đầy đủ, tránh để thuốc tiếp xúc vào mắt và niêm mạc.",
+        "Bảo quản thuốc nơi khô ráo, thoáng mát, xa tầm tay trẻ em."
+      ]
+    },
+    "Tomato_healthy": {
+      "disease_id": "Tomato_healthy",
+      "crop": "Cà chua (Tomato)",
+      "vietnamese_name": "Cây cà chua khỏe mạnh",
+      "english_name": "Healthy Tomato",
+      "scientific_name": "Solanum lycopersicum",
+      "pathogen_type": "Không có (None)",
+      "pathogen_name": "Không phát hiện mầm bệnh",
+      "visual_symptoms": "Lá cây có màu xanh tự nhiên, bề mặt lá lành lặn, không xuất hiện đốm đổi màu, cháy khô hay hoại tử. Gân lá phát triển đều đặn.",
+      "environmental_triggers": "Điều kiện canh tác tối ưu: Nhiệt độ 20 - 28°C, ánh sáng đầy đủ 6 - 8 giờ/ngày, đất tơi xốp pH 6.0 - 6.8.",
+      "severity_level": "An toàn (0)",
+      "chemical_controls": [],
+      "organic_biological_controls": [
+        "Bổ sung định kỳ phân bón lá hữu cơ rong biển hoặc amino acid để kích thích sinh trưởng rễ và hoa.",
+        "Tưới vi sinh Trichoderma định kỳ mỗi tháng 1 lần để tăng cường hệ vi sinh đất đối kháng mầm bệnh."
+      ],
+      "cultural_preventions": [
+        "Duy trì chế độ nước tưới ẩm đều, bón phân cân đối N-P-K và bổ sung Canxi-Bo chống thối đít quả.",
+        "Thường xuyên kiểm tra vườn vào sáng sớm để phát hiện kịp thời các côn trùng chích hút như bọ phấn, bọ trĩ."
+      ],
+      "safety_precautions": [
+        "Không cần sử dụng thuốc BVTV hóa học. Giữ gìn an toàn vệ sinh thực phẩm nông sản."
+      ]
+    },
+    "Potato_Early_blight": {
+      "disease_id": "Potato_Early_blight",
+      "crop": "Khoai tây (Potato)",
+      "vietnamese_name": "Bệnh đốm vòng / Cháy lá sớm khoai tây",
+      "english_name": "Early Blight on Potato",
+      "scientific_name": "Alternaria solani",
+      "pathogen_type": "Nấm (Fungus)",
+      "pathogen_name": "Alternaria solani Sorauer",
+      "visual_symptoms": "Các đốm màu nâu sẫm hoặc đen có nhiều vòng tròn đồng tâm xuất hiện trên lá già. Vết bệnh phát triển làm mép lá bị quăn lại, khô rụi và gãy giòn.",
+      "environmental_triggers": "Nhiệt độ ấm 24 - 30°C, thời tiết luân phiên giữa chu kỳ mưa ẩm và khô ráo.",
+      "severity_level": "Trung bình (giảm kích thước củ và năng suất thu hoạch)",
+      "chemical_controls": [
+        {
+          "active_ingredient": "Difenoconazole",
+          "trade_names": ["Score 250EC"],
+          "dosage": "10 - 15 ml/bình 16 lít nước",
+          "pre_harvest_interval_days": 14,
+          "application_notes": "Phun khi thấy đốm bệnh xuất hiện ở tầng lá dưới, nhắc lại sau 10 ngày nếu cần."
+        },
+        {
+          "active_ingredient": "Propineb",
+          "trade_names": ["Antracol 70WP"],
+          "dosage": "40 - 50 g/bình 16 lít nước",
+          "pre_harvest_interval_days": 7,
+          "application_notes": "Bổ sung vi lượng Kẽm (Zn) giúp lá xanh dày, tăng sức chống chịu bệnh."
+        }
+      ],
+      "organic_biological_controls": [
+        "Xử lý củ giống trước khi gieo trồng bằng chế phẩm Trichoderma hoặc Nano bạc sinh học."
+      ],
+      "cultural_preventions": [
+        "Sử dụng củ giống sạch bệnh có chứng nhận kiểm định chất lượng.",
+        "Tránh bón thừa đạm (N), bón cân đối Kali để vách tế bào lá dày cứng.",
+        "Thu dọn triệt để tàn dư cây khoai tây sau khi dỡ củ."
+      ],
+      "safety_precautions": [
+        "Tuân thủ đúng nồng độ khuyến cáo, đeo kính bảo hộ và khẩu trang y tế/phòng độc."
+      ]
+    },
+    "Potato_Late_blight": {
+      "disease_id": "Potato_Late_blight",
+      "crop": "Khoai tây (Potato)",
+      "vietnamese_name": "Bệnh mốc sương khoai tây",
+      "english_name": "Late Blight on Potato",
+      "scientific_name": "Phytophthora infestans",
+      "pathogen_type": "Nấm giả / Noãn khuẩn (Oomycete)",
+      "pathogen_name": "Phytophthora infestans (Mont.) de Bary",
+      "visual_symptoms": "Vết bệnh dạng đốm nâu đen ngậm nước ở chóp hoặc rìa lá, lan rộng nhanh chóng trong điều kiện ẩm ướt. Mặt dưới có sợi tơ nấm trắng bạc. Củ khoai tây bị nhiễm bệnh có vết lõm màu nâu tím, bên trong củ bị thối nâu khô.",
+      "environmental_triggers": "Thời tiết lạnh ẩm, nhiệt độ 12 - 20°C kèm mưa phùn hoặc sương đêm dày đặc liên tục.",
+      "severity_level": "Đặc biệt nguy hiểm (có thể gây mất trắng vụ đông)",
+      "chemical_controls": [
+        {
+          "active_ingredient": "Cymoxanil + Mancozeb",
+          "trade_names": ["Curzate M8 72WP"],
+          "dosage": "40 - 50 g/bình 16 lít nước",
+          "pre_harvest_interval_days": 7,
+          "application_notes": "Tác động kép tiếp xúc và thấm sâu, ngăn chặn bào tử nảy mầm hữu hiệu."
+        },
+        {
+          "active_ingredient": "Mandipropamid",
+          "trade_names": ["Revus Opti 440SC"],
+          "dosage": "25 - 30 ml/bình 16 lít nước",
+          "pre_harvest_interval_days": 7,
+          "application_notes": "Chống rửa trôi rất tốt trong mùa mưa lạnh."
+        }
+      ],
+      "organic_biological_controls": [
+        "Phun dung dịch thảo mộc tỏi ớt kết hợp tinh dầu quế phòng ngừa sớm.",
+        "Phun chế phẩm sinh học từ vi khuẩn đối kháng Pseudomonas fluorescens."
+      ],
+      "cultural_preventions": [
+        "Vun gốc cao phủ đất kín củ để bào tử mốc sương không trôi theo nước mưa ngấm vào làm thối củ.",
+        "Trồng với mật độ thông thoáng, tránh để rãnh thoát nước bị ứ đọng.",
+        "Không dùng củ thương phẩm từ vùng dịch bệnh để làm củ giống."
+      ],
+      "safety_precautions": [
+        "Trang bị đầy đủ đồ bảo hộ, không ăn uống hay hút thuốc trong khi pha phun hóa chất."
+      ]
+    },
+    "Potato_healthy": {
+      "disease_id": "Potato_healthy",
+      "crop": "Khoai tây (Potato)",
+      "vietnamese_name": "Cây khoai tây khỏe mạnh",
+      "english_name": "Healthy Potato",
+      "scientific_name": "Solanum tuberosum",
+      "pathogen_type": "Không có (None)",
+      "pathogen_name": "Không phát hiện mầm bệnh",
+      "visual_symptoms": "Tán lá sum sê, phiến lá phẳng mịn màu xanh đồng đều, thân đứng vững chắc, không có triệu chứng héo rũ hay đốm lá.",
+      "environmental_triggers": "Điều kiện lý tưởng: Nhiệt độ 15 - 22°C, độ ẩm đất 70 - 80%, đất cát pha hoặc thịt nhẹ giàu mùn.",
+      "severity_level": "An toàn (0)",
+      "chemical_controls": [],
+      "organic_biological_controls": [
+        "Tưới bổ sung dịch trùn quế hoặc phân hữu cơ ủ hoai để nuôi dưỡng củ phát triển to đều."
+      ],
+      "cultural_preventions": [
+        "Tiếp tục vun luống đợt 2 khi cây cao 20 - 25cm và đợt 3 khi bắt đầu ra nụ.",
+        "Duy trì tưới rãnh thấm tiêu nhanh, không để nước ngập bề mặt luống."
+      ],
+      "safety_precautions": [
+        "Không cần phun thuốc trừ nấm. Giữ vệ sinh dụng cụ làm vườn."
+      ]
+    },
+    "Corn_Common_rust": {
+      "disease_id": "Corn_Common_rust",
+      "crop": "Ngô / Bắp (Corn)",
+      "vietnamese_name": "Bệnh gỉ sắt hại ngô",
+      "english_name": "Common Rust on Corn",
+      "scientific_name": "Puccinia sorghi",
+      "pathogen_type": "Nấm (Fungus)",
+      "pathogen_name": "Puccinia sorghi Schwein.",
+      "visual_symptoms": "Xuất hiện các ổ u nhỏ (pustules) hình bầu dục nổi gồ trên cả hai mặt lá. Ổ bệnh màu nâu đỏ hoặc màu gỉ sắt, chứa đầy bột bào tử màu nâu cam. Khi bệnh nặng lá bị khô cháy từng mảng lớn.",
+      "environmental_triggers": "Nhiệt độ vừa phải 16 - 25°C, độ ẩm không khí cao trên 95%, nhiều sương đêm.",
+      "severity_level": "Trung bình - Cao (gây lép hạt, giảm khối lượng 1000 hạt)",
+      "chemical_controls": [
+        {
+          "active_ingredient": "Pyraclostrobin",
+          "trade_names": ["Headline 250EC", "Cabrio Top 600WG"],
+          "dosage": "15 - 20 ml/bình 16 lít nước",
+          "pre_harvest_interval_days": 14,
+          "application_notes": "Phun khi phát hiện ổ gỉ sắt xuất hiện trước giai đoạn ngô trỗ cờ phun râu."
+        },
+        {
+          "active_ingredient": "Tebuconazole",
+          "trade_names": ["Folicur 430SC"],
+          "dosage": "15 ml/bình 16 lít nước",
+          "pre_harvest_interval_days": 14,
+          "application_notes": "Khả năng lưu dẫn cao, diệt sợi nấm nằm sâu trong mô lá."
+        }
+      ],
+      "organic_biological_controls": [
+        "Sử dụng dịch chiết tỏi hoặc dịch chiết gừng pha loãng phun phòng ngừa sớm lúc cây 4 - 6 lá."
+      ],
+      "cultural_preventions": [
+        "Sử dụng các giống ngô lai F1 có gen kháng bệnh gỉ sắt (như NK4300, CP555, DK6919,...).",
+        "Gieo trồng đúng khung lịch thời vụ của ngành nông nghiệp địa phương.",
+        "Tiêu hủy thân lá ngô sau thu hoạch, không để mục nát trên ruộng làm nguồn lây cho vụ sau."
+      ],
+      "safety_precautions": [
+        "Đeo mặt nạ phòng độc khi phun cho ngô ở giai đoạn cây cao quá đầu người để tránh hít phải sương thuốc."
+      ]
+    },
+    "Corn_Northern_Leaf_Blight": {
+      "disease_id": "Corn_Northern_Leaf_Blight",
+      "crop": "Ngô / Bắp (Corn)",
+      "vietnamese_name": "Bệnh cháy lá lớn ngô (Đốm lá lớn)",
+      "english_name": "Northern Leaf Blight on Corn",
+      "scientific_name": "Exserohilum turcicum",
+      "pathogen_type": "Nấm (Fungus)",
+      "pathogen_name": "Exserohilum turcicum (Pass.) K.J. Leonard & Suggs",
+      "visual_symptoms": "Vết bệnh hình thoi hoặc hình thoi kéo dài dạng điếu xì-gà (cigar-shaped), kích thước lớn từ 2 - 15 cm. Ban đầu có màu xanh xám sau chuyển sang nâu tro. Trong điều kiện ẩm, giữa vết bệnh có lớp nấm màu đen mốc.",
+      "environmental_triggers": "Nhiệt độ mát mẻ đến ấm 18 - 27°C, thời gian lá ướt đọng nước kéo dài trên 6 - 8 giờ liên tục.",
+      "severity_level": "Nghiêm trọng (làm giảm diện tích quang hợp nghiêm trọng trong kỳ nuôi bắp)",
+      "chemical_controls": [
+        {
+          "active_ingredient": "Propiconazole + Difenoconazole",
+          "trade_names": ["Tilt Super 300EC"],
+          "dosage": "10 - 15 ml/bình 16 lít nước",
+          "pre_harvest_interval_days": 14,
+          "application_notes": "Phun ướt đều tán lá khi phát hiện chớm bệnh, bảo vệ tầng lá đòng quanh bắp ngô."
+        },
+        {
+          "active_ingredient": "Hexaconazole",
+          "trade_names": ["Anvil 5SC"],
+          "dosage": "20 - 25 ml/bình 16 lít nước",
+          "pre_harvest_interval_days": 10,
+          "application_notes": "Phun chặn đứng vết bệnh lan rộng."
+        }
+      ],
+      "organic_biological_controls": [
+        "Phun chế phẩm sinh học vi nấm Trichoderma kết hợp axit amin hữu cơ định kỳ."
+      ],
+      "cultural_preventions": [
+        "Cày sâu lật đất để chôn vùi tàn dư rơm rạ, xác lá ngô bệnh của vụ trước xuống dưới.",
+        "Bón phân cân đối, đặc biệt chú trọng bón lót phân chuồng hoai mục và bón đón bắp đúng thời điểm.",
+        "Không trồng xen ngô với các cây ký chủ phụ của nấm bệnh."
+      ],
+      "safety_precautions": [
+        "Sử dụng đầy đủ PPE, tuân thủ nghiêm ngặt thời gian cách ly thuốc trước khi thu hoạch bắp tươi."
+      ]
+    },
+    "Corn_Gray_leaf_spot": {
+      "disease_id": "Corn_Gray_leaf_spot",
+      "crop": "Ngô / Bắp (Corn)",
+      "vietnamese_name": "Bệnh đốm xám lá ngô",
+      "english_name": "Gray Leaf Spot on Corn",
+      "scientific_name": "Cercospora zeae-maydis",
+      "pathogen_type": "Nấm (Fungus)",
+      "pathogen_name": "Cercospora zeae-maydis Tehon & E.Y. Daniels",
+      "visual_symptoms": "Vết bệnh hình chữ nhật hẹp đặc trưng, chạy dọc song song giữa các gân lá chính. Chiều rộng chỉ 2 - 4mm, dài từ 1 - 5cm. Ban đầu màu nâu nhạt sau đó chuyển sang màu xám tro.",
+      "environmental_triggers": "Thời tiết nóng ẩm, nhiệt độ 25 - 30°C, độ ẩm không khí rất cao trên 90% kéo dài nhiều ngày.",
+      "severity_level": "Cao (dễ gãy gục thân và lép bắp do lá hỏng sớm)",
+      "chemical_controls": [
+        {
+          "active_ingredient": "Azoxystrobin",
+          "trade_names": ["Amistar 250SC"],
+          "dosage": "15 ml/bình 16 lít nước",
+          "pre_harvest_interval_days": 14,
+          "application_notes": "Phun phòng trừ hiệu quả cao ở giai đoạn trước khi trỗ cờ."
+        }
+      ],
+      "organic_biological_controls": [
+        "Ứng dụng phân bón lá Silic hữu cơ để làm dày vách tế bào biểu bì, ngăn sợi nấm xâm nhiễm cơ học."
+      ],
+      "cultural_preventions": [
+        "Luân canh với đậu tương, đậu phộng hoặc các cây trồng không phải họ hòa thảo.",
+        "Dọn sạch cỏ dại quanh bờ ruộng nơi nấm có thể tồn tại lưu cữu."
+      ],
+      "safety_precautions": [
+        "Đảm bảo an toàn hóa chất theo tiêu chuẩn bảo vệ thực vật quốc gia."
+      ]
+    },
+    "Corn_healthy": {
+      "disease_id": "Corn_healthy",
+      "crop": "Ngô / Bắp (Corn)",
+      "vietnamese_name": "Cây ngô khỏe mạnh",
+      "english_name": "Healthy Corn",
+      "scientific_name": "Zea mays",
+      "pathogen_type": "Không có (None)",
+      "pathogen_name": "Không phát hiện mầm bệnh",
+      "visual_symptoms": "Bản lá rộng dài, phiến lá dày màu xanh đậm bóng mượt, gân giữa màu trắng sáng nổi rõ, không có vết đốm hay rỉ mục.",
+      "environmental_triggers": "Điều kiện thích hợp: Nhiệt độ 20 - 32°C, tầng đất canh tác sâu, đủ ẩm và thoát nước tốt.",
+      "severity_level": "An toàn (0)",
+      "chemical_controls": [],
+      "organic_biological_controls": [
+        "Bón bổ sung phân hữu cơ vi sinh định kỳ lúc làm cỏ vun gốc."
+      ],
+      "cultural_preventions": [
+        "Đảm bảo tưới đủ nước giai đoạn ngô trỗ cờ vào hạt vì đây là giai đoạn mẫn cảm nhất.",
+        "Theo dõi sâu keo mùa thu và sâu đục thân để phòng trừ kịp thời."
+      ],
+      "safety_precautions": [
+        "Không cần can thiệp thuốc diệt nấm."
+      ]
+    }
+  }
+}
