@@ -1,0 +1,16 @@
+{
+  "unit_tests_passed": 14,
+  "backend_tests_passed": 10,
+  "stress_tests_passed": 17,
+  "python": "3.13.9",
+  "dependencies": {
+    "torch": "2.14.1",
+    "torchvision": "0.29.1",
+    "onnx": "1.22.0",
+    "onnxruntime": "1.29.0",
+    "fastapi": "0.141.1",
+    "anyio": "4.14.2",
+    "httpx": "0.28.1"
+  },
+  "raw_data_and_weights_published": false
+}

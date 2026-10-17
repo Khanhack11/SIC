@@ -6,6 +6,8 @@ SIC Capstone Project - Group 5
 
 import io
 import time
+import hashlib
+import json
 from pathlib import Path
 from typing import Dict, Any
 from PIL import Image
@@ -23,6 +25,7 @@ from backend.config import (
     MAX_FILE_SIZE_BYTES,
     CLASS_NAMES,
     MODEL_WEIGHTS_PATH,
+    ONNX_MODEL_PATH,
 )
 
 
@@ -92,17 +95,51 @@ class CropDiseaseInferenceEngine:
     Provides calibrated confidence scores and sub-200ms response profiling.
     """
 
-    def __init__(self, weights_path=MODEL_WEIGHTS_PATH, class_names=CLASS_NAMES, device=None, runtime="eager"):
+    def __init__(self, weights_path=MODEL_WEIGHTS_PATH, class_names=CLASS_NAMES, device=None, runtime="eager",
+                 onnx_path=ONNX_MODEL_PATH):
         self.class_names = list(class_names)
         self.num_classes = len(class_names)
         self.device = torch.device(device or ("cuda" if torch.cuda.is_available() else "cpu"))
-        if runtime not in {"eager", "torchscript"}:
-            raise ValueError("runtime must be eager or torchscript")
+        if runtime not in {"eager", "torchscript", "onnx"}:
+            raise ValueError("runtime must be eager, torchscript or onnx")
         self.runtime = runtime
         self.memory_format = torch.channels_last if self.device.type == "cpu" else torch.contiguous_format
         self.temperature = 1.0
         self.calibrated = False
         self.load_error = None
+
+        if runtime == "onnx":
+            self.weights_loaded = False
+            self.model = None
+            try:
+                import onnxruntime as ort
+                if self.device.type != "cpu":
+                    raise ValueError("The ONNX runtime is configured for CPU only")
+                options = ort.SessionOptions()
+                options.intra_op_num_threads = torch.get_num_threads()
+                options.inter_op_num_threads = 1
+                options.execution_mode = ort.ExecutionMode.ORT_SEQUENTIAL
+                options.graph_optimization_level = ort.GraphOptimizationLevel.ORT_ENABLE_ALL
+                options.add_session_config_entry("session.intra_op.allow_spinning", "0")
+                self.session = ort.InferenceSession(str(onnx_path), options, providers=["CPUExecutionProvider"])
+                metadata = json.loads(self.session.get_modelmeta().custom_metadata_map["sic_contract"])
+                expected = {"class_names": self.class_names, "input_size": list(MODEL_INPUT_SIZE),
+                            "mean": IMAGENET_MEAN, "std": IMAGENET_STD, "architecture": "mobilenet_v2"}
+                for key, value in expected.items():
+                    if metadata.get(key) != value:
+                        raise ValueError(f"ONNX {key} differs from the serving contract")
+                if metadata["checkpoint_sha256"] != hashlib.sha256(Path(weights_path).read_bytes()).hexdigest():
+                    raise ValueError("ONNX graph was exported from a different checkpoint")
+                self.temperature = float(metadata["temperature"])
+                if not .05 <= self.temperature <= 10:
+                    raise ValueError("Invalid ONNX temperature")
+                self.calibrated = bool(metadata.get("calibrated"))
+                if self.session.get_inputs()[0].name != "images" or self.session.get_outputs()[0].name != "logits":
+                    raise ValueError("Unexpected ONNX input/output names")
+                self.weights_loaded = True
+            except Exception as exc:
+                self.load_error = str(exc)
+            return
 
         # Initialize MobileNetV2 architecture
         self.model = self._build_model()
@@ -149,6 +186,15 @@ class CropDiseaseInferenceEngine:
         model.classifier[1] = nn.Linear(in_features, self.num_classes)
         return model
 
+    def logits(self, input_tensor):
+        """Return raw logits using the selected runtime, including batched evaluation."""
+        if not self.weights_loaded:
+            raise ModelNotReadyError(self.load_error or "Trained checkpoint unavailable")
+        if self.runtime == "onnx":
+            values = input_tensor.detach().cpu().contiguous().numpy()
+            return torch.from_numpy(self.session.run(["logits"], {"images": values})[0])
+        return self.model(input_tensor)
+
     def predict(self, image_bytes: bytes) -> Dict[str, Any]:
         """
         Runs model inference on input image bytes.
@@ -163,7 +209,7 @@ class CropDiseaseInferenceEngine:
 
         # Inference
         with torch.inference_mode():
-            outputs = self.model(input_tensor)
+            outputs = self.logits(input_tensor)
             # One transfer synchronizes GPU work and avoids one .item() per class.
             probabilities = torch.softmax(outputs / self.temperature, dim=1)[0].cpu().tolist()
 

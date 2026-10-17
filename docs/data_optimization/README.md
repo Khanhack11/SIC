@@ -1,5 +1,7 @@
 # Phần Data và Optimization của Trần Đặng Công Tâm
 
+Vòng triển khai mới: [tối ưu HTTP và ONNX ngày 17/10/2026](OPTIMIZATION_20261017.md). Cấu hình mặc định hiện dùng 2 threads, 2 inference đồng thời, ONNX nếu có graph và dependency; khi chưa có ONNX dùng TorchScript.
+
 Đây là bộ công cụ để chuẩn bị dữ liệu, huấn luyện một baseline MobileNetV2 trên CPU, đánh giá chất lượng và đo độ trễ trước khi bàn giao cho ML Engineer và Backend Developer. Vai trò trong action plan là Data & Optimization Engineer. Baseline được bổ sung vì nhóm bắt đầu chưa có checkpoint.
 
 ## Sản phẩm bàn giao

@@ -5,6 +5,7 @@ Group 5 - Samsung Innovation Campus
 
 from pathlib import Path
 import os
+from importlib.util import find_spec
 
 # Base directories
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,10 +21,15 @@ MODEL_WEIGHTS_PATH = MODELS_DIR / "mobilenetv2_crop_disease.pt"
 MODEL_INPUT_SIZE = (224, 224)
 
 # CPU runtime settings can be selected from ml.benchmark results.
-TORCH_NUM_THREADS = int(os.environ.get("SIC_TORCH_THREADS", "4"))
-INFERENCE_RUNTIME = os.environ.get("SIC_INFERENCE_RUNTIME", "eager")
+TORCH_NUM_THREADS = int(os.environ.get("SIC_TORCH_THREADS", "2"))
+INFERENCE_CONCURRENCY = int(os.environ.get("SIC_INFERENCE_CONCURRENCY", "2"))
+ONNX_MODEL_PATH = Path(os.environ.get("SIC_ONNX_PATH", str(MODELS_DIR / "mobilenetv2_crop_disease.onnx")))
+INFERENCE_RUNTIME = os.environ.get("SIC_INFERENCE_RUNTIME",
+                                   "onnx" if ONNX_MODEL_PATH.is_file() and find_spec("onnxruntime") else "torchscript")
 if TORCH_NUM_THREADS < 1:
     raise ValueError("SIC_TORCH_THREADS must be a positive integer")
+if INFERENCE_CONCURRENCY < 1:
+    raise ValueError("SIC_INFERENCE_CONCURRENCY must be a positive integer")
 
 # ImageNet normalization parameters (Subsystem A requirement)
 IMAGENET_MEAN = [0.485, 0.456, 0.406]

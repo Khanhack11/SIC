@@ -10,9 +10,14 @@ from typing import Optional, List, Dict, Any
 from fastapi import FastAPI, File, UploadFile, HTTPException, Query, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+import anyio
+from contextlib import asynccontextmanager
+from functools import partial
+from threading import BoundedSemaphore
 from pydantic import BaseModel
 
-from backend.config import CONFIDENCE_THRESHOLD, CLASS_NAMES, TORCH_NUM_THREADS, INFERENCE_RUNTIME
+from backend.config import (CONFIDENCE_THRESHOLD, CLASS_NAMES, TORCH_NUM_THREADS, INFERENCE_RUNTIME,
+                            INFERENCE_CONCURRENCY, MAX_FILE_SIZE_BYTES)
 from backend.inference_engine import (
     CropDiseaseInferenceEngine,
     validate_image_file,
@@ -22,6 +27,15 @@ from backend.inference_engine import (
 from backend.advisory_engine import AdvisoryKnowledgeBase
 
 # Initialize FastAPI Application
+@asynccontextmanager
+async def lifespan(application):
+    application.state.inference_limiter = anyio.CapacityLimiter(INFERENCE_CONCURRENCY)
+    try:
+        yield
+    finally:
+        del application.state.inference_limiter
+
+
 app = FastAPI(
     title="AI-Integrated Crop Disease Advisory API",
     description=(
@@ -31,6 +45,7 @@ app = FastAPI(
     version="1.0.0",
     docs_url="/docs",
     redoc_url="/redoc",
+    lifespan=lifespan,
 )
 
 # CORS Middleware for Frontend Integration (Ma Hong Hai)
@@ -46,6 +61,15 @@ app.add_middleware(
 torch.set_num_threads(TORCH_NUM_THREADS)
 inference_engine = CropDiseaseInferenceEngine(runtime=INFERENCE_RUNTIME)
 advisory_engine = AdvisoryKnowledgeBase()
+inference_slots = BoundedSemaphore(INFERENCE_CONCURRENCY)
+
+
+def process_image(file_bytes, filename, threshold):
+    """Run CPU work off the event loop with request-local advisory settings."""
+    with inference_slots:
+        validate_image_file(file_bytes, filename)
+        inference_result = inference_engine.predict(file_bytes)
+        return advisory_engine.process_diagnosis(inference_result, threshold=threshold)
 
 
 # Response Schemas
@@ -111,23 +135,12 @@ async def diagnose_leaf_image(
         )
 
     try:
+        processing_started = time.perf_counter()
         # Read file bytes
-        file_bytes = await file.read()
-
-        # Step 1: Input Validation
-        validate_image_file(file_bytes, file.filename or "uploaded_image.jpg")
-
-        # Step 2: Model Inference
-        inference_result = inference_engine.predict(file_bytes)
-
-        # Step 3: Confidence-Gated Decision Engine
-        if custom_threshold is not None:
-            original_threshold = advisory_engine.threshold
-            advisory_engine.threshold = custom_threshold
-            payload = advisory_engine.process_diagnosis(inference_result)
-            advisory_engine.threshold = original_threshold
-        else:
-            payload = advisory_engine.process_diagnosis(inference_result)
+        file_bytes = await file.read(MAX_FILE_SIZE_BYTES + 1)
+        payload = await anyio.to_thread.run_sync(partial(process_image, file_bytes,
+                                                       file.filename or "uploaded_image.jpg", custom_threshold),
+                                                limiter=getattr(app.state, "inference_limiter", None))
 
         # Include file metadata
         payload["image_metadata"] = {
@@ -136,7 +149,9 @@ async def diagnose_leaf_image(
             "size_bytes": len(file_bytes),
         }
 
-        return JSONResponse(status_code=status.HTTP_200_OK, content=payload)
+        processing_ms = (time.perf_counter() - processing_started) * 1000
+        return JSONResponse(status_code=status.HTTP_200_OK, content=payload,
+                            headers={"Server-Timing": f"inference;dur={payload['prediction']['latency_ms']:.2f}, processing;dur={processing_ms:.2f}"})
 
     except ModelNotReadyError as e:
         raise HTTPException(status_code=status.HTTP_503_SERVICE_UNAVAILABLE, detail=str(e))

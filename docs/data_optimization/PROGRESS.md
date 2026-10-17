@@ -2,6 +2,28 @@
 
 Ngày làm việc 16/10/2026. Nhánh local `tran-dang-cong-tam`.
 
+## Vòng tối ưu ngày 17 tháng 10 năm 2026
+
+- Người dùng yêu cầu tiếp tục tối ưu và tắt máy khi Limits còn không quá 5%. Theo dõi nền đã được tạo thành công, automation `l-u-sic-v-t-t-m-y-khi-codex-c-n-5`, kiểm tra mỗi 5 phút. Tiếp tục kiểm tra trực tiếp khi làm việc.
+- Đã sửa API để CPU inference chạy trong threadpool, giới hạn số lượt inference đồng thời bằng `SIC_INFERENCE_CONCURRENCY` (mặc định 2), và áp dụng ngưỡng tư vấn riêng cho request thay vì đổi biến dùng chung. Upload được đọc tối đa giới hạn file cộng 1 byte.
+- Đã bổ sung ONNX Runtime FP32 với metadata kiểm tra nhãn, input contract và SHA-256 checkpoint. Model local: `models/mobilenetv2_crop_disease.onnx`.
+- Validation đủ 1.731 ảnh: eager, TorchScript và ONNX FP32 cùng macro F1 94,4801%, prediction agreement 100%. INT8 chỉ đạt 90,7411%, đã loại khỏi lựa chọn triển khai. Không đổi checkpoint baseline.
+- Perceptual audit trên 11.494 ảnh không gắn cờ cặp gần trùng khác split theo pHash <=2 và dHash <=4. Không suy ra mọi lá vật lý đã tách biệt; metadata dự phòng vẫn là giới hạn.
+- Các kết quả mới được ghi riêng ở `results/optimization_20261017/`. Các thay đổi REPORT.md, benchmark.json và environment.json có sẵn đầu lượt được giữ lại; bản sao nằm trong `artifacts/optimization_20261017_baseline/`.
+- Đang đo HTTP localhost bằng `python -m ml.api_benchmark`; registry server do công cụ sở hữu: `artifacts/api_active_process.json`. Công cụ tự dừng server của mình trong finally khi được yêu cầu pause.
+- Đã chọn ONNX FP32, 2 threads, 2 inference slots. Vòng xác nhận 150 request mỗi mức tải: HTTP mean/p95 19,28/35,63 ms với 1 client; 45,15/54,39 ms với 4 client; 81,31/93,96 ms với 8 client.
+- 14 kiểm thử unit/integration, 10 kiểm thử backend và 17 kiểm thử stress cuối đều pass. Server benchmark đã được dừng; registry active=false.
+- Mặc định API tự chọn ONNX nếu graph và dependency có sẵn, còn lại dùng TorchScript. Báo cáo đầy đủ: `OPTIMIZATION_20261017.md`. Vòng tối ưu đang được commit và push trên nhánh `tran-dang-cong-tam`; các thay đổi REPORT.md, benchmark.json và environment.json có sẵn đầu lượt vẫn được giữ riêng trong working tree.
+
+Lệnh tiếp tục sau khi kiểm tra/xóa marker pause cũ nếu đã được người dùng cho phép tiếp tục:
+
+```powershell
+python -m ml.runtime_validation
+python -m ml.near_duplicate_audit
+python -m ml.api_benchmark --threads 2 4 --slots 1 2 --concurrency 1 4 8 --runs 80
+python -m unittest discover -s tests -v
+```
+
 ## Trạng thái hiện tại
 
 - Đã tải 11.504 ảnh RGB của 11 lớp từ PlantVillage, kiểm tra Git blob hash từng ảnh.

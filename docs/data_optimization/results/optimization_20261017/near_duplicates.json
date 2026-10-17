@@ -1,0 +1,17 @@
+{
+  "scanned_images": 11494,
+  "manifest_sha256": {
+    "train": "7acf2f27e2854f541b70a8362408e13bc0b5a29e76e003df5fd120f989392552",
+    "validation": "75c87109a18776fa9d0c140a28b42cb73e953c443ce1f9e4b13c7e92724745a6",
+    "test": "10aa14d2d7a6f1fd2d079205c04689dc6a11de01e3c6149e4bf721ca0095c5c2"
+  },
+  "pair_counts": {},
+  "examples": [],
+  "method": "canonical rotation/reflection; 63-bit DCT pHash <=2 and dHash <=4",
+  "splits_modified": false,
+  "limitations": [
+    "Candidate matches need manual review; hashes do not prove leaf identity.",
+    "Conservative thresholds and canonical orientation can miss similar views.",
+    "No candidates does not prove the absence of physical-leaf leakage."
+  ]
+}

@@ -66,7 +66,7 @@ def evaluate(args):
     with torch.inference_mode():
         for index, (images, labels) in enumerate(loader):
             check_pause()
-            outputs.append(engine.model(images.to(engine.device, memory_format=engine.memory_format)).cpu())
+            outputs.append(engine.logits(images.to(engine.device, memory_format=engine.memory_format)).cpu())
             targets.append(labels)
             if index % 20 == 0:
                 print(f"Evaluation batch {index + 1}/{len(loader)}", flush=True)
@@ -102,7 +102,7 @@ def main():
     parser.add_argument("--weights", type=Path, default=Path("models/mobilenetv2_crop_disease.pt"))
     parser.add_argument("--output", type=Path, default=Path("docs/data_optimization/results/evaluation.json"))
     parser.add_argument("--device", choices=["cpu", "cuda"], default="cpu")
-    parser.add_argument("--runtime", choices=["eager", "torchscript"], default="eager")
+    parser.add_argument("--runtime", choices=["eager", "torchscript", "onnx"], default="eager")
     parser.add_argument("--threads", type=int, default=4)
     parser.add_argument("--batch-size", type=int, default=64)
     args = parser.parse_args()

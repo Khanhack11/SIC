@@ -100,7 +100,7 @@ def main():
     parser.add_argument("--weights", type=Path, default=Path("models/mobilenetv2_crop_disease.pt"))
     parser.add_argument("--output", type=Path, default=Path("docs/data_optimization/results/benchmark.json"))
     parser.add_argument("--threads", type=int, nargs="+", default=[1, 2, 4, 8])
-    parser.add_argument("--runtimes", nargs="+", choices=["eager", "torchscript"], default=["eager", "torchscript"])
+    parser.add_argument("--runtimes", nargs="+", choices=["eager", "torchscript", "onnx"], default=["eager", "torchscript"])
     parser.add_argument("--concurrency", type=int, nargs="+", default=[1, 4])
     parser.add_argument("--runs", type=int, default=60)
     parser.add_argument("--warmup", type=int, default=10)
