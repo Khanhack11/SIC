@@ -1,0 +1,124 @@
+{
+  "source_root": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\plantvillage",
+  "seed": 42,
+  "target_ratios": {
+    "train": 0.7,
+    "validation": 0.15,
+    "test": 0.15
+  },
+  "split_policy": "stratified by class; all images of a leaf remain in one split",
+  "leaf_map_sha256": "3b4b253683c6911744959a3870a92509b1faa1ee34e9f8585e21d0fe6337a25b",
+  "source": {
+    "repository": "https://github.com/spMohanty/PlantVillage-Dataset",
+    "revision": "7f7ecc7e1eaca78107e3affe7cb5abd9427e139a",
+    "variant": "raw/color",
+    "seed": 42,
+    "max_per_class": 1500,
+    "selected_counts": {
+      "Corn_(maize)___Common_rust_": 1192,
+      "Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot": 513,
+      "Corn_(maize)___Northern_Leaf_Blight": 985,
+      "Corn_(maize)___healthy": 1162,
+      "Potato___Early_blight": 1000,
+      "Potato___Late_blight": 1000,
+      "Potato___healthy": 152,
+      "Tomato___Early_blight": 1000,
+      "Tomato___Late_blight": 1500,
+      "Tomato___Septoria_leaf_spot": 1500,
+      "Tomato___healthy": 1500
+    },
+    "hash_verification": "git blob SHA-1",
+    "leaf_map_sha256": "3b4b253683c6911744959a3870a92509b1faa1ee34e9f8585e21d0fe6337a25b",
+    "failures": []
+  },
+  "input_valid_count": 11504,
+  "curated_count": 11494,
+  "leaf_map_matches": 5671,
+  "leaf_map_fallbacks": 5833,
+  "excluded_count": 10,
+  "excluded_reasons": {
+    "duplicate_rgb_pixels": 10
+  },
+  "splits": {
+    "train": {
+      "count": 8043,
+      "ratio": 0.6997563946406821,
+      "per_class": {
+        "Corn_Gray_leaf_spot": 359,
+        "Corn_Common_rust": 834,
+        "Corn_Northern_Leaf_Blight": 689,
+        "Corn_healthy": 814,
+        "Potato_Early_blight": 700,
+        "Potato_Late_blight": 700,
+        "Potato_healthy": 104,
+        "Tomato_Early_blight": 700,
+        "Tomato_Late_blight": 1047,
+        "Tomato_Septoria_leaf_spot": 1050,
+        "Tomato_healthy": 1046
+      }
+    },
+    "validation": {
+      "count": 1731,
+      "ratio": 0.15060031320689055,
+      "per_class": {
+        "Corn_Gray_leaf_spot": 77,
+        "Corn_Common_rust": 179,
+        "Corn_Northern_Leaf_Blight": 148,
+        "Corn_healthy": 174,
+        "Potato_Early_blight": 152,
+        "Potato_Late_blight": 152,
+        "Potato_healthy": 24,
+        "Tomato_Early_blight": 151,
+        "Tomato_Late_blight": 225,
+        "Tomato_Septoria_leaf_spot": 225,
+        "Tomato_healthy": 224
+      }
+    },
+    "test": {
+      "count": 1720,
+      "ratio": 0.14964329215242736,
+      "per_class": {
+        "Corn_Gray_leaf_spot": 77,
+        "Corn_Common_rust": 179,
+        "Corn_Northern_Leaf_Blight": 148,
+        "Corn_healthy": 174,
+        "Potato_Early_blight": 148,
+        "Potato_Late_blight": 148,
+        "Potato_healthy": 24,
+        "Tomato_Early_blight": 149,
+        "Tomato_Late_blight": 224,
+        "Tomato_Septoria_leaf_spot": 225,
+        "Tomato_healthy": 224
+      }
+    }
+  },
+  "class_names": [
+    "Corn_Common_rust",
+    "Corn_Gray_leaf_spot",
+    "Corn_Northern_Leaf_Blight",
+    "Corn_healthy",
+    "Potato_Early_blight",
+    "Potato_Late_blight",
+    "Potato_healthy",
+    "Tomato_Early_blight",
+    "Tomato_Late_blight",
+    "Tomato_Septoria_leaf_spot",
+    "Tomato_healthy"
+  ],
+  "manifest_sha256": {
+    "train": "7acf2f27e2854f541b70a8362408e13bc0b5a29e76e003df5fd120f989392552",
+    "validation": "75c87109a18776fa9d0c140a28b42cb73e953c443ce1f9e4b13c7e92724745a6",
+    "test": "10aa14d2d7a6f1fd2d079205c04689dc6a11de01e3c6149e4bf721ca0095c5c2"
+  },
+  "leakage_checks": {
+    "leaf_groups_disjoint": true,
+    "file_hashes_disjoint": true,
+    "pixel_hashes_disjoint": true
+  },
+  "limitations": [
+    "Metadata cannot prove biological labels are correct.",
+    "Exact RGB deduplication does not detect every visually similar image.",
+    "Fallback leaf identifiers do not guarantee physical leaf identity.",
+    "Controlled-background PlantVillage results do not establish field performance."
+  ]
+}

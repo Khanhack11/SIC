@@ -4,6 +4,7 @@ Group 5 - Samsung Innovation Campus
 """
 
 from pathlib import Path
+import os
 
 # Base directories
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -17,6 +18,12 @@ KNOWLEDGE_BASE_PATH = DATA_DIR / "advisory_knowledge_base.json"
 # Model configuration
 MODEL_WEIGHTS_PATH = MODELS_DIR / "mobilenetv2_crop_disease.pt"
 MODEL_INPUT_SIZE = (224, 224)
+
+# CPU runtime settings can be selected from ml.benchmark results.
+TORCH_NUM_THREADS = int(os.environ.get("SIC_TORCH_THREADS", "4"))
+INFERENCE_RUNTIME = os.environ.get("SIC_INFERENCE_RUNTIME", "eager")
+if TORCH_NUM_THREADS < 1:
+    raise ValueError("SIC_TORCH_THREADS must be a positive integer")
 
 # ImageNet normalization parameters (Subsystem A requirement)
 IMAGENET_MEAN = [0.485, 0.456, 0.406]

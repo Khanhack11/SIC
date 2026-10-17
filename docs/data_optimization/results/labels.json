@@ -1,0 +1,28 @@
+{
+  "class_names": [
+    "Corn_Common_rust",
+    "Corn_Gray_leaf_spot",
+    "Corn_Northern_Leaf_Blight",
+    "Corn_healthy",
+    "Potato_Early_blight",
+    "Potato_Late_blight",
+    "Potato_healthy",
+    "Tomato_Early_blight",
+    "Tomato_Late_blight",
+    "Tomato_Septoria_leaf_spot",
+    "Tomato_healthy"
+  ],
+  "class_to_index": {
+    "Corn_Common_rust": 0,
+    "Corn_Gray_leaf_spot": 1,
+    "Corn_Northern_Leaf_Blight": 2,
+    "Corn_healthy": 3,
+    "Potato_Early_blight": 4,
+    "Potato_Late_blight": 5,
+    "Potato_healthy": 6,
+    "Tomato_Early_blight": 7,
+    "Tomato_Late_blight": 8,
+    "Tomato_Septoria_leaf_spot": 9,
+    "Tomato_healthy": 10
+  }
+}
