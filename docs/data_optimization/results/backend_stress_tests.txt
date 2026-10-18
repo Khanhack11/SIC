@@ -1,0 +1,42 @@
+[InferenceEngine] Loaded model weights from D:\AI_SIC_ICTU_2026\Final_SIC_AI_2026\Project\SIC\models\mobilenetv2_crop_disease.pt
+[AdvisoryEngine] Loaded 11 crop disease profiles from Knowledge Base.
+================================================================================
+ KIỂM THỬ TOÀN DIỆN HỆ THỐNG VÀ CÁC TRƯỜNG HỢP BIÊN (EDGE CASES)
+================================================================================
+
+--- 1. KIỂM THỬ CÁC ENDPOINTS CƠ BẢN ---
+ [PASS] Root Endpoint '/' (Status: 200)
+ [PASS] Health Check '/api/health' 
+ [PASS] Supported Crops '/api/crops' 
+ [PASS] All Diseases List '/api/diseases' 
+
+--- 2. KIỂM THỬ TRA CỨU TỪNG BỆNH TRONG KNOWLEDGE BASE ---
+ [PASS] Tra cứu 11/11 bệnh chi tiết 
+ [PASS] Tra cứu bệnh không tồn tại (Expect 404) (Code: 404)
+
+--- 3. KIỂM THỬ CÁC TRƯỜNG HỢP LỖI ĐẦU VÀO (EDGE CASES) ---
+ [PASS] File rỗng 0 bytes (Expect 400) 
+ [PASS] File không đúng đuôi ảnh .py (Expect 400) 
+ [PASS] File vượt quá giới hạn 10MB (Expect 400) 
+ [PASS] File ảnh hỏng cấu trúc (Expect 400) 
+ [PASS] Ảnh xám 1 kênh màu Grayscale (Tự convert RGB) 
+ [PASS] Ảnh trong suốt 4 kênh RGBA (Tự convert RGB) 
+ [PASS] Ảnh tỷ lệ kéo dài 1920x400 (Tự resize 224x224) 
+
+--- 4. KIỂM THỬ THAM SỐ NGƯỠNG TIN CẬY (CUSTOM THRESHOLD) ---
+ [PASS] Threshold > 1.0 (Expect 422 Unprocessable Entity) 
+ [PASS] Threshold < 0.0 (Expect 422 Unprocessable Entity) 
+ [PASS] Threshold = 0.85 được áp dụng chính xác 
+
+--- 5. ĐO LƯỜNG ĐỘ TRỄ HIỆU NĂNG (BENCHMARK 30 LƯỢT SUY LUẬN) ---
+  + Độ trễ nhỏ nhất (Min): 28.27 ms
+  + Độ trễ trung bình (Mean): 42.47 ms
+  + Độ trễ trung vị (Median): 38.37 ms
+  + Phân vị 95 (P95): 65.21 ms
+  + Độ trễ lớn nhất (Max): 75.41 ms
+ [PASS] Đạt tiêu chuẩn Capstone latency < 200ms (Mean: 42.5ms, P95: 65.2ms)
+
+================================================================================
+ KẾT QUẢ TỔNG THỂ: 17/17 BÀI KIỂM THỬ THÀNH CÔNG (100.0%)
+ HỆ THỐNG BACKEND CỦA BẠN HOÀN TOÀN KHÔNG CÓ LỖI (ZERO BUGS)!
+================================================================================

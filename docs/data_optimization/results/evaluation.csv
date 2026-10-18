@@ -1,0 +1,12 @@
+true/predicted,Corn_Common_rust,Corn_Gray_leaf_spot,Corn_Northern_Leaf_Blight,Corn_healthy,Potato_Early_blight,Potato_Late_blight,Potato_healthy,Tomato_Early_blight,Tomato_Late_blight,Tomato_Septoria_leaf_spot,Tomato_healthy
+Corn_Common_rust,178,1,0,0,0,0,0,0,0,0,0
+Corn_Gray_leaf_spot,0,70,7,0,0,0,0,0,0,0,0
+Corn_Northern_Leaf_Blight,1,16,131,0,0,0,0,0,0,0,0
+Corn_healthy,0,1,0,173,0,0,0,0,0,0,0
+Potato_Early_blight,0,0,0,0,148,0,0,0,0,0,0
+Potato_Late_blight,0,0,0,0,1,137,3,0,7,0,0
+Potato_healthy,0,0,0,0,0,0,24,0,0,0,0
+Tomato_Early_blight,0,0,0,0,0,0,0,131,11,5,2
+Tomato_Late_blight,0,0,0,0,0,0,0,6,211,6,1
+Tomato_Septoria_leaf_spot,0,0,0,0,0,0,0,17,6,197,5
+Tomato_healthy,0,0,0,0,0,0,0,1,3,0,220

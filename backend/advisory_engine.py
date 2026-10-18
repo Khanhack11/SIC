@@ -61,7 +61,7 @@ class AdvisoryKnowledgeBase:
             })
         return summary
 
-    def process_diagnosis(self, inference_result: Dict[str, Any]) -> Dict[str, Any]:
+    def process_diagnosis(self, inference_result: Dict[str, Any], threshold: Optional[float] = None) -> Dict[str, Any]:
         """
         Confidence-Gated Decision Logic (Subsystem B Core):
         1. Evaluates confidence against the configured threshold.
@@ -70,13 +70,16 @@ class AdvisoryKnowledgeBase:
         """
         predicted_class = inference_result["predicted_class"]
         confidence = inference_result["confidence"]
+        applied_threshold = self.threshold if threshold is None else threshold
+        if not 0.0 <= applied_threshold <= 1.0:
+            raise ValueError("Confidence threshold must be between 0 and 1")
         latency_ms = inference_result.get("latency_ms", 0.0)
 
         # Retrieve disease details from database
         disease_record = self.get_disease_by_id(predicted_class)
 
         # Decision Logic: Check confidence gate
-        if confidence >= self.threshold:
+        if confidence >= applied_threshold:
             # Case 1: High confidence prediction
             status = "CONFIRMED"
             message = "Độ tin cậy đạt chuẩn. Đã trích xuất phác đồ tư vấn nông nghiệp chính xác."
@@ -86,7 +89,7 @@ class AdvisoryKnowledgeBase:
             # Case 2: Low confidence prediction (< threshold)
             status = "UNCERTAIN"
             message = (
-                f"Độ tin cậy mô hình ({confidence * 100:.1f}%) thấp hơn ngưỡng an toàn ({self.threshold * 100:.0f}%). "
+                f"Độ tin cậy mô hình ({confidence * 100:.1f}%) thấp hơn ngưỡng an toàn ({applied_threshold * 100:.0f}%). "
                 "Hệ thống tạm giữ phác đồ hóa chất để tránh can thiệp sai lầm."
             )
             # Safe Fallback Guidance
@@ -112,8 +115,8 @@ class AdvisoryKnowledgeBase:
                 "is_healthy": inference_result.get("is_healthy", False),
                 "confidence": confidence,
                 "confidence_percentage": f"{confidence * 100:.2f}%",
-                "threshold_applied": self.threshold,
-                "confidence_gate_passed": confidence >= self.threshold,
+                "threshold_applied": applied_threshold,
+                "confidence_gate_passed": confidence >= applied_threshold,
                 "latency_ms": latency_ms,
             },
             "advisory_details": advisory_payload,

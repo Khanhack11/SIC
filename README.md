@@ -11,6 +11,12 @@
 
 ---
 
+## Data & Optimization của Trần Đặng Công Tâm
+
+Pipeline chuẩn bị PlantVillage, augmentation dùng chung với serving, huấn luyện baseline MobileNetV2 trên CPU, đánh giá test và benchmark đã được bổ sung. Xem [hướng dẫn thực hiện và bàn giao](docs/data_optimization/README.md) và [tiến độ hiện tại](docs/data_optimization/PROGRESS.md).
+
+Backend cần checkpoint đã huấn luyện tại `models/mobilenetv2_crop_disease.pt`. Khi chưa có checkpoint hợp lệ, `/api/health` báo `MODEL_NOT_READY` và `/api/diagnose` trả HTTP 503. Chạy `python -m ml.train` sau khi chuẩn bị dữ liệu theo hướng dẫn để tạo baseline; weights được giữ local và không đưa vào Git.
+
 ## ⚡ Hướng Dẫn Nhanh: Lấy Code Về Chạy Được Ngay (Quick Start)
 
 Dành cho các thành viên trong nhóm (Bảo, Tâm, Hải) hoặc giảng viên muốn tải về và chạy ngay:
@@ -51,7 +57,7 @@ hoặc kiểm thử chuyên sâu toàn bộ edge cases:
 ```bash
 python stress_and_edge_test.py
 ```
-*(Kết quả: 17/17 test cases PASS 100%, độ trễ xử lý ~34ms đạt chuẩn Capstone < 200ms)*.
+*Bộ kiểm thử kiểm tra hành vi API. Kết quả F1 và tốc độ của checkpoint thật được ghi riêng trong [báo cáo Data & Optimization](docs/data_optimization/README.md); không dùng kết quả demo để kết luận chất lượng model.*
 
 ---
 
@@ -91,4 +97,4 @@ SIC/
 ## 🛡️ Điểm Nổi Bật Đáp Ứng Chuẩn Giảng Viên & Samsung SIC
 1. **Confidence-Gated Safeguard:** Ngăn ngừa việc nông dân dùng nhầm thuốc bảo vệ thực vật khi ảnh chụp mờ hoặc không đủ độ tin cậy ($< 75\%$).
 2. **Tuân thủ quy chuẩn y tế & nông nghiệp:** Đính kèm thời gian cách ly (PHI), liều lượng, hoạt chất và hướng dẫn trang bị bảo hộ lao động (PPE).
-3. **Hiệu năng cao:** Tối ưu hóa pipeline xử lý tensor, độ trễ trung bình đạt ~34ms (vượt xa mục tiêu < 200ms của đề tài).
+3. **Hiệu năng:** Pipeline tái sử dụng transform, dùng inference mode và hỗ trợ TorchScript. Chạy `python -m ml.benchmark` trên máy triển khai để kiểm tra mục tiêu < 200ms bằng checkpoint đã huấn luyện.

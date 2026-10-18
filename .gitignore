@@ -22,3 +22,12 @@ ENV/
 extracted_sic_text.txt
 create_notebook.py
 *.log
+
+# Reproducible local data and model artifacts (keep manifests/reports in docs)
+data/raw/
+data/processed/
+models/*.pt
+models/*.pth
+models/*.onnx
+models/*.json
+artifacts/

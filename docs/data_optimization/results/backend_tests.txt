@@ -1,0 +1,45 @@
+[InferenceEngine] Loaded model weights from D:\AI_SIC_ICTU_2026\Final_SIC_AI_2026\Project\SIC\models\mobilenetv2_crop_disease.pt
+[AdvisoryEngine] Loaded 11 crop disease profiles from Knowledge Base.
+======================================================================
+BAT DAU CHAY BO KIEM THU TU DONG (SIC BACKEND TEST SUITE)
+======================================================================
+
+[TEST 1] Kiem tra Root Endpoint ('/')...
+  -> PASS: Status 200, Lead: Nguyen Quoc Khanh
+
+[TEST 2] Kiem tra Health Check ('/api/health')...
+  -> PASS: Status HEALTHY, Classes: 11, Latency goal: < 200 ms
+
+[TEST 3] Kiem tra danh muc cay trong ('/api/crops')...
+  -> PASS: Ho tro 3 loai cay: ['Cà chua (Tomato)', 'Khoai tây (Potato)', 'Ngô (Corn)']
+
+[TEST 4] Kiem tra danh muc benh ('/api/diseases')...
+  -> PASS: Tong so benh trong Knowledge Base: 11
+
+[TEST 5] Kiem tra chi tiet benh ('/api/diseases/Tomato_Early_blight')...
+  -> PASS: Lay thanh cong phac do 'Bệnh đốm vòng / Cháy lá sớm cà chua', tac nhan: Alternaria solani
+
+[TEST 6] Kiem tra ma benh khong ton tai (404 Not Found)...
+  -> PASS: Tra ve dung 404 Not Found khi benh khong ton tai
+
+[TEST 7] Kiem tra chan doan anh hop le ('/api/diagnose')...
+  -> PASS: Chan doan thanh cong!
+     + Status: UNCERTAIN
+     + Predicted: Tomato_Septoria_leaf_spot
+     + Confidence: 74.43%
+     + Latency: 43.84 ms (Dat chuan < 200ms: True)
+
+[TEST 8] Kiem tra bo loc Confidence-Gated (Threshold cut-off)...
+  -> PASS: Bo loc hoat dong chinh xac khi confidence < threshold!
+     + Status: UNCERTAIN
+     + Warning: Khuyến nghị chụp lại ảnh chất lượng cao hơn hoặc tham vấn chuyên gia.
+
+[TEST 9] Kiem tra loc anh loi/hong (400 Bad Request)...
+  -> PASS: Da chan dung file anh hong voi ma loi 400: File ảnh bị lỗi hoặc hỏng, không thể đọc: cannot identify image file <_io.BytesIO object at 0x0000027159C042C0>
+
+[TEST 10] Kiem tra loc file sai dinh dang gia mao PNG (400 Bad Request)...
+  -> PASS: Da phat hien va chan file gia mao thanh cong
+
+======================================================================
+TAT CA 10/10 BAI KIEM THU DA VUOT QUA XUAT SAC (100% PASS)!
+======================================================================

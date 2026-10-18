@@ -6,11 +6,16 @@ SIC Capstone Project - Group 5
 
 import io
 import time
-from typing import Dict, Tuple, Any
+import hashlib
+import json
+from pathlib import Path
+from typing import Dict, Any
 from PIL import Image
 import torch
 import torch.nn as nn
-from torchvision import models, transforms
+from torchvision import models
+
+from backend.preprocessing import image_transform, orient_rgb
 
 from backend.config import (
     MODEL_INPUT_SIZE,
@@ -20,12 +25,17 @@ from backend.config import (
     MAX_FILE_SIZE_BYTES,
     CLASS_NAMES,
     MODEL_WEIGHTS_PATH,
+    ONNX_MODEL_PATH,
 )
 
 
 class InputValidationError(Exception):
     """Raised when an uploaded image fails validation."""
     pass
+
+
+class ModelNotReadyError(RuntimeError):
+    """No verified, trained checkpoint is available for diagnosis."""
 
 
 def validate_image_file(file_bytes: bytes, filename: str) -> None:
@@ -54,6 +64,10 @@ def validate_image_file(file_bytes: bytes, filename: str) -> None:
     # Corruption check
     try:
         with Image.open(io.BytesIO(file_bytes)) as img:
+            if img.format not in {"JPEG", "PNG"}:
+                raise ValueError("Nội dung ảnh phải là JPEG hoặc PNG.")
+            if min(img.size) < 32 or img.width * img.height > 20_000_000:
+                raise ValueError("Ảnh phải có cạnh tối thiểu 32px và không vượt 20 megapixel.")
             img.verify()  # Fast structural verification
     except Exception as e:
         raise InputValidationError(f"File ảnh bị lỗi hoặc hỏng, không thể đọc: {str(e)}")
@@ -67,15 +81,11 @@ def preprocess_image(image_bytes: bytes) -> torch.Tensor:
     3. Normalizes using ImageNet mean and std baselines.
     4. Adds batch dimension: (1, 3, 224, 224).
     """
-    image = Image.open(io.BytesIO(image_bytes)).convert("RGB")
-
-    transform_pipeline = transforms.Compose([
-        transforms.Resize(MODEL_INPUT_SIZE),
-        transforms.ToTensor(),
-        transforms.Normalize(mean=IMAGENET_MEAN, std=IMAGENET_STD),
-    ])
-
-    tensor = transform_pipeline(image)
+    try:
+        with Image.open(io.BytesIO(image_bytes)) as image:
+            tensor = image_transform()(orient_rgb(image))
+    except (OSError, ValueError) as exc:
+        raise InputValidationError(f"Không thể giải mã đầy đủ ảnh: {exc}") from exc
     return tensor.unsqueeze(0)  # Shape: (1, 3, 224, 224)
 
 
@@ -85,28 +95,89 @@ class CropDiseaseInferenceEngine:
     Provides calibrated confidence scores and sub-200ms response profiling.
     """
 
-    def __init__(self, weights_path=MODEL_WEIGHTS_PATH, class_names=CLASS_NAMES):
-        self.class_names = class_names
+    def __init__(self, weights_path=MODEL_WEIGHTS_PATH, class_names=CLASS_NAMES, device=None, runtime="eager",
+                 onnx_path=ONNX_MODEL_PATH):
+        self.class_names = list(class_names)
         self.num_classes = len(class_names)
-        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        self.device = torch.device(device or ("cuda" if torch.cuda.is_available() else "cpu"))
+        if runtime not in {"eager", "torchscript", "onnx"}:
+            raise ValueError("runtime must be eager, torchscript or onnx")
+        self.runtime = runtime
+        self.memory_format = torch.channels_last if self.device.type == "cpu" else torch.contiguous_format
+        self.temperature = 1.0
+        self.calibrated = False
+        self.load_error = None
+
+        if runtime == "onnx":
+            self.weights_loaded = False
+            self.model = None
+            try:
+                import onnxruntime as ort
+                if self.device.type != "cpu":
+                    raise ValueError("The ONNX runtime is configured for CPU only")
+                options = ort.SessionOptions()
+                options.intra_op_num_threads = torch.get_num_threads()
+                options.inter_op_num_threads = 1
+                options.execution_mode = ort.ExecutionMode.ORT_SEQUENTIAL
+                options.graph_optimization_level = ort.GraphOptimizationLevel.ORT_ENABLE_ALL
+                options.add_session_config_entry("session.intra_op.allow_spinning", "0")
+                self.session = ort.InferenceSession(str(onnx_path), options, providers=["CPUExecutionProvider"])
+                metadata = json.loads(self.session.get_modelmeta().custom_metadata_map["sic_contract"])
+                expected = {"class_names": self.class_names, "input_size": list(MODEL_INPUT_SIZE),
+                            "mean": IMAGENET_MEAN, "std": IMAGENET_STD, "architecture": "mobilenet_v2"}
+                for key, value in expected.items():
+                    if metadata.get(key) != value:
+                        raise ValueError(f"ONNX {key} differs from the serving contract")
+                if metadata["checkpoint_sha256"] != hashlib.sha256(Path(weights_path).read_bytes()).hexdigest():
+                    raise ValueError("ONNX graph was exported from a different checkpoint")
+                self.temperature = float(metadata["temperature"])
+                if not .05 <= self.temperature <= 10:
+                    raise ValueError("Invalid ONNX temperature")
+                self.calibrated = bool(metadata.get("calibrated"))
+                if self.session.get_inputs()[0].name != "images" or self.session.get_outputs()[0].name != "logits":
+                    raise ValueError("Unexpected ONNX input/output names")
+                self.weights_loaded = True
+            except Exception as exc:
+                self.load_error = str(exc)
+            return
 
         # Initialize MobileNetV2 architecture
         self.model = self._build_model()
         self.weights_loaded = False
 
+        weights_path = Path(weights_path) if weights_path else None
         if weights_path and weights_path.exists():
             try:
-                state_dict = torch.load(weights_path, map_location=self.device)
+                checkpoint = torch.load(weights_path, map_location="cpu", weights_only=True)
+                if "state_dict" in checkpoint:
+                    expected = {"class_names": self.class_names, "input_size": list(MODEL_INPUT_SIZE),
+                                "mean": IMAGENET_MEAN, "std": IMAGENET_STD, "architecture": "mobilenet_v2"}
+                    for key, value in expected.items():
+                        if checkpoint.get(key) != value:
+                            raise ValueError(f"Checkpoint {key} differs from the serving contract")
+                    state_dict = checkpoint["state_dict"]
+                    self.temperature = float(checkpoint.get("temperature", 1.0))
+                    if not 0.05 <= self.temperature <= 10.0:
+                        raise ValueError("Invalid checkpoint temperature")
+                    self.calibrated = bool(checkpoint.get("calibration"))
+                else:
+                    # Existing ML-lead state_dict files remain compatible, but are uncalibrated.
+                    state_dict = checkpoint
                 self.model.load_state_dict(state_dict)
                 self.weights_loaded = True
                 print(f"[InferenceEngine] Loaded model weights from {weights_path}")
             except Exception as e:
-                print(f"[InferenceEngine] Warning: Cannot load checkpoint ({e}). Using initialized model.")
+                self.load_error = str(e)
+                print(f"[InferenceEngine] Checkpoint unavailable: {e}")
         else:
-            print("[InferenceEngine] Using initialized MobileNetV2 classifier (ready for weights from ML Engineer Dinh Gia Bao).")
+            print("[InferenceEngine] No trained checkpoint found; diagnosis is unavailable until weights are provided.")
 
-        self.model.to(self.device)
+        self.model.to(self.device, memory_format=self.memory_format)
         self.model.eval()
+        if runtime == "torchscript" and self.weights_loaded:
+            example = torch.zeros(1, 3, *MODEL_INPUT_SIZE, device=self.device).to(memory_format=self.memory_format)
+            with torch.inference_mode():
+                self.model = torch.jit.freeze(torch.jit.trace(self.model, example))
 
     def _build_model(self) -> nn.Module:
         """Builds MobileNetV2 with custom classification head for crop diseases."""
@@ -115,31 +186,42 @@ class CropDiseaseInferenceEngine:
         model.classifier[1] = nn.Linear(in_features, self.num_classes)
         return model
 
+    def logits(self, input_tensor):
+        """Return raw logits using the selected runtime, including batched evaluation."""
+        if not self.weights_loaded:
+            raise ModelNotReadyError(self.load_error or "Trained checkpoint unavailable")
+        if self.runtime == "onnx":
+            values = input_tensor.detach().cpu().contiguous().numpy()
+            return torch.from_numpy(self.session.run(["logits"], {"images": values})[0])
+        return self.model(input_tensor)
+
     def predict(self, image_bytes: bytes) -> Dict[str, Any]:
         """
         Runs model inference on input image bytes.
         Profiles latency and returns top prediction with confidence and all probabilities.
         """
+        if not self.weights_loaded:
+            raise ModelNotReadyError("Chưa có checkpoint đã huấn luyện hợp lệ. " + (self.load_error or ""))
         start_time = time.perf_counter()
 
         # Preprocessing
-        input_tensor = preprocess_image(image_bytes).to(self.device)
+        input_tensor = preprocess_image(image_bytes).to(self.device, memory_format=self.memory_format)
 
         # Inference
-        with torch.no_grad():
-            outputs = self.model(input_tensor)
-            probabilities = torch.softmax(outputs, dim=1)[0]
+        with torch.inference_mode():
+            outputs = self.logits(input_tensor)
+            # One transfer synchronizes GPU work and avoids one .item() per class.
+            probabilities = torch.softmax(outputs / self.temperature, dim=1)[0].cpu().tolist()
 
-        top_prob, top_idx = torch.topk(probabilities, 1)
-        predicted_idx = top_idx.item()
-        confidence = float(top_prob.item())
+        predicted_idx = max(range(self.num_classes), key=probabilities.__getitem__)
+        confidence = float(probabilities[predicted_idx])
         predicted_class = self.class_names[predicted_idx]
 
         latency_ms = round((time.perf_counter() - start_time) * 1000, 2)
 
         # Build full probabilities dictionary
         all_probs = {
-            self.class_names[i]: round(float(probabilities[i].item()), 4)
+            self.class_names[i]: round(float(probabilities[i]), 4)
             for i in range(self.num_classes)
         }
 
@@ -155,5 +237,6 @@ class CropDiseaseInferenceEngine:
             "confidence_percentage": f"{confidence * 100:.2f}%",
             "latency_ms": latency_ms,
             "benchmark_met": latency_ms < 200.0,
+            "calibrated": self.calibrated,
             "all_probabilities": all_probs,
         }
