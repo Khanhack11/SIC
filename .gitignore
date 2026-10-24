@@ -30,4 +30,6 @@ models/*.pt
 models/*.pth
 models/*.onnx
 models/*.json
+models/*.partial
+models/*_search/
 artifacts/

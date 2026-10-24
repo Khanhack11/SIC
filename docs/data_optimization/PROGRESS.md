@@ -2,6 +2,28 @@
 
 Ngày làm việc 16/10/2026. Nhánh local `tran-dang-cong-tam`.
 
+## Vòng tối ưu model ngày 24 tháng 10 năm 2026
+
+Yêu cầu hiện hành: khi Limits còn không quá 5% ở một trong hai cửa sổ, lưu và dừng task, KHÔNG tắt máy. Automation `l-u-sic-v-t-t-m-y-khi-codex-c-n-5` đã được đổi tên/nội dung sang dừng task và bật mỗi 5 phút. Nội dung yêu cầu tắt máy ở các mục lịch sử bên dưới đã hết hiệu lực.
+
+- Checkpoint đang triển khai vẫn giữ nguyên tại `models/mobilenetv2_crop_disease.pt` và graph ONNX tương ứng.
+- Đã thử 6 cấu hình đầu Linear bằng feature cache đã kiểm tra hợp đồng nhãn, hash manifest và tái tính feature của 16 ảnh validation. Cấu hình tốt nhất: class-weight exponent 0,5; L2 0,001; validation macro F1 94,8793% so với baseline 94,4801%. Standardization được fold vào weight/bias để không tăng chi phí inference.
+- Ứng viên head: `models/mobilenetv2_head_v2_20261024.pt`. Báo cáo `results/optimization_20261024/head_search.json`. Lượt `mobilenetv2_head_20261024_search` đầu tiên gặp file lock khi rename trên Windows; lượt v2 có retry và hoàn tất.
+- Đang chạy `python -u -m ml.finetune_projection`: fine-tune projection Conv1×1 cuối và head, BatchNorm frozen, activation shard FP16 trên đĩa để phù hợp máy 8GB RAM. Lưu resume trong `artifacts/projection_*/resume.pt`; dừng tại batch boundary khi có `artifacts/PAUSE_REQUESTED`.
+- Chọn ứng viên bằng validation; test chưa được đọc trong vòng tối ưu này. Validation đã dùng ở các vòng trước nên cải thiện cần được xem cùng nguy cơ overfit validation.
+- Đã kết thúc hai thử nghiệm projection (LR 1e-4 và 1e-5); cả hai không vượt epoch 0 và bị loại bằng validation. File ứng viên chỉ lưu lại trọng số epoch 0, không được triển khai.
+- Chọn Linear bằng validation rồi xác nhận test: accuracy 93,8953%, macro F1 93,3147%, thấp hơn baseline 93,7632%; NLL/ECE cũng kém hơn. Giữ baseline, không thử tiếp hyperparameter dựa trên test này.
+- ONNX ứng viên đã xuất riêng tại `models/mobilenetv2_head_20261024.onnx`, có cùng macro F1 và accuracy với eager trên test. Model và graph mặc định không bị thay thế.
+- Bộ kiểm thử 17/17 pass. Báo cáo `MODEL_OPTIMIZATION_20261024.md`, kết quả `results/optimization_20261024/`, quyết định `decision.json`.
+- Đã kết thúc đánh giá và benchmark ứng viên, không còn tiến trình tối ưu của vòng này chạy. ONNX ứng viên có p95 9,85 ms serial và 25,36 ms concurrency 4 trong process nhưng không được triển khai vì chất lượng không cải thiện. Mã và báo cáo được commit trên nhánh `tran-dang-cong-tam`; weights/search/cache giữ local.
+
+Lệnh tiếp tục:
+
+```powershell
+python -u -m ml.finetune_projection
+python -m ml.evaluate --split validation --weights models/mobilenetv2_projection_20261024.pt --output docs/data_optimization/results/optimization_20261024/projection_validation.json
+```
+
 ## Vòng tối ưu ngày 17 tháng 10 năm 2026
 
 - Người dùng yêu cầu tiếp tục tối ưu và tắt máy khi Limits còn không quá 5%. Theo dõi nền đã được tạo thành công, automation `l-u-sic-v-t-t-m-y-khi-codex-c-n-5`, kiểm tra mỗi 5 phút. Tiếp tục kiểm tra trực tiếp khi làm việc.
@@ -59,9 +81,9 @@ Downloader kiểm tra lại và tiếp tục các file chưa đủ. Nếu đã c
 
 ## Yêu cầu về hạn mức
 
-Người dùng yêu cầu khi Codex còn không quá 5% hạn mức thì lưu tiến độ, tạm dừng các tiến trình của chat này rồi tắt máy. Lần kiểm tra gần nhất: còn 7% cửa sổ 5 giờ, 69% cửa sổ tuần. Chưa đạt ngưỡng tắt máy. Lịch theo dõi nền chưa tạo được do công cụ automation cần phê duyệt trong khi phiên không cho phép luồng phê duyệt đó. Kiểm tra trực tiếp vẫn thực hiện trong lúc chat đang làm việc.
+Yêu cầu hiện hành ngày 24/10/2026: khi một cửa sổ Codex còn không quá 5%, lưu checkpoint/tiến độ và dừng task của chat; KHÔNG tắt máy. Automation đã cập nhật và đang active, kiểm tra mỗi 5 phút. Lần kiểm tra gần nhất trong vòng này: còn 79% cửa sổ 5 giờ, 97% tuần.
 
-Để yêu cầu các job ML dừng có lưu trạng thái, tạo `artifacts/PAUSE_REQUESTED`. Xóa đúng file này trước khi chạy tiếp. Không dùng lệnh tắt máy cho đến khi đã đọc hạn mức thực tế và đạt ngưỡng.
+Để yêu cầu các job ML dừng có lưu trạng thái, tạo `artifacts/PAUSE_REQUESTED`. Chỉ xóa đúng file này khi được cho phép tiếp tục. Không gọi lệnh tắt máy.
 
 ## Phạm vi Git
 

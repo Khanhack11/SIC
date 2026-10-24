@@ -1,0 +1,265 @@
+{
+  "accuracy": 0.938953488372093,
+  "macro_precision": 0.9278512993574818,
+  "macro_recall": 0.9399487739847757,
+  "macro_f1": 0.9331467376689327,
+  "per_class": {
+    "Corn_Common_rust": {
+      "precision": 0.994413407821229,
+      "recall": 0.994413407821229,
+      "f1": 0.994413407821229,
+      "support": 179
+    },
+    "Corn_Gray_leaf_spot": {
+      "precision": 0.7701149425287356,
+      "recall": 0.8701298701298701,
+      "f1": 0.8170731707317073,
+      "support": 77
+    },
+    "Corn_Northern_Leaf_Blight": {
+      "precision": 0.9280575539568345,
+      "recall": 0.8716216216216216,
+      "f1": 0.8989547038327526,
+      "support": 148
+    },
+    "Corn_healthy": {
+      "precision": 0.9942528735632183,
+      "recall": 0.9942528735632183,
+      "f1": 0.9942528735632183,
+      "support": 174
+    },
+    "Potato_Early_blight": {
+      "precision": 0.9932432432432432,
+      "recall": 0.9932432432432432,
+      "f1": 0.9932432432432432,
+      "support": 148
+    },
+    "Potato_Late_blight": {
+      "precision": 0.9790209790209791,
+      "recall": 0.9459459459459459,
+      "f1": 0.9621993127147767,
+      "support": 148
+    },
+    "Potato_healthy": {
+      "precision": 0.8888888888888888,
+      "recall": 1.0,
+      "f1": 0.9411764705882353,
+      "support": 24
+    },
+    "Tomato_Early_blight": {
+      "precision": 0.8506493506493507,
+      "recall": 0.8791946308724832,
+      "f1": 0.8646864686468647,
+      "support": 149
+    },
+    "Tomato_Late_blight": {
+      "precision": 0.8947368421052632,
+      "recall": 0.9107142857142857,
+      "f1": 0.9026548672566371,
+      "support": 224
+    },
+    "Tomato_Septoria_leaf_spot": {
+      "precision": 0.9395348837209302,
+      "recall": 0.8977777777777778,
+      "f1": 0.9181818181818181,
+      "support": 225
+    },
+    "Tomato_healthy": {
+      "precision": 0.9734513274336283,
+      "recall": 0.9821428571428571,
+      "f1": 0.9777777777777777,
+      "support": 224
+    }
+  },
+  "confusion_matrix": [
+    [
+      178,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      67,
+      10,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      18,
+      129,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      1,
+      0,
+      173,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      147,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      1,
+      140,
+      3,
+      0,
+      4,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      24,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      131,
+      12,
+      6,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      1,
+      0,
+      3,
+      0,
+      8,
+      204,
+      6,
+      2
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      13,
+      6,
+      202,
+      4
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      2,
+      2,
+      0,
+      220
+    ]
+  ],
+  "confusion_matrix_axes": "rows=true, columns=predicted",
+  "class_names": [
+    "Corn_Common_rust",
+    "Corn_Gray_leaf_spot",
+    "Corn_Northern_Leaf_Blight",
+    "Corn_healthy",
+    "Potato_Early_blight",
+    "Potato_Late_blight",
+    "Potato_healthy",
+    "Tomato_Early_blight",
+    "Tomato_Late_blight",
+    "Tomato_Septoria_leaf_spot",
+    "Tomato_healthy"
+  ],
+  "split": "test",
+  "test_count": 1720,
+  "checkpoint_sha256": "372d3f09edad78bfd5e8c2da797883477477477fc0c9d6ff41e9665430970c0b",
+  "test_manifest_sha256": "10aa14d2d7a6f1fd2d079205c04689dc6a11de01e3c6149e4bf721ca0095c5c2",
+  "device": "cpu",
+  "runtime": "eager",
+  "threads": 2,
+  "torch_version": "2.14.1+cpu",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "temperature": 1.3361120223999023,
+  "calibrated": true,
+  "calibration_before": {
+    "nll": 0.19579079747200012,
+    "ece": 0.021001411543693393,
+    "ece_bins": 15,
+    "confidence_threshold": 0.75,
+    "accepted_count": 1613,
+    "accepted_coverage": 0.9377906918525696,
+    "accepted_accuracy": 0.9621822834014893
+  },
+  "calibration_after": {
+    "nll": 0.181697815656662,
+    "ece": 0.011980487164692022,
+    "ece_bins": 15,
+    "confidence_threshold": 0.75,
+    "accepted_count": 1565,
+    "accepted_coverage": 0.9098837375640869,
+    "accepted_accuracy": 0.9680511355400085
+  },
+  "macro_f1_target": 0.85,
+  "macro_f1_target_met": true,
+  "limitations": "PlantVillage controlled-background test subset; field generalization is unmeasured."
+}

@@ -1,5 +1,7 @@
 # Phần Data và Optimization của Trần Đặng Công Tâm
 
+[Vòng tối ưu model ngày 24/10/2026](MODEL_OPTIMIZATION_20261024.md): đã thử Linear regularization và fine-tune projection; giữ baseline vì ứng viên không cải thiện test. Theo dõi Limits hiện chỉ lưu và dừng task ở ngưỡng 5%, không tắt máy.
+
 Vòng triển khai mới: [tối ưu HTTP và ONNX ngày 17/10/2026](OPTIMIZATION_20261017.md). Cấu hình mặc định hiện dùng 2 threads, 2 inference đồng thời, ONNX nếu có graph và dependency; khi chưa có ONNX dùng TorchScript.
 
 Đây là bộ công cụ để chuẩn bị dữ liệu, huấn luyện một baseline MobileNetV2 trên CPU, đánh giá chất lượng và đo độ trễ trước khi bàn giao cho ML Engineer và Backend Developer. Vai trò trong action plan là Data & Optimization Engineer. Baseline được bổ sung vì nhóm bắt đầu chưa có checkpoint.

@@ -1,0 +1,12 @@
+{
+  "decision": "retain_deployed_baseline",
+  "deployed_checkpoint_sha256": "ea7f52fc69187c7e5ee701b943bf80046ce26ff90d12aecb559967815a62a423",
+  "candidate_sha256": "372d3f09edad78bfd5e8c2da797883477477477fc0c9d6ff41e9665430970c0b",
+  "reason": "Validation winner did not pass final test regression gate; no further tuning used test results.",
+  "baseline_test_macro_f1": 0.9376324878231624,
+  "candidate_test_macro_f1": 0.9331467376689327,
+  "tests_passed": 17,
+  "test_set_reused_from_prior_rounds": true,
+  "task_stop_threshold_remaining_percent": 5,
+  "shutdown_authorized": false
+}

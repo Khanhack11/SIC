@@ -57,7 +57,8 @@ def calibration_metrics(logits, targets, temperature, bins=15):
 
 def evaluate(args):
     torch.set_num_threads(args.threads)
-    dataset = ManifestDataset(args.data / "test.csv", args.source)
+    split = getattr(args, "split", "test")
+    dataset = ManifestDataset(args.data / f"{split}.csv", args.source)
     engine = CropDiseaseInferenceEngine(args.weights, device=args.device, runtime=args.runtime)
     if not engine.weights_loaded:
         raise ModelNotReadyError(engine.load_error or "Trained checkpoint required")
@@ -74,8 +75,8 @@ def evaluate(args):
     predictions = logits.argmax(dim=1)
     report = classification_metrics(targets.numpy(), predictions.numpy())
     report.update({
-        "test_count": len(dataset), "checkpoint_sha256": hashlib.sha256(args.weights.read_bytes()).hexdigest(),
-        "test_manifest_sha256": hashlib.sha256(dataset.manifest.read_bytes()).hexdigest(),
+        "split": split, f"{split}_count": len(dataset), "checkpoint_sha256": hashlib.sha256(args.weights.read_bytes()).hexdigest(),
+        f"{split}_manifest_sha256": hashlib.sha256(dataset.manifest.read_bytes()).hexdigest(),
         "device": str(engine.device), "runtime": args.runtime, "threads": args.threads,
         "torch_version": str(torch.__version__), "platform": platform.platform(),
         "temperature": engine.temperature, "calibrated": engine.calibrated,
@@ -91,7 +92,7 @@ def evaluate(args):
         writer.writerow(["true/predicted", *CLASS_NAMES])
         for label, row in zip(CLASS_NAMES, report["confusion_matrix"]):
             writer.writerow([label, *row])
-    print(json.dumps({key: report[key] for key in ("test_count", "accuracy", "macro_f1", "macro_f1_target_met")}, indent=2), flush=True)
+    print(json.dumps({key: report[key] for key in (f"{split}_count", "accuracy", "macro_f1", "macro_f1_target_met")}, indent=2), flush=True)
     return report
 
 
@@ -99,6 +100,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--data", type=Path, default=Path("data/processed/plantvillage"))
     parser.add_argument("--source", type=Path)
+    parser.add_argument("--split", choices=["validation", "test"], default="test")
     parser.add_argument("--weights", type=Path, default=Path("models/mobilenetv2_crop_disease.pt"))
     parser.add_argument("--output", type=Path, default=Path("docs/data_optimization/results/evaluation.json"))
     parser.add_argument("--device", choices=["cpu", "cuda"], default="cpu")
