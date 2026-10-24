@@ -1,5 +1,7 @@
 # Phần Data và Optimization của Trần Đặng Công Tâm
 
+[Sửa cách trộn ảnh khi fine-tune](TRAINING_SHUFFLE_20261024.md): shuffle từng ảnh thay cho từng shard, batch 128 và đã kiểm tra pause/resume. Mức tăng validation quá nhỏ nên vẫn giữ baseline.
+
 [Vòng tối ưu model ngày 24/10/2026](MODEL_OPTIMIZATION_20261024.md): đã thử Linear regularization và fine-tune projection; giữ baseline vì ứng viên không cải thiện test. Theo dõi Limits hiện chỉ lưu và dừng task ở ngưỡng 5%, không tắt máy.
 
 Vòng triển khai mới: [tối ưu HTTP và ONNX ngày 17/10/2026](OPTIMIZATION_20261017.md). Cấu hình mặc định hiện dùng 2 threads, 2 inference đồng thời, ONNX nếu có graph và dependency; khi chưa có ONNX dùng TorchScript.

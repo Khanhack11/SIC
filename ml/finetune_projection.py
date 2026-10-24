@@ -8,6 +8,7 @@ import argparse
 import copy
 import hashlib
 import json
+from functools import lru_cache
 from pathlib import Path
 
 import torch
@@ -45,6 +46,22 @@ def tail_logits(model, features):
     return model.classifier(model.features[-1](features).mean((2, 3)))
 
 
+class CachedSamples:
+    """Shuffle individual samples across class-sorted shards, with bounded RAM."""
+
+    def __init__(self, paths):
+        self.references = []
+        for path in paths:
+            shard = torch.load(path, weights_only=True)
+            self.references.extend((path, offset) for offset in range(len(shard["targets"])))
+        self.load = lru_cache(maxsize=16)(lambda path: torch.load(path, weights_only=True))
+
+    def batch(self, indices):
+        samples = [(self.load(self.references[index][0]), self.references[index][1]) for index in indices]
+        return (torch.stack([shard["features"][offset] for shard, offset in samples]).float(),
+                torch.stack([shard["targets"][offset] for shard, offset in samples]))
+
+
 def validation_logits(model, paths):
     values, targets = [], []
     model.eval()
@@ -77,6 +94,7 @@ def run(args):
     validation = ManifestDataset(args.data / "validation.csv")
     config = {"input_sha256": hashlib.sha256(args.weights.read_bytes()).hexdigest(), "epochs": args.epochs,
               "lr": args.lr, "batch_size": args.batch_size, "seed": 42, "cache_dtype": "float16",
+              "effective_batch_size": args.batch_size * args.batch_shards, "sample_level_shuffle": True,
               "train_sha256": hashlib.sha256(training.manifest.read_bytes()).hexdigest(),
               "validation_sha256": hashlib.sha256(validation.manifest.read_bytes()).hexdigest(),
               "script_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest()}
@@ -84,13 +102,23 @@ def run(args):
     root = args.activation_cache or Path("artifacts") / f"projection_{cache_key}"
     if args.activation_cache:
         previous = torch.load(root / "resume.pt", weights_only=True)["config"]
-        for key in ("input_sha256", "train_sha256", "validation_sha256", "batch_size", "seed", "cache_dtype"):
+        for key in ("train_sha256", "validation_sha256", "batch_size", "seed", "cache_dtype"):
             if previous[key] != config[key]:
                 raise ValueError(f"Activation cache contract mismatch: {key}")
+        if previous["input_sha256"] != config["input_sha256"]:
+            if not args.cache_source_weights or hashlib.sha256(args.cache_source_weights.read_bytes()).hexdigest() != previous["input_sha256"]:
+                raise ValueError("Provide the original --cache-source-weights to verify backbone compatibility")
+            source_state = torch.load(args.cache_source_weights, weights_only=True)["state_dict"]
+            for key, value in baseline["state_dict"].items():
+                if key.startswith("features.") and not key.startswith("features.18."):
+                    if key not in source_state or not torch.equal(value, source_state[key]):
+                        raise ValueError(f"Cached feature backbone differs: {key}")
     root.mkdir(parents=True, exist_ok=True)
     train_paths = collect_shards(model, training, root / "train", args.batch_size, True)
     val_paths = collect_shards(model, validation, root / "validation", args.batch_size, False)
     targets = torch.tensor([int(row["class_index"]) for row in training.rows])
+    samples = CachedSamples(train_paths)
+    effective_batch_size = config["effective_batch_size"]
     counts = torch.bincount(targets, minlength=engine.num_classes).float()
     criterion = nn.CrossEntropyLoss(weight=(counts.sum() / (len(counts) * counts)).sqrt())
     parameters = [parameter for parameter in model.parameters() if parameter.requires_grad]
@@ -122,24 +150,25 @@ def run(args):
     for epoch in range(start_epoch, args.epochs):
         model.eval()
         model.classifier.train()
-        order = torch.randperm(len(train_paths), generator=torch.Generator().manual_seed(42 + epoch)).tolist()
-        for position in range(start_batch if epoch == start_epoch else 0, len(order)):
+        order = torch.randperm(len(samples.references), generator=torch.Generator().manual_seed(42 + epoch)).tolist()
+        batches = [order[start:start + effective_batch_size] for start in range(0, len(order), effective_batch_size)]
+        for position in range(start_batch if epoch == start_epoch else 0, len(batches)):
             if PAUSE_FILE.exists():
                 save(epoch, position)
                 check_pause()
-            shard = torch.load(train_paths[order[position]], weights_only=True)
-            features = shard["features"].float().to(memory_format=torch.channels_last)
+            features, labels = samples.batch(batches[position])
+            features = features.to(memory_format=torch.channels_last)
             optimizer.zero_grad(set_to_none=True)
-            loss = criterion(tail_logits(model, features), shard["targets"])
+            loss = criterion(tail_logits(model, features), labels)
             loss.backward()
             nn.utils.clip_grad_norm_(parameters, 5.)
             optimizer.step()
             if (position + 1) % 20 == 0:
                 save(epoch, position + 1)
             if (position + 1) % 50 == 0:
-                print(f"Epoch {epoch + 1}, batch {position + 1}/{len(order)}", flush=True)
+                print(f"Epoch {epoch + 1}, batch {position + 1}/{len(batches)}", flush=True)
         # A pause during validation resumes from the completed training epoch.
-        save(epoch, len(order))
+        save(epoch, len(batches))
         logits, val_targets = validation_logits(model, val_paths)
         result = metrics(logits, val_targets)
         history.append({"epoch": epoch + 1, "macro_f1": result["macro_f1"], "nll": result["nll"]})
@@ -177,8 +206,10 @@ def main():
     parser.add_argument("--batch-size", type=int, default=32)
     parser.add_argument("--lr", type=float, default=.0001)
     parser.add_argument("--activation-cache", type=Path, help="Reuse compatible existing activation shards")
+    parser.add_argument("--cache-source-weights", type=Path, help="Original checkpoint used for a compatible cache")
+    parser.add_argument("--batch-shards", type=int, default=1, help="Effective training batch size multiplier")
     args = parser.parse_args()
-    if min(args.epochs, args.batch_size, args.lr) <= 0:
+    if min(args.epochs, args.batch_size, args.lr, args.batch_shards) <= 0:
         parser.error("Training arguments must be positive")
     run(args)
 

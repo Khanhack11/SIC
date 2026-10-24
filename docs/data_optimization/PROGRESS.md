@@ -2,6 +2,24 @@
 
 Ngày làm việc 16/10/2026. Nhánh local `tran-dang-cong-tam`.
 
+## Lượt tiếp tục ngày 24 tháng 10 năm 2026
+
+- Đã kiểm tra commit `fedf43c` còn local. Push không tương tác xác nhận Git thiếu credential (`Cannot prompt because user interactivity has been disabled`); chưa đẩy được lên GitHub.
+- Phát hiện pipeline fine-tune chỉ shuffle thứ tự shard trong khi manifest/shard được sắp theo lớp. Đã sửa shuffle ở mức từng ảnh trên toàn bộ train, ghép batch thực tế 128 ảnh qua `--batch-shards 4`; cache LRU 16 shard giữ bộ nhớ có giới hạn.
+- Bắt đầu lại từ baseline gốc, không từ ứng viên Linear đã bị loại. Reuse cache chỉ khi manifest/seed/dtype khớp và toàn bộ state trước projection bằng nhau giữa checkpoint nguồn cache và checkpoint đầu vào.
+- Lượt shuffle LR 1e-5 hoàn tất sau 4 epoch, best epoch 1, macro F1 validation cache 94,5225%. File `models/mobilenetv2_projection_shuffled_20261024.pt`. Đang xác nhận full FP32 validation.
+- Đã hoàn tất đối chứng LR 1e-4 sau 3 epoch, best epoch 0; không vượt baseline. LR 1e-5 được xác nhận full FP32 validation đạt macro F1 94,5225%, tăng khoảng 0,0424 điểm phần trăm so với baseline 94,4801%.
+- Đã kiểm tra pause/resume thực tế: lưu và dừng ở epoch index 2/batch index 29, chạy lại cùng lệnh tiếp tục và hoàn tất. 18/18 kiểm thử pass.
+- Giữ checkpoint/ONNX đang triển khai, SHA-256 checkpoint vẫn khớp baseline đã ghi trong báo cáo test gốc. Chênh lệch trên validation cũ chưa đủ để triển khai ứng viên mới. Báo cáo `TRAINING_SHUFFLE_20261024.md`, kết quả `results/optimization_20261024_shuffle/`.
+- Không dùng test để chọn cấu hình và chưa đọc lại test trong lượt này. Mọi ứng viên vẫn là thử nghiệm, chưa thay baseline/ONNX mặc định.
+- Automation `l-u-v-d-ng-t-i-u-sic-khi-limits-c-n-5` theo dõi 5 phút khi task đang chạy; <=5% thì lưu và dừng, không tắt máy. Khi lượt này hoàn tất và không còn job, xóa lịch theo dõi để tránh polling vô ích. Automation cũ đã xóa sau khi lượt trước kết thúc.
+
+Lệnh tiếp tục đúng lượt hiện tại:
+
+```powershell
+python -u -m ml.finetune_projection --weights models/mobilenetv2_crop_disease.pt --cache-source-weights models/mobilenetv2_head_v2_20261024.pt --activation-cache artifacts/projection_170eab8cc1ae9b44 --batch-shards 4 --lr .0001 --epochs 8 --output models/mobilenetv2_projection_shuffled_lr1e4_20261024.pt
+```
+
 ## Vòng tối ưu model ngày 24 tháng 10 năm 2026
 
 Yêu cầu hiện hành: khi Limits còn không quá 5% ở một trong hai cửa sổ, lưu và dừng task, KHÔNG tắt máy. Automation `l-u-sic-v-t-t-m-y-khi-codex-c-n-5` đã được đổi tên/nội dung sang dừng task và bật mỗi 5 phút. Nội dung yêu cầu tắt máy ở các mục lịch sử bên dưới đã hết hiệu lực.

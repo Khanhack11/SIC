@@ -1,10 +1,30 @@
 import unittest
 import torch
+from pathlib import Path
+import tempfile
 from torchvision.models import mobilenet_v2
-from ml.finetune_projection import tail_logits
+from ml.finetune_projection import CachedSamples, tail_logits
 
 
 class ProjectionTests(unittest.TestCase):
+    def test_individual_samples_can_mix_across_class_sorted_shards(self):
+        root = Path(__file__).resolve().parents[1] / "artifacts" / "test_temp"
+        root.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=root) as temporary:
+            paths = []
+            for label in range(3):
+                path = Path(temporary) / f"{label}.pt"
+                torch.save({"features": torch.full((4, 2, 2, 2), label, dtype=torch.float16),
+                            "targets": torch.full((4,), label)}, path)
+                paths.append(path)
+            dataset = CachedSamples(paths)
+            features, labels = dataset.batch([0, 4, 8, 1, 5, 9])
+            self.assertEqual(labels.tolist(), [0, 1, 2, 0, 1, 2])
+            self.assertEqual(features[:, 0, 0, 0].tolist(), labels.float().tolist())
+            order = torch.randperm(len(dataset.references), generator=torch.Generator().manual_seed(42)).tolist()
+            self.assertEqual(sorted(order), list(range(12)))
+            dataset.load.cache_clear()
+
     def test_cached_tail_matches_full_model(self):
         torch.manual_seed(42)
         model = mobilenet_v2(weights=None, num_classes=11).eval()

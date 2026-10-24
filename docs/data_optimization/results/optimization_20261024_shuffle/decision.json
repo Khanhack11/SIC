@@ -1,0 +1,16 @@
+{
+  "deployed_baseline_unchanged": true,
+  "deployed_checkpoint_sha256": "ea7f52fc69187c7e5ee701b943bf80046ce26ff90d12aecb559967815a62a423",
+  "test_read_in_this_round": false,
+  "baseline_validation_macro_f1": 0.9448007212310983,
+  "candidate_validation_macro_f1": 0.9452245750521846,
+  "validation_gain_percentage_points": 0.04238538210863396,
+  "decision": "retain_deployed_baseline; gain too small on reused validation",
+  "sample_level_shuffle": true,
+  "effective_batch_size": 128,
+  "unit_tests_passed": 18,
+  "pause_resume_verified": true,
+  "pause_resume_epoch_zero_based": 2,
+  "pause_resume_next_batch_zero_based": 29,
+  "shutdown_authorized": false
+}
