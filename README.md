@@ -1,100 +1,97 @@
-# 🌿 AI-Integrated Crop Disease Advisory and Image-Based Diagnosis System
-**Hệ thống tư vấn hỗ trợ bệnh trên cây trồng có tích hợp mô hình AI phân tích bệnh qua hình ảnh**
+# Crop Disease Advisory System
 
-* **Chương trình:** Samsung Innovation Campus (SIC) - AI Course
-* **Nhóm thực hiện:** Group 5
-* **Thành viên & Phân công:**
-  * **Nguyễn Quốc Khánh:** **Backend Developer & Database Architect** (Chịu trách nhiệm toàn bộ hệ thống Backend, API và Cơ sở dữ liệu tri thức)
-  * **Đinh Gia Bảo:** Team Leader & ML Engineer (Huấn luyện mạng CNN MobileNetV2)
-  * **Trần Đặng Công Tâm:** Data & Optimization Engineer (Tập dữ liệu PlantVillage & Tối ưu hóa suy luận)
-  * **Ma Hồng Hải:** Frontend Developer & Agronomic QA (Giao diện Web & Kiểm định nông học)
+Hệ thống nhận diện ảnh lá cà chua, khoai tây và ngô, sau đó trả thông tin chăm sóc tham khảo. MobileNetV2 phân loại 11 lớp gồm 8 bệnh và 3 lớp lá khỏe. FastAPI phục vụ cả frontend tại `/app` và API.
 
----
+Samsung Innovation Campus, Group 5. Chuẩn bị báo cáo **04–05/11/2026**, thời lượng 20 phút.
 
-## Data & Optimization của Trần Đặng Công Tâm
+| Thành viên | Phạm vi công việc |
+|---|---|
+| Đinh Gia Bảo | Điều phối, phát triển và đánh giá model |
+| Trần Đặng Công Tâm | Dữ liệu, preprocessing, huấn luyện và runtime |
+| Nguyễn Quốc Khánh | Backend và kho tri thức |
+| Ma Hồng Hải | Frontend và đối chiếu tài liệu nông học |
 
-Pipeline chuẩn bị PlantVillage, augmentation dùng chung với serving, huấn luyện baseline MobileNetV2 trên CPU, đánh giá test và benchmark đã được bổ sung. Xem [hướng dẫn thực hiện và bàn giao](docs/data_optimization/README.md) và [tiến độ hiện tại](docs/data_optimization/PROGRESS.md).
+## Chạy demo trên Windows
 
-Backend cần checkpoint đã huấn luyện tại `models/mobilenetv2_crop_disease.pt`. Khi chưa có checkpoint hợp lệ, `/api/health` báo `MODEL_NOT_READY` và `/api/diagnose` trả HTTP 503. Chạy `python -m ml.train` sau khi chuẩn bị dữ liệu theo hướng dẫn để tạo baseline; weights được giữ local và không đưa vào Git.
+Gói bàn giao `SIC_demo_20261104.zip` có source, ảnh demo và weights baseline. Git chỉ giữ code và hồ sơ kết quả; raw data, môi trường Python và weights được bàn giao riêng.
 
-## ⚡ Hướng Dẫn Nhanh: Lấy Code Về Chạy Được Ngay (Quick Start)
+Môi trường đã kiểm tra: Windows 11, Python 3.13.9. Chạy trong thư mục project:
 
-Dành cho các thành viên trong nhóm (Bảo, Tâm, Hải) hoặc giảng viên muốn tải về và chạy ngay:
-
-### Bước 1: Clone dự án về máy
-```bash
-git clone https://github.com/Khanhack11/SIC.git
-cd SIC
+```powershell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements-demo.txt
+.\.venv\Scripts\python.exe -m uvicorn backend.main:app --host 127.0.0.1 --port 8000
 ```
 
-### Bước 2: Cài đặt thư viện phụ thuộc
-Khuyến nghị tạo môi trường ảo (virtualenv) hoặc cài trực tiếp:
-```bash
-pip install -r requirements.txt
+Mở **http://127.0.0.1:8000/app**. Khi `.venv` đã có, có thể chạy `run_demo.cmd`. Giữ cửa sổ server mở trong buổi demo. Swagger: http://127.0.0.1:8000/docs.
+
+Model cần `models/mobilenetv2_crop_disease.pt` và graph tương ứng `models/mobilenetv2_crop_disease.onnx`. ONNX là mặc định khi graph và dependency phù hợp; còn lại dùng TorchScript. Khi không có checkpoint hợp lệ, health báo `MODEL_NOT_READY`, diagnose trả HTTP 503 và giao diện khóa nút phân tích. Graph phải khớp hash checkpoint.
+
+## Sử dụng và phạm vi tư vấn
+
+Chọn JPG/PNG hoặc bấm Chụp ảnh. File tối đa 10 MB, mỗi cạnh ít nhất 32 px, không quá 20 megapixel. Camera trực tiếp cần localhost/HTTPS và quyền camera. Thiết bị không hỗ trợ sẽ chuyển sang trình chọn ảnh/camera của thiết bị.
+
+Ngưỡng giao diện cố định 75%. Confidence thấp sẽ chỉ trả hướng dẫn chụp lại. Khi đạt ngưỡng, app hiển thị triệu chứng, canh tác và nguồn tài liệu. `custom_threshold` vẫn có trong API để kiểm thử.
+
+Mỗi record có nguồn và phạm vi đối chiếu với UMN Extension, Cornell CALS hoặc UMD Extension. Chưa có kiểm định chuyên gia đối với nhãn thuốc tại Việt Nam. API ẩn liều thuốc và công thức sinh học chưa duyệt ở mọi endpoint, kể cả khi confidence cao. Dữ liệu thuốc gốc chỉ được giữ để đối chiếu.
+
+Ảnh thật trong `sample_images/demo` được chọn từ validation để minh họa thao tác; manifest ghi nguồn, nhãn, hash và confidence quan sát. Không dùng các ảnh này để kết luận chất lượng model.
+
+## Model và hiệu năng
+
+| Thí nghiệm | Validation macro F1 | Test macro F1 | Quyết định |
+|---|---:|---:|---|
+| MobileNetV2 backbone frozen | 94,48% | 93,76% | Giữ để phục vụ |
+| CNN nhỏ, 8 epoch GPU | 75,87% | 75,47% | Đối chứng |
+| MobileNetV2 fine-tune GPU, chọn epoch 5 | 95,01% | Không đọc test ứng viên | Loại vì recall một lớp giảm quá giới hạn |
+
+Recall `Corn_Gray_leaf_spot` của ứng viên giảm 9,09 điểm phần trăm. Giới hạn phát hành đã đặt là không giảm quá 2 điểm ở bất kỳ lớp nào, nên giữ baseline và graph mặc định.
+
+Baseline đạt accuracy 94,19% trên 1.720 ảnh test. Temperature fit bằng validation. Benchmark HTTP mới dùng ONNX FP32, 2 threads, 2 slots, 80 request mỗi mức tải:
+
+| Clients | Mean | P95 |
+|---:|---:|---:|
+| 1 | 11,07 ms | 13,63 ms |
+| 4 | 28,91 ms | 32,49 ms |
+| 8 | 55,51 ms | 62,70 ms |
+
+Đo gồm upload multipart, kiểm tra ảnh, preprocessing, inference, tư vấn và response trên localhost. Không xem đây là bảo đảm độ trễ Internet. [Hồ sơ bản phát hành](docs/final_release/README.md).
+
+## Kiểm thử
+
+```powershell
+.\.venv\Scripts\python.exe -m unittest discover -s tests -v
+.\.venv\Scripts\python.exe test_backend.py
+.\.venv\Scripts\python.exe stress_and_edge_test.py
 ```
 
-### Bước 3: Lựa chọn cách chạy
+Hồ sơ frontend có kiểm tra tự động và screenshot desktop/mobile. Camera mô phỏng xác minh luồng phần mềm; cần thử camera vật lý trước buổi trình bày.
 
-#### 🔹 Lựa chọn A: Mở và chạy trực tiếp trên VS Code bằng Jupyter Notebook (`.ipynb`)
-1. Mở thư mục dự án trên **Visual Studio Code**.
-2. Mở file `backend_development.ipynb`.
-3. Bấm **Select Kernel** $\rightarrow$ chọn Python của bạn.
-4. Bấm **Run All** để xem trực quan bảng dữ liệu 11 loại bệnh, biểu đồ phân tích và kết quả test API.
+## Huấn luyện
 
-#### 🔹 Lựa chọn B: Khởi động Server Backend (Kết nối Frontend Web của bạn Hải)
-```bash
-python -m uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload
-```
-* **Giao diện test API trực quan (Swagger UI):** Mở trình duyệt truy cập `http://localhost:8000/docs`
-* **Endpoint chẩn đoán bệnh:** `POST http://localhost:8000/api/diagnose` (Hỗ trợ upload ảnh lá cây)
-* *Đã tích hợp sẵn CORS Middleware (`allow_origins=["*"]`) cho phép mọi ứng dụng Frontend (React, Vue, Vite, HTML5) kết nối tự do mà không bị chặn.*
+Pipeline dùng PlantVillage ghim revision, chia 8.043/1.731/1.720 ảnh train/validation/test. [Hướng dẫn dữ liệu](docs/data_optimization/README.md).
 
-#### 🔹 Lựa chọn C: Chạy kiểm thử tự động toàn diện (Test Suite)
-```bash
-python test_backend.py
-```
-hoặc kiểm thử chuyên sâu toàn bộ edge cases:
-```bash
-python stress_and_edge_test.py
-```
-*Bộ kiểm thử kiểm tra hành vi API. Kết quả F1 và tốc độ của checkpoint thật được ghi riêng trong [báo cáo Data & Optimization](docs/data_optimization/README.md); không dùng kết quả demo để kết luận chất lượng model.*
-
----
-
-## 📁 Cấu trúc Thư mục Dự án
-
-```text
-SIC/
-├── backend_development.ipynb         # [CHÍNH] Jupyter Notebook phát triển, kiểm thử & demo trên VS Code
-├── test_backend.py                  # Bộ kiểm thử chức năng tự động (10/10 PASS)
-├── stress_and_edge_test.py          # Bộ kiểm thử chuyên sâu & trường hợp biên (17/17 PASS)
-├── requirements.txt                 # Danh sách thư viện phụ thuộc
-├── README.md                        # Hướng dẫn chi tiết sử dụng và tích hợp
-│
-├── backend/                         # Package mã nguồn Backend hoàn chỉnh
-│   ├── __init__.py
-│   ├── config.py                    # Cấu hình ngưỡng tin cậy (0.75), kích thước ảnh (224x224), 11 lớp bệnh
-│   ├── inference_engine.py          # Tiền xử lý, lọc ảnh hỏng & suy luận MobileNetV2 (Latency < 200ms)
-│   ├── advisory_engine.py           # Bộ điều phối logic quyết định (Confidence-Gated Decision Logic)
-│   └── main.py                      # RESTful API Service sử dụng FastAPI & chuẩn OpenAPI
-│
-├── data/
-│   └── advisory_knowledge_base.json # Database tri thức nông nghiệp chuẩn FAO, USDA & Viện BVTV Việt Nam
-│
-├── models/                          # Nơi chứa file trọng số mobilenetv2_crop_disease.pt từ bạn Bảo (ML Lead)
-│   └── .gitkeep
-│
-└── sample_images/                   # Bộ ảnh mẫu phục vụ kiểm thử ngay
-    ├── tomato_leaf_sample.jpg       # Ảnh lá cà chua bệnh đốm vòng
-    ├── corn_leaf_sample.png         # Ảnh lá ngô bệnh gỉ sắt
-    ├── potato_leaf_sample.jpg       # Ảnh lá khoai tây khỏe mạnh
-    ├── corrupted_image.jpg          # Ảnh hỏng để test tính năng lọc lỗi
-    └── invalid_disguised_file.png   # File giả mạo định dạng
+```powershell
+python -m ml.download_dataset
+python -m ml.prepare_dataset
+python -m ml.train
 ```
 
----
+Prepare/train từ chối ghi đè đầu ra có sẵn. Train GPU dùng môi trường riêng:
 
-## 🛡️ Điểm Nổi Bật Đáp Ứng Chuẩn Giảng Viên & Samsung SIC
-1. **Confidence-Gated Safeguard:** Ngăn ngừa việc nông dân dùng nhầm thuốc bảo vệ thực vật khi ảnh chụp mờ hoặc không đủ độ tin cậy ($< 75\%$).
-2. **Tuân thủ quy chuẩn y tế & nông nghiệp:** Đính kèm thời gian cách ly (PHI), liều lượng, hoạt chất và hướng dẫn trang bị bảo hộ lao động (PPE).
-3. **Hiệu năng:** Pipeline tái sử dụng transform, dùng inference mode và hỗ trợ TorchScript. Chạy `python -m ml.benchmark` trên máy triển khai để kiểm tra mục tiêu < 200ms bằng checkpoint đã huấn luyện.
+```powershell
+python -m venv .venv-gpu
+.\.venv-gpu\Scripts\python.exe -m pip install torch==2.14.1 torchvision==0.29.1 --index-url https://download.pytorch.org/whl/cu126
+.\.venv-gpu\Scripts\python.exe -m ml.train_gpu --architecture small_cnn --epochs 8 --batch-size 32 --lr .001 --output models/small_cnn_new.pt
+.\.venv-gpu\Scripts\python.exe -m ml.train_gpu --architecture mobilenet_v2 --epochs 6 --batch-size 16 --lr .00001 --output models/mobilenetv2_gpu_new.pt
+```
+
+Checkpoint mới lưu riêng. Trainer có resume và marker `artifacts/PAUSE_REQUESTED`, dừng có lưu ở ranh giới batch. Không xóa marker cũ khi chưa muốn tiếp tục. Chỉ đánh giá test sau khi khóa cấu hình bằng validation.
+
+## Tài liệu và giới hạn
+
+- [API và kho tri thức](docs/API_AND_DATABASE_SPECIFICATION.md)
+- [Báo cáo và kết quả mới](docs/final_release/README.md)
+- [Kịch bản trình bày 20 phút](docs/final_release/PRESENTATION_20_MIN.md)
+
+PlantVillage có nền kiểm soát. Chưa đo độ chính xác ngoài đồng hoặc hiệu quả giảm thiệt hại mùa vụ. Một phần ảnh dùng định danh lá dự phòng nên audit không chứng minh tuyệt đối mọi lá vật lý đã tách biệt. Test đã được sử dụng ở các vòng trước. Model không phát hiện ảnh ngoài miền; cây khác hoặc đồ vật vẫn có thể nhận confidence cao.

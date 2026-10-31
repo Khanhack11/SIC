@@ -5,6 +5,7 @@ SIC Capstone Project - Group 5
 """
 
 import json
+from copy import deepcopy
 from pathlib import Path
 from typing import Dict, Any, Optional, List
 
@@ -43,8 +44,20 @@ class AdvisoryKnowledgeBase:
         return self.data.get("disclaimer_default", "")
 
     def get_disease_by_id(self, disease_id: str) -> Optional[Dict[str, Any]]:
-        """Retrieves raw agronomic advisory record for a given disease ID."""
-        return self.diseases.get(disease_id)
+        """Return a request-local record, withholding unreviewed treatment instructions."""
+        raw = self.diseases.get(disease_id)
+        if raw is None:
+            return None
+        record = deepcopy(raw)
+        review = record.get("review", {})
+        if review.get("chemical_status") != "verified_local_label":
+            record["chemical_controls"] = []
+            record["organic_biological_controls"] = []
+            record["treatment_notice"] = (
+                "Chưa có kiểm định chuyên môn về sản phẩm, liều lượng và thời gian cách ly tại Việt Nam. "
+                "Hệ thống chưa cung cấp hướng dẫn dùng thuốc; hãy tham vấn cán bộ BVTV địa phương."
+            )
+        return record
 
     def list_all_diseases(self) -> List[Dict[str, Any]]:
         """Returns brief summary list of all known diseases in the database."""
@@ -82,15 +95,15 @@ class AdvisoryKnowledgeBase:
         if confidence >= applied_threshold:
             # Case 1: High confidence prediction
             status = "CONFIRMED"
-            message = "Độ tin cậy đạt chuẩn. Đã trích xuất phác đồ tư vấn nông nghiệp chính xác."
+            message = "Dự đoán đạt ngưỡng hiển thị thông tin tham khảo. Cần đối chiếu triệu chứng thực tế."
             advisory_payload = disease_record
             remediation_notice = None
         else:
             # Case 2: Low confidence prediction (< threshold)
             status = "UNCERTAIN"
             message = (
-                f"Độ tin cậy mô hình ({confidence * 100:.1f}%) thấp hơn ngưỡng an toàn ({applied_threshold * 100:.0f}%). "
-                "Hệ thống tạm giữ phác đồ hóa chất để tránh can thiệp sai lầm."
+                f"Độ tin cậy mô hình ({confidence * 100:.1f}%) thấp hơn ngưỡng hiển thị ({applied_threshold * 100:.0f}%). "
+                "Chưa đủ độ tin cậy để hiển thị thông tin bệnh."
             )
             # Safe Fallback Guidance
             advisory_payload = {

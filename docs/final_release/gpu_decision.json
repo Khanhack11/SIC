@@ -1,0 +1,22 @@
+{
+  "decision": "retain_deployed_baseline",
+  "test_read_for_gpu_candidate": false,
+  "validation_gain_percentage_points": 0.5270340479501812,
+  "required_macro_f1_gain_percentage_points": 0.5,
+  "maximum_allowed_class_recall_drop_percentage_points": 2,
+  "class_recall_delta_percentage_points": {
+    "Corn_Common_rust": 0.0,
+    "Corn_Gray_leaf_spot": -9.090909090909093,
+    "Corn_Northern_Leaf_Blight": 4.729729729729726,
+    "Corn_healthy": 0.0,
+    "Potato_Early_blight": 0.0,
+    "Potato_Late_blight": -0.6578947368421018,
+    "Potato_healthy": 0.0,
+    "Tomato_Early_blight": 0.0,
+    "Tomato_Late_blight": 4.8888888888888875,
+    "Tomato_Septoria_leaf_spot": 1.3333333333333308,
+    "Tomato_healthy": 0.0
+  },
+  "reason": "Corn_Gray_leaf_spot recall regression exceeds the predeclared validation gate. No candidate test evaluation or further test-driven tuning.",
+  "baseline_checkpoint_sha256": "ea7f52fc69187c7e5ee701b943bf80046ce26ff90d12aecb559967815a62a423"
+}

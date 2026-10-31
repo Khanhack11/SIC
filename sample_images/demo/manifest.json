@@ -1,0 +1,52 @@
+{
+  "purpose": "Examples selected from validation for demonstrating UI states, not an evaluation sample.",
+  "source": "https://github.com/spMohanty/PlantVillage-Dataset",
+  "revision": "7f7ecc7e1eaca78107e3affe7cb5abd9427e139a",
+  "checkpoint_sha256": "ea7f52fc69187c7e5ee701b943bf80046ce26ff90d12aecb559967815a62a423",
+  "images": [
+    {
+      "filename": "uncertain.jpg",
+      "caption": "Ảnh khó, độ tin cậy thấp",
+      "source_path": "Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot/05daf90f-9100-499f-a4aa-ebc5dfc20adf___RS_GLSp 7335.JPG",
+      "label": "Corn_Gray_leaf_spot",
+      "split": "validation",
+      "source_sha256": "46ca7a093812c6de1b133f88db3ae565a4be0afcbce33f343d5617d427ff749c",
+      "demo_sha256": "29ecdca78fff35131c8a66f5e81ec47c98cfe418f1998ea6ca480637c59c90b9",
+      "observed_prediction": "Corn_Northern_Leaf_Blight",
+      "observed_confidence": 0.5961
+    },
+    {
+      "filename": "Corn_Common_rust.jpg",
+      "caption": "Ngô, gỉ sắt",
+      "source_path": "Corn_(maize)___Common_rust_/RS_Rust 1577.JPG",
+      "label": "Corn_Common_rust",
+      "split": "validation",
+      "source_sha256": "2765de0ac643b7bcf7cfdccfab3c9442e15f262957bf5dca4d84527017cbde4d",
+      "demo_sha256": "5820666c0ade81612cc480445ffa8a82a37582052157b5fa44bf7cb41bc5b3c7",
+      "observed_prediction": "Corn_Common_rust",
+      "observed_confidence": 0.9999
+    },
+    {
+      "filename": "Potato_healthy.jpg",
+      "caption": "Khoai tây, lá khỏe",
+      "source_path": "Potato___healthy/04481ca2-f94c-457e-b785-1ac05800b7ec___RS_HL 1930.JPG",
+      "label": "Potato_healthy",
+      "split": "validation",
+      "source_sha256": "aed52452d81d81597b1bac54981bcae6952906110f7aa47be945a6a28f4a7e60",
+      "demo_sha256": "5f2d35e2dbf34479f95edfc0246f345daa3490be519623c8a143d12698d02d7e",
+      "observed_prediction": "Potato_healthy",
+      "observed_confidence": 0.9289
+    },
+    {
+      "filename": "Tomato_Early_blight.jpg",
+      "caption": "Cà chua, đốm vòng",
+      "source_path": "Tomato___Early_blight/04747279-48b2-4ce1-932b-e511424beb6b___RS_Erly.B 8240.JPG",
+      "label": "Tomato_Early_blight",
+      "split": "validation",
+      "source_sha256": "6d212f360c48da8c6f6563291b60e60bd5c215f981320adde51c6bf6bdddb855",
+      "demo_sha256": "f44d09bfa63e1c38cdd9f45152f45c4e0a4a13eaf5538da847d600c01d6db23f",
+      "observed_prediction": "Tomato_Early_blight",
+      "observed_confidence": 0.9782
+    }
+  ]
+}

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hệ thống Tư vấn Bệnh Cây trồng AI - SIC Group 5</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
   <style>
     :root {
       --primary: #2e7d32;
@@ -196,339 +196,107 @@
     }
     @keyframes spin { to { transform: rotate(360deg); } }
   </style>
+
+  <style>
+    * { font-family: Inter, "Segoe UI", sans-serif; }
+    body { font-size:16px; }
+    header h1 { text-wrap:balance; }
+    header p { font-size:15px; opacity:1; }
+    .card { min-width:0; border:0; }
+    .status-bar { gap:12px; flex-wrap:wrap; border:0; }
+    .upload-zone { display:block; font-size:16px; padding:24px 16px; }
+    .upload-zone p { font-size:15px; color:#37503d; }
+    input[type=file] { display:block; max-width:100%; margin:12px auto 0; font-size:15px; }
+    button, summary, a, input { outline-offset:4px; }
+    :focus-visible { outline:3px solid #1b5e20; }
+    .btn-sample { font-size:14px; padding:10px 12px; min-height:44px; }
+    .secondary { border:1px solid #67916b; color:#1b5e20; background:#fff; padding:10px 14px; border-radius:8px; cursor:pointer; font-size:16px; min-height:44px; }
+    .secondary:hover { background:#e8f5e9; }
+    button:disabled { cursor:not-allowed; opacity:.65; }
+    #image-preview { object-fit:contain; background:#f4f6f8; }
+    #file-info, .hint { color:#435649; font-size:14px; margin-top:10px; overflow-wrap:anywhere; }
+    .notice { background:#fff3dd; color:#673a00; padding:12px; border-radius:8px; margin:12px 0; }
+    #input-error { color:#9b1717; padding-top:12px; }
+    [hidden] { display:none !important; }
+    .result-box { display:block; }
+    .diagnosis-header { align-items:flex-start; flex-wrap:wrap; gap:12px; }
+    .disease-title { font-size:22px; text-wrap:balance; }
+    .metrics-row { display:flex; flex-wrap:wrap; gap:24px; margin:20px 0; }
+    .metric-pill { background:none; padding:0; text-align:left; }
+    .metric-pill .label { font-size:14px; color:#435649; }
+    .metric-pill .val { font-size:23px; font-variant-numeric:tabular-nums; }
+    meter { width:100%; height:18px; accent-color:#2e7d32; }
+    details { padding:14px 0; border-bottom:1px solid #d9e4da; }
+    summary { cursor:pointer; font-weight:600; color:#1b5e20; min-height:32px; }
+    details p, details ul { margin-top:8px; }
+    ul { padding-left:22px; }
+    li + li { margin-top:6px; }
+    #sources a { color:#1b5e20; text-underline-offset:3px; overflow-wrap:anywhere; }
+    .disclaimer-text { font-size:14px; color:#435649; }
+    #camera-panel { margin-top:16px; }
+    video { display:block; width:100%; max-height:260px; background:#142819; border-radius:10px; }
+    .camera-actions { display:flex; gap:8px; margin-top:10px; }
+    .empty-state { padding:44px 12px; font-size:16px; }
+    fieldset { border:0; min-width:0; }
+    ::selection { background:#c8e6c9; color:#14391a; }
+    @media(max-width:600px) { header h1 { font-size:23px; } .card { padding:18px; } .container { padding:0 12px; } }
+    @media(prefers-reduced-motion:reduce) { *, *::before, *::after { animation:none !important; transition:none !important; } }
+  </style>
 </head>
 <body>
-
   <header>
-    <h1>🌿 Hệ Thống Chẩn Đoán & Tư Vấn Bệnh Cây Trồng AI</h1>
-    <p>Samsung Innovation Campus (SIC) Capstone Project - Group 5 | Backend Developer: <strong>Nguyễn Quốc Khánh</strong></p>
+    <h1>Chẩn đoán và tư vấn bệnh cây trồng</h1>
+    <p>Samsung Innovation Campus · Group 5</p>
   </header>
-
-  <div class="container">
-    
-    <!-- Status bar -->
+  <main class="container">
     <div class="status-bar">
-      <div>
-        <strong>FastAPI Backend Server:</strong>
-        <span id="server-status" class="badge badge-offline">Đang kiểm tra kết nối...</span>
-      </div>
-      <div style="font-size: 13px; color: var(--text-muted);">
-        Base URL: <code>http://127.0.0.1:8000</code>
-      </div>
+      <span id="server-status" role="status" class="badge">Đang kiểm tra model…</span>
+      <span class="hint">Cà chua, khoai tây, ngô · 11 lớp lá</span>
     </div>
-
     <div class="grid">
-      
-      <!-- Left Column: Input Form -->
-      <div class="card">
-        <h2>📸 Chụp / Tải ảnh lá cây</h2>
-
-        <div class="upload-zone" onclick="document.getElementById('file-input').click()">
-          <svg viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/></svg>
-          <p><strong>Bấm vào đây để chọn ảnh lá cây</strong></p>
-          <p>Hỗ trợ định dạng JPG, PNG (Tối đa 10MB)</p>
-          <input type="file" id="file-input" accept="image/jpeg,image/png" style="display: none;" onchange="handleFileSelect(event)">
-        </div>
-
-        <img id="image-preview" alt="Xem trước ảnh">
-
-        <div class="threshold-control">
-          <label>
-            <span>Ngưỡng tin cậy an toàn (Threshold):</span>
-            <span id="threshold-val" style="color: var(--primary); font-weight: 700;">75%</span>
+      <section class="card" aria-labelledby="input-title">
+        <h2 id="input-title">Ảnh lá cây</h2>
+        <fieldset id="input-controls">
+          <label class="upload-zone" for="file-input">
+            <strong>Chọn một ảnh rõ nét</strong>
+            <p>JPG hoặc PNG, tối đa 10 MB. Chụp gần lá, đủ sáng.</p>
+            <input type="file" id="file-input" accept="image/jpeg,image/png">
           </label>
-          <input type="range" id="threshold-range" min="50" max="95" value="75" oninput="updateThreshold(this.value)">
+          <div class="sample-buttons"><button id="open-camera" type="button" class="secondary">Chụp ảnh</button></div>
+          <input type="file" id="camera-file" accept="image/jpeg,image/png" capture="environment" hidden>
+          <div id="camera-panel" hidden>
+            <video id="camera-video" autoplay playsinline muted aria-label="Xem trước camera"></video>
+            <div class="camera-actions"><button id="capture" class="secondary" type="button">Dùng ảnh này</button><button id="close-camera" class="secondary" type="button">Đóng camera</button></div>
+          </div>
+          <p id="input-error" role="alert" hidden></p>
+          <img id="image-preview" alt="Ảnh lá đã chọn">
+          <p id="file-info" role="status"></p>
+          <button id="btn-submit" type="button" class="btn-submit" disabled>Phân tích ảnh</button>
+          <p class="hint">Ngưỡng hiển thị tư vấn: 75%. Ảnh ngoài ba cây được hỗ trợ có thể cho kết quả sai dù độ tin cậy cao.</p>
+          <details><summary>Thử với ảnh lá mẫu</summary><p class="hint">Ảnh từ tập validation PlantVillage, chỉ dùng minh họa thao tác. Nhãn mẫu không thay cho kết quả model.</p><div id="sample-buttons" class="sample-buttons"></div></details>
+        </fieldset>
+      </section>
+      <section class="card" aria-labelledby="result-title" aria-busy="false" id="result-card">
+        <h2 id="result-title">Kết quả phân tích</h2>
+        <p id="empty-state" class="empty-state" role="status">Chọn ảnh để xem dự đoán và thông tin chăm sóc tham khảo.</p>
+        <div id="result-box" class="result-box" hidden>
+          <div class="diagnosis-header"><div><h3 id="disease-name" class="disease-title"></h3><p id="scientific-name" class="scientific-name"></p></div><span id="status-badge" class="badge"></span></div>
+          <div class="metrics-row"><div class="metric-pill"><div class="label">Độ tin cậy model</div><div id="metric-conf" class="val"></div></div><div class="metric-pill"><div class="label">Tiền xử lý và suy luận</div><div id="metric-latency" class="val"></div></div></div>
+          <meter id="confidence-meter" min="0" max="100" value="0" aria-label="Độ tin cậy dự đoán"></meter>
+          <p id="request-time" class="hint"></p>
+          <p id="result-message" class="notice"></p>
+          <div id="uncertain-guidance" hidden><h3>Cách chụp lại ảnh</h3><ul id="guidance-list"></ul></div>
+          <div id="advisory-panels">
+            <details open><summary>Triệu chứng và điều kiện phát triển</summary><p id="symptoms-text"></p><p id="climate-text"></p></details>
+            <details open><summary>Chăm sóc và phòng ngừa</summary><ul id="cultural-list"></ul></details>
+            <details><summary>Thông tin sử dụng thuốc</summary><p id="treatment-notice"></p><ul id="chemical-list"></ul></details>
+            <details><summary>Lưu ý và nguồn tham khảo</summary><ul id="safety-list"></ul><ul id="sources"></ul><p id="review-note" class="hint"></p></details>
+          </div>
+          <p id="disclaimer-text" class="disclaimer-text"></p>
         </div>
-
-        <button id="btn-submit" class="btn-submit" onclick="submitDiagnosis()" disabled>
-          🔍 Bắt đầu Chẩn đoán Bệnh
-        </button>
-
-        <div style="margin-top: 20px;">
-          <p style="font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 6px;">Thử nhanh bằng ảnh mẫu có sẵn:</p>
-          <div class="sample-buttons">
-            <button class="btn-sample" onclick="loadSample('tomato_leaf_sample.jpg')">🍅 Cà chua đốm vòng</button>
-            <button class="btn-sample" onclick="loadSample('corn_leaf_sample.png')">🌽 Ngô gỉ sắt</button>
-            <button class="btn-sample" onclick="loadSample('potato_leaf_sample.jpg')">🥔 Khoai tây khỏe mạnh</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Right Column: Results -->
-      <div class="card">
-        <h2>📋 Kết quả Chẩn đoán & Tư vấn</h2>
-
-        <div id="empty-state" class="empty-state">
-          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
-          <p>Vui lòng tải lên một bức ảnh lá cây (Cà chua, Khoai tây, Ngô) để nhận kết quả phân tích AI và phác đồ điều trị.</p>
-        </div>
-
-        <div id="result-box" class="result-box">
-          
-          <div class="diagnosis-header">
-            <div>
-              <div id="disease-name" class="disease-title">Tên bệnh</div>
-              <div id="scientific-name" class="scientific-name">Scientific Name</div>
-            </div>
-            <div id="status-badge" class="badge">CONFIRMED</div>
-          </div>
-
-          <div class="metrics-row">
-            <div class="metric-pill">
-              <div class="label">Độ tin cậy AI</div>
-              <div id="metric-conf" class="val" style="color: var(--primary);">94.5%</div>
-            </div>
-            <div class="metric-pill">
-              <div class="label">Thời gian đáp ứng</div>
-              <div id="metric-latency" class="val" style="color: #0288d1;">32.5 ms</div>
-            </div>
-            <div class="metric-pill">
-              <div class="label">Chuẩn Capstone</div>
-              <div class="val" style="color: #2e7d32;">&lt; 200 ms ✅</div>
-            </div>
-          </div>
-
-          <div id="alert-container"></div>
-
-          <!-- Symptoms -->
-          <div class="section-title">🔍 Triệu chứng nhận biết:</div>
-          <p id="symptoms-text" style="font-size: 13px; color: #424242;"></p>
-
-          <!-- Chemical Treatments -->
-          <div id="chemical-section">
-            <div class="section-title">💊 Thuốc BVTV khuyến cáo (Phác đồ chuẩn FAO):</div>
-            <table class="treatment-table">
-              <thead>
-                <tr>
-                  <th>Hoạt chất & Biệt dược</th>
-                  <th>Liều lượng</th>
-                  <th>Cách ly (PHI)</th>
-                </tr>
-              </thead>
-              <tbody id="chemical-tbody"></tbody>
-            </table>
-          </div>
-
-          <!-- Cultural controls -->
-          <div id="cultural-section">
-            <div class="section-title">🌱 Biện pháp canh tác phòng ngừa:</div>
-            <ul id="cultural-list" class="guidance-list"></ul>
-          </div>
-
-          <!-- Safety PPE -->
-          <div id="safety-section">
-            <div class="section-title">⚠️ Quy chuẩn bảo hộ an toàn (PPE):</div>
-            <div id="safety-box" class="alert-box alert-warning"></div>
-          </div>
-
-          <!-- Disclaimer -->
-          <div id="disclaimer-text" class="disclaimer-text"></div>
-
-        </div>
-
-      </div>
-
+      </section>
     </div>
-
-  </div>
-
-  <script>
-    const API_BASE = "http://127.0.0.1:8000";
-    let selectedFile = null;
-
-    // Check server status
-    async function checkServerHealth() {
-      const statusEl = document.getElementById("server-status");
-      try {
-        const res = await fetch(`${API_BASE}/api/health`, { method: "GET" });
-        if (res.ok) {
-          statusEl.textContent = "ONLINE (Kết nối máy chủ tốt)";
-          statusEl.className = "badge badge-online";
-        } else {
-          throw new Error();
-        }
-      } catch (e) {
-        statusEl.textContent = "OFFLINE (Chưa bật server uvicorn)";
-        statusEl.className = "badge badge-offline";
-      }
-    }
-
-    checkServerHealth();
-    setInterval(checkServerHealth, 5000);
-
-    function updateThreshold(val) {
-      document.getElementById("threshold-val").textContent = val + "%";
-    }
-
-    function handleFileSelect(event) {
-      const file = event.target.files[0];
-      if (file) {
-        selectedFile = file;
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          const preview = document.getElementById("image-preview");
-          preview.src = e.target.result;
-          preview.style.display = "block";
-          document.getElementById("btn-submit").disabled = false;
-        };
-        reader.readAsDataURL(file);
-      }
-    }
-
-    const SAMPLE_DATA = {
-      'tomato_leaf_sample.jpg': 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAEAAQADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDn6KKK8A+YCiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigApVG5gPU4pKdH/rE+ooAJE2OVznFNqSf/XN+H8qjoAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKADFFOWRl4zkeh5FL8jdQVPtyKAGUU/wAtiMr8w/2aZQAUUUUAFFFFABTo/wDWJ9RTadH/AKxPqKAHT/65vw/lUdST/wCub8P5VHQJBRRRQMKKKKACijGTgU/y8DLnb7d/yoAZRT9yr91c+7f4U0kkknqaAEooooAKKKKACiiigAooooAKKKKACiiigAooooAM4ORT/Mz95Q316/nTKKAH7Ub7rYPo3+NIyMvUcevam0qsy9D1oASin7kb7y4Pqv8AhR5efuEN7dD+VADKdH/rE+oppGDg06P/AFifUUAOn/1zfh/Ko6kn/wBc34fyqOgSCinCNsZOFHqaXKKeBuPqen5UDGqrN0HSnbUX7zZPov8AjSF2YAE8DsOlNoAeZCPugKPbr+dMoooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigB/mN0b5h/tc05NhkUjKnPQ8ioqdH/rE+ooESzKvnEs3pwOtR79o+Rce/U0s/8Arm/D+VR0gQpJJyTk+9JRRTGFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFRzNhMetBth6Eq9WNKPUY8xPC8D1qIkk5JzT4o/MbHQDqafPfW9owjIJPUhB0+tCTZ95h8JRw0bU1bz6kauy9D+FWEcOPQikdEniEsRByMgjvUCNtcH86Wxx5jl1PEU3KKtNbPuWqKKKZ8SFOj/ANYn1FNp0f8ArE+ooAdP/rm/D+VR1JP/AK5vw/lUdAkFFFFAwooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiinGNgM4yPUc0ANqGccKamprKHXBoOvA11QxEaktl+ugy1YBmXuelZl9YzLcuyo0iuSwKjOPY1dIKt6EVMt0QPmXJ9c4pxlY+90mroSxga0tCJCMk7iB29qhAycCnyStIeeB6U6FMnceg6Um7sxxeIjhqLqPpt6k9FFFB+ehTo/9Yn1FNp0f+sT6igB0/wDrm/D+VR1JP/rm/D+VR0CQUUUUDCiiigAooooAKKKMZOBQAUUpUrjIx9aSgAooooAKKKKACiiigAooooAKUEg5BwaSigB/mZ+8ob69fzowjdGKn/a6fnTKKAB4SVyy8eoqEwDPDfpU4JU5BI+lO35+8oPuODSOuhjsRQXLTlZff+ZAsKjrzUlP2o3Rsezf40hRgMkceo5FMyr4mrXlzVZXG0UUUGIU6P8A1ifUU2nR/wCsT6igB0/+ub8P5VHUk/8Arm/D+VR0CQUUUUDCilVWboOlO2qv3mz7L/jQAynCNiM4wPU8Uu/H3VA9zyaaSSck5PvQA75F6ksfbgUeYR90BfpTKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKUEqcgkfSkooAfvz95QfccGjarfdbHs3+NMooAcyMvUcevaiP/AFifUUisyn5SRUiOC65UZyORx3oEJP8A65vw/lTACTgDJqWYqJW+XLe/SozIxGM4HoOKQIXZj7zAew5NG5V+6ufdv8KZRTGOZ2bqePTtTaKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACnR/wCsT6im06P/AFifUUAOn/1zfh/Ko6kn/wBc34fyqOgSCiiopZcfKvXuaDpw2GqYmoqdNf8AAJCyr1IFN81P71VqKVz6OHD9FR9+Tv5W/wCCXAQRkHNFVFYqcg1ZRw4yPyoPIx+V1MJ7yd49+3qOooopnlhRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAU6P/AFifUU2nR/6xPqKAHT/65vw/lUdST/65vw/lUdAkIx2qTVSrMv8AqzVakz6zh+EVRlPre34f8EKKKKR74U+Jtrj0PFMpyffX60HPi4RnQnGW1mWqKKKo/PQooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKdH/AKxPqKbTo/8AWJ9RQA6f/XN+H8qjqSf/AFzfh/Ko6BICMjBqoylWINW6a6Bxg/nSPVyvH/VKjUvhe/l5lWintEy9sj2pNjf3T+VI+uhi6E480Zq3qNqWFOdx/ChIT1b8qnppHiZrmsHB0aLvfd/1vcKKKKZ8wFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABTo/8AWJ9RTadH/rE+ooAdP/rm/D+VR1JP/rm/D+VR0CQUUUUDCiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAp0f+sT6im06P8A1ifUUAOn/wBc34fyqOpJ/wDXN+H8qjoEgooooGFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABTo/9Yn1FNp0f+sT6igB0/wDrm/D+VR1JP/rm/D+VR0CQUUUUDCiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAozg5FFFACkknJOT70lFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQB//2Q==',
-      'corn_leaf_sample.png': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOAAAADgCAIAAACVT/22AAAEWElEQVR4nO3csa0dVRSG0QdCogHohh7IHBC6AURCEc5owKEDMkRZdgPOyEaaM3vGvCt05xNeK7QMsuCTzn2Xn/3NT3//9vKoH378/tPHzw//5f5W/ll90bdf/i1wH4GSJlDSBEqaQEkTKGkCJU2gpAmUNIGSJlDSBEqaQEkTKGkCJU2gpAmUNIGSJlDSBEqaQEkTKGkCJU2gpAmUNIGSJlDSBEqaQEkTKGkCJU2gpAmUNIGSJlDSBEqaQEkTKGkCJe27u/8AaW9/+XP5lXd//HzTn+UrJdDZ77/+dfHrMn0aT/wr6vz3v4H/ikAfjE+jzyHQx7PT6BMIlDSBkibQnVf9eO5n+ScQ6IPZqfM5BPpIfOp8Gl/UXyV4/Dldmk8m0CvvP7z59PHz0/5lcOSJJ02gpAmUNJ9Bi/xwthFoi5nfwhMfYuZ3JNAKM7+RQBNetdx7e/gfUf7HBEqaQEkTaMKr/hP/+w9vXr4aAq0w8xsJNMTM78gX9S1mfguBFlmdbjzxpAmUNIGS5jPoFdftbifQmdlbhCd+YPbWIdCV2VuKQHdct6sRKGkCJU2gO67b1Qh0ZfaWItCB2VuHL+pnZm8RAr3iut3tPPGkCZQ0gZLmM2iR63YbgbaY+S088SFmfkcCrTDzGwk0wXW7MwIlTaCkCTTBdbszAq0w8xsJNMTM78gX9S1mfguBFrlut/HEkyZQ0gRKms+gV1y3u51AZ2ZvEZ74gdlbh0BXZm8pAt1x3a5GoKQJlDSB7rhuVyPQldlbikAHZm8dvqifmb1FCPSK63a388STJlDSBEqaz6BFrtttBNpi5rfwxIeY+R0JtMLMbyTQBNftzgiUNIGSJtAE1+3OCLTCzG8k0BAzvyNf1LeY+S0EWuS63cYTT5pASRMoaT6DXnHd7nYCnZm9RXjiB2ZvHQJdmb2lCHTHdbsagZImUNIEuuO6XY1AV2ZvKQIdmL11+KJ+ZvYWIdArrtvdzhNPmkBJEyhpPoMWuW63EWiLmd/CEx9i5nck0Aozv5FAE1y3OyNQ0gRKmkATXLc7I9AKM7+RQEPM/I58Ud9i5rcQaJHrdhtPPGkCJU2gpPkMesV1u9sJdGb2FuGJH5i9dQh0ZfaWItAd1+1qBEqaQEkT6I7rdjUCXZm9pQh0YPbW4Yv6mdlbhECvuG53O088aQIlTaCk+Qxa5LrdRqAtZn4LT3yImd+RQCvM/EYCTXDd7oxASRMoaQJNcN3ujEArzPxGAg0x8zvyRX2Lmd9CoEWu22088aQJlDSBkuYz6BXX7W4n0JnZW4QnfmD21iHQldlbikB3XLerEShpAiVNoDuu29UIdGX2liLQgdlbhy/qZ2ZvEQK94rrd7TzxpAmUNIGS5jNoket2G4G2mPktPPEhZn5HAq0w8xsJNMF1uzMCJU2gpAk0wXW7MwKtMPMbCTTEzO/IF/UtZn4LgRa5brfxxJMmUNIESppASRMoaQIlTaC8lP0DKTulZ/nfPgYAAAAASUVORK5CYII=',
-      'potato_leaf_sample.jpg': 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAEsASwDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDIooormPmgooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiipc4rclySCiiis3WXQnnQUUUUvbeQe0CiiiqVZD50FFFFaKSexSaewUUUUxhRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFKUlFXYm7BRRRXPKo3sZObYUUUVmSFFFFABRRRQAUUUUAFFFFABRRRWsarW5an3CiiiuhO+qNAooooGFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUpSUVdibsFFFFckpOTuzFu4UUUUhBRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRVwm4scZWCiiiupO5sFFFFAwooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKK5Zy5mYyd2FFFFQSFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUVrSlbRlwfQKKKK6DUKKKKACiiigAooooAKKKKACiiigAooooAKKKKzqStEibsgooormMgooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKK7Iu6ubp3QUUUUxhRRRQAUUUUAFFFFABRRRQAUUUUAFFFFc9V62MpvUKKKKyICiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooorei9LGkH0CiiitjQKKKKACiiigAooooAKKKKACiiigAooorkm7yZhLcKKKKkQUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFa0n7xcNwoooroNQooooAKKKKACiiigAooooAKKKKACiiiuOXxMwe4UUUUhBRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUVpS+IqG4UUUV0mwUUUUAFFFFABRRRQAUUUUAFFFFABRRRXLU+JmEtwoooqBBRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUVrRWpcNwoooroNQooooAKKKKACiiigAooooAKKKKACiiiuestbmU1rcKKKKyICiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAoooropLS5rBaBRRRWpYUUUUAFFFFABRRRQAUUUUAFFFFABRRRUTjzRJkroKKKK5TEKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKEruwLUKKKK7ErKxulYKKKKYwooooAKKKKACiiigAooooAKKKKACiiigAooornqQs7mU421CiiisiAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiit6UOrNIR6hRRRWxoFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQ1fQQUUUVyzg4mUo2CiiioJCiiigAooooAKKKKACiiigAooooAKKKKACiiitadO+rLjG+rCiiiug1CiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiihq4gooorCVL+Uhw7BRRRWLTW5nawUUUUAFFFFABRRRQAUUUU1FvYaTYUUUVvGklqy1C24UUUVqaBRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQ1cQUUUVDpxfQXKgooopeyiLkQUUUU1CK6D5UFFFFWUFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAf/9k='
-    };
-
-    function dataURLtoFile(dataurl, filename) {
-      const arr = dataurl.split(',');
-      const mime = arr[0].match(/:(.*?);/)[1];
-      const bstr = atob(arr[1]);
-      let n = bstr.length;
-      const u8arr = new Uint8Array(n);
-      while (n--) {
-        u8arr[n] = bstr.charCodeAt(n);
-      }
-      return new File([u8arr], filename, { type: mime });
-    }
-
-    function loadSample(filename) {
-      try {
-        const b64 = SAMPLE_DATA[filename];
-        if (!b64) throw new Error("Không tìm thấy ảnh mẫu: " + filename);
-        selectedFile = dataURLtoFile(b64, filename);
-        const preview = document.getElementById("image-preview");
-        preview.src = b64;
-        preview.style.display = "block";
-        document.getElementById("btn-submit").disabled = false;
-      } catch (e) {
-        alert("Lỗi nạp ảnh: " + e.message);
-      }
-    }
-
-    async function submitDiagnosis() {
-      if (!selectedFile) return;
-
-      const btn = document.getElementById("btn-submit");
-      btn.disabled = true;
-      btn.innerHTML = `<span class="spinner"></span> Đang xử lý AI...`;
-
-      const threshold = parseFloat(document.getElementById("threshold-range").value) / 100.0;
-      const formData = new FormData();
-      formData.append("file", selectedFile);
-
-      try {
-        const response = await fetch(`${API_BASE}/api/diagnose?custom_threshold=${threshold}`, {
-          method: "POST",
-          body: formData,
-        });
-
-        if (!response.ok) {
-          const err = await response.json();
-          throw new Error(err.detail || "Lỗi khi gọi API");
-        }
-
-        const data = await response.json();
-        renderResult(data);
-      } catch (err) {
-        alert("Lỗi: " + err.message + "\n(Hãy đảm bảo bạn đã chạy lệnh: python -m uvicorn backend.main:app)");
-      } finally {
-        btn.disabled = false;
-        btn.innerHTML = `🔍 Bắt đầu Chẩn đoán Bệnh`;
-      }
-    }
-
-    function renderResult(data) {
-      document.getElementById("empty-state").style.display = "none";
-      document.getElementById("result-box").style.display = "block";
-
-      const isConfirmed = data.diagnosis_status === "CONFIRMED";
-      const statusBadge = document.getElementById("status-badge");
-      statusBadge.textContent = isConfirmed ? "CONFIRMED (XÁC NHẬN)" : "UNCERTAIN (CẦN KIỂM TRA LẠI)";
-      statusBadge.className = isConfirmed ? "badge badge-online" : "badge badge-offline";
-
-      document.getElementById("metric-conf").textContent = data.prediction.confidence_percentage;
-      document.getElementById("metric-latency").textContent = data.prediction.latency_ms + " ms";
-
-      const alertContainer = document.getElementById("alert-container");
-      alertContainer.innerHTML = "";
-
-      if (!isConfirmed) {
-        alertContainer.innerHTML = `
-          <div class="alert-box alert-warning">
-            <strong>⚠️ Cảnh báo an toàn:</strong> ${data.message}
-            <br><em>${data.remediation_notice || ""}</em>
-          </div>
-        `;
-      }
-
-      const adv = data.advisory_details;
-      if (isConfirmed && adv) {
-        document.getElementById("disease-name").textContent = adv.vietnamese_name;
-        document.getElementById("scientific-name").textContent = `${adv.scientific_name} | ${adv.pathogen_type}`;
-        document.getElementById("symptoms-text").textContent = adv.visual_symptoms || "Không có";
-
-        // Chemical
-        const tbody = document.getElementById("chemical-tbody");
-        tbody.innerHTML = "";
-        if (adv.chemical_controls && adv.chemical_controls.length > 0) {
-          document.getElementById("chemical-section").style.display = "block";
-          adv.chemical_controls.forEach(c => {
-            const tr = document.createElement("tr");
-            tr.innerHTML = `
-              <td><strong>${c.active_ingredient}</strong><br><small style="color:#666">${c.trade_names.join(", ")}</small></td>
-              <td>${c.dosage}</td>
-              <td><span style="color:#d32f2f; font-weight:600;">${c.pre_harvest_interval_days} ngày</span></td>
-            `;
-            tbody.appendChild(tr);
-          });
-        } else {
-          document.getElementById("chemical-section").style.display = "none";
-        }
-
-        // Cultural
-        const cultList = document.getElementById("cultural-list");
-        cultList.innerHTML = "";
-        if (adv.cultural_preventions) {
-          adv.cultural_preventions.forEach(item => {
-            const li = document.createElement("li");
-            li.textContent = item;
-            cultList.appendChild(li);
-          });
-        }
-
-        // Safety
-        const safetyBox = document.getElementById("safety-box");
-        if (adv.safety_precautions && adv.safety_precautions.length > 0) {
-          safetyBox.textContent = adv.safety_precautions[0];
-          document.getElementById("safety-section").style.display = "block";
-        } else {
-          document.getElementById("safety-section").style.display = "none";
-        }
-
-      } else {
-        // Fallback Uncertain view
-        document.getElementById("disease-name").textContent = adv.preliminary_assessment || "Chưa xác định";
-        document.getElementById("scientific-name").textContent = "Độ tin cậy chưa đạt ngưỡng cho phép";
-        document.getElementById("symptoms-text").textContent = "Ảnh lá cây chưa đủ độ rõ nét hoặc vết bệnh không điển hình.";
-
-        document.getElementById("chemical-section").style.display = "none";
-        document.getElementById("safety-section").style.display = "none";
-
-        const cultList = document.getElementById("cultural-list");
-        cultList.innerHTML = "";
-        if (adv.guidance_for_farmer) {
-          adv.guidance_for_farmer.forEach(item => {
-            const li = document.createElement("li");
-            li.textContent = item;
-            cultList.appendChild(li);
-          });
-        }
-      }
-
-      document.getElementById("disclaimer-text").textContent = "⚖️ " + (data.regulatory_disclaimer || "");
-    }
-  </script>
+  </main>
+  <script src="frontend.js" defer></script>
 </body>
 </html>

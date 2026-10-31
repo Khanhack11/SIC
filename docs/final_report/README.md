@@ -1,5 +1,7 @@
 # Capstone Final Report
 
+Archived before the final completion pass. Use the [current release](../final_release/README.md) for the presentation on 4–5 November 2026.
+
 The Word report follows the supplied Samsung SIC Final Report template. It preserves its cover, chapter order, embedded fonts, headers, footers, blue section banners and review tables. Narrative was filled using repository evidence available on 31 October 2026. Instructor scores remain unfilled. Team-table notes describe assigned scope and recorded work; they are not signed personal testimonials.
 
 Report: [SIC AI Capstone Project Final Report](<SIC_AI_Capstone Project_Final Report.docx>).

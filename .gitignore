@@ -5,6 +5,7 @@ __pycache__/
 
 # Virtual environments
 .venv/
+.venv-gpu/
 venv/
 env/
 ENV/
@@ -33,3 +34,4 @@ models/*.json
 models/*.partial
 models/*_search/
 artifacts/
+.chart-data-*/

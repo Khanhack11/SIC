@@ -1,0 +1,59 @@
+{
+  "scope": "Real localhost HTTP multipart upload, validation, inference, advisory and JSON response",
+  "load": "Closed-loop clients; client wall latency includes server queueing, excludes client executor queue",
+  "checkpoint_sha256": "ea7f52fc69187c7e5ee701b943bf80046ce26ff90d12aecb559967815a62a423",
+  "validation_manifest_sha256": "75c87109a18776fa9d0c140a28b42cb73e953c443ce1f9e4b13c7e92724745a6",
+  "warmup": 10,
+  "images": 11,
+  "results": [
+    {
+      "runtime": "onnx",
+      "threads": 2,
+      "inference_slots": 2,
+      "clients": 1,
+      "count": 80,
+      "mean_ms": 11.071097500064297,
+      "p50_ms": 10.559449999618664,
+      "p95_ms": 13.629770000170538,
+      "max_ms": 14.691700000184937,
+      "throughput_requests_per_second": 88.60491996535139,
+      "mean_under_200ms": true,
+      "p95_under_200ms": true,
+      "mean_server_inference_ms": 8.27675,
+      "mean_server_processing_ms": 8.910625
+    },
+    {
+      "runtime": "onnx",
+      "threads": 2,
+      "inference_slots": 2,
+      "clients": 4,
+      "count": 80,
+      "mean_ms": 28.911037499949543,
+      "p50_ms": 28.996799999731593,
+      "p95_ms": 32.489514999542735,
+      "max_ms": 36.098699999456585,
+      "throughput_requests_per_second": 134.74174386803864,
+      "mean_under_200ms": true,
+      "p95_under_200ms": true,
+      "mean_server_inference_ms": 13.160874999999999,
+      "mean_server_processing_ms": 25.015625
+    },
+    {
+      "runtime": "onnx",
+      "threads": 2,
+      "inference_slots": 2,
+      "clients": 8,
+      "count": 80,
+      "mean_ms": 55.50715999999056,
+      "p50_ms": 55.78654999999344,
+      "p95_ms": 62.70440999978746,
+      "max_ms": 63.98009999975329,
+      "throughput_requests_per_second": 137.48224975264972,
+      "mean_under_200ms": true,
+      "p95_under_200ms": true,
+      "mean_server_inference_ms": 12.9025,
+      "mean_server_processing_ms": 51.5655
+    }
+  ],
+  "custom_threshold_isolation": true
+}

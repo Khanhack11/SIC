@@ -1,0 +1,307 @@
+{
+  "config": {
+    "architecture": "small_cnn",
+    "seed": 42,
+    "lr": 0.001,
+    "epochs": 8,
+    "patience": 3,
+    "batch_size": 32,
+    "amp": true,
+    "source_sha256": null,
+    "train_sha256": "7acf2f27e2854f541b70a8362408e13bc0b5a29e76e003df5fd120f989392552",
+    "validation_sha256": "75c87109a18776fa9d0c140a28b42cb73e953c443ce1f9e4b13c7e92724745a6",
+    "script_sha256": "e80ed07825db05b206c38eb1f2bd0ae10d46ff0cf6ece52011446a376f1c5db8"
+  },
+  "device": "cuda",
+  "gpu": "NVIDIA GeForce RTX 2050",
+  "torch": "2.14.1+cu126",
+  "initial_validation": null,
+  "history": [
+    {
+      "epoch": 1,
+      "validation_loss": 1.4629977941513062,
+      "validation_macro_f1": 0.41781470202199045
+    },
+    {
+      "epoch": 2,
+      "validation_loss": 1.0300394296646118,
+      "validation_macro_f1": 0.634714965991519
+    },
+    {
+      "epoch": 3,
+      "validation_loss": 0.960830569267273,
+      "validation_macro_f1": 0.6325872703154508
+    },
+    {
+      "epoch": 4,
+      "validation_loss": 0.9049125909805298,
+      "validation_macro_f1": 0.6660077026794922
+    },
+    {
+      "epoch": 5,
+      "validation_loss": 0.7663590312004089,
+      "validation_macro_f1": 0.7143848002437695
+    },
+    {
+      "epoch": 6,
+      "validation_loss": 0.6992408037185669,
+      "validation_macro_f1": 0.748733356376474
+    },
+    {
+      "epoch": 7,
+      "validation_loss": 0.6653940677642822,
+      "validation_macro_f1": 0.7587093135390468
+    },
+    {
+      "epoch": 8,
+      "validation_loss": 0.6836107969284058,
+      "validation_macro_f1": 0.7447638218719461
+    }
+  ],
+  "best_epoch": 7,
+  "validation": {
+    "accuracy": 0.7689196995956095,
+    "macro_precision": 0.7832266841947049,
+    "macro_recall": 0.7752026148170482,
+    "macro_f1": 0.7587093135390468,
+    "per_class": {
+      "Corn_Common_rust": {
+        "precision": 0.9562841530054644,
+        "recall": 0.9776536312849162,
+        "f1": 0.9668508287292817,
+        "support": 179
+      },
+      "Corn_Gray_leaf_spot": {
+        "precision": 0.6056338028169014,
+        "recall": 0.5584415584415584,
+        "f1": 0.581081081081081,
+        "support": 77
+      },
+      "Corn_Northern_Leaf_Blight": {
+        "precision": 0.6225490196078431,
+        "recall": 0.8581081081081081,
+        "f1": 0.7215909090909092,
+        "support": 148
+      },
+      "Corn_healthy": {
+        "precision": 0.9613259668508287,
+        "recall": 1.0,
+        "f1": 0.9802816901408451,
+        "support": 174
+      },
+      "Potato_Early_blight": {
+        "precision": 0.8143712574850299,
+        "recall": 0.8947368421052632,
+        "f1": 0.8526645768025078,
+        "support": 152
+      },
+      "Potato_Late_blight": {
+        "precision": 0.7525773195876289,
+        "recall": 0.48026315789473684,
+        "f1": 0.5863453815261045,
+        "support": 152
+      },
+      "Potato_healthy": {
+        "precision": 0.7931034482758621,
+        "recall": 0.9583333333333334,
+        "f1": 0.8679245283018867,
+        "support": 24
+      },
+      "Tomato_Early_blight": {
+        "precision": 0.6944444444444444,
+        "recall": 0.6622516556291391,
+        "f1": 0.6779661016949152,
+        "support": 151
+      },
+      "Tomato_Late_blight": {
+        "precision": 0.8690476190476191,
+        "recall": 0.3244444444444444,
+        "f1": 0.4724919093851132,
+        "support": 225
+      },
+      "Tomato_Septoria_leaf_spot": {
+        "precision": 0.5509641873278237,
+        "recall": 0.8888888888888888,
+        "f1": 0.6802721088435374,
+        "support": 225
+      },
+      "Tomato_healthy": {
+        "precision": 0.9951923076923077,
+        "recall": 0.9241071428571429,
+        "f1": 0.9583333333333334,
+        "support": 224
+      }
+    },
+    "confusion_matrix": [
+      [
+        175,
+        2,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      [
+        1,
+        43,
+        28,
+        0,
+        4,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        11,
+        127,
+        3,
+        0,
+        2,
+        0,
+        0,
+        0,
+        4,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        174,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        2,
+        0,
+        136,
+        6,
+        0,
+        3,
+        2,
+        2,
+        0
+      ],
+      [
+        0,
+        0,
+        25,
+        0,
+        1,
+        73,
+        2,
+        7,
+        7,
+        37,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        23,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        10,
+        0,
+        0,
+        1,
+        10,
+        1,
+        100,
+        0,
+        29,
+        0
+      ],
+      [
+        6,
+        4,
+        18,
+        3,
+        20,
+        4,
+        0,
+        12,
+        73,
+        84,
+        1
+      ],
+      [
+        0,
+        0,
+        2,
+        0,
+        0,
+        0,
+        1,
+        21,
+        1,
+        200,
+        0
+      ],
+      [
+        0,
+        0,
+        2,
+        0,
+        5,
+        1,
+        1,
+        1,
+        0,
+        7,
+        207
+      ]
+    ],
+    "confusion_matrix_axes": "rows=true, columns=predicted",
+    "class_names": [
+      "Corn_Common_rust",
+      "Corn_Gray_leaf_spot",
+      "Corn_Northern_Leaf_Blight",
+      "Corn_healthy",
+      "Potato_Early_blight",
+      "Potato_Late_blight",
+      "Potato_healthy",
+      "Tomato_Early_blight",
+      "Tomato_Late_blight",
+      "Tomato_Septoria_leaf_spot",
+      "Tomato_healthy"
+    ],
+    "loss": 0.6653940677642822,
+    "calibration": {
+      "nll": 0.6635494828224182,
+      "ece": 0.020618911570636556,
+      "ece_bins": 15,
+      "confidence_threshold": 0.75,
+      "accepted_count": 1005,
+      "accepted_coverage": 0.580589234828949,
+      "accepted_accuracy": 0.9442785978317261
+    }
+  },
+  "training_seconds": 933.4769936000002,
+  "test_used_for_selection": false
+}

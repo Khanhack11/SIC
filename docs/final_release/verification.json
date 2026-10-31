@@ -1,0 +1,61 @@
+{
+  "date": "2026-10-31",
+  "target_presentation": "2026-11-04/05",
+  "duration_minutes": 20,
+  "tests": {
+    "unit_integration": {
+      "passed": 25,
+      "skipped": 0
+    },
+    "backend": {
+      "passed": 10
+    },
+    "stress_edge": {
+      "passed": 17
+    },
+    "browser": {
+      "passed": 13,
+      "page_errors": 0
+    }
+  },
+  "baseline_checkpoint_sha256": "ea7f52fc69187c7e5ee701b943bf80046ce26ff90d12aecb559967815a62a423",
+  "baseline_classification_evaluation": "Recorded earlier; checkpoint and test manifest matched. Full classification not rerun in this release.",
+  "small_cnn_test": "Fresh evaluation of fixed 8-epoch configuration; see small_cnn_test.json",
+  "gpu_candidate": "Rejected by validation class-recall gate; test not evaluated",
+  "environment": {
+    "os": "Windows 11",
+    "python": "3.13.9",
+    "serving_torch": "2.14.1+cpu",
+    "gpu_torch": "2.14.1+cu126",
+    "gpu": "NVIDIA RTX 2050 4 GB",
+    "onnxruntime": "1.29.0"
+  },
+  "document_qa": {
+    "report_pages": 11,
+    "slide_count": 14,
+    "visual_review": "All report pages and slides inspected",
+    "video_seconds": 38.56
+  },
+  "limitations": [
+    "Camera tested with simulated device, physical camera unverified",
+    "No field-image evaluation or local pesticide-label approval",
+    "Existing test split reused in prior experiments",
+    "Package smoke test uses the installed environment, not a separate physical machine"
+  ],
+  "artifacts_sha256": {
+    "SIC_AI_Capstone Project_Final Report.docx": "35728a3e70fbb88229527ba91c8f73b3051562a4a58a284310768db87192feb6",
+    "SIC_Final_Presentation_20min.pptx": "dfcd067e650f736c09fcb1b3bdc28d31fdeee042e4a7b2ad87ab282d462e403c",
+    "SIC_Demo.webm": "8c203220ed80325fa261950afb3921da8e8188a9e9e03422f3bb169792fc4cd2"
+  },
+  "package_smoke": {
+    "passed": true,
+    "checks": [
+      "extracted source imports",
+      "ONNX weights ready",
+      "frontend HTTP 200",
+      "real image diagnosis",
+      "unreviewed treatments withheld"
+    ],
+    "environment": "Existing installed serving environment, separate extraction folder"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "checks": [
+    "simulated camera capture and stream cleanup",
+    "camera permission denied",
+    "corrupt image",
+    "oversize image",
+    "disease inference",
+    "duplicate submission prevention",
+    "sources",
+    "unreviewed treatments withheld",
+    "uncertain guidance",
+    "healthy leaf",
+    "mobile overflow",
+    "model not ready",
+    "offline server"
+  ],
+  "page_errors": []
+}

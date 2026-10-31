@@ -99,7 +99,8 @@ class CropDiseaseInferenceEngine:
                  onnx_path=ONNX_MODEL_PATH):
         self.class_names = list(class_names)
         self.num_classes = len(class_names)
-        self.device = torch.device(device or ("cuda" if torch.cuda.is_available() else "cpu"))
+        self.device = torch.device(device or ("cpu" if runtime == "onnx" else
+                                              "cuda" if torch.cuda.is_available() else "cpu"))
         if runtime not in {"eager", "torchscript", "onnx"}:
             raise ValueError("runtime must be eager, torchscript or onnx")
         self.runtime = runtime

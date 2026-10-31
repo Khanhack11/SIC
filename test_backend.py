@@ -4,6 +4,8 @@ Tests all endpoints, inference engine, knowledge base, and validation rules.
 """
 
 import sys
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
 from pathlib import Path
 from fastapi.testclient import TestClient
 
@@ -58,7 +60,9 @@ def run_tests():
     assert res.status_code == 200
     detail = res.json()["advisory_data"]
     assert detail["scientific_name"] == "Alternaria solani"
-    assert len(detail["chemical_controls"]) > 0
+    assert detail["chemical_controls"] == []
+    assert detail["review"]["chemical_status"] == "pending_local_review"
+    assert detail["sources"]
     print(f"  -> PASS: Lay thanh cong phac do '{detail['vietnamese_name']}', tac nhan: {detail['scientific_name']}")
 
     # 6. Test Disease Detail Not Found

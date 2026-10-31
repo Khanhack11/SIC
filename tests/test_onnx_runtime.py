@@ -1,6 +1,7 @@
 from importlib.util import find_spec
 from pathlib import Path
 import unittest
+from unittest.mock import patch
 
 import torch
 from backend.inference_engine import CropDiseaseInferenceEngine
@@ -9,6 +10,12 @@ from backend.inference_engine import CropDiseaseInferenceEngine
 @unittest.skipUnless(find_spec("onnxruntime") and Path("models/mobilenetv2_crop_disease.onnx").exists()
                      and Path("models/mobilenetv2_crop_disease.pt").exists(), "Optional ONNX artifacts unavailable")
 class OnnxRuntimeTests(unittest.TestCase):
+    def test_onnx_defaults_to_cpu_even_when_cuda_is_available(self):
+        with patch('torch.cuda.is_available', return_value=True):
+            engine = CropDiseaseInferenceEngine(runtime='onnx')
+        self.assertEqual(engine.device.type, 'cpu')
+        self.assertTrue(engine.weights_loaded, engine.load_error)
+
     def test_batch_shapes_and_logits_agree_with_fp32_checkpoint(self):
         previous_threads = torch.get_num_threads()
         torch.set_num_threads(2)

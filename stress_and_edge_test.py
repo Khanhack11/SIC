@@ -4,6 +4,8 @@ Tests all endpoints, edge cases, error handling, input validation, and latency b
 """
 
 import sys
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
 import io
 import time
 from pathlib import Path
@@ -151,7 +153,7 @@ def test_all():
     print("\n" + "=" * 80)
     print(f" KẾT QUẢ TỔNG THỂ: {passed}/{total} BÀI KIỂM THỬ THÀNH CÔNG ({passed/total*100:.1f}%)")
     if passed == total:
-        print(" HỆ THỐNG BACKEND CỦA BẠN HOÀN TOÀN KHÔNG CÓ LỖI (ZERO BUGS)!")
+        print(" Hoàn tất các trường hợp trong bộ kiểm thử.")
     else:
         print(f" CÓ {total - passed} LỖI CẦN XỬ LÝ.")
     print("=" * 80)

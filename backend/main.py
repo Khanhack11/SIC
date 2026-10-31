@@ -5,11 +5,13 @@ SIC Capstone Project - Group 5
 """
 
 import time
+import logging
 import torch
 from typing import Optional, List, Dict, Any
 from fastapi import FastAPI, File, UploadFile, HTTPException, Query, status
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, FileResponse
+from fastapi.staticfiles import StaticFiles
 import anyio
 from contextlib import asynccontextmanager
 from functools import partial
@@ -17,7 +19,7 @@ from threading import BoundedSemaphore
 from pydantic import BaseModel
 
 from backend.config import (CONFIDENCE_THRESHOLD, CLASS_NAMES, TORCH_NUM_THREADS, INFERENCE_RUNTIME,
-                            INFERENCE_CONCURRENCY, MAX_FILE_SIZE_BYTES)
+                            INFERENCE_CONCURRENCY, MAX_FILE_SIZE_BYTES, BASE_DIR, SAMPLE_IMAGES_DIR)
 from backend.inference_engine import (
     CropDiseaseInferenceEngine,
     validate_image_file,
@@ -62,6 +64,18 @@ torch.set_num_threads(TORCH_NUM_THREADS)
 inference_engine = CropDiseaseInferenceEngine(runtime=INFERENCE_RUNTIME)
 advisory_engine = AdvisoryKnowledgeBase()
 inference_slots = BoundedSemaphore(INFERENCE_CONCURRENCY)
+app.mount("/demo", StaticFiles(directory=SAMPLE_IMAGES_DIR / "demo", check_dir=False), name="demo")
+
+
+@app.get("/app", include_in_schema=False)
+@app.get("/frontend_demo.html", include_in_schema=False)
+def frontend():
+    return FileResponse(BASE_DIR / "frontend_demo.html")
+
+
+@app.get("/frontend.js", include_in_schema=False)
+def frontend_script():
+    return FileResponse(BASE_DIR / "frontend.js", media_type="text/javascript")
 
 
 def process_image(file_bytes, filename, threshold):
@@ -82,6 +96,9 @@ class HealthCheckResponse(BaseModel):
     num_supported_classes: int
     confidence_threshold: float
     target_latency: str
+    inference_runtime: str
+    device: str
+    calibrated: bool
 
 
 @app.get("/", tags=["Root"])
@@ -96,6 +113,7 @@ def root_endpoint() -> Dict[str, Any]:
         "documentation": "/docs",
         "health_check": "/api/health",
         "diagnose_endpoint": "/api/diagnose [POST]",
+        "frontend": "/app",
     }
 
 
@@ -111,6 +129,9 @@ def health_check() -> HealthCheckResponse:
         num_supported_classes=len(CLASS_NAMES),
         confidence_threshold=advisory_engine.threshold,
         target_latency="< 200 ms",
+        inference_runtime=inference_engine.runtime,
+        device=str(inference_engine.device),
+        calibrated=inference_engine.calibrated,
     )
 
 
@@ -158,10 +179,13 @@ async def diagnose_leaf_image(
     except InputValidationError as e:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
     except Exception as e:
+        logging.getLogger(__name__).exception("Diagnosis processing failed")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Lỗi xử lý nội bộ backend: {str(e)}"
+            detail="Không thể xử lý ảnh lúc này. Vui lòng thử lại hoặc chọn ảnh khác."
         )
+    finally:
+        await file.close()
 
 
 @app.get("/api/diseases", tags=["Knowledge Base"])
