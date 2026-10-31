@@ -1,0 +1,37 @@
+{
+  "verified_at": "2026-10-31T14:08:06.258291+00:00",
+  "scope": "Test suites rerun and deployed checkpoint/test manifest hashes verified. Classification evaluation and formal latency benchmarks were not rerun; the stress suite includes a short latency check.",
+  "python": "3.13.9",
+  "torch": "2.14.1+cpu",
+  "torchvision": "0.29.1+cpu",
+  "cuda_available": false,
+  "checkpoint_sha256": "ea7f52fc69187c7e5ee701b943bf80046ce26ff90d12aecb559967815a62a423",
+  "test_manifest_sha256": "10aa14d2d7a6f1fd2d079205c04689dc6a11de01e3c6149e4bf721ca0095c5c2",
+  "test_runs": [
+    {
+      "name": "unit_tests",
+      "command": "python -m unittest discover -s tests -v",
+      "exit_code": 0
+    },
+    {
+      "name": "backend_tests",
+      "command": "python test_backend.py",
+      "exit_code": 0
+    },
+    {
+      "name": "stress_tests",
+      "command": "python stress_and_edge_test.py",
+      "exit_code": 0
+    }
+  ],
+  "test_summary": {
+    "unit_discovered": 18,
+    "unit_passed": 16,
+    "unit_skipped": 2,
+    "unit_skip_reason": "Optional ONNX dependency unavailable",
+    "backend_passed": 10,
+    "backend_total": 10,
+    "stress_passed": 17,
+    "stress_total": 17
+  }
+}

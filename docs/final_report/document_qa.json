@@ -1,0 +1,15 @@
+{
+  "report_sha256": "edb2ceb37d36972bba4017cdddc230db12a7d9e40f9560e4eeb567c819a65005",
+  "template_sha256": "c04027deb625ae86c0b3c4ed67275f7e48e80816b1a9598107713bebce616f1f",
+  "reference_pages": 7,
+  "final_pages": 11,
+  "visual_review": "All 11 final pages inspected after native Word PDF export; no clipping, missing glyphs or orphan subsection headings observed.",
+  "modified_package_parts": [
+    "word/document.xml",
+    "word/settings.xml"
+  ],
+  "preserved": "All other package parts byte-for-byte, including styles, embedded fonts, headers, footers, relationships and custom XML; section geometry and content-control IDs retained.",
+  "authored_language": "English",
+  "template_adjustments": "Deliberate title line breaks and keep-with-next on subsection headings; source body run formatting reused for filled narrative.",
+  "instructor_scores": "Left unchanged and unfilled"
+}

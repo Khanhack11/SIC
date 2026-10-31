@@ -42,12 +42,12 @@ Confusion matrix đầy đủ ở `results/evaluation.csv`; chỉ số từng l�
 
 ## Hiệu năng đo trên CPU
 
-Cấu hình serial tốt nhất trong các cấu hình đã đo là runtime `torchscript`, 2 CPU threads. Mean 14.93 ms, p95 19.45 ms. Mục tiêu mean dưới 200ms: đạt.
+Cấu hình serial tốt nhất trong các cấu hình đã đo là runtime `torchscript`, 4 CPU threads. Mean 19.74 ms, p95 33.76 ms. Mục tiêu mean dưới 200ms: đạt.
 
 | Concurrency | Mean ms | P95 ms | Requests mỗi giây |
 |---:|---:|---:|---:|
-| 1 | 14.93 | 19.45 | 66.18 |
-| 4 | 42.38 | 64.74 | 92.42 |
+| 1 | 19.74 | 33.76 | 50.11 |
+| 4 | 92.75 | 172.94 | 41.50 |
 
 Thời gian benchmark gồm validation ảnh, preprocessing, inference và xác suất trong process; không bao gồm HTTP, mạng hoặc tư vấn. Benchmark dùng một ảnh validation mỗi lớp và warmup. Đây là phép đo trên máy này với tải đóng vòng; cần đo lại trên máy triển khai.
 

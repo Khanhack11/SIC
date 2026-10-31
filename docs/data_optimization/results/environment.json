@@ -4,10 +4,10 @@
   "dependencies": {
     "torch": "2.14.1",
     "torchvision": "0.29.1",
-    "pillow": "11.3.0",
-    "numpy": "2.4.2",
-    "fastapi": "0.141.1",
-    "uvicorn": "0.52.3",
+    "pillow": "13.0.0",
+    "numpy": "2.5.4",
+    "fastapi": "0.143.3",
+    "uvicorn": "0.54.0",
     "httpx": "0.28.1"
   }
 }
