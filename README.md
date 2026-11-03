@@ -6,6 +6,8 @@ Luồng điện thoại và ảnh thực địa được ghi trong [các phase](
 
 Để hiểu model hoạt động, mở [sơ đồ hệ thống bằng Archify](.archify/architecture-sic-pipeline-20261103-114010/he-thong.html), [pipeline train](.archify/architecture-sic-pipeline-20261103-114010/huan-luyen.html), [pipeline suy luận](.archify/architecture-sic-pipeline-20261103-114010/suy-luan.html) và [giải thích từng bước](.archify/architecture-sic-pipeline-20261103-114010/README.md). V3 mới đã train và đánh giá, nhưng chưa qua tiêu chí triển khai; xem [kết quả và giới hạn](docs/final_release/mobile_field/RESULTS.md).
 
+Lượt tiếp tục ngày 03/11 đã hoàn tất thêm hai epoch và sửa lỗi camera ghi đè ảnh mới, crop sát mép ảnh rộng lẻ. [Kết quả lượt tiếp tục](docs/final_release/mobile_field/continuation_20261103/README.md). Mở `run_field_demo.cmd` để thử V3 riêng tại port 8003; V2 mặc định vẫn ở port 8000. Weights nằm trong gói `Reports/SIC_mobile_field_20261103.zip`, không lưu trong Git.
+
 Samsung Innovation Campus, Group 5. Chuẩn bị báo cáo **04–05/11/2026**, thời lượng 20 phút.
 
 | Thành viên | Phạm vi công việc |

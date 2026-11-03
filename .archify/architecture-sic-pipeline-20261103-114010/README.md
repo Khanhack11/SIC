@@ -2,6 +2,8 @@
 
 Điện thoại gửi ảnh đến API. Model trên máy chủ dùng trọng số đã học để phân loại ảnh, sau đó hệ thống tra thông tin chăm sóc và hiển thị kết quả.
 
+Cập nhật sau sơ đồ: đã hoàn tất thêm hai epoch V3 và sửa callback camera/crop sát mép. [Kết quả lượt tiếp tục](evidence/continuation_20261103/README.md) ghi số đo validation mới. Sơ đồ vẫn dẫn mã nguồn tại commit cố định; các bảng của checkpoint trước bên dưới được giữ để đối chiếu.
+
 Mở lần lượt các file HTML bằng Chrome hoặc Edge. Chúng hoạt động độc lập, không cần Internet để xem sơ đồ.
 
 1. [Toàn bộ hệ thống: từ điện thoại đến kết quả](he-thong.html).

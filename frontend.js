@@ -36,6 +36,9 @@ async function checkServerHealth() {
     const response = await fetch(`${API_BASE}/api/health`, { signal: requestTimeout(5000) });
     if (!response.ok) throw new Error('health');
     const health = await response.json();
+    byId('model-scope').textContent = health.model_architecture?.startsWith('MobileNetV3')
+      ? 'V3 thử nghiệm · Cà chua, khoai tây, ngô. Độ chính xác ngoài thực địa chưa được xác nhận.'
+      : 'MobileNetV2 · Cà chua, khoai tây, ngô · 11 lớp lá';
     modelReady = health.status === 'HEALTHY' && health.weights_loaded === true;
     status.textContent = modelReady ? 'Model sẵn sàng' : 'Máy chủ đã chạy, model chưa sẵn sàng';
     status.className = `badge ${modelReady ? 'badge-online' : 'badge-offline'}`;
@@ -204,12 +207,16 @@ async function openCamera() {
 }
 
 async function captureImage() {
+  if (busy) return;
   const video = byId('camera-video');
   if (!video.videoWidth) return inputError('Camera chưa sẵn sàng. Đợi hình ảnh xuất hiện rồi chụp lại.');
+  const selection = selectionVersion;
+  const camera = cameraVersion;
   const canvas = document.createElement('canvas');
   canvas.width = video.videoWidth; canvas.height = video.videoHeight;
   canvas.getContext('2d').drawImage(video, 0, 0);
   const blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/jpeg', .92));
+  if (selection !== selectionVersion || camera !== cameraVersion || busy) return;
   stopCamera();
   if (blob) await selectFile(new File([blob], 'camera_leaf.jpg', { type: 'image/jpeg' }));
 }

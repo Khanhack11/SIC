@@ -1,0 +1,109 @@
+{
+  "health": {
+    "status": "HEALTHY",
+    "service": "SIC Crop Disease Advisory API",
+    "version": "1.0.0",
+    "model_architecture": "MobileNetV3-Large field (224x224 RGB letterbox)",
+    "weights_loaded": true,
+    "num_supported_classes": 11,
+    "confidence_threshold": 0.75,
+    "target_latency": "< 200 ms",
+    "inference_runtime": "eager",
+    "device": "cpu",
+    "calibrated": true
+  },
+  "samples": [
+    {
+      "file": "Corn_Common_rust.jpg",
+      "prediction": {
+        "disease_id": "Corn_Common_rust",
+        "crop": "Corn",
+        "is_healthy": false,
+        "confidence": 0.9829256534576416,
+        "confidence_percentage": "98.29%",
+        "threshold_applied": 0.75,
+        "confidence_gate_passed": true,
+        "latency_ms": 68.5
+      },
+      "review_reason": null
+    },
+    {
+      "file": "Potato_healthy.jpg",
+      "prediction": {
+        "disease_id": "Potato_healthy",
+        "crop": "Potato",
+        "is_healthy": true,
+        "confidence": 0.9977236390113831,
+        "confidence_percentage": "99.77%",
+        "threshold_applied": 0.75,
+        "confidence_gate_passed": false,
+        "latency_ms": 24.73
+      },
+      "review_reason": "field_healthy_unverified"
+    },
+    {
+      "file": "Tomato_Early_blight.jpg",
+      "prediction": {
+        "disease_id": "Tomato_Early_blight",
+        "crop": "Tomato",
+        "is_healthy": false,
+        "confidence": 0.9985094666481018,
+        "confidence_percentage": "99.85%",
+        "threshold_applied": 0.75,
+        "confidence_gate_passed": true,
+        "latency_ms": 36.37
+      },
+      "review_reason": null
+    },
+    {
+      "file": "uncertain.jpg",
+      "prediction": {
+        "disease_id": "Corn_Gray_leaf_spot",
+        "crop": "Corn",
+        "is_healthy": false,
+        "confidence": 0.9955891370773315,
+        "confidence_percentage": "99.56%",
+        "threshold_applied": 0.75,
+        "confidence_gate_passed": true,
+        "latency_ms": 21.33
+      },
+      "review_reason": null
+    }
+  ],
+  "api_crop_valid": true,
+  "api_invalid_image_rejected": true,
+  "api_tiny_crop_rejected": true,
+  "qualitative_user_screenshot": {
+    "predicted_class": "Corn_Gray_leaf_spot",
+    "crop": "Corn",
+    "is_healthy": false,
+    "confidence": 0.7557073831558228,
+    "confidence_percentage": "75.57%",
+    "latency_ms": 20.37,
+    "calibrated": true,
+    "benchmark_met": true,
+    "all_probabilities": {
+      "Corn_Common_rust": 0.06431075930595398,
+      "Corn_Gray_leaf_spot": 0.7557073831558228,
+      "Corn_Northern_Leaf_Blight": 0.012099086306989193,
+      "Corn_healthy": 0.005700946319848299,
+      "Potato_Early_blight": 0.001993841491639614,
+      "Potato_Late_blight": 0.024296240881085396,
+      "Potato_healthy": 0.013923246413469315,
+      "Tomato_Early_blight": 0.0699063315987587,
+      "Tomato_Late_blight": 0.021604331210255623,
+      "Tomato_Septoria_leaf_spot": 0.008026002906262875,
+      "Tomato_healthy": 0.0026237224228680134,
+      "Unsupported": 0.019808145239949226
+    },
+    "scope": "Screenshot crop only, not original upload; no expert label, not a quality metric or training sample."
+  },
+  "weights_sha256": "6a252ac806d88367bb6ee67ce04cccfce7ba986268f5d0d5e1f8332ed39ec62a",
+  "warm_cpu_latency_ms": {
+    "n": 30,
+    "median": 20.240000000000002,
+    "p95": 28.02,
+    "max": 28.92
+  },
+  "latency_scope": "One JPEG fixture, 3 warmups then 30 sequential calls; decode+preprocess+CNN only. Not network, phone, concurrency or cold startup."
+}

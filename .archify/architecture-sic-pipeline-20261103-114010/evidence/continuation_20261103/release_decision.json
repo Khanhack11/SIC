@@ -1,0 +1,41 @@
+{
+  "selection": "validation only",
+  "checks": {
+    "field_f1_gain": {
+      "value": 30.64460599638729,
+      "minimum": 5,
+      "unit": "percentage points",
+      "passed": true
+    },
+    "village_f1_drop": {
+      "value": -3.0393837526007106,
+      "maximum": 2,
+      "unit": "percentage points",
+      "passed": true
+    },
+    "field_score_gate_accuracy": {
+      "value": 0.5769230723381042,
+      "minimum": 0.85,
+      "passed": false
+    },
+    "field_score_gate_coverage": {
+      "value": 0.18840579688549042,
+      "minimum": 0.25,
+      "passed": false
+    },
+    "known_diseased_false_healthy": {
+      "value": 0.0,
+      "maximum": 0.05,
+      "passed": true
+    }
+  },
+  "all_passed": false,
+  "decision": "Keep default V2; candidate remains experimental",
+  "candidate_weights_sha256": "6a252ac806d88367bb6ee67ce04cccfce7ba986268f5d0d5e1f8332ed39ec62a",
+  "test_used_for_selection": false,
+  "evidence_sha256": {
+    "docs\\final_release\\mobile_field\\baseline_validation.json": "8a0d3718f4ef25fd07e551372c3d607b149939a2c085a7f4b7925a7b9b7bcb45",
+    "docs\\final_release\\mobile_field\\continuation_20261103\\validation.json": "36b50ec4993a82c3dde184e5d7e77104a9942ab369fb7ece340acad401bda7b2",
+    "docs\\FIELD_RELEASE_CRITERIA.json": "cf9895c37fbccbb9701e31ffab837a0e379b8ae345eb92c0137b3a904ba94175"
+  }
+}

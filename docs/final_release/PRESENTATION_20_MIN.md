@@ -2,6 +2,8 @@
 
 Ngày dự kiến: 04–05/11/2026. Deck `SIC_Final_Presentation_20min.pptx` có 14 trang; speaker notes chứa thời lượng, gợi ý nói và nguồn cho từng trang. Mở slide cùng `http://127.0.0.1:8000/app` trước khi trình bày.
 
+Cập nhật ngày 03/11: deck và video giữ kết quả baseline ngày 31/10. Báo cáo Word và hồ sơ V3 đã cập nhật; dùng [bảng so sánh mới](mobile_field/continuation_20261103/README.md) cùng ba HTML Archify khi nói phần mở rộng. `run_field_demo.cmd` mở V3 thử nghiệm ở `http://127.0.0.1:8003/app`, chưa thay model mặc định.
+
 | Phút | Slide | Nội dung |
 |---|---:|---|
 | 0:00–0:30 | 1 | Tên đề tài, Group 5, mục đích hỗ trợ nhận diện ảnh lá |
@@ -11,7 +13,7 @@ Ngày dự kiến: 04–05/11/2026. Deck `SIC_Final_Presentation_20min.pptx` có
 | 3:30–5:00 | 5 | Luồng ảnh, API, model, confidence gate và kho tri thức |
 | 5:00–6:30 | 6 | Baseline, augmentation, loss, chọn epoch, calibration và lượt GPU |
 | 6:30–8:00 | 7 | Test baseline và CNN đối chứng |
-| 8:00–10:00 | 8 | Ứng viên GPU tăng F1 nhưng giảm recall một lớp; vì sao chưa phát hành |
+| 8:00–10:00 | 8 + bảng mới | Một phút V2 giảm recall; một phút V3 cải thiện thực địa nhưng chưa qua cổng triển khai |
 | 10:00–11:00 | 9 | Confidence, ECE, coverage và accepted accuracy |
 | 11:00–12:00 | 10 | Mean/p95 HTTP, tải 1/4/8 client và phạm vi phép đo |
 | 12:00–13:00 | 11 | Nguồn tư vấn, phạm vi kiểm tra và phần thuốc bị ẩn |
@@ -33,6 +35,8 @@ Mở phần ảnh mẫu và chọn Ngô, gỉ sắt. Nhấn Phân tích ảnh, c
 
 Chọn Khoai tây, lá khỏe. Nói rõ model xếp ảnh vào lớp khỏe trong 11 lớp đã học; kết quả không chứng nhận toàn bộ cây không có bệnh. Sau đó dùng ảnh khó, quan sát confidence khoảng 59,6%, thông báo chưa đủ tin cậy và hướng dẫn chụp lại.
 
+Dành khoảng một phút trong phần này để chọn file từ máy, mở khung crop, áp dụng rồi khôi phục. Giải thích rằng khung do người dùng chọn, chưa tự tách lá. Đánh dấu có tổn thương và phân tích ảnh lá khỏe để cho thấy cảnh báo xung đột. Điểm 59,6% của ảnh khó thuộc V2 trên ảnh mẫu gốc; V3 hoặc vùng crop khác có thể cho điểm khác.
+
 Chọn một file hỏng hoặc file trên 10 MB để minh họa validation. Nếu camera đã thử trước buổi trình bày, chụp một ảnh để cho thấy luồng capture và preview. Không dùng ảnh vật thể ngoài phạm vi để khẳng định model biết từ chối ảnh lạ: hệ thống hiện chưa có chức năng đó.
 
 ## Giải thích các câu hỏi kỹ thuật
@@ -51,6 +55,10 @@ Chọn một file hỏng hoặc file trên 10 MB để minh họa validation. N�
 
 **Tư vấn thuốc.** Nguồn nước ngoài được dùng để đối chiếu triệu chứng và canh tác. Chưa có xác nhận nhãn thuốc địa phương, liều, sản phẩm và PHI. API trả mảng thuốc/công thức sinh học rỗng, kể cả khi confidence cao. Không khẳng định dữ liệu đã được chuyên gia nông học duyệt.
 
-**Ảnh ngoài miền.** Model luôn phân phối xác suất trên 11 lớp. Nó có thể dự đoán tự tin với đồ vật hoặc cây khác. Ngưỡng 75% không thay thế bộ phát hiện ảnh lạ; đây là giới hạn cần công bố.
+**Ảnh ngoài miền ở V2.** V2 luôn phân phối xác suất trên 11 lớp. Nó có thể dự đoán tự tin với đồ vật hoặc cây khác. Ngưỡng 75% không thay thế bộ phát hiện ảnh lạ; đây là giới hạn cần công bố.
+
+**V3 mới và lý do chưa thay mặc định.** V3 có 12 đầu ra, gồm Unsupported. Sau hai epoch bổ sung, F1 validation CPU trên PlantDoc là 46,59%, so với V2 15,95%. Chỉ số này tính trên tám lớp trong phạm vi có mẫu. Trong 78/414 ảnh vượt cổng điểm, 45 dự đoán đúng, tức 57,69%; coverage 18,84%. Chưa đạt mức 85%/25% đã đặt trước. Không đo lại test cũ để chọn tiếp và chưa có kiểm định điện thoại thực địa với nhãn chuyên gia.
+
+**Model học và crop.** Train so sánh dự đoán với nhãn rồi sửa trọng số. Khi nhận ảnh mới, model dùng trọng số đã lưu, không tự train thêm. Crop lấy vùng người dùng chọn; resize/letterbox chuẩn bị kích thước cho CNN. Đặc trưng qua đầu phân loại tạo logits, softmax/T tạo điểm, rồi hệ thống tra lời khuyên từ JSON. Có thể mở ba sơ đồ trong `Reports/SIC_Pipeline_20261103` để giải thích.
 
 **Phân công.** Giải thích theo vai trò trong Action Plan và mã/báo cáo thực tế. Không đọc các ghi chú đóng góp trong bảng nhóm như nhận xét cá nhân đã ký xác nhận.

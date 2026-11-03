@@ -52,7 +52,9 @@ def crop_upload(image_bytes, crop_box):
             raise ValueError('coordinates must stay inside image')
         with Image.open(io.BytesIO(image_bytes)) as source:
             image = orient_rgb(source)
-            bounds = (round(x*image.width), round(y*image.height), round((x+width)*image.width), round((y+height)*image.height))
+            # Match browser Math.round for nonnegative coordinates, including half-pixel ties.
+            bounds = tuple(min(limit, math.floor(value*limit+.5)) for value,limit in
+                           [(x,image.width),(y,image.height),(x+width,image.width),(y+height,image.height)])
             if min(bounds[2]-bounds[0], bounds[3]-bounds[1]) < 32:
                 raise ValueError('crop must be at least 32 pixels on each side')
             output = io.BytesIO()

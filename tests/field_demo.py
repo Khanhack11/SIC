@@ -8,14 +8,14 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-os.environ['SIC_FIELD_MODEL_PATH'] = str(ROOT / 'models/mobilenetv3_field_20261103.pt')
+os.environ.setdefault('SIC_FIELD_MODEL_PATH', str(ROOT / 'models/mobilenetv3_field_20261103.pt'))
 
 from fastapi.testclient import TestClient
 from backend.main import app, inference_engine
 
 
 def main():
-    output = ROOT / 'tests/results/field_demo'
+    output = Path(os.environ.get('SIC_TEST_OUTPUT', str(ROOT / 'tests/results/field_demo')))
     output.mkdir(parents=True, exist_ok=True)
     samples = sorted((ROOT / 'sample_images/demo').glob('*.jpg'))
     results = []

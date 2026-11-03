@@ -1,0 +1,32 @@
+{
+  "diagnosis_status": "UNCERTAIN",
+  "review_reason": "field_healthy_unverified",
+  "diagnostic_confirmation": false,
+  "message": "Model nghiêng về lớp khỏe nhưng chưa đủ cơ sở xác nhận sức khỏe cây từ ảnh thực địa. Hãy đối chiếu các lỗ, đốm hoặc biến dạng và chụp riêng từng lá.",
+  "prediction": {
+    "disease_id": "Potato_healthy",
+    "crop": "Potato",
+    "is_healthy": true,
+    "confidence": 0.9977236390113831,
+    "confidence_percentage": "99.77%",
+    "threshold_applied": 0.75,
+    "confidence_gate_passed": false,
+    "latency_ms": 228.7
+  },
+  "advisory_details": {
+    "preliminary_assessment": "Cây khoai tây khỏe mạnh",
+    "guidance_for_farmer": [
+      "1. Chụp lại ảnh lá cây ở cự ly gần (15 - 30cm), lấy nét trực diện vào vết bệnh hoặc đốm lá.",
+      "2. Chụp trong điều kiện ánh sáng tự nhiên đầy đủ, tránh chụp ngược sáng hoặc bóng râm che khuất.",
+      "3. Đảm bảo bề mặt lá sạch, không dính bùn đất hoặc bị rung mờ khi chụp.",
+      "4. Liên hệ trực tiếp với cán bộ Trạm Khuyến nông / Trạm BVTV địa phương để kiểm tra mẫu lá thực địa."
+    ]
+  },
+  "remediation_notice": "Khuyến nghị chụp lại ảnh chất lượng cao hơn hoặc tham vấn chuyên gia.",
+  "regulatory_disclaimer": "Thông tin tư vấn mang tính chất hỗ trợ quyết định (Decision-Support Guidance). Người canh tác cần tuân thủ quy tắc 4 đúng khi sử dụng thuốc BVTV, mang trang bị bảo hộ (PPE) và tham vấn cán bộ khuyến nông địa phương trước khi triển khai diện rộng.",
+  "image_metadata": {
+    "filename": "Potato_healthy.jpg",
+    "content_type": "application/octet-stream",
+    "size_bytes": 41710
+  }
+}

@@ -2,6 +2,8 @@
 
 V3 mới cải thiện phân loại trên PlantDoc nhưng chưa đạt cổng triển khai. API vẫn dùng MobileNetV2 mặc định, kèm chính sách xem lại nhãn khỏe cho ảnh người dùng. V3 được lưu riêng để thử và nghiên cứu tiếp.
 
+[Lượt tiếp tục ngày 03/11](continuation_20261103/README.md) đã hoàn tất thêm hai epoch, đo validation CPU 46,59% F1 PlantDoc và sửa lỗi camera/crop. Các bảng bên dưới giữ kết quả của checkpoint trước để đối chiếu, không phải kết quả của lượt tiếp tục.
+
 ## Dữ liệu và huấn luyện
 
 Đã tải PlantDoc tại revision `5467f6012d78d1c446145d5f582da6096f852ae8`, xác minh 2.580 file gồm 2.578 ảnh và tài liệu nguồn. Sau kiểm tra và lọc, PlantDoc có 1.658 ảnh train, 414 validation và 217 test. Giữ nguyên split PlantVillage 8.043/1.731/1.720. `data_audit.json` ghi ánh xạ nhãn, ảnh loại và giới hạn dữ liệu.

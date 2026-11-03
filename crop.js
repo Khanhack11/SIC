@@ -56,11 +56,14 @@
     if (!source || busy) return;
     const version=selectionVersion;
     const [x,y,w,h]=rectangle;
-    const width=Math.round(source.naturalWidth*w), height=Math.round(source.naturalHeight*h);
+    const left=Math.round(source.naturalWidth*x), top=Math.round(source.naturalHeight*y);
+    const right=Math.min(source.naturalWidth,Math.round(source.naturalWidth*(x+w)));
+    const bottom=Math.min(source.naturalHeight,Math.round(source.naturalHeight*(y+h)));
+    const width=right-left, height=bottom-top;
     if (Math.min(width,height)<32) return inputError('Vùng cắt cần có mỗi cạnh ít nhất 32 px. Hãy chọn vùng lớn hơn.');
     const output=document.createElement('canvas');
     output.width=width; output.height=height;
-    output.getContext('2d').drawImage(source,Math.round(x*source.naturalWidth),Math.round(y*source.naturalHeight),width,height,0,0,width,height);
+    output.getContext('2d').drawImage(source,left,top,width,height,0,0,width,height);
     const blob=await new Promise(resolve => output.toBlob(resolve,'image/jpeg',.95));
     if (!blob || version!==selectionVersion || busy) return;
     await selectFile(new File([blob],'leaf_crop.jpg',{type:'image/jpeg'}),{fromCrop:true});

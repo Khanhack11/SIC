@@ -4,6 +4,8 @@ Yêu cầu xác nhận ngày 03/11/2026: Android phổ thông và iPhone dùng w
 
 Cập nhật thực hiện: phase 1–3 đã triển khai; phase 4 đã train và đánh giá một ứng viên V3, chưa qua cổng triển khai nên giữ baseline; phase 5 đã kiểm tra trình duyệt mô phỏng và API, chưa có điện thoại vật lý. [Số liệu và giới hạn](final_release/mobile_field/RESULTS.md). [Ba sơ đồ và giải thích model](../.archify/architecture-sic-pipeline-20261103-114010/README.md).
 
+Lượt tiếp tục đã hoàn tất thêm hai epoch, kiểm tra khôi phục optimizer trên GPU và sửa callback camera/crop sát mép ảnh. [Kết quả mới](final_release/mobile_field/continuation_20261103/README.md) giữ riêng validation, không đo lại test cũ. Cổng triển khai vẫn chưa đạt.
+
 ## Phase 1. Rà soát và tái hiện
 
 Đã rà soát kiến trúc backend, hợp đồng preprocessing, pipeline dữ liệu/huấn luyện, runtime ONNX, advisory, frontend và các bộ test. MobileNetV2 có 11 lớp, được train chủ yếu trên PlantVillage nền kiểm soát. Toàn ảnh được resize 224×224, không có detector/crop lá tự động và không có lớp ngoài phạm vi. UI gọi softmax là độ tin cậy, dễ bị hiểu thành độ chính xác.

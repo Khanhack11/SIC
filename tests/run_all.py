@@ -25,6 +25,7 @@ def main():
     ]
     if args.web:
         commands.append(('browser', [shutil.which('node') or 'node', 'tests/frontend_demo.cjs']))
+        commands.append(('frontend_async', [shutil.which('node') or 'node', 'tests/frontend_async.cjs']))
     if args.mobile:
         commands.append(('mobile_browsers', [shutil.which('node') or 'node', 'tests/mobile_browsers.cjs']))
     results = {}

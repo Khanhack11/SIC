@@ -16,7 +16,7 @@ def package(output):
                      and not p.is_relative_to(BASE_DIR / 'tests/results'))
     diagram_folder = BASE_DIR / '.archify/architecture-sic-pipeline-20261103-114010'
     files.extend(p for p in diagram_folder.rglob('*') if p.is_file())
-    for name in ['frontend_demo.html', 'frontend.js', 'crop.js', 'run_demo.cmd', 'run_mobile_demo.cmd', 'README.md',
+    for name in ['frontend_demo.html', 'frontend.js', 'crop.js', 'run_demo.cmd', 'run_mobile_demo.cmd', 'run_field_demo.cmd', 'README.md',
                  'requirements.txt', 'requirements-demo.txt', 'requirements-onnx.txt',
                  'data/advisory_knowledge_base.json',
                  'docs/API_AND_DATABASE_SPECIFICATION.md', 'docs/MOBILE_FIELD_PHASES.md', 'docs/FIELD_RELEASE_CRITERIA.json']:
@@ -25,7 +25,8 @@ def package(output):
     for name in ['small_cnn_20261031.pt', 'small_cnn_20261031.json',
                  'mobilenetv2_gpu_20261031.pt', 'mobilenetv2_gpu_20261031.json',
                  'mobilenetv2_gpu_20261103.pt', 'mobilenetv2_gpu_20261103.json',
-                 'mobilenetv3_field_20261103.pt', 'mobilenetv3_field_20261103.json']:
+                 'mobilenetv3_field_20261103.pt', 'mobilenetv3_field_20261103.json',
+                 'mobilenetv3_field_continued_20261103.pt', 'mobilenetv3_field_continued_20261103.json']:
         candidate = BASE_DIR / 'models' / name
         if candidate.is_file():
             files.append(candidate)

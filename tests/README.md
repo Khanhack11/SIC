@@ -26,6 +26,9 @@ Có thể mở `run_tests.cmd` để chạy cả browser và giữ cửa sổ xe
 | `mobile_browsers.cjs` | Chromium và WebKit với thao tác chạm và viewport 360/390/412/844; không phải điện thoại thật |
 | `field_demo.py` | Chạy riêng bằng Python khi có weights V3: kiểm tra API thật, crop và đo latency CPU sau warmup |
 | `architecture_diagrams.cjs` | Kiểm tra riêng file HTML Archify bằng Chrome ở 1440/1920 px; truyền thư mục sơ đồ làm đối số |
+| `frontend_async.cjs` | Callback camera đến chậm sau khi chọn file khác/đóng camera và crop sát mép ảnh rộng lẻ; không cần chạy model |
+| `test_field_recovery.py` | Khôi phục optimizer, RNG và vị trí lấy mẫu; kiểm tra bước train tiếp theo khớp với trạng thái đã lưu |
+| `test_field_release.py` | Không dùng test hoặc manifest khác để quyết định phát hành; trường hợp F1 tăng vẫn trượt cổng độ chính xác |
 | `run_all.py` | Chạy các bộ test, giữ log và mã thoát |
 | `fixtures/` | Ảnh nhân tạo và file lỗi để kiểm tra API; không dùng đo chất lượng model |
 

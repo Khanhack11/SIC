@@ -1,2 +1,2 @@
 # Archify receipts bind exact bytes. Preserve line endings across checkouts.
-.archify/** -text
+.archify/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

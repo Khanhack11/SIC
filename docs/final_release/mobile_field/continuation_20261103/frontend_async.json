@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "checks": [
+    "new file",
+    "close camera",
+    "odd-width crop preserves source boundary"
+  ],
+  "experimental_model_notice": true,
+  "camera": "simulated",
+  "backend": "mock health; no model inference needed for this race"
+}

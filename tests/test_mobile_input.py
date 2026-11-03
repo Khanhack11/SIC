@@ -20,6 +20,14 @@ class MobileInputTests(unittest.TestCase):
         for box in ['0,0,0,1','0.8,0,0.5,1','NaN,0,1,1','0,0,1','0,0,.01,1']:
             with self.assertRaises(InputValidationError): crop_upload(data.getvalue(),box)
 
+    def test_odd_dimensions_match_browser_rounding_without_extra_border(self):
+        for dimensions, expected in [((95,97),(47,97)),((97,95),(48,95))]:
+            image=Image.new('RGB',dimensions,(70,170,80));data=io.BytesIO();image.save(data,format='PNG')
+            for box in ['0.5,0,0.5,1','0.5,0,0.5000001,1']:
+                with Image.open(io.BytesIO(crop_upload(data.getvalue(),box))) as cropped:
+                    self.assertEqual(cropped.size,expected)
+                    self.assertGreater(cropped.getpixel((cropped.width-1,40))[1],150)
+
     def test_reported_damage_prevents_high_confidence_healthy_advice(self):
         result=AdvisoryKnowledgeBase().process_diagnosis({'predicted_class':'Corn_healthy',
             'confidence':.99999,'is_healthy':True,'visible_damage':True})
