@@ -1,0 +1,2 @@
+# Archify receipts bind exact bytes. Preserve line endings across checkouts.
+.archify/** -text
