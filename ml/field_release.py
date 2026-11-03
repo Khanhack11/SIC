@@ -34,7 +34,7 @@ def decide(baseline, candidate, criteria):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--baseline', type=Path, default=Path('docs/final_release/mobile_field/baseline_validation.json'))
+    parser.add_argument('--baseline', type=Path, default=Path('docs/benchmarks/quality/baseline_validation.json'))
     parser.add_argument('--candidate', type=Path, required=True)
     parser.add_argument('--criteria', type=Path, default=Path('docs/FIELD_RELEASE_CRITERIA.json'))
     parser.add_argument('--output', type=Path, required=True)

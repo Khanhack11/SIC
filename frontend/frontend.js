@@ -39,6 +39,7 @@ async function checkServerHealth() {
     byId('model-scope').textContent = health.model_architecture?.startsWith('MobileNetV3')
       ? 'V3 thử nghiệm · Cà chua, khoai tây, ngô. Độ chính xác ngoài thực địa chưa được xác nhận.'
       : 'MobileNetV2 · Cà chua, khoai tây, ngô · 11 lớp lá';
+    if (health.device) byId('model-scope').textContent += health.device.startsWith('cuda') ? ' · Máy chủ GPU CUDA' : ' · Máy chủ CPU';
     modelReady = health.status === 'HEALTHY' && health.weights_loaded === true;
     status.textContent = modelReady ? 'Model sẵn sàng' : 'Máy chủ đã chạy, model chưa sẵn sàng';
     status.className = `badge ${modelReady ? 'badge-online' : 'badge-offline'}`;

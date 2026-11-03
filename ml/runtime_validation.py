@@ -19,8 +19,9 @@ def compare(data, weights, output):
     dataset = ManifestDataset(data / "validation.csv")
     loader = DataLoader(dataset, batch_size=32, shuffle=False)
     candidates = [("eager", "eager", None), ("torchscript", "torchscript", None),
-                  ("onnx_fp32", "onnx", Path("models/mobilenetv2_crop_disease.onnx")),
-                  ("onnx_int8", "onnx", Path("models/mobilenetv2_crop_disease_int8.onnx"))]
+                  ("onnx_fp32", "onnx", Path("models/mobilenetv2_crop_disease.onnx"))]
+    int8 = Path("models/mobilenetv2_crop_disease_int8.onnx")
+    if int8.exists(): candidates.append(("onnx_int8", "onnx", int8))
     reference, results = None, {}
     for name, runtime, path in candidates:
         check_pause()

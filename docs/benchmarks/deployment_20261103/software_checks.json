@@ -1,0 +1,111 @@
+{
+  "passed": true,
+  "suite": "tests/results/20261103_225746_236046",
+  "unit_integration_tests": 61,
+  "backend_checks": 10,
+  "stress_edge_checks": 17,
+  "frontend_checks": 25,
+  "async_checks": 4,
+  "suite_summary": {
+    "passed": true,
+    "exit_codes": {
+      "unit_integration": 0,
+      "backend": 0,
+      "stress_edge": 0,
+      "browser": 0,
+      "frontend_async": 0,
+      "mobile_browsers": 0
+    },
+    "browser_requested": true,
+    "mobile_requested": true
+  },
+  "mobile_emulation": {
+    "passed": true,
+    "results": [
+      {
+        "engine": "chromium",
+        "passed": true,
+        "viewports": [
+          360,
+          390,
+          412,
+          844
+        ],
+        "touch_controls": true,
+        "crop": true,
+        "restore": true,
+        "damage_review": true,
+        "page_errors": []
+      },
+      {
+        "engine": "webkit",
+        "passed": true,
+        "viewports": [
+          360,
+          390,
+          412,
+          844
+        ],
+        "touch_controls": true,
+        "crop": true,
+        "restore": true,
+        "damage_review": true,
+        "page_errors": []
+      }
+    ],
+    "limitation": "Desktop Windows engines with mobile viewport/touch emulation. Physical Android/iPhone and physical camera not tested."
+  },
+  "candidate_api_checks": {
+    "cpu": {
+      "report": "tests/results/field_canonical_cpu_20261103_verified/results.json",
+      "report_sha256": "557d1bbf6585f39a4b0f3fd902a254f6e0b2d2f6fc32416dbbadaa500773051a",
+      "health": {
+        "status": "HEALTHY",
+        "service": "SIC Crop Disease Advisory API",
+        "version": "1.0.0",
+        "model_architecture": "MobileNetV3-Large field (224x224 RGB letterbox)",
+        "weights_loaded": true,
+        "num_supported_classes": 11,
+        "confidence_threshold": 0.75,
+        "target_latency": "< 200 ms",
+        "inference_runtime": "eager",
+        "device": "cpu",
+        "calibrated": true
+      },
+      "api_crop_valid": true,
+      "api_invalid_image_rejected": true,
+      "api_tiny_crop_rejected": true,
+      "exit_code": 0
+    },
+    "gpu": {
+      "report": "tests/results/field_canonical_gpu_20261103_verified/results.json",
+      "report_sha256": "0da2f0ffa446ca93a314188d7279911d3bf74b8fe223cdac9de2fdb6d37ea9c7",
+      "health": {
+        "status": "HEALTHY",
+        "service": "SIC Crop Disease Advisory API",
+        "version": "1.0.0",
+        "model_architecture": "MobileNetV3-Large field (224x224 RGB letterbox)",
+        "weights_loaded": true,
+        "num_supported_classes": 11,
+        "confidence_threshold": 0.75,
+        "target_latency": "< 200 ms",
+        "inference_runtime": "eager",
+        "device": "cuda",
+        "calibrated": true
+      },
+      "api_crop_valid": true,
+      "api_invalid_image_rejected": true,
+      "api_tiny_crop_rejected": true,
+      "exit_code": 0
+    }
+  },
+  "scope": "Software correctness checks, not disease recognition accuracy. Candidate API uses TestClient; HTTP benchmarks exercise real localhost servers separately. No physical Android/iPhone validation.",
+  "log_sha256": {
+    "backend.log": "67926a0e334be47ed724c5425155c21464115f90a878eac12be7cd111aebfbd9",
+    "browser.log": "371f0eb3164a87e4db44ddf7b0ce8b6eabe772a178b9d2a184b945f9a0852dd6",
+    "frontend_async.log": "772aa277fb2b5b2b73ffcbd0876984c1fe71607474af23163679fbd3250e5356",
+    "mobile_browsers.log": "64f48c08d98da9881f0a5b61b218c57b3b5f26124ff075ad6ef93463029d0f73",
+    "stress_edge.log": "06ba4726d0b3e1090ce470961774e0674a32418ead6e763e7dda5f0511f71241",
+    "unit_integration.log": "823c44480739ba56d076c4d5a31645f64c6b0a0159ffb1409ea7ff93aeefb3bb"
+  }
+}

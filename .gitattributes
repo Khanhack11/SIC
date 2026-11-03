@@ -1,2 +1,4 @@
 # Archify receipts bind exact bytes. Preserve line endings across checkouts.
 .archify/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+# Benchmark provenance binds the original report bytes, including Windows line endings.
+docs/benchmarks/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

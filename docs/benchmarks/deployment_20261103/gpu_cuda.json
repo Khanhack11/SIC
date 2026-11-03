@@ -1,0 +1,111 @@
+{
+  "hardware": {
+    "os": "Windows-11-10.0.26300-SP0",
+    "cpu_architecture": "AMD64",
+    "python_bits": 64,
+    "cpu_identifier": "Intel64 Family 6 Model 154 Stepping 3, GenuineIntel",
+    "torch": "2.14.1+cu126",
+    "threads": 2,
+    "device": "cuda",
+    "runtime": "eager",
+    "native_libraries": {
+      "torch_python_binding": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.venv-gpu\\Lib\\site-packages\\torch\\_C.cp313-win_amd64.pyd",
+      "torch_cpu_dll": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.venv-gpu\\Lib\\site-packages\\torch\\lib\\torch_cpu.dll",
+      "torch_cuda_dll": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.venv-gpu\\Lib\\site-packages\\torch\\lib\\torch_cuda.dll"
+    },
+    "gpu": "NVIDIA GeForce RTX 2050",
+    "cuda": "12.6",
+    "compute_capability": [
+      8,
+      6
+    ],
+    "total_vram_bytes": 4294443008
+  },
+  "warmup": 10,
+  "iterations": 50,
+  "fixtures": {
+    "sample_images\\demo\\Corn_Common_rust.jpg": "5820666c0ade81612cc480445ffa8a82a37582052157b5fa44bf7cb41bc5b3c7",
+    "sample_images\\demo\\Potato_healthy.jpg": "5f2d35e2dbf34479f95edfc0246f345daa3490be519623c8a143d12698d02d7e",
+    "sample_images\\demo\\Tomato_Early_blight.jpg": "f44d09bfa63e1c38cdd9f45152f45c4e0a4a13eaf5538da847d600c01d6db23f",
+    "sample_images\\demo\\uncertain.jpg": "29ecdca78fff35131c8a66f5e81ec47c98cfe418f1998ea6ca480637c59c90b9"
+  },
+  "scope": "Forward excludes preprocessing/transfer. Image pipeline includes decode, transform, device transfer, model and probabilities; excludes HTTP, advisory and network.",
+  "quality_claim": false,
+  "precision": "FP32; no autocast",
+  "results": [
+    {
+      "model": "baseline",
+      "weights": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\models\\mobilenetv2_crop_disease.pt",
+      "weights_sha256": "ea7f52fc69187c7e5ee701b943bf80046ce26ff90d12aecb559967815a62a423",
+      "temperature": 1.0312894582748413,
+      "parameter_count": 2237963,
+      "forward_only_by_batch": {
+        "1": {
+          "iterations": 50,
+          "mean_ms": 37.7368839996052,
+          "p50_ms": 33.6645999996108,
+          "p95_ms": 67.47241499651862,
+          "images_per_second": 26.499273231209603
+        },
+        "4": {
+          "iterations": 50,
+          "mean_ms": 42.86804600036703,
+          "p50_ms": 36.765000000741566,
+          "p95_ms": 84.02484500002174,
+          "images_per_second": 93.30959474956597
+        }
+      },
+      "image_pipeline": {
+        "iterations": 50,
+        "mean_ms": 47.32263999976567,
+        "p50_ms": 45.04849999648286,
+        "p95_ms": 66.43033500295132,
+        "images_per_second": 21.13153450451944
+      },
+      "fixture_predictions": [
+        "Corn_Common_rust",
+        "Potato_healthy",
+        "Tomato_Early_blight",
+        "Corn_Northern_Leaf_Blight"
+      ],
+      "peak_allocated_vram_bytes": 62598656
+    },
+    {
+      "model": "candidate",
+      "weights": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\models\\candidate\\mobilenetv3_field.pt",
+      "weights_sha256": "0eeb20ec4ef5f3f11cd477920ccc63f33e2b721bb37e394900467f64dc284577",
+      "temperature": 1.005058765411377,
+      "parameter_count": 3221052,
+      "forward_only_by_batch": {
+        "1": {
+          "iterations": 50,
+          "mean_ms": 47.6864540000679,
+          "p50_ms": 43.07334999975865,
+          "p95_ms": 73.10348000464727,
+          "images_per_second": 20.970315804957444
+        },
+        "4": {
+          "iterations": 50,
+          "mean_ms": 54.230833999608876,
+          "p50_ms": 47.523649998765904,
+          "p95_ms": 99.31658999848877,
+          "images_per_second": 73.75877715671584
+        }
+      },
+      "image_pipeline": {
+        "iterations": 50,
+        "mean_ms": 55.51995999951032,
+        "p50_ms": 49.98704999889014,
+        "p95_ms": 74.21848499907355,
+        "images_per_second": 18.01154035429456
+      },
+      "fixture_predictions": [
+        "Corn_Common_rust",
+        "Potato_healthy",
+        "Tomato_Early_blight",
+        "Corn_Gray_leaf_spot"
+      ],
+      "peak_allocated_vram_bytes": 53351936
+    }
+  ]
+}

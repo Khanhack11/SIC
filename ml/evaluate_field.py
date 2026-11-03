@@ -63,8 +63,8 @@ def evaluate(args):
 
 if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--data',type=Path,default=Path('data/processed/field_mobile_v1'))
-    parser.add_argument('--weights',type=Path,default=Path('models/mobilenetv3_field_20261103.pt'))
+    parser.add_argument('--data',type=Path,default=Path('data/processed/field_mobile_v2'))
+    parser.add_argument('--weights',type=Path,default=Path('models/candidate/mobilenetv3_field.pt'))
     parser.add_argument('--baseline',action='store_true')
     parser.add_argument('--split',choices=['validation','test','external_test'],default='validation')
     parser.add_argument('--output',type=Path,required=True)

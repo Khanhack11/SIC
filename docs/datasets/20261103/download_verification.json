@@ -46,5 +46,46 @@
     "archive_bytes": 1057281724,
     "archive_sha256": "cbdfb273eb26fea93fda52bbfe4766cc31881feb3a1202b13e4d85e8a4c0bcfa",
     "upstream_checksum": "md5:9358a66dff88cdd15c4fe009763c40a3"
+  },
+  "potato_holeta_v2": {
+    "status": "complete",
+    "files": 430,
+    "uncompressed_bytes": 5322366,
+    "renamed_windows_paths": 0,
+    "archive_bytes": 5334258,
+    "archive_sha256": "6928a86923c15059a838003b1113ac7fbac8c0790e64190b0c37acb4bbd5f5eb",
+    "upstream_checksum": "sha256:6928a86923c15059a838003b1113ac7fbac8c0790e64190b0c37acb4bbd5f5eb"
+  },
+  "potato_late_blight_iitkgp": {
+    "files": 1581,
+    "uncompressed_bytes": 146565614,
+    "renamed_windows_paths": 1,
+    "zip_crc_verified": true,
+    "status": "complete",
+    "archive_bytes": 146597826,
+    "archive_sha256": "59e902c87dddf41d1f8dd4ffbfed296d5ab970fac82cdfaffe1e4edfca498554",
+    "upstream_checksum": "md5:dd2c7bc833c37bce09a7d96f5bc39d8f"
+  },
+  "potato_field_indonesia": {
+    "status": "complete",
+    "files": 1096,
+    "uncompressed_bytes": 285335365,
+    "renamed_windows_paths": 0,
+    "upstream_sha256_verified": 1096
+  },
+  "maize_field_bd": {
+    "status": "complete",
+    "files": 1001,
+    "uncompressed_bytes": 423689593,
+    "renamed_windows_paths": 0,
+    "upstream_sha256_verified": 1001,
+    "excluded_heic_count": 6
+  },
+  "tomato_field_pakistan": {
+    "status": "complete",
+    "files": 191,
+    "uncompressed_bytes": 474313843,
+    "renamed_windows_paths": 0,
+    "zip_crc_verified": true
   }
 }

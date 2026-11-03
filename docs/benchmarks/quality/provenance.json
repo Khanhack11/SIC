@@ -1,0 +1,20 @@
+{
+  "baseline_validation.json": {
+    "source": "docs/final_release/antigravity_continuation_20261103/baseline_validation.json",
+    "sha256": "147796f0a7537fbb7b76ef68e5202a5e8df7a4b687042a5d03ef9e1998231185",
+    "weights_verified": true,
+    "evaluation_repeated": false
+  },
+  "candidate_validation.json": {
+    "source": "docs/final_release/codex_collaboration_20261103/validation_field_v2_evaluation.json",
+    "sha256": "2e951c0c1db7e0594bfe1f04a5637c2f816975231f986704cb999073cd6d2203",
+    "weights_verified": true,
+    "evaluation_repeated": false
+  },
+  "baseline_plantvillage_test_historical.json": {
+    "source": "docs/data_optimization/results/evaluation.json",
+    "sha256": "fa329f9a2434702add1d9590755c30519458c0d50fa9aafacaf726007014b934",
+    "weights_verified": true,
+    "evaluation_repeated": false
+  }
+}

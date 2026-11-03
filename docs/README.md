@@ -2,8 +2,11 @@
 
 | Tài liệu | Mục đích |
 |---|---|
+| [Runtime CPU/GPU](RUNTIME.md) | Mã model, weights và thư viện native thực thi |
+| [Nhãn dữ liệu](DATA_LABELING.md) | Manifest, class index và bảng duyệt nhãn thật |
+| [Benchmark](BENCHMARKS.md) | Chất lượng từng lớp, CPU/CUDA và tải API |
 | [Bản đồ thư mục](project_structure/README.md) | Kiểm kê, thay đổi đường dẫn và cách tìm mã nguồn |
-| [Audit dữ liệu mới](datasets/20261103/README.md) | 5 nguồn dữ liệu, ảnh trùng và danh sách cần duyệt |
+| [Audit dữ liệu mới](datasets/20261103/README.md) | 10 nguồn dữ liệu, ảnh trùng và danh sách cần duyệt |
 | [API và kho tri thức](API_AND_DATABASE_SPECIFICATION.md) | Hợp đồng backend và tư vấn |
 | [Các phase ảnh thực tế](MOBILE_FIELD_PHASES.md) | Phạm vi upload, crop và đánh giá model |
 | [Hồ sơ phát hành](final_release/README.md) | Demo, model, kết quả và giới hạn |

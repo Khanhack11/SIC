@@ -1,0 +1,202 @@
+{
+  "manifest": "data\\processed\\field_mobile_v2\\records.json",
+  "manifest_sha256": "4678faca1433bbb79d31185cdb6600994e29b777c9fbe8ed23bfb58fe92f5f24",
+  "rows": 20902,
+  "class_map": {
+    "0": "Corn_Common_rust",
+    "1": "Corn_Gray_leaf_spot",
+    "2": "Corn_Northern_Leaf_Blight",
+    "3": "Corn_healthy",
+    "4": "Potato_Early_blight",
+    "5": "Potato_Late_blight",
+    "6": "Potato_healthy",
+    "7": "Tomato_Early_blight",
+    "8": "Tomato_Late_blight",
+    "9": "Tomato_Septoria_leaf_spot",
+    "10": "Tomato_healthy",
+    "11": "Unsupported"
+  },
+  "counts": [
+    {
+      "split": "test",
+      "label": "Corn_Common_rust",
+      "count": 189
+    },
+    {
+      "split": "test",
+      "label": "Corn_Gray_leaf_spot",
+      "count": 81
+    },
+    {
+      "split": "test",
+      "label": "Corn_Northern_Leaf_Blight",
+      "count": 148
+    },
+    {
+      "split": "test",
+      "label": "Corn_healthy",
+      "count": 174
+    },
+    {
+      "split": "test",
+      "label": "Potato_Early_blight",
+      "count": 154
+    },
+    {
+      "split": "test",
+      "label": "Potato_Late_blight",
+      "count": 153
+    },
+    {
+      "split": "test",
+      "label": "Potato_healthy",
+      "count": 24
+    },
+    {
+      "split": "test",
+      "label": "Tomato_Early_blight",
+      "count": 158
+    },
+    {
+      "split": "test",
+      "label": "Tomato_Late_blight",
+      "count": 234
+    },
+    {
+      "split": "test",
+      "label": "Tomato_Septoria_leaf_spot",
+      "count": 235
+    },
+    {
+      "split": "test",
+      "label": "Tomato_healthy",
+      "count": 232
+    },
+    {
+      "split": "test",
+      "label": "Unsupported",
+      "count": 155
+    },
+    {
+      "split": "train",
+      "label": "Corn_Common_rust",
+      "count": 1123
+    },
+    {
+      "split": "train",
+      "label": "Corn_Gray_leaf_spot",
+      "count": 536
+    },
+    {
+      "split": "train",
+      "label": "Corn_Northern_Leaf_Blight",
+      "count": 797
+    },
+    {
+      "split": "train",
+      "label": "Corn_healthy",
+      "count": 889
+    },
+    {
+      "split": "train",
+      "label": "Potato_Early_blight",
+      "count": 991
+    },
+    {
+      "split": "train",
+      "label": "Potato_Late_blight",
+      "count": 1302
+    },
+    {
+      "split": "train",
+      "label": "Potato_healthy",
+      "count": 568
+    },
+    {
+      "split": "train",
+      "label": "Tomato_Early_blight",
+      "count": 1015
+    },
+    {
+      "split": "train",
+      "label": "Tomato_Late_blight",
+      "count": 1359
+    },
+    {
+      "split": "train",
+      "label": "Tomato_Septoria_leaf_spot",
+      "count": 1454
+    },
+    {
+      "split": "train",
+      "label": "Tomato_healthy",
+      "count": 1259
+    },
+    {
+      "split": "train",
+      "label": "Unsupported",
+      "count": 4932
+    },
+    {
+      "split": "validation",
+      "label": "Corn_Common_rust",
+      "count": 226
+    },
+    {
+      "split": "validation",
+      "label": "Corn_Gray_leaf_spot",
+      "count": 106
+    },
+    {
+      "split": "validation",
+      "label": "Corn_Northern_Leaf_Blight",
+      "count": 167
+    },
+    {
+      "split": "validation",
+      "label": "Corn_healthy",
+      "count": 187
+    },
+    {
+      "split": "validation",
+      "label": "Potato_Early_blight",
+      "count": 186
+    },
+    {
+      "split": "validation",
+      "label": "Potato_Late_blight",
+      "count": 242
+    },
+    {
+      "split": "validation",
+      "label": "Potato_healthy",
+      "count": 106
+    },
+    {
+      "split": "validation",
+      "label": "Tomato_Early_blight",
+      "count": 195
+    },
+    {
+      "split": "validation",
+      "label": "Tomato_Late_blight",
+      "count": 267
+    },
+    {
+      "split": "validation",
+      "label": "Tomato_Septoria_leaf_spot",
+      "count": 267
+    },
+    {
+      "split": "validation",
+      "label": "Tomato_healthy",
+      "count": 245
+    },
+    {
+      "split": "validation",
+      "label": "Unsupported",
+      "count": 546
+    }
+  ],
+  "scope": "Read-only export. Proposed labels are not applied to the locked training manifest. Blank original_label means original text is absent from this record."
+}

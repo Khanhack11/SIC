@@ -1,0 +1,101 @@
+{
+  "hardware": {
+    "os": "Windows-11-10.0.26300-SP0",
+    "cpu_architecture": "AMD64",
+    "python_bits": 64,
+    "cpu_identifier": "Intel64 Family 6 Model 154 Stepping 3, GenuineIntel",
+    "torch": "2.14.1+cpu",
+    "threads": 2,
+    "device": "cpu",
+    "runtime": "eager",
+    "native_libraries": {
+      "torch_python_binding": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.venv\\Lib\\site-packages\\torch\\_C.cp313-win_amd64.pyd",
+      "torch_cpu_dll": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.venv\\Lib\\site-packages\\torch\\lib\\torch_cpu.dll"
+    }
+  },
+  "warmup": 10,
+  "iterations": 50,
+  "fixtures": {
+    "sample_images\\demo\\Corn_Common_rust.jpg": "5820666c0ade81612cc480445ffa8a82a37582052157b5fa44bf7cb41bc5b3c7",
+    "sample_images\\demo\\Potato_healthy.jpg": "5f2d35e2dbf34479f95edfc0246f345daa3490be519623c8a143d12698d02d7e",
+    "sample_images\\demo\\Tomato_Early_blight.jpg": "f44d09bfa63e1c38cdd9f45152f45c4e0a4a13eaf5538da847d600c01d6db23f",
+    "sample_images\\demo\\uncertain.jpg": "29ecdca78fff35131c8a66f5e81ec47c98cfe418f1998ea6ca480637c59c90b9"
+  },
+  "scope": "Forward excludes preprocessing/transfer. Image pipeline includes decode, transform, device transfer, model and probabilities; excludes HTTP, advisory and network.",
+  "quality_claim": false,
+  "precision": "FP32; no autocast",
+  "results": [
+    {
+      "model": "baseline",
+      "weights": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\models\\mobilenetv2_crop_disease.pt",
+      "weights_sha256": "ea7f52fc69187c7e5ee701b943bf80046ce26ff90d12aecb559967815a62a423",
+      "temperature": 1.0312894582748413,
+      "parameter_count": 2237963,
+      "forward_only_by_batch": {
+        "1": {
+          "iterations": 50,
+          "mean_ms": 91.70742800008156,
+          "p50_ms": 82.1800500016252,
+          "p95_ms": 133.1489100000908,
+          "images_per_second": 10.904242129646365
+        },
+        "4": {
+          "iterations": 50,
+          "mean_ms": 272.8527659995598,
+          "p50_ms": 261.95779999761726,
+          "p95_ms": 330.8852449976257,
+          "images_per_second": 14.659921021311742
+        }
+      },
+      "image_pipeline": {
+        "iterations": 50,
+        "mean_ms": 103.73179999936838,
+        "p50_ms": 99.09159999733674,
+        "p95_ms": 163.11487500133802,
+        "images_per_second": 9.640245325021729
+      },
+      "fixture_predictions": [
+        "Corn_Common_rust",
+        "Potato_healthy",
+        "Tomato_Early_blight",
+        "Corn_Northern_Leaf_Blight"
+      ]
+    },
+    {
+      "model": "candidate",
+      "weights": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\models\\candidate\\mobilenetv3_field.pt",
+      "weights_sha256": "0eeb20ec4ef5f3f11cd477920ccc63f33e2b721bb37e394900467f64dc284577",
+      "temperature": 1.005058765411377,
+      "parameter_count": 3221052,
+      "forward_only_by_batch": {
+        "1": {
+          "iterations": 50,
+          "mean_ms": 81.3386560001527,
+          "p50_ms": 74.51070000388427,
+          "p95_ms": 110.69412500219185,
+          "images_per_second": 12.29427739742986
+        },
+        "4": {
+          "iterations": 50,
+          "mean_ms": 251.13700200003223,
+          "p50_ms": 242.57150000266847,
+          "p95_ms": 347.94231500090973,
+          "images_per_second": 15.927561323677372
+        }
+      },
+      "image_pipeline": {
+        "iterations": 50,
+        "mean_ms": 95.00793200015323,
+        "p50_ms": 91.23529999851598,
+        "p95_ms": 136.52345499831424,
+        "images_per_second": 10.525436970866677
+      },
+      "fixture_predictions": [
+        "Corn_Common_rust",
+        "Potato_healthy",
+        "Tomato_Early_blight",
+        "Corn_Gray_leaf_spot"
+      ]
+    }
+  ]
+}

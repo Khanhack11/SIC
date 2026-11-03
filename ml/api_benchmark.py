@@ -34,6 +34,7 @@ def measure(args):
                     candidate.bind(("127.0.0.1", 0))
                     port = candidate.getsockname()[1]
                 environment = {**os.environ, "SIC_INFERENCE_RUNTIME": "onnx" if runtime == "onnx_int8" else runtime,
+                               "SIC_DEVICE": args.device,
                                "SIC_TORCH_THREADS": str(threads),
                                "SIC_INFERENCE_CONCURRENCY": str(slots)}
                 environment.pop('SIC_FIELD_MODEL_PATH', None)
@@ -44,7 +45,7 @@ def measure(args):
                 if runtime in {"onnx", "onnx_int8"}:
                     graph_name = "mobilenetv2_crop_disease_int8.onnx" if runtime == "onnx_int8" else "mobilenetv2_crop_disease.onnx"
                     environment["SIC_ONNX_PATH"] = str((Path("models") / graph_name).resolve())
-                log_path = Path("artifacts") / f"api_{runtime}_{threads}_{slots}.log"
+                log_path = Path("artifacts/api_benchmark") / args.output.stem / f"api_{runtime}_{threads}_{slots}.log"
                 log_path.parent.mkdir(parents=True, exist_ok=True)
                 with log_path.open("wb") as log:
                     command = [sys.executable, "-m", "uvicorn", "backend.main:app", "--host", "127.0.0.1",
@@ -70,6 +71,8 @@ def measure(args):
                                     expected_runtime = 'onnx' if runtime == 'onnx_int8' else runtime
                                     if health['inference_runtime'] != expected_runtime:
                                         raise RuntimeError('Benchmark runtime differs from the loaded engine')
+                                    if health['device'].split(':')[0] != args.device:
+                                        raise RuntimeError('Benchmark device differs from the loaded engine')
                                     if args.field_weights and not health['model_architecture'].startswith('MobileNetV3'):
                                         raise RuntimeError('Benchmark did not load the field model')
                                     break
@@ -105,7 +108,7 @@ def measure(args):
                                 with ThreadPoolExecutor(max_workers=concurrency) as pool:
                                     values = list(pool.map(request, range(args.runs)))
                                 elapsed = time.perf_counter() - started
-                                row = {"runtime": runtime, "threads": threads, "inference_slots": slots,
+                                row = {"runtime": runtime, "device": health['device'], "threads": threads, "inference_slots": slots,
                                        "clients": concurrency, **summarize([value["http_ms"] for value in values], elapsed),
                                        "mean_server_inference_ms": sum(value["inference_ms"] for value in values) / len(values)}
                                 if all(value["processing_ms"] is not None for value in values):
@@ -123,7 +126,10 @@ def measure(args):
                                 print(json.dumps(row), flush=True)
                     finally:
                         if server.poll() is None:
-                            server.terminate()
+                            if os.name == 'nt':
+                                subprocess.run(['taskkill','/PID',str(server.pid),'/T','/F'],capture_output=True)
+                            else:
+                                server.terminate()
                             try:
                                 server.wait(timeout=5)
                             except subprocess.TimeoutExpired:
@@ -135,6 +141,7 @@ def measure(args):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--data", type=Path, default=Path("data/processed/plantvillage"))
+    parser.add_argument('--device',choices=['cpu','cuda'],default='cpu')
     parser.add_argument("--runtimes", nargs="+", choices=["eager", "torchscript", "onnx", "onnx_int8"], default=["eager", "torchscript", "onnx"])
     parser.add_argument("--threads", type=int, nargs="+", default=[2, 4])
     parser.add_argument("--slots", type=int, nargs="+", default=[1, 2])
@@ -142,9 +149,11 @@ def main():
     parser.add_argument("--runs", type=int, default=80)
     parser.add_argument("--warmup", type=int, default=10)
     parser.add_argument('--field-weights', type=Path, help='Benchmark V3 instead of the default V2')
-    parser.add_argument('--field-onnx', type=Path, default=Path('models/mobilenetv3_field_continued_20261103.onnx'))
+    parser.add_argument('--field-onnx', type=Path, default=Path('models/candidate/mobilenetv3_field.onnx'))
     parser.add_argument("--output", type=Path, default=Path("docs/data_optimization/results/optimization_20261017/api_benchmark.json"))
     args = parser.parse_args()
+    if args.device=='cuda' and args.runtimes!=['eager']:
+        parser.error('CUDA profile requires --runtimes eager')
     if min(args.runs, args.warmup, *args.threads, *args.slots, *args.concurrency) < 1:
         parser.error("All counts must be positive")
     if args.field_weights and any(r not in {'eager', 'onnx'} for r in args.runtimes):

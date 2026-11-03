@@ -200,8 +200,8 @@ def run(args):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--data", type=Path, default=Path("data/processed/plantvillage"))
-    parser.add_argument("--weights", type=Path, default=Path("models/mobilenetv2_head_v2_20261024.pt"))
-    parser.add_argument("--output", type=Path, default=Path("models/mobilenetv2_projection_20261024.pt"))
+    parser.add_argument("--weights", type=Path, required=True)
+    parser.add_argument("--output", type=Path, default=Path("artifacts/training_runs/projection/model.pt"))
     parser.add_argument("--epochs", type=int, default=8)
     parser.add_argument("--batch-size", type=int, default=32)
     parser.add_argument("--lr", type=float, default=.0001)

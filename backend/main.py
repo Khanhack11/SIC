@@ -19,7 +19,7 @@ from functools import partial
 from threading import BoundedSemaphore
 from pydantic import BaseModel
 
-from backend.config import (CONFIDENCE_THRESHOLD, CLASS_NAMES, TORCH_NUM_THREADS, INFERENCE_RUNTIME,
+from backend.config import (CONFIDENCE_THRESHOLD, CLASS_NAMES, TORCH_NUM_THREADS, INFERENCE_RUNTIME, INFERENCE_DEVICE,
                             INFERENCE_CONCURRENCY, MAX_FILE_SIZE_BYTES, SAMPLE_IMAGES_DIR, FRONTEND_DIR)
 from backend.inference_engine import (
     CropDiseaseInferenceEngine,
@@ -66,9 +66,9 @@ torch.set_num_threads(TORCH_NUM_THREADS)
 field_model_path = os.environ.get('SIC_FIELD_MODEL_PATH')
 if field_model_path:
     from backend.field_inference import FieldInferenceEngine
-    inference_engine = FieldInferenceEngine(field_model_path, onnx_path=os.environ.get('SIC_FIELD_ONNX_PATH'))
+    inference_engine = FieldInferenceEngine(field_model_path, onnx_path=os.environ.get('SIC_FIELD_ONNX_PATH'), device=INFERENCE_DEVICE)
 else:
-    inference_engine = CropDiseaseInferenceEngine(runtime=INFERENCE_RUNTIME)
+    inference_engine = CropDiseaseInferenceEngine(runtime=INFERENCE_RUNTIME, device=INFERENCE_DEVICE)
 advisory_engine = AdvisoryKnowledgeBase()
 inference_slots = BoundedSemaphore(INFERENCE_CONCURRENCY)
 app.mount("/demo", StaticFiles(directory=SAMPLE_IMAGES_DIR / "demo", check_dir=False), name="demo")

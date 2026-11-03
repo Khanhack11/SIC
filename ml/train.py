@@ -218,7 +218,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--data", type=Path, default=Path("data/processed/plantvillage"))
     parser.add_argument("--source", type=Path, help="Override raw-data path after moving the project")
-    parser.add_argument("--output", type=Path, default=Path("models/mobilenetv2_crop_disease.pt"))
+    parser.add_argument("--output", type=Path, default=Path("artifacts/training_runs/baseline/model.pt"))
     parser.add_argument("--epochs", type=int, default=80)
     parser.add_argument("--patience", type=int, default=12)
     parser.add_argument("--views", type=int, default=2)

@@ -27,11 +27,11 @@ create_notebook.py
 # Reproducible local data and model artifacts (keep manifests/reports in docs)
 data/raw/
 data/processed/
-models/*.pt
-models/*.pth
-models/*.onnx
-models/*.json
-models/*.partial
+models/**/*.pt
+models/**/*.pth
+models/**/*.onnx
+models/**/*.json
+models/**/*.partial
 models/*_search/
 artifacts/
 .chart-data-*/

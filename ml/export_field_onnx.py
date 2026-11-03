@@ -28,6 +28,6 @@ def export(weights, output):
 
 if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--weights',type=Path,default=Path('models/mobilenetv3_field_continued_20261103.pt'))
-    parser.add_argument('--output',type=Path,default=Path('models/mobilenetv3_field_continued_20261103.onnx'))
+    parser.add_argument('--weights',type=Path,default=Path('models/candidate/mobilenetv3_field.pt'))
+    parser.add_argument('--output',type=Path,default=Path('models/candidate/mobilenetv3_field.onnx'))
     args=parser.parse_args();torch.set_num_threads(2);export(args.weights,args.output)

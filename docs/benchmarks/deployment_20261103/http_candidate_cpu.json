@@ -1,0 +1,63 @@
+{
+  "scope": "Real localhost HTTP multipart upload, validation, inference, advisory and JSON response",
+  "load": "Closed-loop clients; client wall latency includes server queueing, excludes client executor queue",
+  "checkpoint_sha256": "0eeb20ec4ef5f3f11cd477920ccc63f33e2b721bb37e394900467f64dc284577",
+  "model_family": "field_v3",
+  "validation_manifest_sha256": "75c87109a18776fa9d0c140a28b42cb73e953c443ce1f9e4b13c7e92724745a6",
+  "warmup": 10,
+  "images": 11,
+  "results": [
+    {
+      "runtime": "onnx",
+      "device": "cpu",
+      "threads": 2,
+      "inference_slots": 2,
+      "clients": 1,
+      "count": 80,
+      "mean_ms": 48.09943249965727,
+      "p50_ms": 46.186300001863856,
+      "p95_ms": 61.42689999942375,
+      "max_ms": 82.23390000057407,
+      "throughput_requests_per_second": 20.608437851801927,
+      "mean_under_200ms": true,
+      "p95_under_200ms": true,
+      "mean_server_inference_ms": 40.541125,
+      "mean_server_processing_ms": 43.052625
+    },
+    {
+      "runtime": "onnx",
+      "device": "cpu",
+      "threads": 2,
+      "inference_slots": 2,
+      "clients": 4,
+      "count": 80,
+      "mean_ms": 142.10006874945975,
+      "p50_ms": 126.8336499997531,
+      "p95_ms": 245.96405499796668,
+      "max_ms": 285.26370000327006,
+      "throughput_requests_per_second": 27.21907044288761,
+      "mean_under_200ms": true,
+      "p95_under_200ms": false,
+      "mean_server_inference_ms": 69.03775,
+      "mean_server_processing_ms": 135.137875
+    },
+    {
+      "runtime": "onnx",
+      "device": "cpu",
+      "threads": 2,
+      "inference_slots": 2,
+      "clients": 8,
+      "count": 80,
+      "mean_ms": 245.93116750029367,
+      "p50_ms": 246.61340000238852,
+      "p95_ms": 338.5092099979374,
+      "max_ms": 368.5350000014296,
+      "throughput_requests_per_second": 30.986759009233577,
+      "mean_under_200ms": false,
+      "p95_under_200ms": false,
+      "mean_server_inference_ms": 57.977250000000005,
+      "mean_server_processing_ms": 236.08874999999998
+    }
+  ],
+  "custom_threshold_isolation": true
+}

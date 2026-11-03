@@ -19,11 +19,14 @@ def field_onnx_contract(checkpoint, weights_path):
 
 
 class FieldInferenceEngine:
-    def __init__(self,path,onnx_path=None):
-        self.runtime='onnx' if onnx_path else 'eager';self.device=torch.device('cpu');self.calibrated=False
+    def __init__(self,path,onnx_path=None,device='cpu'):
+        self.runtime='onnx' if onnx_path else 'eager';self.device=torch.device(device);self.calibrated=False
         self.weights_loaded=False;self.load_error=None;self.temperature=1.
         self.model=None
         try:
+            if self.device.type not in {'cpu','cuda'}:raise ValueError('Field device must be cpu or cuda')
+            if self.device.type=='cuda' and not torch.cuda.is_available():raise ValueError('CUDA is unavailable; use .venv-gpu with an NVIDIA GPU')
+            if onnx_path and self.device.type!='cpu':raise ValueError('This ONNX profile uses CPU; choose PyTorch eager for CUDA')
             checkpoint=torch.load(Path(path),map_location='cpu',weights_only=True)
             for key,value in {'architecture':FIELD_ARCHITECTURE,'class_names':FIELD_CLASSES,
                               'preprocessing':FIELD_PREPROCESSING}.items():
@@ -46,7 +49,7 @@ class FieldInferenceEngine:
                     len(outputs[0].shape)!=2 or outputs[0].shape[1]!=len(FIELD_CLASSES)):
                     raise ValueError('Field ONNX input/output mismatch')
             else:
-                self.model=build_field_model().eval().to(memory_format=torch.channels_last)
+                self.model=build_field_model().eval().to(device=self.device,memory_format=torch.channels_last if self.device.type=='cpu' else torch.contiguous_format)
                 self.model.load_state_dict(checkpoint['state_dict'])
             self.weights_loaded=True
         except Exception as error:self.load_error=str(error)
@@ -55,7 +58,7 @@ class FieldInferenceEngine:
         if not self.weights_loaded:raise ModelNotReadyError(self.load_error or 'Field checkpoint unavailable')
         if self.runtime=='onnx':
             return torch.from_numpy(self.session.run(['logits'],{'images':images.detach().cpu().contiguous().numpy()})[0])
-        return self.model(images.to('cpu',memory_format=torch.channels_last))
+        return self.model(images.to(self.device,memory_format=torch.channels_last if self.device.type=='cpu' else torch.contiguous_format))
 
     def predict(self,image_bytes):
         if not self.weights_loaded:raise ModelNotReadyError(self.load_error or 'Field checkpoint unavailable')

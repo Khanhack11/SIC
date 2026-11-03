@@ -74,8 +74,8 @@ def compare(args):
 
 if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--data',type=Path,default=Path('data/processed/field_mobile_v1'))
-    parser.add_argument('--weights',type=Path,default=Path('models/mobilenetv3_field_continued_20261103.pt'))
-    parser.add_argument('--onnx',type=Path,default=Path('models/mobilenetv3_field_continued_20261103.onnx'))
+    parser.add_argument('--data',type=Path,default=Path('data/processed/field_mobile_v2'))
+    parser.add_argument('--weights',type=Path,default=Path('models/candidate/mobilenetv3_field.pt'))
+    parser.add_argument('--onnx',type=Path,default=Path('models/candidate/mobilenetv3_field.onnx'))
     parser.add_argument('--output',type=Path,default=Path('docs/final_release/villite_adaptation/runtime_validation.json'))
     compare(parser.parse_args())

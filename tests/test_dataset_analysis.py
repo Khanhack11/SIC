@@ -9,15 +9,30 @@ import unittest
 import numpy as np
 from PIL import Image
 
-from ml.analyze_recommended_datasets import audit_boxes, candidates, hashes, inspect_image, map_label
+from ml.analyze_recommended_datasets import (
+    audit_boxes,
+    candidates,
+    hashes,
+    inspect_image,
+    map_label,
+    multi_source_candidates,
+)
 
 
 class DatasetAnalysisTests(unittest.TestCase):
     def test_ambiguous_labels_are_not_direct_training_candidates(self):
         self.assertEqual(map_label("corn northern leaf blight"), ("Corn_Northern_Leaf_Blight", "direct_name_candidate"))
         self.assertEqual(map_label("Corn leaf blight"), ("", "ambiguous_corn_blight"))
+        self.assertEqual(map_label("Corn Corn_Leaf_Blight"), ("", "ambiguous_corn_blight"))
         self.assertEqual(map_label("Corn rust leaf"), ("Corn_Common_rust", "review_rust_species"))
         self.assertEqual(map_label("Potato leaf")[1], "review_generic_healthy_label")
+        self.assertEqual(map_label("Potato Phytophthora"), ("Potato_Late_blight", "direct_name_candidate"))
+        self.assertEqual(map_label("Potato LateBlight"), ("Potato_Late_blight", "direct_name_candidate"))
+        self.assertEqual(map_label("Potato Fungi"), ("", "ambiguous_broad_fungal_label"))
+        self.assertEqual(
+            map_label("unlabeled_field_potato_mixed_stages"),
+            ("", "unlabeled_corpus_no_per_image_ground_truth"),
+        )
         self.assertEqual(map_label("tomato leaf mold"), ("", "outside_current_11_classes"))
 
     def test_hashes_group_rotations_and_pixel_hash_includes_shape(self):

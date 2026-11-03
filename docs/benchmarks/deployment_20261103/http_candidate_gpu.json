@@ -1,0 +1,63 @@
+{
+  "scope": "Real localhost HTTP multipart upload, validation, inference, advisory and JSON response",
+  "load": "Closed-loop clients; client wall latency includes server queueing, excludes client executor queue",
+  "checkpoint_sha256": "0eeb20ec4ef5f3f11cd477920ccc63f33e2b721bb37e394900467f64dc284577",
+  "model_family": "field_v3",
+  "validation_manifest_sha256": "75c87109a18776fa9d0c140a28b42cb73e953c443ce1f9e4b13c7e92724745a6",
+  "warmup": 10,
+  "images": 11,
+  "results": [
+    {
+      "runtime": "eager",
+      "device": "cuda",
+      "threads": 2,
+      "inference_slots": 2,
+      "clients": 1,
+      "count": 80,
+      "mean_ms": 64.65531374924467,
+      "p50_ms": 64.55774999994901,
+      "p95_ms": 87.25202499954321,
+      "max_ms": 100.19449999526842,
+      "throughput_requests_per_second": 15.30986408993034,
+      "mean_under_200ms": true,
+      "p95_under_200ms": true,
+      "mean_server_inference_ms": 57.708000000000006,
+      "mean_server_processing_ms": 60.144625
+    },
+    {
+      "runtime": "eager",
+      "device": "cuda",
+      "threads": 2,
+      "inference_slots": 2,
+      "clients": 4,
+      "count": 80,
+      "mean_ms": 189.6799587505484,
+      "p50_ms": 171.56959999920218,
+      "p95_ms": 316.664889999447,
+      "max_ms": 469.9285000024247,
+      "throughput_requests_per_second": 20.62028657301037,
+      "mean_under_200ms": true,
+      "p95_under_200ms": false,
+      "mean_server_inference_ms": 91.95750000000001,
+      "mean_server_processing_ms": 183.24200000000002
+    },
+    {
+      "runtime": "eager",
+      "device": "cuda",
+      "threads": 2,
+      "inference_slots": 2,
+      "clients": 8,
+      "count": 80,
+      "mean_ms": 334.91093624988935,
+      "p50_ms": 333.94520000365446,
+      "p95_ms": 424.7545300066122,
+      "max_ms": 440.3096999958507,
+      "throughput_requests_per_second": 22.643454634857427,
+      "mean_under_200ms": false,
+      "p95_under_200ms": false,
+      "mean_server_inference_ms": 83.46975,
+      "mean_server_processing_ms": 327.11725
+    }
+  ],
+  "custom_threshold_isolation": true
+}

@@ -18,20 +18,27 @@ from ml.train_field import FieldDataset, domain_metrics, logits_for, validation_
 from ml.train_gpu import atomic_save, cpu_state, train_mode
 
 
-def save_progress(path, model, optimizer, scaler, progress, config):
-    atomic_save({'model': cpu_state(model), 'optimizer': optimizer.state_dict(),
-                 'scaler': scaler.state_dict(), 'progress': progress, 'config': config,
-                 'torch_rng': torch.get_rng_state(), 'python_rng': random.getstate(),
-                 'cuda_rng': torch.cuda.get_rng_state_all() if torch.cuda.is_available() else []}, path)
+def save_progress(path, model, optimizer, scaler, progress, config, scheduler=None):
+    payload = {'model': cpu_state(model), 'optimizer': optimizer.state_dict(),
+               'scaler': scaler.state_dict(), 'progress': progress, 'config': config,
+               'torch_rng': torch.get_rng_state(), 'python_rng': random.getstate(),
+               'cuda_rng': torch.cuda.get_rng_state_all() if torch.cuda.is_available() else []}
+    if scheduler is not None:
+        payload['scheduler'] = scheduler.state_dict()
+    atomic_save(payload, path)
 
 
-def restore_progress(path, model, optimizer, scaler, config):
+def restore_progress(path, model, optimizer, scaler, config, scheduler=None):
     saved = torch.load(path, map_location='cpu', weights_only=True)
     if saved['config'] != config:
         raise ValueError('Recovery configuration changed; preserve checkpoint and choose a new output')
+    if (scheduler is not None) != ('scheduler' in saved):
+        raise ValueError('Recovery scheduler state mismatch; preserve checkpoint and choose a new output')
     model.load_state_dict(saved['model'])
     optimizer.load_state_dict(saved['optimizer'])
     scaler.load_state_dict(saved['scaler'])
+    if scheduler is not None:
+        scheduler.load_state_dict(saved['scheduler'])
     torch.set_rng_state(saved['torch_rng'])
     random.setstate(saved['python_rng'])
     if saved['cuda_rng']:
@@ -39,6 +46,16 @@ def restore_progress(path, model, optimizer, scaler, config):
             raise RuntimeError('CUDA recovery requires the original GPU environment')
         torch.cuda.set_rng_state_all(saved['cuda_rng'])
     return saved['progress']
+
+
+def build_cosine_scheduler(optimizer, epochs, min_ratio=0.2):
+    if epochs < 1 or not (math.isfinite(min_ratio) and 0.0 < min_ratio <= 1.0):
+        raise ValueError('Cosine scheduler requires positive epochs and min_ratio in (0, 1]')
+    def lr_lambda(completed_epochs):
+        step = min(max(completed_epochs, 0), epochs)
+        cosine = 0.5 * (1.0 + math.cos(math.pi * step / epochs))
+        return min_ratio + (1.0 - min_ratio) * cosine
+    return torch.optim.lr_scheduler.LambdaLR(optimizer, lr_lambda=lr_lambda)
 
 
 def validate_parent_manifest(source, digest, audit, records, expanded=False):
@@ -130,14 +147,19 @@ def train(args):
     train_rows = [r for r in records if r['split'] == 'train']
     val_rows = [r for r in records if r['split'] == 'validation']
     samples = args.samples_per_epoch if args.samples_per_epoch is not None else len(train_rows)
+    label_smoothing = getattr(args, 'label_smoothing', .05)
+    cosine_lr = bool(getattr(args, 'cosine_lr', False))
     if min(args.epochs, args.batch_size, samples) < 1 or not 0 <= args.min_village_f1 <= 1:
         raise ValueError('Positive training counts and a valid minimum village F1 are required')
+    if not (math.isfinite(label_smoothing) and 0. <= label_smoothing < 1.):
+        raise ValueError('Label smoothing must be finite and in [0, 1)')
     config = {'parent_sha256': hashlib.sha256(args.source.read_bytes()).hexdigest(),
               'records_sha256': digest, 'epochs': args.epochs, 'batch_size': args.batch_size,
               'seed': 42, 'backbone_lr': args.backbone_lr, 'top_backbone_lr': args.top_backbone_lr,
               'head_lr': args.head_lr, 'expanded_data': expanded, 'unfreeze_blocks': args.unfreeze_blocks,
               'samples_per_epoch': samples, 'min_village_f1': args.min_village_f1,
               'balanced_calibration': args.balanced_calibration,
+              'label_smoothing': label_smoothing, 'cosine_lr': cosine_lr,
               'script_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
               'dataset_sampler_sha256': hashlib.sha256(Path('ml/train_field.py').read_bytes()).hexdigest(),
               'transform_sha256': hashlib.sha256(Path('backend/mobile_model.py').read_bytes()).hexdigest()}
@@ -145,10 +167,11 @@ def train(args):
     model.load_state_dict(source['state_dict'])
     optimizer = torch.optim.AdamW(finetuning_groups(model, args.unfreeze_blocks, args.backbone_lr,
                                  args.head_lr, args.top_backbone_lr), weight_decay=.0001)
+    scheduler = build_cosine_scheduler(optimizer, args.epochs) if cosine_lr else None
     scaler = torch.amp.GradScaler('cuda')
     recovery = args.output.with_suffix('.progress.pt')
     if recovery.exists():
-        progress = restore_progress(recovery, model, optimizer, scaler, config)
+        progress = restore_progress(recovery, model, optimizer, scaler, config, scheduler=scheduler)
         print('Recovered batch boundary:', progress['epoch'], progress['next_sample'], flush=True)
     else:
         logits, targets = logits_for(model, val_rows, 'cuda', args.batch_size)
@@ -160,7 +183,7 @@ def train(args):
         progress = {'epoch': 0, 'next_sample': 0, 'order': [], 'history': [],
                     'best_loss': validation_loss(logits, targets, val_rows),
                     'best_state': cpu_state(model), 'selected_stage': 'parent', 'active_seconds': 0.}
-        save_progress(recovery, model, optimizer, scaler, progress, config)
+        save_progress(recovery, model, optimizer, scaler, progress, config, scheduler=scheduler)
     dataset = FieldDataset(train_rows, training=True)
     weights = weights_for(train_rows)
     started = time.perf_counter()
@@ -176,7 +199,7 @@ def train(args):
         for images, labels in loader:
             optimizer.zero_grad(set_to_none=True)
             with torch.autocast('cuda', dtype=torch.float16):
-                loss = nn.functional.cross_entropy(model(images.to('cuda')), labels.to('cuda'), label_smoothing=.05)
+                loss = nn.functional.cross_entropy(model(images.to('cuda')), labels.to('cuda'), label_smoothing=label_smoothing)
             if not torch.isfinite(loss): raise RuntimeError('Nonfinite loss')
             scaler.scale(loss).backward(); scaler.unscale_(optimizer)
             nn.utils.clip_grad_norm_([p for p in model.parameters() if p.requires_grad], 5.)
@@ -185,13 +208,14 @@ def train(args):
             batch = (progress['next_sample'] + args.batch_size - 1) // args.batch_size
             if batch % 50 == 0 or progress['next_sample'] == samples or PAUSE_FILE.exists():
                 progress['active_seconds'] += time.perf_counter() - started; started = time.perf_counter()
-                save_progress(recovery, model, optimizer, scaler, progress, config)
+                save_progress(recovery, model, optimizer, scaler, progress, config, scheduler=scheduler)
                 print(f"Epoch {progress['epoch']+1}/{args.epochs}, batch {batch}, loss {float(loss.detach()):.4f}", flush=True)
             check_pause()
         logits, targets = logits_for(model, val_rows, 'cuda', args.batch_size)
         value = validation_loss(logits, targets, val_rows)
         metrics = domain_metrics(logits, targets, val_rows)
         progress['history'].append({'epoch': progress['epoch'] + 1, 'validation_loss': value,
+                                    'lrs': [g['lr'] for g in optimizer.param_groups],
                                     'known_f1': {d: m['known_macro_f1_present'] for d, m in metrics.items()}})
         village = metrics.get('PlantVillage', {}).get('known_macro_f1_present', 0.)
         if value < progress['best_loss'] and village >= args.min_village_f1:
@@ -199,8 +223,10 @@ def train(args):
             progress['selected_stage'] = f"continued/{progress['epoch']+1}"
         print(progress['history'][-1], flush=True)
         progress['epoch'] += 1; progress['next_sample'] = 0; progress['order'] = []
+        if scheduler is not None:
+            scheduler.step()
         progress['active_seconds'] += time.perf_counter() - started; started = time.perf_counter()
-        save_progress(recovery, model, optimizer, scaler, progress, config)
+        save_progress(recovery, model, optimizer, scaler, progress, config, scheduler=scheduler)
     model.load_state_dict(progress['best_state'])
     logits, targets = logits_for(model, val_rows, 'cuda', args.batch_size)
     temperature, calibration = calibrate_balanced(logits, targets, val_rows) if args.balanced_calibration else calibrate(logits, targets)
@@ -220,9 +246,9 @@ def train(args):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--source', type=Path, default=Path('models/mobilenetv3_field_20261103.pt'))
-    parser.add_argument('--output', type=Path, default=Path('models/mobilenetv3_field_continued_20261103.pt'))
-    parser.add_argument('--data', type=Path, default=Path('data/processed/field_mobile_v1'))
+    parser.add_argument('--source', type=Path, default=Path('models/candidate/mobilenetv3_field.pt'))
+    parser.add_argument('--output', type=Path, default=Path('artifacts/training_runs/continued/model.pt'))
+    parser.add_argument('--data', type=Path, default=Path('data/processed/field_mobile_v2'))
     parser.add_argument('--epochs', type=int, default=2)
     parser.add_argument('--batch-size', type=int, default=32)
     parser.add_argument('--expanded-data', action='store_true', help='Require parent-bound expansion audit and preserved holdouts')
@@ -233,4 +259,6 @@ if __name__ == '__main__':
     parser.add_argument('--head-lr', type=float, default=1e-4)
     parser.add_argument('--min-village-f1', type=float, default=0.)
     parser.add_argument('--balanced-calibration', action='store_true')
+    parser.add_argument('--label-smoothing', type=float, default=.05)
+    parser.add_argument('--cosine-lr', action='store_true')
     train(parser.parse_args())

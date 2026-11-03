@@ -1,5 +1,33 @@
 {
   "datasets": {
+    "maize_field_bd": {
+      "images": 994,
+      "source_labels": 7,
+      "status": {
+        "valid": 994
+      },
+      "bytes": 423648138,
+      "dimensions": {
+        "min_width": 843,
+        "max_width": 1920,
+        "min_height": 794,
+        "max_height": 1920
+      },
+      "official_splits": {
+        "unspecified": 994
+      },
+      "candidate_target_labels": [
+        "Corn_Common_rust",
+        "Corn_Gray_leaf_spot",
+        "Corn_healthy"
+      ],
+      "direct_name_target_counts": {
+        "Corn_Common_rust": 135,
+        "Corn_Gray_leaf_spot": 100,
+        "Corn_healthy": 114
+      },
+      "hash_verified_image_blobs": 0
+    },
     "plantdoc_classification": {
       "images": 2578,
       "source_labels": 28,
@@ -187,6 +215,108 @@
         "Tomato_Septoria_leaf_spot": 130
       },
       "hash_verified_image_blobs": 0
+    },
+    "potato_field_indonesia": {
+      "images": 1096,
+      "source_labels": 7,
+      "status": {
+        "valid": 1096
+      },
+      "bytes": 285335365,
+      "dimensions": {
+        "min_width": 1500,
+        "max_width": 1500,
+        "min_height": 1500,
+        "max_height": 1500
+      },
+      "official_splits": {
+        "unspecified": 1096
+      },
+      "candidate_target_labels": [
+        "Potato_Late_blight",
+        "Potato_healthy"
+      ],
+      "direct_name_target_counts": {
+        "Potato_healthy": 201,
+        "Potato_Late_blight": 347
+      },
+      "hash_verified_image_blobs": 0
+    },
+    "potato_holeta_v2": {
+      "images": 430,
+      "source_labels": 2,
+      "status": {
+        "valid": 430
+      },
+      "bytes": 5322366,
+      "dimensions": {
+        "min_width": 256,
+        "max_width": 256,
+        "min_height": 256,
+        "max_height": 256
+      },
+      "official_splits": {
+        "unspecified": 430
+      },
+      "candidate_target_labels": [
+        "Potato_Late_blight",
+        "Potato_healthy"
+      ],
+      "direct_name_target_counts": {
+        "Potato_healthy": 363,
+        "Potato_Late_blight": 67
+      },
+      "hash_verified_image_blobs": 0
+    },
+    "potato_late_blight_iitkgp": {
+      "images": 1561,
+      "source_labels": 1,
+      "status": {
+        "valid": 1561
+      },
+      "bytes": 146387137,
+      "dimensions": {
+        "min_width": 640,
+        "max_width": 640,
+        "min_height": 640,
+        "max_height": 640
+      },
+      "official_splits": {
+        "unspecified": 1561
+      },
+      "candidate_target_labels": [],
+      "direct_name_target_counts": {},
+      "hash_verified_image_blobs": 0
+    },
+    "tomato_field_pakistan": {
+      "images": 191,
+      "source_labels": 6,
+      "status": {
+        "valid": 191
+      },
+      "bytes": 474313843,
+      "dimensions": {
+        "min_width": 225,
+        "max_width": 4080,
+        "min_height": 300,
+        "max_height": 4080
+      },
+      "official_splits": {
+        "unspecified": 191
+      },
+      "candidate_target_labels": [
+        "Tomato_Early_blight",
+        "Tomato_Late_blight",
+        "Tomato_Septoria_leaf_spot",
+        "Tomato_healthy"
+      ],
+      "direct_name_target_counts": {
+        "Tomato_Early_blight": 56,
+        "Tomato_healthy": 66,
+        "Tomato_Late_blight": 13,
+        "Tomato_Septoria_leaf_spot": 12
+      },
+      "hash_verified_image_blobs": 0
     }
   },
   "detection": {
@@ -234,6 +364,23 @@
     "images_without_csv_boxes": 25,
     "note": "Geometry checks do not verify disease identity or complete leaf coverage."
   },
+  "maize_field_bd_detection": {
+    "csv_files": {
+      "Bacterial Leaf Streak.csv": 142,
+      "Common Rust.csv": 0,
+      "Corn Leaf Blight.csv": 200,
+      "Eyespot.csv": 100,
+      "Gray Leaf Spot.csv": 100,
+      "labels_healthy-leaf_2026-07-28-09-14-11.csv": 100,
+      "Maize Streak Disease.csv": 100
+    },
+    "total_boxes": 742,
+    "status_counts": {
+      "valid_geometry": 741,
+      "unmatched_resized_filename_or_heic": 1
+    },
+    "note": "Common Rust.csv has 0 bounding-box rows (header only) in upstream Mendeley v1; other 6 CSVs annotate original 3000x4000 full-res coordinates while resized folders are ~1080x1916."
+  },
   "segmentation": {
     "mask_counts": {
       "valid_mask": 7745,
@@ -269,12 +416,14 @@
     "note": "Masks cover diseased parts, not the entire leaf. Missing COCO categories must be reconstructed from Metadata.csv."
   },
   "duplicates": {
-    "exact_file_duplicate_groups": 10132,
-    "exact_pixel_duplicate_groups": 10113,
-    "duplicate_or_similarity_groups": 9651,
-    "pairs": 13823,
-    "label_conflict_groups": 47,
+    "exact_file_duplicate_groups": 10218,
+    "exact_pixel_duplicate_groups": 10199,
+    "duplicate_or_similarity_groups": 9864,
+    "pairs": 16890,
+    "label_conflict_groups": 50,
     "pair_counts": {
+      "maize_field_bd / maize_field_bd: exact_oriented_rgb_pixels": 34,
+      "maize_field_bd / maize_field_bd: perceptual_review_candidate": 2935,
       "plantdoc_classification / plantdoc_classification: exact_oriented_rgb_pixels": 16,
       "plantdoc_classification / plantdoc_classification: perceptual_review_candidate": 56,
       "plantdoc_classification / plantdoc_detection: exact_oriented_rgb_pixels": 2488,
@@ -282,10 +431,13 @@
       "plantdoc_classification / plantseg: perceptual_review_candidate": 120,
       "plantdoc_classification / plantwild_v2: exact_oriented_rgb_pixels": 90,
       "plantdoc_classification / plantwild_v2: perceptual_review_candidate": 160,
+      "plantdoc_classification / tomato_field_pakistan: exact_oriented_rgb_pixels": 10,
+      "plantdoc_classification / tomato_field_pakistan: perceptual_review_candidate": 1,
       "plantdoc_detection / plantdoc_detection: perceptual_review_candidate": 56,
       "plantdoc_detection / plantseg: perceptual_review_candidate": 121,
       "plantdoc_detection / plantwild_v2: exact_oriented_rgb_pixels": 90,
       "plantdoc_detection / plantwild_v2: perceptual_review_candidate": 162,
+      "plantdoc_detection / tomato_field_pakistan: perceptual_review_candidate": 1,
       "plantseg / plantseg: perceptual_review_candidate": 480,
       "plantseg / plantwild_v2: exact_oriented_rgb_pixels": 7774,
       "plantseg / plantwild_v2: perceptual_review_candidate": 1026,
@@ -293,7 +445,15 @@
       "plantvillage / plantvillage: perceptual_review_candidate": 3,
       "plantvillage / plantwild_v2: perceptual_review_candidate": 3,
       "plantwild_v2 / plantwild_v2: exact_oriented_rgb_pixels": 404,
-      "plantwild_v2 / plantwild_v2: perceptual_review_candidate": 652
+      "plantwild_v2 / plantwild_v2: perceptual_review_candidate": 652,
+      "plantwild_v2 / tomato_field_pakistan: exact_oriented_rgb_pixels": 1,
+      "potato_field_indonesia / potato_field_indonesia: exact_oriented_rgb_pixels": 43,
+      "potato_field_indonesia / potato_field_indonesia: perceptual_review_candidate": 9,
+      "potato_holeta_v2 / potato_holeta_v2: exact_oriented_rgb_pixels": 1,
+      "potato_holeta_v2 / potato_holeta_v2: perceptual_review_candidate": 11,
+      "potato_late_blight_iitkgp / potato_late_blight_iitkgp: exact_oriented_rgb_pixels": 17,
+      "potato_late_blight_iitkgp / potato_late_blight_iitkgp: perceptual_review_candidate": 1,
+      "tomato_field_pakistan / tomato_field_pakistan: exact_oriented_rgb_pixels": 3
     },
     "method": "Dimension-aware EXIF-oriented RGB SHA256; canonical rotations/reflections of <=256px grayscale, pHash <=3 and dHash <=4.",
     "limitations": [
@@ -310,6 +470,36 @@
     "exclude_duplicate_within_new_source": 2,
     "review_rust_species": 177,
     "review_image_quality": 1
+  },
+  "multi_source_candidate_counts": {
+    "maize_field_bd": {
+      "holdout_safe_candidate": 123,
+      "exclude_duplicate_within_new_sources": 226
+    },
+    "plantwild_v2": {
+      "holdout_safe_candidate": 639,
+      "exclude_overlap_with_protected_holdout": 227,
+      "exclude_overlap_with_existing_train": 40,
+      "review_conflicting_labels": 51,
+      "exclude_duplicate_within_new_sources": 2,
+      "review_rust_species": 177,
+      "review_image_quality": 1
+    },
+    "potato_field_indonesia": {
+      "holdout_safe_candidate": 506,
+      "exclude_duplicate_within_new_sources": 42
+    },
+    "potato_holeta_v2": {
+      "holdout_safe_candidate": 418,
+      "exclude_duplicate_within_new_sources": 12
+    },
+    "tomato_field_pakistan": {
+      "holdout_safe_candidate": 126,
+      "review_conflicting_labels": 6,
+      "exclude_overlap_with_protected_holdout": 2,
+      "project_label": 12,
+      "exclude_overlap_with_existing_train": 1
+    }
   },
   "training_started": false,
   "existing_splits_modified": false,

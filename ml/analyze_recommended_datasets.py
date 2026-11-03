@@ -28,6 +28,8 @@ DIRECT_MAPPING = {
     "corn healthy": "Corn_healthy",
     "potato early blight": "Potato_Early_blight",
     "potato late blight": "Potato_Late_blight",
+    "potato lateblight": "Potato_Late_blight",
+    "potato phytophthora": "Potato_Late_blight",
     "potato healthy": "Potato_healthy",
     "tomato early blight": "Tomato_Early_blight",
     "tomato late blight": "Tomato_Late_blight",
@@ -47,8 +49,12 @@ def map_label(label):
         return normalized[key], "direct_name_candidate"
     if key in {"corn rust", "corn common rust rust"}:
         return "Corn_Common_rust", "review_rust_species"
-    if key == "corn blight":
+    if key in {"corn blight", "corn corn blight"}:
         return "", "ambiguous_corn_blight"
+    if key == "potato fungi":
+        return "", "ambiguous_broad_fungal_label"
+    if key == "unlabeled field potato mixed stages":
+        return "", "unlabeled_corpus_no_per_image_ground_truth"
     if key in {"potato", "tomato", "corn"}:
         return {"potato": "Potato_healthy", "tomato": "Tomato_healthy", "corn": "Corn_healthy"}[key], "review_generic_healthy_label"
     return "", "outside_current_11_classes"
@@ -143,7 +149,7 @@ def scan(root, name, records):
     temporary = output.with_suffix(".jsonl.partial")
     iterator = iter(tasks())
     try:
-        with temporary.open("w", encoding="utf-8") as stream, ThreadPoolExecutor(max_workers=2) as pool:
+        with temporary.open("w", encoding="utf-8") as stream, ThreadPoolExecutor(max_workers=8) as pool:
             while True:
                 batch = []
                 for _ in range(24):
@@ -433,6 +439,128 @@ def duplicate_audit(root, records):
                             "Pair counts are graph edges, not independent sample counts; exact pairs use a star per group."]}
 
 
+def additional_records(root, name):
+    base = root / name / "original"
+    records = []
+    if name == "potato_holeta_v2":
+        for path in sorted(base.rglob("*")):
+            if path.is_file() and path.suffix.lower() in {".jpg", ".jpeg", ".png"}:
+                rel = path.relative_to(base).as_posix()
+                records.append(record(name, path, f"Potato {path.parent.name}", "unspecified", rel))
+    elif name == "potato_late_blight_iitkgp":
+        for member, path in archive_records(root, name):
+            if path.suffix.lower() in {".jpg", ".jpeg", ".png"}:
+                records.append(record(name, path, "unlabeled_field_potato_mixed_stages", "unspecified", member))
+    elif name == "potato_field_indonesia":
+        for path in sorted(base.rglob("*")):
+            if path.is_file() and path.suffix.lower() in {".jpg", ".jpeg", ".png"}:
+                rel = path.relative_to(base).as_posix()
+                records.append(record(name, path, f"Potato {path.parent.name}", "unspecified", rel))
+    elif name == "maize_field_bd":
+        for path in sorted(base.rglob("*")):
+            if path.is_file() and path.parent.name != "annotations" and path.suffix.lower() in {".jpg", ".jpeg", ".png"}:
+                rel = path.relative_to(base).as_posix()
+                records.append(record(name, path, f"Corn {path.parent.name}", "unspecified", rel))
+    elif name == "tomato_field_pakistan":
+        for path in sorted(base.rglob("*")):
+            if path.is_file() and path.suffix.lower() in {".jpg", ".jpeg", ".png"}:
+                rel = path.relative_to(base).as_posix()
+                records.append(record(name, path, path.parent.name, "unspecified", rel))
+    return records
+
+
+def audit_maize_bd_boxes(root, records):
+    ann_dir = root / "maize_field_bd/original/annotations"
+    if not ann_dir.exists():
+        return {}
+    by_name = {Path(r["path"]).name: r for r in records if r["dataset"] == "maize_field_bd"}
+    csv_summary = {}
+    all_boxes = []
+    status_counts = Counter()
+    for csv_path in sorted(ann_dir.glob("*.csv")):
+        with csv_path.open(encoding="utf-8-sig", newline="") as stream:
+            rows = list(csv.DictReader(stream))
+        csv_summary[csv_path.name] = len(rows)
+        for row in rows:
+            fname = row.get("image_name", "")
+            img = by_name.get(fname)
+            errors = []
+            try:
+                x = float(row["bbox_x"])
+                y = float(row["bbox_y"])
+                w = float(row["bbox_width"])
+                h = float(row["bbox_height"])
+                iw = float(row["image_width"])
+                ih = float(row["image_height"])
+                if not (0 <= x and 0 <= y and w > 0 and h > 0 and x + w <= iw + 1 and y + h <= ih + 1):
+                    errors.append("invalid_or_outside_image_box")
+                if not img:
+                    errors.append("unmatched_resized_filename_or_heic")
+            except (KeyError, ValueError) as err:
+                errors.append(str(err))
+            status = ";".join(errors) if errors else "valid_geometry"
+            status_counts[status] += 1
+            all_boxes.append(dict(row, csv_file=csv_path.name, status=status))
+    write_csv(root / "analysis/maize_field_bd_boxes.csv", all_boxes)
+    return {
+        "csv_files": csv_summary,
+        "total_boxes": len(all_boxes),
+        "status_counts": dict(status_counts),
+        "note": (
+            "Common Rust.csv has 0 bounding-box rows (header only) in upstream Mendeley v1; "
+            "other 6 CSVs annotate original 3000x4000 full-res coordinates while resized folders are ~1080x1916."
+        ),
+    }
+
+
+def multi_source_candidates(root, records):
+    new_sources = {"plantwild_v2", "potato_holeta_v2", "potato_field_indonesia", "maize_field_bd", "tomato_field_pakistan"}
+    selected = []
+    seen = set()
+    by_source = defaultdict(Counter)
+    for row in sorted(records, key=lambda r: r["id"]):
+        if row["dataset"] not in new_sources or not row["target_label"]:
+            continue
+        status = "needs_visual_label_review"
+        if row["mapping_status"] not in {"direct_name_candidate", "project_label"}:
+            status = row["mapping_status"]
+        elif row["status"] != "valid" or min(row.get("width", 0), row.get("height", 0)) < 64:
+            status = "review_image_quality"
+        elif row.get("group_label_conflict"):
+            status = "review_conflicting_labels"
+        elif row.get("group_protected_holdout"):
+            status = "exclude_overlap_with_protected_holdout"
+        elif row.get("group_previous_train"):
+            status = "exclude_overlap_with_existing_train"
+        elif row["duplicate_group"] in seen:
+            status = "exclude_duplicate_within_new_sources"
+        else:
+            seen.add(row["duplicate_group"])
+            status = "holdout_safe_candidate"
+        selected.append(
+            {
+                key: row.get(key)
+                for key in (
+                    "id",
+                    "dataset",
+                    "path",
+                    "source_label",
+                    "target_label",
+                    "mapping_status",
+                    "status",
+                    "sha256",
+                    "duplicate_group",
+                    "group_protected_holdout",
+                    "group_previous_train",
+                )
+            }
+            | {"selection_status": status}
+        )
+        by_source[row["dataset"]][status] += 1
+    write_csv(root / "analysis/multi_source_candidates.csv", selected)
+    return {k: dict(v) for k, v in sorted(by_source.items())}
+
+
 def candidates(root, records):
     selected = []
     seen = set()
@@ -440,7 +568,7 @@ def candidates(root, records):
         if row["dataset"] != "plantwild_v2" or not row["target_label"]:
             continue
         status = "needs_visual_label_review"
-        if row["mapping_status"] != "direct_name_candidate":
+        if row["mapping_status"] not in {"direct_name_candidate", "project_label"}:
             status = row["mapping_status"]
         elif row["status"] != "valid" or min(row.get("width", 0), row.get("height", 0)) < 64:
             status = "review_image_quality"
@@ -471,17 +599,25 @@ def analyze(root):
         else:
             source = classification_records(root, name)
         records.extend(scan(root, name, source))
+    for extra in ("potato_holeta_v2", "potato_late_blight_iitkgp", "potato_field_indonesia", "maize_field_bd", "tomato_field_pakistan"):
+        if (root / extra / "original").exists():
+            source = additional_records(root, extra)
+            if source:
+                records.extend(scan(root, extra, source))
     detector = audit_boxes([r for r in records if r["dataset"] == "plantdoc_detection"], boxes)
     write_csv(root / "analysis/detection_boxes.csv", boxes)
+    maize_bd_boxes = audit_maize_bd_boxes(root, records)
     segmentation = audit_masks(root, [r for r in records if r["dataset"] == "plantseg"])
     duplicates = duplicate_audit(root, records)
     candidate_counts = candidates(root, records)
+    multi_source_counts = multi_source_candidates(root, records)
     class_counts = Counter((r["dataset"], r["source_label"], r["target_label"], r["mapping_status"]) for r in records)
     write_csv(root / "analysis/class_counts.csv", [dict(dataset=dataset, source_label=label, target_label=target,
                mapping_status=status, images=count) for (dataset, label, target, status), count in sorted(class_counts.items())])
     write_csv(root / "analysis/image_inventory.csv", records)
-    summary = {"datasets": {}, "detection": detector, "segmentation": segmentation,
+    summary = {"datasets": {}, "detection": detector, "maize_field_bd_detection": maize_bd_boxes, "segmentation": segmentation,
                "duplicates": duplicates, "plantwild_candidate_counts": candidate_counts,
+               "multi_source_candidate_counts": multi_source_counts,
                "training_started": False, "existing_splits_modified": False, "serving_model_changed": False}
     for name in sorted({r["dataset"] for r in records}):
         subset = [r for r in records if r["dataset"] == name]

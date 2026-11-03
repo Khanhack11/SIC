@@ -1,0 +1,104 @@
+{
+  "hardware": {
+    "os": "Windows-11-10.0.26300-SP0",
+    "cpu_architecture": "AMD64",
+    "python_bits": 64,
+    "cpu_identifier": "Intel64 Family 6 Model 154 Stepping 3, GenuineIntel",
+    "torch": "2.14.1+cpu",
+    "threads": 2,
+    "device": "cpu",
+    "runtime": "onnx",
+    "native_libraries": {
+      "torch_python_binding": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.venv\\Lib\\site-packages\\torch\\_C.cp313-win_amd64.pyd",
+      "torch_cpu_dll": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.venv\\Lib\\site-packages\\torch\\lib\\torch_cpu.dll",
+      "onnxruntime_binding": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.venv\\Lib\\site-packages\\onnxruntime\\capi\\onnxruntime_pybind11_state.pyd"
+    }
+  },
+  "warmup": 10,
+  "iterations": 50,
+  "fixtures": {
+    "sample_images\\demo\\Corn_Common_rust.jpg": "5820666c0ade81612cc480445ffa8a82a37582052157b5fa44bf7cb41bc5b3c7",
+    "sample_images\\demo\\Potato_healthy.jpg": "5f2d35e2dbf34479f95edfc0246f345daa3490be519623c8a143d12698d02d7e",
+    "sample_images\\demo\\Tomato_Early_blight.jpg": "f44d09bfa63e1c38cdd9f45152f45c4e0a4a13eaf5538da847d600c01d6db23f",
+    "sample_images\\demo\\uncertain.jpg": "29ecdca78fff35131c8a66f5e81ec47c98cfe418f1998ea6ca480637c59c90b9"
+  },
+  "scope": "Forward excludes preprocessing/transfer. Image pipeline includes decode, transform, device transfer, model and probabilities; excludes HTTP, advisory and network.",
+  "quality_claim": false,
+  "precision": "FP32; no autocast",
+  "results": [
+    {
+      "model": "baseline",
+      "weights": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\models\\mobilenetv2_crop_disease.pt",
+      "weights_sha256": "ea7f52fc69187c7e5ee701b943bf80046ce26ff90d12aecb559967815a62a423",
+      "temperature": 1.0312894582748413,
+      "parameter_count": null,
+      "forward_only_by_batch": {
+        "1": {
+          "iterations": 50,
+          "mean_ms": 31.69932999968296,
+          "p50_ms": 29.33965000192984,
+          "p95_ms": 44.4439799975953,
+          "images_per_second": 31.546408078972064
+        },
+        "4": {
+          "iterations": 50,
+          "mean_ms": 124.85135999988415,
+          "p50_ms": 115.77909999687108,
+          "p95_ms": 168.53638000211504,
+          "images_per_second": 32.03809714210331
+        }
+      },
+      "image_pipeline": {
+        "iterations": 50,
+        "mean_ms": 44.26594400007161,
+        "p50_ms": 42.82905000218307,
+        "p95_ms": 56.13545499691099,
+        "images_per_second": 22.590730246222293
+      },
+      "fixture_predictions": [
+        "Corn_Common_rust",
+        "Potato_healthy",
+        "Tomato_Early_blight",
+        "Corn_Northern_Leaf_Blight"
+      ],
+      "onnx_sha256": "4702d60484f036d56264331909111795e94cd0ee982c164addcf63cdb563b750"
+    },
+    {
+      "model": "candidate",
+      "weights": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\models\\candidate\\mobilenetv3_field.pt",
+      "weights_sha256": "0eeb20ec4ef5f3f11cd477920ccc63f33e2b721bb37e394900467f64dc284577",
+      "temperature": 1.005058765411377,
+      "parameter_count": null,
+      "forward_only_by_batch": {
+        "1": {
+          "iterations": 50,
+          "mean_ms": 31.112955999706173,
+          "p50_ms": 29.158900000766153,
+          "p95_ms": 45.1824600018881,
+          "images_per_second": 32.14095118475544
+        },
+        "4": {
+          "iterations": 50,
+          "mean_ms": 119.1770799997903,
+          "p50_ms": 111.86264999923878,
+          "p95_ms": 164.7048149978218,
+          "images_per_second": 33.563500632898865
+        }
+      },
+      "image_pipeline": {
+        "iterations": 50,
+        "mean_ms": 41.805637999641476,
+        "p50_ms": 38.59404999820981,
+        "p95_ms": 64.6096749966091,
+        "images_per_second": 23.920218608039804
+      },
+      "fixture_predictions": [
+        "Corn_Common_rust",
+        "Potato_healthy",
+        "Tomato_Early_blight",
+        "Corn_Gray_leaf_spot"
+      ],
+      "onnx_sha256": "e34cfcfce80820895f42121cd76584874674bb601b63daf3ba5079a62405c4ec"
+    }
+  ]
+}

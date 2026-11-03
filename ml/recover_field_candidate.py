@@ -59,8 +59,8 @@ def recover(source, output, data):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--source', type=Path, default=Path('models/mobilenetv3_field_20261103.resume.pt'))
-    parser.add_argument('--output', type=Path, default=Path('models/mobilenetv3_field_20261103.pt'))
+    parser.add_argument('--source', type=Path, required=True)
+    parser.add_argument('--output', type=Path, default=Path('artifacts/training_runs/recovered/model.pt'))
     parser.add_argument('--data', type=Path, default=Path('data/processed/field_mobile_v1'))
     args = parser.parse_args()
     recover(args.source, args.output, args.data)

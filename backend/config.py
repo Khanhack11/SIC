@@ -19,13 +19,19 @@ KNOWLEDGE_BASE_PATH = DATA_DIR / "advisory_knowledge_base.json"
 
 # Model configuration
 MODEL_WEIGHTS_PATH = MODELS_DIR / "mobilenetv2_crop_disease.pt"
+FIELD_MODEL_WEIGHTS_PATH = MODELS_DIR / "candidate" / "mobilenetv3_field.pt"
+FIELD_ONNX_MODEL_PATH = FIELD_MODEL_WEIGHTS_PATH.with_suffix('.onnx')
 MODEL_INPUT_SIZE = (224, 224)
 
 # CPU runtime settings can be selected from ml.benchmark results.
 TORCH_NUM_THREADS = int(os.environ.get("SIC_TORCH_THREADS", "2"))
 INFERENCE_CONCURRENCY = int(os.environ.get("SIC_INFERENCE_CONCURRENCY", "2"))
+INFERENCE_DEVICE = os.environ.get("SIC_DEVICE", "cpu")
+if INFERENCE_DEVICE not in {"cpu", "cuda"}:
+    raise ValueError("SIC_DEVICE must be cpu or cuda")
 ONNX_MODEL_PATH = Path(os.environ.get("SIC_ONNX_PATH", str(MODELS_DIR / "mobilenetv2_crop_disease.onnx")))
 INFERENCE_RUNTIME = os.environ.get("SIC_INFERENCE_RUNTIME",
+                                   "eager" if INFERENCE_DEVICE == "cuda" else
                                    "onnx" if ONNX_MODEL_PATH.is_file() and find_spec("onnxruntime") else "torchscript")
 if TORCH_NUM_THREADS < 1:
     raise ValueError("SIC_TORCH_THREADS must be a positive integer")

@@ -172,7 +172,7 @@ def main():
     parser.add_argument("--cache", type=Path, default=Path("artifacts/features_f96fe288aaf4be0d.pt"))
     parser.add_argument("--data", type=Path, default=Path("data/processed/plantvillage"))
     parser.add_argument("--weights", type=Path, default=Path("models/mobilenetv2_crop_disease.pt"))
-    parser.add_argument("--output", type=Path, default=Path("models/mobilenetv2_head_20261024.pt"))
+    parser.add_argument("--output", type=Path, default=Path("artifacts/training_runs/head/model.pt"))
     parser.add_argument("--report", type=Path, default=Path("docs/data_optimization/results/optimization_20261024/head_search.json"))
     optimize(parser.parse_args())
 
