@@ -8,6 +8,8 @@ Luồng điện thoại và ảnh thực địa được ghi trong [các phase](
 
 Lượt tiếp tục ngày 03/11 đã hoàn tất thêm hai epoch và sửa lỗi camera ghi đè ảnh mới, crop sát mép ảnh rộng lẻ. [Kết quả lượt tiếp tục](docs/final_release/mobile_field/continuation_20261103/README.md). Mở `run_field_demo.cmd` để thử V3 riêng tại port 8003; V2 mặc định vẫn ở port 8000. Weights nằm trong gói `Reports/SIC_mobile_field_20261103.zip`, không lưu trong Git.
 
+[Đối chiếu ViLLite và pipeline áp dụng cho SIC](docs/final_release/villite_adaptation/README.md): V3 có thêm runtime ONNX FP32 tùy chọn, kiểm tra hợp đồng/checksum và đối chứng trên validation trước khi đo HTTP. `run_field_demo.cmd onnx` dùng graph đã export, vẫn là bản V3 thử nghiệm, không đổi cổng kiểm định bệnh lá.
+
 Samsung Innovation Campus, Group 5. Chuẩn bị báo cáo **04–05/11/2026**, thời lượng 20 phút.
 
 | Thành viên | Phạm vi công việc |

@@ -1,0 +1,36 @@
+{
+  "passed": true,
+  "results": [
+    {
+      "engine": "chromium",
+      "passed": true,
+      "viewports": [
+        360,
+        390,
+        412,
+        844
+      ],
+      "touch_controls": true,
+      "crop": true,
+      "restore": true,
+      "damage_review": true,
+      "page_errors": []
+    },
+    {
+      "engine": "webkit",
+      "passed": true,
+      "viewports": [
+        360,
+        390,
+        412,
+        844
+      ],
+      "touch_controls": true,
+      "crop": true,
+      "restore": true,
+      "damage_review": true,
+      "page_errors": []
+    }
+  ],
+  "limitation": "Desktop Windows engines with mobile viewport/touch emulation. Physical Android/iPhone and physical camera not tested."
+}

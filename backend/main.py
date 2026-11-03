@@ -66,7 +66,7 @@ torch.set_num_threads(TORCH_NUM_THREADS)
 field_model_path = os.environ.get('SIC_FIELD_MODEL_PATH')
 if field_model_path:
     from backend.field_inference import FieldInferenceEngine
-    inference_engine = FieldInferenceEngine(field_model_path)
+    inference_engine = FieldInferenceEngine(field_model_path, onnx_path=os.environ.get('SIC_FIELD_ONNX_PATH'))
 else:
     inference_engine = CropDiseaseInferenceEngine(runtime=INFERENCE_RUNTIME)
 advisory_engine = AdvisoryKnowledgeBase()

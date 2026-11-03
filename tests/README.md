@@ -29,6 +29,7 @@ Có thể mở `run_tests.cmd` để chạy cả browser và giữ cửa sổ xe
 | `frontend_async.cjs` | Callback camera đến chậm sau khi chọn file khác/đóng camera và crop sát mép ảnh rộng lẻ; không cần chạy model |
 | `test_field_recovery.py` | Khôi phục optimizer, RNG và vị trí lấy mẫu; kiểm tra bước train tiếp theo khớp với trạng thái đã lưu |
 | `test_field_release.py` | Không dùng test hoặc manifest khác để quyết định phát hành; trường hợp F1 tăng vẫn trượt cổng độ chính xác |
+| `test_field_onnx.py` | Export V3, đối chiếu batch 1/4 và ảnh thật qua preprocessing, từ chối graph không khớp checkpoint; cần dependencies ONNX |
 | `run_all.py` | Chạy các bộ test, giữ log và mã thoát |
 | `fixtures/` | Ảnh nhân tạo và file lỗi để kiểm tra API; không dùng đo chất lượng model |
 

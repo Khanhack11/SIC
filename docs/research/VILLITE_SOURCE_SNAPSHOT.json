@@ -1,0 +1,153 @@
+{
+  "repository": "https://github.com/cyberbount/ViLLite",
+  "revision": "09e2691320429a32e7f3ea9e0fb701d45139fdf2",
+  "inspected_on": "2026-11-03",
+  "method": "GitHub connector pinned source reads; local readable cache, not a full git clone",
+  "cached_text_files": [
+    {
+      "path": ".gitignore",
+      "remote_git_blob_sha1": "be52bffb1b7f0d9d87f7299d6b66e20b18d95ed5"
+    },
+    {
+      "path": "CITATION.cff",
+      "remote_git_blob_sha1": "dae3770c0f7f6aeced1bae0eaa25bfbe519c032f"
+    },
+    {
+      "path": "LICENSE",
+      "remote_git_blob_sha1": "5505670c0c7ebfcfc510c577b67a107000db3131"
+    },
+    {
+      "path": "README.md",
+      "remote_git_blob_sha1": "cc634180415655836f3df1da7033660ab2e22a1d"
+    },
+    {
+      "path": "app.py",
+      "remote_git_blob_sha1": "9b5888f2ab306846e94aaedd3c92bab3e67f5d1d"
+    },
+    {
+      "path": "configs/dictionaries/vietnamese_dict.txt",
+      "remote_git_blob_sha1": "acf0c22ae17ec7ece61663a85bdcb8ad91306c8e"
+    },
+    {
+      "path": "configs/vn_ppocrv6_det.yaml",
+      "remote_git_blob_sha1": "68c954d7429e9552e35807e39a1271f74eedd683"
+    },
+    {
+      "path": "configs/vn_ppocrv6_det.yml",
+      "remote_git_blob_sha1": "3449a45b6119e389b57cea454b1b9f1f7e440a62"
+    },
+    {
+      "path": "configs/vn_ppocrv6_det_unseen.yml",
+      "remote_git_blob_sha1": "2fdee7ab1f6b96fbec77edffc023f84bd68ba635"
+    },
+    {
+      "path": "configs/vn_ppocrv6_medium_rec.yml",
+      "remote_git_blob_sha1": "01d54c800470996217ff70860eab154b1f896004"
+    },
+    {
+      "path": "configs/vn_ppocrv6_medium_rec_bmod.yml",
+      "remote_git_blob_sha1": "1172cca46ae1a6a53ff5d0ce92edaebcdd001277"
+    },
+    {
+      "path": "configs/vn_ppocrv6_medium_rec_dryrun.yml",
+      "remote_git_blob_sha1": "76e4c23ab2a7ad90ad683302266ce5b735bfa0ff"
+    },
+    {
+      "path": "configs/vn_ppocrv6_medium_rec_unseen_eval.yml",
+      "remote_git_blob_sha1": "20b1945fca7079198340e53029f720cf8e6048dd"
+    },
+    {
+      "path": "configs/vn_ppocrv6_medium_rec_vintext.yml",
+      "remote_git_blob_sha1": "db3544335f64dd5aff4e17f2dc58c30840f1fe96"
+    },
+    {
+      "path": "ocr_api.py",
+      "remote_git_blob_sha1": "172d50435b52e97f58d16865e59ce3ae11262379"
+    },
+    {
+      "path": "requirements.txt",
+      "remote_git_blob_sha1": "ec95eaa947d3cacd53785b3b956d3d53589178de"
+    },
+    {
+      "path": "scripts/audit_vn_ocr.py",
+      "remote_git_blob_sha1": "cebbef5b50fc8b43a99bf88d70baa5e97fbeacd0"
+    },
+    {
+      "path": "scripts/convert_vn_det.py",
+      "remote_git_blob_sha1": "57ec689a82504a45835e671a535f32744bd7954d"
+    },
+    {
+      "path": "scripts/download_models.sh",
+      "remote_git_blob_sha1": "8220cf013edf61dce9d8227a05dc7ee644b35317"
+    },
+    {
+      "path": "scripts/start.sh",
+      "remote_git_blob_sha1": "de83fbaec9768d366519b878b1cde45cd26063ff"
+    },
+    {
+      "path": "services/camera_service.py",
+      "remote_git_blob_sha1": "095585dc68ee5e056f6a27a66c109a6ced447f64"
+    },
+    {
+      "path": "services/ocr_service.py",
+      "remote_git_blob_sha1": "70e7de8bd4372af858e620bf8baff6e87f812c9a"
+    },
+    {
+      "path": "src/dataset/audit_rec_dataset.py",
+      "remote_git_blob_sha1": "852ad56f7ccf78f5537f02ea358f42f083c24503"
+    },
+    {
+      "path": "src/dataset/build_rec_dataset.py",
+      "remote_git_blob_sha1": "81d7eb9a756aba20eedba5b4cd69834e934b3606"
+    },
+    {
+      "path": "src/dataset/convert_vintext_det.py",
+      "remote_git_blob_sha1": "1a6d19a7a51566abd2da71312545bffda58d65e6"
+    },
+    {
+      "path": "src/dataset/convert_vintext_rec.py",
+      "remote_git_blob_sha1": "32c05fb8cea35cff1676a099154902c0f6fb69f1"
+    },
+    {
+      "path": "src/pipeline/__init__.py",
+      "remote_git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "src/pipeline/run_pipeline.py",
+      "remote_git_blob_sha1": "9f364edddc84580c4466f164394c29a22e4ce1a8"
+    },
+    {
+      "path": "static/css/style.css",
+      "remote_git_blob_sha1": "23f3fb1981d24426fd427d00191a510fc3b6ad5c"
+    },
+    {
+      "path": "static/js/app.js",
+      "remote_git_blob_sha1": "720152d2ef4d739d8c32b0ee70aa988fc0d4233d"
+    },
+    {
+      "path": "templates/index.html",
+      "remote_git_blob_sha1": "ba8445c386e68606a16b0505236ac9b97098387f"
+    },
+    {
+      "path": "tools/benchmark_onnx_rec.py",
+      "remote_git_blob_sha1": "f053aa91d36da97ac7dad116684a2deadcaff925"
+    },
+    {
+      "path": "tools/eval_onnx_rec.py",
+      "remote_git_blob_sha1": "4fdcbcbeb41f59c2e7e805d1d95c0f751a05b2cc"
+    },
+    {
+      "path": "tools/eval_onnx_rec_metrics.py",
+      "remote_git_blob_sha1": "d8b1825d365fd18255ec9d6b351c5521fe70a81e"
+    },
+    {
+      "path": "tools/evaluation/evaluate_e2e.py",
+      "remote_git_blob_sha1": "d54db2f82020be97649986de67af18ce8ba71ac7"
+    },
+    {
+      "path": "tools/test_onnx_rec.py",
+      "remote_git_blob_sha1": "2ecee72a0206abed07cd43b9fbb561eb248c3328"
+    }
+  ],
+  "license": "MIT; cited as research source; no OCR runtime code or weights imported into SIC"
+}

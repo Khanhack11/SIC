@@ -2,6 +2,8 @@
 
 [Kết quả V3 và sửa lỗi camera/crop ngày 03/11](mobile_field/continuation_20261103/README.md). Gói bàn giao mới là `Reports/SIC_mobile_field_20261103.zip`. Toàn bộ mã test nằm trong `tests/`, mở `run_tests.cmd` ở thư mục project để chạy chung. Báo cáo Word đã cập nhật ngày 03/11 và giữ 11 trang. Slide/video giữ bản 31/10 cho kết quả baseline; dùng kịch bản và hồ sơ mới khi giải thích V3.
 
+[Bổ sung sau khi đọc ViLLite](villite_adaptation/README.md): V3 có runtime ONNX FP32 tùy chọn, đã kiểm tra khớp nhãn trên 2.145 validation images và đo HTTP riêng. Regression mới có 39 unit/integration test. Đây là hồ sơ tối ưu runtime, không có lượt train mới hay thay đổi kết luận cổng kiểm định thực địa trong báo cáo Word.
+
 Bản demo dùng checkpoint MobileNetV2 baseline, cùng ONNX FP32 đã kiểm tra. Frontend và API chạy chung tại `/app`. Có camera, upload, validation phía client/server, trạng thái model chưa sẵn sàng, panel tham khảo và nguồn cho 11 record. Các hướng dẫn thuốc/công thức sinh học chưa duyệt bị ẩn tại API.
 
 ## Tài liệu bàn giao

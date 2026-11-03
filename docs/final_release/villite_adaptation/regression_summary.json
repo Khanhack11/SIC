@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "exit_codes": {
+    "unit_integration": 0,
+    "backend": 0,
+    "stress_edge": 0,
+    "browser": 0,
+    "frontend_async": 0,
+    "mobile_browsers": 0
+  },
+  "browser_requested": true,
+  "mobile_requested": true,
+  "unit_integration_count": 39,
+  "onnx_checks_skipped": false,
+  "validation_images_compared": 2145,
+  "physical_phones_tested": false,
+  "log_directory": "tests/results/20261103_130319_635040"
+}

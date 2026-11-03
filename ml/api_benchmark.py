@@ -20,6 +20,8 @@ from ml.runtime import check_pause
 
 
 def measure(args):
+    if args.output.exists():
+        raise ValueError('Preserve existing benchmark evidence; choose a new output')
     dataset = ManifestDataset(args.data / "validation.csv")
     selected = [next(row for row in dataset.rows if row["label"] == label) for label in CLASS_NAMES]
     images = [(dataset.source_root / row["path"]).read_bytes() for row in selected]
@@ -34,6 +36,11 @@ def measure(args):
                 environment = {**os.environ, "SIC_INFERENCE_RUNTIME": "onnx" if runtime == "onnx_int8" else runtime,
                                "SIC_TORCH_THREADS": str(threads),
                                "SIC_INFERENCE_CONCURRENCY": str(slots)}
+                environment.pop('SIC_FIELD_MODEL_PATH', None)
+                environment.pop('SIC_FIELD_ONNX_PATH', None)
+                if args.field_weights:
+                    environment['SIC_FIELD_MODEL_PATH'] = str(args.field_weights.resolve())
+                    if runtime == 'onnx': environment['SIC_FIELD_ONNX_PATH'] = str(args.field_onnx.resolve())
                 if runtime in {"onnx", "onnx_int8"}:
                     graph_name = "mobilenetv2_crop_disease_int8.onnx" if runtime == "onnx_int8" else "mobilenetv2_crop_disease.onnx"
                     environment["SIC_ONNX_PATH"] = str((Path("models") / graph_name).resolve())
@@ -60,6 +67,11 @@ def measure(args):
                                     health = client.get("/api/health").json()
                                     if not health["weights_loaded"]:
                                         raise RuntimeError(f"Model not ready; inspect {log_path}")
+                                    expected_runtime = 'onnx' if runtime == 'onnx_int8' else runtime
+                                    if health['inference_runtime'] != expected_runtime:
+                                        raise RuntimeError('Benchmark runtime differs from the loaded engine')
+                                    if args.field_weights and not health['model_architecture'].startswith('MobileNetV3'):
+                                        raise RuntimeError('Benchmark did not load the field model')
                                     break
                                 except httpx.ConnectError:
                                     if time.monotonic() > deadline:
@@ -102,7 +114,8 @@ def measure(args):
                                 args.output.parent.mkdir(parents=True, exist_ok=True)
                                 report = {"scope": "Real localhost HTTP multipart upload, validation, inference, advisory and JSON response",
                                           "load": "Closed-loop clients; client wall latency includes server queueing, excludes client executor queue",
-                                          "checkpoint_sha256": hashlib.sha256(Path("models/mobilenetv2_crop_disease.pt").read_bytes()).hexdigest(),
+                                          "checkpoint_sha256": hashlib.sha256((args.field_weights or Path("models/mobilenetv2_crop_disease.pt")).read_bytes()).hexdigest(),
+                                          "model_family": 'field_v3' if args.field_weights else 'baseline_v2',
                                           "validation_manifest_sha256": hashlib.sha256(dataset.manifest.read_bytes()).hexdigest(),
                                           "warmup": args.warmup, "images": len(images), "results": results,
                                           "custom_threshold_isolation": True}
@@ -128,10 +141,14 @@ def main():
     parser.add_argument("--concurrency", type=int, nargs="+", default=[1, 4, 8])
     parser.add_argument("--runs", type=int, default=80)
     parser.add_argument("--warmup", type=int, default=10)
+    parser.add_argument('--field-weights', type=Path, help='Benchmark V3 instead of the default V2')
+    parser.add_argument('--field-onnx', type=Path, default=Path('models/mobilenetv3_field_continued_20261103.onnx'))
     parser.add_argument("--output", type=Path, default=Path("docs/data_optimization/results/optimization_20261017/api_benchmark.json"))
     args = parser.parse_args()
     if min(args.runs, args.warmup, *args.threads, *args.slots, *args.concurrency) < 1:
         parser.error("All counts must be positive")
+    if args.field_weights and any(r not in {'eager', 'onnx'} for r in args.runtimes):
+        parser.error('Field model supports eager and onnx only; provide --runtimes explicitly')
     measure(args)
 
 

@@ -1,0 +1,30 @@
+{
+  "passed": true,
+  "checks": [
+    "simulated camera capture and stream cleanup",
+    "camera permission denied",
+    "corrupt image",
+    "oversize image",
+    "disease inference",
+    "duplicate submission prevention",
+    "sources",
+    "unreviewed treatments withheld",
+    "uncertain guidance",
+    "healthy leaf",
+    "mobile overflow",
+    "model not ready",
+    "offline server",
+    "slow sample does not replace newer local file",
+    "HTTP 400 recovery",
+    "HTTP 500 recovery",
+    "HTTP 503 recovery",
+    "network failure recovery",
+    "successful retry",
+    "manual crop dimensions",
+    "restore original",
+    "preview/upload pixel parity",
+    "healthy/damage conflict",
+    "readable result typography"
+  ],
+  "page_errors": []
+}

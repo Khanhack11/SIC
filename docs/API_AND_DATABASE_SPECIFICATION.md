@@ -6,6 +6,8 @@
 
 Hai mép được tính riêng từ tọa độ ảnh gốc, làm tròn pixel theo `floor(value + 0.5)` cho tọa độ không âm, thống nhất với JavaScript. Mép phải/dưới được chặn trong kích thước ảnh. Ảnh rộng 97 px, chọn nửa phải, bắt đầu tại pixel 49 và cho vùng rộng 48 px.
 
+V3 thử nghiệm có thể dùng ONNX FP32 bằng `SIC_FIELD_MODEL_PATH` cùng `SIC_FIELD_ONNX_PATH`; engine đối chiếu graph với hash checkpoint và hợp đồng preprocessing. `/api/health` trả `inference_runtime` thực tế. Shape JSON của `/api/diagnose` không đổi, ngưỡng và chính sách review giữ nguyên. [Pipeline học từ ViLLite và hồ sơ đo](final_release/villite_adaptation/README.md).
+
 `field_photo=true` là mặc định cho ảnh người dùng. Dự đoán lớp khỏe trên ảnh thực địa trả `UNCERTAIN`, `review_reason=field_healthy_unverified`, giữ nguyên score. `visible_damage=true` chuyển trường hợp khỏe sang `visible_damage_conflict`. Chỉ các ảnh validation minh họa có nguồn xác định dùng `field_photo=false`. Các lớp không có trong kho tri thức trả `unsupported_class`. Đây là quy tắc thận trọng, không phải bộ phát hiện sâu bệnh hoặc OOD hoàn chỉnh.
 
 `diagnostic_confirmation=false` nêu rõ kết quả không xác nhận chẩn đoán. Giá trị cũ `CONFIRMED` chỉ có nghĩa đã qua cổng score/phạm vi để hiển thị thông tin tham khảo, không xác nhận sức khỏe cây. Cổng score trong hồ sơ đánh giá được đo trước chính sách yêu cầu xem lại ảnh khỏe thực địa; không gọi đó là tỷ lệ API chấp nhận cuối cùng.

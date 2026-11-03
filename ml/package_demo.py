@@ -10,7 +10,7 @@ from backend.config import BASE_DIR, MODEL_WEIGHTS_PATH, ONNX_MODEL_PATH
 
 def package(output):
     files = []
-    for folder in ['backend', 'ml', 'tests', 'sample_images/demo', 'docs/final_release', 'docs/data_optimization']:
+    for folder in ['backend', 'ml', 'tests', 'sample_images/demo', 'docs/final_release', 'docs/data_optimization', 'docs/research']:
         files.extend(p for p in (BASE_DIR / folder).rglob('*')
                      if p.is_file() and '__pycache__' not in p.parts and 'node_modules' not in p.parts
                      and not p.is_relative_to(BASE_DIR / 'tests/results'))
@@ -26,7 +26,8 @@ def package(output):
                  'mobilenetv2_gpu_20261031.pt', 'mobilenetv2_gpu_20261031.json',
                  'mobilenetv2_gpu_20261103.pt', 'mobilenetv2_gpu_20261103.json',
                  'mobilenetv3_field_20261103.pt', 'mobilenetv3_field_20261103.json',
-                 'mobilenetv3_field_continued_20261103.pt', 'mobilenetv3_field_continued_20261103.json']:
+                 'mobilenetv3_field_continued_20261103.pt', 'mobilenetv3_field_continued_20261103.json',
+                 'mobilenetv3_field_continued_20261103.onnx']:
         candidate = BASE_DIR / 'models' / name
         if candidate.is_file():
             files.append(candidate)
