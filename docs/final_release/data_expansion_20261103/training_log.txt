@@ -1,0 +1,33 @@
+Epoch 1/4, batch 50, loss 0.9189
+Epoch 1/4, batch 100, loss 0.9236
+Epoch 1/4, batch 150, loss 0.6068
+Epoch 1/4, batch 200, loss 0.6104
+Epoch 1/4, batch 250, loss 0.4842
+Epoch 1/4, batch 300, loss 0.5714
+Epoch 1/4, batch 324, loss 0.3442
+{'epoch': 1, 'validation_loss': 0.7592556998133659, 'known_f1': {'FieldSupplement': 0.6211659084115713, 'PlantDoc': 0.4593560096454546, 'PlantVillage': 0.9758308449067695}}
+Epoch 2/4, batch 50, loss 0.5728
+Epoch 2/4, batch 100, loss 0.6953
+Epoch 2/4, batch 150, loss 0.5546
+Epoch 2/4, batch 200, loss 0.4510
+Epoch 2/4, batch 250, loss 0.4440
+Epoch 2/4, batch 300, loss 0.6436
+Epoch 2/4, batch 324, loss 0.4220
+{'epoch': 2, 'validation_loss': 0.7621603906154633, 'known_f1': {'FieldSupplement': 0.6720555124496012, 'PlantDoc': 0.47828792375652923, 'PlantVillage': 0.976891967495716}}
+Epoch 3/4, batch 50, loss 0.4651
+Epoch 3/4, batch 100, loss 0.5473
+Epoch 3/4, batch 150, loss 0.4430
+Epoch 3/4, batch 200, loss 0.5239
+Epoch 3/4, batch 250, loss 0.6683
+Epoch 3/4, batch 300, loss 0.5415
+Epoch 3/4, batch 324, loss 0.3204
+{'epoch': 3, 'validation_loss': 0.737285204231739, 'known_f1': {'FieldSupplement': 0.6517090311210764, 'PlantDoc': 0.45519038170823883, 'PlantVillage': 0.9820559124447016}}
+Epoch 4/4, batch 50, loss 0.6264
+Epoch 4/4, batch 100, loss 0.4134
+Epoch 4/4, batch 150, loss 0.5135
+Epoch 4/4, batch 200, loss 0.5506
+Epoch 4/4, batch 250, loss 0.5132
+Epoch 4/4, batch 300, loss 0.4017
+Epoch 4/4, batch 324, loss 0.5468
+{'epoch': 4, 'validation_loss': 0.7491511926054955, 'known_f1': {'FieldSupplement': 0.6556095824925227, 'PlantDoc': 0.49447541737251866, 'PlantVillage': 0.9778322869648793}}
+Saved continued candidate: models\mobilenetv3_expanded_20261103.pt

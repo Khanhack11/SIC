@@ -1,0 +1,20 @@
+{
+  "experiment": "field_v2_multisource (separate workspace experiment)",
+  "verification": "Existing CPU evaluation evidence inspected; not recomputed in this expansion run",
+  "weights_path": "models/mobilenetv3_field_v2_20261103.pt",
+  "weights_sha256": "c296f938564a4beb07cfeca00d9cca579516de442666a4ad96b6748355ee4c4e",
+  "training_manifest_sha256": "4678faca1433bbb79d31185cdb6600994e29b777c9fbe8ed23bfb58fe92f5f24",
+  "evaluation_manifest_sha256": "aba85a5d50dd6d3f763d39ec3e21cae7ba7645e54374f90c99b9ff0a7a6db4b5",
+  "validation_report_path": "docs\\final_release\\mobile_field\\v2_multisource_20261103\\validation.json",
+  "validation_report_sha256": "9a437bed0c3e4d0ea0341af252474b95d0cc4210a1613fe07fe7d032a929fd66",
+  "selected_stage": "field_v2/epoch_6",
+  "epochs": 6,
+  "PlantDoc": {
+    "known_macro_f1_present": 0.5498007090314279,
+    "score_gate_accuracy": 0.5922330021858215,
+    "score_gate_coverage": 0.24879227578639984
+  },
+  "default_changed": false,
+  "Holeta_independent": false,
+  "limitations": "Different training corpus; public source labels not project expert adjudication. This model trained Holeta, so cannot be compared on Holeta as an unseen source."
+}

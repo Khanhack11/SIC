@@ -29,6 +29,7 @@ Có thể mở `run_tests.cmd` để chạy cả browser và giữ cửa sổ xe
 | `frontend_async.cjs` | Callback camera đến chậm sau khi đổi file, đóng camera hoặc thu gọn mục bổ sung, và crop sát mép ảnh rộng lẻ |
 | `live_demo.cjs` | Chạy riêng bằng `node tests/live_demo.cjs` khi server 8000 đã bật; thử mở trang và gửi ảnh thật trên Chromium/WebKit, lưu lỗi mạng và screenshot. Không khởi động hoặc tắt server. Có thể đổi URL bằng `SIC_DEMO_URL`. |
 | `test_field_recovery.py` | Khôi phục optimizer, RNG và vị trí lấy mẫu; kiểm tra bước train tiếp theo khớp với trạng thái đã lưu |
+| `test_expanded_field.py` | Domain mới tham gia metrics/loss, giữ holdout của parent và chặn train trùng holdout; nguồn Ecuador chỉ dùng train |
 | `test_field_release.py` | Không dùng test hoặc manifest khác để quyết định phát hành; trường hợp F1 tăng vẫn trượt cổng độ chính xác |
 | `test_field_onnx.py` | Export V3, đối chiếu batch 1/4 và ảnh thật qua preprocessing, từ chối graph không khớp checkpoint; cần dependencies ONNX |
 | `test_dataset_acquisition.py` | Kiểm tra ZIP, đường dẫn Windows, tên khác chữ hoa/thường, checksum và Git blob bằng dữ liệu nhân tạo |

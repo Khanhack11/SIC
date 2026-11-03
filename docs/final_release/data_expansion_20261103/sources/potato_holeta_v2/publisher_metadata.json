@@ -1,0 +1,90 @@
+{
+  "id": "v4w72bsts5",
+  "doi": {
+    "id": "10.17632/v4w72bsts5.2",
+    "status": "allocated",
+    "prefix": "10.17632"
+  },
+  "name": "Potato Leaf (Healthy and Late Blight)",
+  "description": "The potato crop is found at fourth a major crop in the world, after rice, wheat, and maize. Nonetheless, in Ethiopia, the yield per unit area of potatoes is very low compared to other countries. There are a plethora of reasons, and one of them is the disease. The major disease, which affects the major potato production area is Late Blight, according to researchers the disease caused 100% crop loss on the unimproved local cultivar and 67.1% on a susceptible variety.\n\nNot to take early Late Blight disease management would destroy the whole farm within a few days. For decades many researchers have experimented on plant disease detection and classification using computer vision via different approaches and algorithms. Many researchers used traditional machine learning algorithms which require a handcrafted feature extraction to detect a given image. Besides, the data collected were under a laboratory setup which makes it less reliable while testing in real cultivation farms captured images of the potato.\n\nHeterogeneous image datasets were collected from (Holeta, Ethiopia) potato farm with the help of two plant pathologists. The dataset is correctly labeled with two classes as \u2018Healthy\u2019 and \u2018Late Blight\u2019, and the image has a variety meaning some of the images are captured with less noisy background images and others with a highly noisy environment. Under the \u2018Late Blight\u2019 class 63 images were collected and under the \u2018Healthy\u2019 class 363 images were collected. Finally, the prepared dataset could be used for different research that aimed at plant disease detection and classification.\n\n",
+  "version": 2,
+  "contributors": [
+    {
+      "institution": {
+        "name": "Addis Ababa Science and Technology University"
+      },
+      "profile_id": "0ecc8160-b391-31f6-afd1-6ed567fdf7ee",
+      "first_name": "Natnael",
+      "last_name": "Tilahun",
+      "orcid_id": "0000-0002-3024-4992"
+    }
+  ],
+  "versions": [
+    {
+      "version": 2,
+      "available": true,
+      "publish_date": "2022-05-31T06:10:12.414Z"
+    },
+    {
+      "version": 1,
+      "available": true,
+      "publish_date": "2020-11-02T17:02:46.437Z"
+    }
+  ],
+  "articles": [],
+  "categories": [
+    {
+      "id": "data.elsevier.com/vocabulary/OmniScience/Concept-252576536",
+      "label": "Image Database"
+    }
+  ],
+  "institutions": [
+    {
+      "id": "b1ea0626-3534-54f5-8d08-2ad0478b2313",
+      "name": "Addis Ababa Science and Technology University",
+      "ror_id": "https://ror.org/02psd9228"
+    }
+  ],
+  "available": true,
+  "method": "The dataset was captured in a real potato farm in an uncontrolled environment. A high-resolution digital camera and smartphone were used. The potato farm is located in Holeta, Ethiopia. Dataset preparation is challenging. This dataset could help researchers in the field of computer vision.",
+  "size": 0,
+  "owner": {
+    "institution": {
+      "name": "Addis Ababa Science and Technology University"
+    },
+    "profile_id": "0ecc8160-b391-31f6-afd1-6ed567fdf7ee",
+    "first_name": "Natnael",
+    "last_name": "Tilahun",
+    "orcid_id": "0000-0002-3024-4992"
+  },
+  "channel": "WEB",
+  "owner_id": "0ecc8160-b391-31f6-afd1-6ed567fdf7ee",
+  "publish_date": "2022-05-31T06:10:12.414Z",
+  "data_licence": {
+    "id": "01d9c749-3c4d-4431-9df3-620b2dcfe144",
+    "description": "You can share, copy and modify this dataset so long as you give appropriate credit, provide a link to the CC BY license, and indicate if changes were made, but you may not do so in a way that suggests the rights holder has endorsed you or your use of the dataset. Note that further permission may be required for any content within the dataset that is identified as belonging to a third party.",
+    "url": "http://creativecommons.org/licenses/by/4.0",
+    "category": "Creative",
+    "short_name": "CC BY 4.0",
+    "full_name": "Creative Commons Attribution 4.0 International"
+  },
+  "related_links": [
+    {
+      "type": "article",
+      "rel": "compiled_by",
+      "href": "https://ieeexplore.ieee.org/abstract/document/9672243"
+    }
+  ],
+  "funders": [],
+  "customer_id": "7377952c-6404-4428-bbfc-77242cfc301e",
+  "modified_on": "2022-05-30T19:57:58.072Z",
+  "created_on": "2020-11-02T17:02:46.467Z",
+  "confidential": false,
+  "links": {
+    "view": "https://data.mendeley.com/datasets/v4w72bsts5"
+  },
+  "repository": {
+    "id": "MENDELEY_DATA",
+    "name": "Mendeley Data"
+  }
+}

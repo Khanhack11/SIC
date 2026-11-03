@@ -1,0 +1,8 @@
+{
+  "command": ".venv/Scripts/python.exe -m unittest tests.test_expanded_field tests.test_field_recovery tests.test_field_release tests.test_field_pipeline",
+  "exit_code": 0,
+  "tests_passed": 11,
+  "source_download_verification": "python -m ml.download_corn_ecuador verified all 232 publisher SHA-256 hashes",
+  "application_or_frontend_changed": false,
+  "test_scope": "ML regression; no new browser run for this data/training-only change"
+}

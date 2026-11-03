@@ -1,0 +1,10 @@
+{
+  "frozen_at_utc": "2026-11-03T11:41:57.0423481Z",
+  "candidate_sha256": "2285c544286d6fbde3bd280052894674a20be8b40ad9ad9456d87dc9db96f06d",
+  "parent_sha256": "6a252ac806d88367bb6ee67ce04cccfce7ba986268f5d0d5e1f8332ed39ec62a",
+  "records_sha256": "b6eb04f51252f2107bd5b726d8e02d691f8ccffe2bcbc9a1ce34e6cbcb0b798a",
+  "external_source": "HoletaExternal: 418 images, 351 healthy and 67 late blight",
+  "selection": "Mean validation NLL over domains; temperature fitted on validation only",
+  "restriction": "Both models fixed before external results. No external-test tuning. Holeta is not independent for the separate field_mobile_v2 job.",
+  "default_model_changed": false
+}

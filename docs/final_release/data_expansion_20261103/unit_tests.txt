@@ -1,0 +1,6 @@
+...........
+----------------------------------------------------------------------
+Ran 11 tests in 1.482s
+
+OK
+[AdvisoryEngine] Loaded 11 crop disease profiles from Knowledge Base.

@@ -1,0 +1,8 @@
+{
+  "ml/continue_field.py": "ecd6dc4d4e00018b1a1f4ad0d82a863e0e77569d23057cc4931bcf6ce5cb612a",
+  "ml/train_field.py": "791d008cb32f5e1b52a013ebf9cc07920c010bbff1fd7cc1a5be323443f23315",
+  "ml/prepare_expanded_field.py": "898f3d2751d824ed21e8c1deed786da1cc76015e6f24d7722745b74c51587319",
+  "ml/evaluate_field.py": "fad124abd1da492e542db2d4cd616486e4c377f448b5d140c47c89cfef7f670b",
+  "backend/mobile_model.py": "b6fe1e2d6aed75ae1e1c4e939f65f4427387cab55236304fd802f68337bf9551",
+  "ml/download_corn_ecuador.py": "674f5fce425074a4b4b9b56aa6cff8af674ae91f14de361543a1dbb7e1e9f695"
+}

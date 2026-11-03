@@ -35,7 +35,7 @@ class FieldDataset(Dataset):
 
 def domain_metrics(logits,targets,rows,temperature=1.):
     result={}
-    for domain in ('PlantVillage','PlantDoc'):
+    for domain in sorted({row['domain'] for row in rows}):
         mask=torch.tensor([r['domain']==domain for r in rows])
         if not mask.any(): continue
         values=classification_metrics(targets[mask].numpy(),logits[mask].argmax(1).numpy(),FIELD_CLASSES)
@@ -63,8 +63,11 @@ def logits_for(model,rows,device,batch_size):
 
 
 def validation_loss(logits,labels,rows):
+    if not rows or len(rows) != len(labels):
+        raise ValueError('Validation rows and targets must be nonempty and aligned')
     losses=nn.functional.cross_entropy(logits,labels,reduction='none')
-    return sum(float(losses[torch.tensor([r['domain']==domain for r in rows])].mean()) for domain in ('PlantVillage','PlantDoc'))/2
+    domains=sorted({row['domain'] for row in rows})
+    return sum(float(losses[torch.tensor([r['domain']==domain for r in rows])].mean()) for domain in domains)/len(domains)
 
 
 def train(args):

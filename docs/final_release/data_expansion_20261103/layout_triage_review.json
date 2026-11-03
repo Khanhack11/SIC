@@ -1,0 +1,8 @@
+{
+  "images_viewed": 871,
+  "contact_sheets": 14,
+  "excluded": 123,
+  "expert_adjudicated": false,
+  "method": "AI layout triage of all source-labeled candidates; original disease labels retained for remaining samples",
+  "accepted_means": "suitable leaf-photo layout, not proof of disease ground truth"
+}

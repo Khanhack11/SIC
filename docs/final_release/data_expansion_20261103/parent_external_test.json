@@ -1,0 +1,295 @@
+{
+  "split": "external_test",
+  "model": "candidate_v3_eager",
+  "domains": {
+    "HoletaExternal": {
+      "accuracy": 0.17703349282296652,
+      "macro_precision": 0.12604166666666666,
+      "macro_recall": 0.05379796175816076,
+      "macro_f1": 0.06199931017876783,
+      "per_class": {
+        "Corn_Common_rust": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 0
+        },
+        "Corn_Gray_leaf_spot": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 0
+        },
+        "Corn_Northern_Leaf_Blight": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 0
+        },
+        "Corn_healthy": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 0
+        },
+        "Potato_Early_blight": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 0
+        },
+        "Potato_Late_blight": {
+          "precision": 0.5625,
+          "recall": 0.5373134328358209,
+          "f1": 0.549618320610687,
+          "support": 67
+        },
+        "Potato_healthy": {
+          "precision": 0.95,
+          "recall": 0.10826210826210826,
+          "f1": 0.19437340153452687,
+          "support": 351
+        },
+        "Tomato_Early_blight": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 0
+        },
+        "Tomato_Late_blight": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 0
+        },
+        "Tomato_Septoria_leaf_spot": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 0
+        },
+        "Tomato_healthy": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 0
+        },
+        "Unsupported": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 0
+        }
+      },
+      "confusion_matrix": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          36,
+          2,
+          17,
+          8,
+          2,
+          0,
+          2
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          2,
+          28,
+          38,
+          2,
+          8,
+          0,
+          26,
+          247
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "confusion_matrix_axes": "rows=true, columns=predicted",
+      "class_names": [
+        "Corn_Common_rust",
+        "Corn_Gray_leaf_spot",
+        "Corn_Northern_Leaf_Blight",
+        "Corn_healthy",
+        "Potato_Early_blight",
+        "Potato_Late_blight",
+        "Potato_healthy",
+        "Tomato_Early_blight",
+        "Tomato_Late_blight",
+        "Tomato_Septoria_leaf_spot",
+        "Tomato_healthy",
+        "Unsupported"
+      ],
+      "macro_f1_present": 0.37199586107260696,
+      "known_macro_f1_present": 0.37199586107260696,
+      "calibration": {
+        "nll": 2.688295602798462,
+        "ece": 0.48310679476708174,
+        "ece_bins": 15,
+        "confidence_threshold": 0.75,
+        "accepted_count": 155,
+        "accepted_coverage": 0.37081339955329895,
+        "accepted_accuracy": 0.1225806474685669
+      },
+      "score_gate_coverage": 0.08373206108808517,
+      "score_gate_accuracy": 0.5428571701049805,
+      "known_diseased_count": 67,
+      "known_diseased_high_confidence_healthy_count": 1,
+      "known_diseased_high_confidence_healthy_rate": 0.014925372786819935
+    }
+  },
+  "temperature": 0.7828429937362671,
+  "runtime": "eager",
+  "records_sha256": "b6eb04f51252f2107bd5b726d8e02d691f8ccffe2bcbc9a1ce34e6cbcb0b798a",
+  "weights_sha256": "6a252ac806d88367bb6ee67ce04cccfce7ba986268f5d0d5e1f8332ed39ec62a",
+  "seconds": 18.811630699998204,
+  "count": 418,
+  "score_gate_definition": "max probability >=0.75 and predicted != Unsupported, before field-healthy review; not final API acceptance",
+  "limitations": "Proxy/internet labels; no local expert adjudication. Present-class metrics exclude absent ground-truth classes and retain confusion into all 12 labels."
+}

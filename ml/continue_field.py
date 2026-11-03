@@ -40,6 +40,29 @@ def restore_progress(path, model, optimizer, scaler, config):
     return saved['progress']
 
 
+def validate_parent_manifest(source, digest, audit, records, expanded=False):
+    parent_digest = source['training']['config']['records_sha256']
+    if parent_digest == digest:
+        return
+    if not expanded:
+        raise ValueError('Parent used a different data manifest; use an audited expansion explicitly')
+    if audit.get('parent_records_sha256') != parent_digest:
+        raise ValueError('Expanded data does not identify the parent training manifest')
+    parent_path = Path(audit['parent_records_path'])
+    raw = parent_path.read_bytes()
+    if hashlib.sha256(raw).hexdigest() != parent_digest:
+        raise ValueError('Parent manifest changed')
+    parent = json.loads(raw)
+    original_holdout = {(r['path'], r['sha256'], r['label'], r['split']) for r in parent if r['split'] != 'train'}
+    current = {(r['path'], r['sha256'], r['label'], r['split']) for r in records}
+    if not original_holdout.issubset(current):
+        raise ValueError('Existing holdout records were changed or removed')
+    held_hashes = {r['sha256'] for r in records if r['split'] != 'train'}
+    held_groups = {r['audit_group'] for r in records if r['split'] != 'train'}
+    if any(r['sha256'] in held_hashes or r['audit_group'] in held_groups for r in records if r['split'] == 'train'):
+        raise ValueError('Expanded training overlaps a protected holdout')
+
+
 def train(args):
     if args.output.exists():
         raise ValueError('Existing final candidate preserved; choose a new output')
@@ -49,21 +72,22 @@ def train(args):
     torch.manual_seed(42); random.seed(42); torch.cuda.manual_seed_all(42)
     manifest = args.data / 'records.json'
     digest = hashlib.sha256(manifest.read_bytes()).hexdigest()
-    if json.loads((args.data / 'audit.json').read_text())['records_sha256'] != digest:
+    audit = json.loads((args.data / 'audit.json').read_text())
+    if audit['records_sha256'] != digest:
         raise ValueError('Audited manifest changed')
     source = torch.load(args.source, map_location='cpu', weights_only=True)
     for key, expected in {'architecture': FIELD_ARCHITECTURE, 'class_names': FIELD_CLASSES,
                           'preprocessing': FIELD_PREPROCESSING}.items():
         if source.get(key) != expected:
             raise ValueError('Parent checkpoint contract mismatch: ' + key)
-    if source['training']['config']['records_sha256'] != digest:
-        raise ValueError('Parent used a different data manifest')
+    records = json.loads(manifest.read_text())
+    expanded = getattr(args, 'expanded_data', False)
+    validate_parent_manifest(source, digest, audit, records, expanded)
     config = {'parent_sha256': hashlib.sha256(args.source.read_bytes()).hexdigest(),
               'records_sha256': digest, 'epochs': args.epochs, 'batch_size': args.batch_size,
-              'seed': 42, 'backbone_lr': 1e-5, 'head_lr': 1e-4,
+              'seed': 42, 'backbone_lr': 1e-5, 'head_lr': 1e-4, 'expanded_data': expanded,
               'script_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
               'transform_sha256': hashlib.sha256(Path('backend/mobile_model.py').read_bytes()).hexdigest()}
-    records = json.loads(manifest.read_text())
     train_rows = [r for r in records if r['split'] == 'train']
     val_rows = [r for r in records if r['split'] == 'validation']
     model = build_field_model().to('cuda')
@@ -148,4 +172,5 @@ if __name__ == '__main__':
     parser.add_argument('--data', type=Path, default=Path('data/processed/field_mobile_v1'))
     parser.add_argument('--epochs', type=int, default=2)
     parser.add_argument('--batch-size', type=int, default=32)
+    parser.add_argument('--expanded-data', action='store_true', help='Require parent-bound expansion audit and preserved holdouts')
     train(parser.parse_args())

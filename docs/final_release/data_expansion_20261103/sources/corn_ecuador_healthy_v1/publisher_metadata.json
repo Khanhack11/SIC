@@ -1,0 +1,97 @@
+{
+  "id": "w56xxnykcc",
+  "doi": {
+    "id": "10.17632/w56xxnykcc.1",
+    "status": "allocated",
+    "prefix": "10.17632"
+  },
+  "name": "CornLeafDiseaseCollection",
+  "description": "The CornLeafDiseaseCollection dataset contains 1,079 images of corn leaves collected from three experimental plantations located in three cantons of Manab\u00ed, Ecuador. Specifically the dataset includes images of four foliar diseases. The dataset also contains images of healthy leaves.\nAll images were taken under controlled conditions. The photographs were taken with the same smartphone, using an specific distance, between the mobile and the corn leaf (15-20 cm between the corn leaf and the smartphone). In addition, the geographic and UTM coordinates, the corn variety and the corresponding plantation were registered. \nThe dataset is organized into five subdirectories, each corresponding to a specific category disease:\n- asphalt_stain (Phyllachora maydis)\n- bipolaris (Bipolaris maydis)\n- common rust (Southern rust)\n- healthy\n- stenocarpella (Diplodia leaf streak)",
+  "version": 1,
+  "contributors": [
+    {
+      "institution": {
+        "id": "1aaf7f23-dca2-5736-a2fb-717db0d4cdff",
+        "name": "Escuela Superior Politecnica Agropecuaria de Manabi",
+        "ror_id": "https://ror.org/01wea3g49"
+      },
+      "profile_id": "dbba70dd-7d99-4a48-bd33-403ebd612eed",
+      "first_name": "Leonela Maril\u00f9",
+      "last_name": "Murillo Parraga"
+    },
+    {
+      "institution": {
+        "id": "ea03dd8c-d004-5922-b626-7ab8a73a5b7e",
+        "name": "Universidad Tecnica de Manabi",
+        "ror_id": "https://ror.org/02qgahb88"
+      },
+      "profile_id": "b4622c3f-5cbd-4c9a-8651-12148e4d0a4d",
+      "first_name": "Carlos Alfredo",
+      "last_name": "Silva Villafuerte",
+      "orcid_id": "0000-0002-0328-8033"
+    }
+  ],
+  "versions": [
+    {
+      "version": 1,
+      "available": true,
+      "publish_date": "2025-09-17T21:46:09.085Z"
+    }
+  ],
+  "articles": [],
+  "categories": [
+    {
+      "id": "data.elsevier.com/vocabulary/OmniScience/Concept-603644649",
+      "label": "Agriculture"
+    }
+  ],
+  "institutions": [
+    {
+      "id": "1aaf7f23-dca2-5736-a2fb-717db0d4cdff",
+      "name": "Escuela Superior Politecnica Agropecuaria de Manabi",
+      "ror_id": "https://ror.org/01wea3g49"
+    },
+    {
+      "id": "ea03dd8c-d004-5922-b626-7ab8a73a5b7e",
+      "name": "Universidad Tecnica de Manabi",
+      "ror_id": "https://ror.org/02qgahb88"
+    }
+  ],
+  "available": true,
+  "size": 0,
+  "owner": {
+    "institution": {
+      "id": "ea03dd8c-d004-5922-b626-7ab8a73a5b7e",
+      "name": "Universidad Tecnica de Manabi",
+      "ror_id": "https://ror.org/02qgahb88"
+    },
+    "profile_id": "b4622c3f-5cbd-4c9a-8651-12148e4d0a4d",
+    "first_name": "Carlos Alfredo",
+    "last_name": "Silva Villafuerte",
+    "orcid_id": "0000-0002-0328-8033"
+  },
+  "channel": "WEB",
+  "owner_id": "b4622c3f-5cbd-4c9a-8651-12148e4d0a4d",
+  "publish_date": "2025-09-17T21:46:09.085Z",
+  "data_licence": {
+    "id": "01d9c749-3c4d-4431-9df3-620b2dcfe144",
+    "description": "You can share, copy and modify this dataset so long as you give appropriate credit, provide a link to the CC BY license, and indicate if changes were made, but you may not do so in a way that suggests the rights holder has endorsed you or your use of the dataset. Note that further permission may be required for any content within the dataset that is identified as belonging to a third party.",
+    "url": "http://creativecommons.org/licenses/by/4.0",
+    "category": "Creative",
+    "short_name": "CC BY 4.0",
+    "full_name": "Creative Commons Attribution 4.0 International"
+  },
+  "related_links": [],
+  "funders": [],
+  "customer_id": "7377952c-6404-4428-bbfc-77242cfc301e",
+  "modified_on": "2025-09-17T16:51:47.935Z",
+  "created_on": "2025-09-15T20:31:24.525Z",
+  "confidential": false,
+  "links": {
+    "view": "https://data.mendeley.com/datasets/w56xxnykcc"
+  },
+  "repository": {
+    "id": "MENDELEY_DATA",
+    "name": "Mendeley Data"
+  }
+}

@@ -1,0 +1,21 @@
+Evaluation batch 1
+Evaluation batch 41
+Evaluation batch 81
+Evaluation batch 121
+{'FieldSupplement': 0.5020903427034463, 'PlantDoc': 0.4659461585306957, 'PlantVillage': 0.9751945587571054}
+Evaluation batch 1
+Evaluation batch 41
+Evaluation batch 81
+Evaluation batch 121
+{'FieldSupplement': 0.4413439442762751, 'PlantDoc': 0.1595000985668228, 'PlantVillage': 0.9448007212310983}
+Evaluation batch 1
+Evaluation batch 41
+Evaluation batch 81
+Evaluation batch 121
+{'FieldSupplement': 0.6517090311210764, 'PlantDoc': 0.4582891223225526, 'PlantVillage': 0.9820559124447016}
+Keep default V2; candidate remains experimental
+Evaluation batch 1
+{'HoletaExternal': 0.37199586107260696}
+Evaluation batch 1
+{'HoletaExternal': 0.2993643031784841}
+Expanded-data evaluation complete; no deployment performed.

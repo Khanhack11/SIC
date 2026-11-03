@@ -20,6 +20,7 @@ def evaluate(args):
     if hashlib.sha256(data_file.read_bytes()).hexdigest()!=json.loads((args.data/'audit.json').read_text())['records_sha256']:
         raise ValueError('Split manifest changed')
     rows=[r for r in json.loads(data_file.read_text()) if r['split']==args.split]
+    if not rows:raise ValueError('Requested split has no records: '+args.split)
     if args.baseline:
         engine=CropDiseaseInferenceEngine(device='cpu',runtime='onnx')
     else:engine=FieldInferenceEngine(args.weights)
@@ -65,7 +66,7 @@ if __name__=='__main__':
     parser.add_argument('--data',type=Path,default=Path('data/processed/field_mobile_v1'))
     parser.add_argument('--weights',type=Path,default=Path('models/mobilenetv3_field_20261103.pt'))
     parser.add_argument('--baseline',action='store_true')
-    parser.add_argument('--split',choices=['validation','test'],default='validation')
+    parser.add_argument('--split',choices=['validation','test','external_test'],default='validation')
     parser.add_argument('--output',type=Path,required=True)
     args=parser.parse_args()
     if args.baseline:args.weights=Path('models/mobilenetv2_crop_disease.pt')

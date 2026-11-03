@@ -1,0 +1,738 @@
+{
+  "parent_records_path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\processed\\field_mobile_v1\\records.json",
+  "parent_records_sha256": "aba85a5d50dd6d3f763d39ec3e21cae7ba7645e54374f90c99b9ff0a7a6db4b5",
+  "records_sha256": "b6eb04f51252f2107bd5b726d8e02d691f8ccffe2bcbc9a1ce34e6cbcb0b798a",
+  "seed": 42,
+  "new_source_validation_fraction": 0.2,
+  "counts": {
+    "PlantVillage/train/Corn_Gray_leaf_spot": 359,
+    "PlantVillage/train/Corn_Common_rust": 834,
+    "PlantVillage/train/Corn_Northern_Leaf_Blight": 689,
+    "PlantVillage/train/Corn_healthy": 814,
+    "PlantVillage/train/Potato_Early_blight": 700,
+    "PlantVillage/train/Potato_Late_blight": 700,
+    "PlantVillage/train/Potato_healthy": 104,
+    "PlantVillage/train/Tomato_Early_blight": 700,
+    "PlantVillage/train/Tomato_Late_blight": 1047,
+    "PlantVillage/train/Tomato_Septoria_leaf_spot": 1050,
+    "PlantVillage/train/Tomato_healthy": 1046,
+    "PlantVillage/validation/Corn_Gray_leaf_spot": 77,
+    "PlantVillage/validation/Corn_Common_rust": 179,
+    "PlantVillage/validation/Corn_Northern_Leaf_Blight": 148,
+    "PlantVillage/validation/Corn_healthy": 174,
+    "PlantVillage/validation/Potato_Early_blight": 152,
+    "PlantVillage/validation/Potato_Late_blight": 152,
+    "PlantVillage/validation/Potato_healthy": 24,
+    "PlantVillage/validation/Tomato_Early_blight": 151,
+    "PlantVillage/validation/Tomato_Late_blight": 225,
+    "PlantVillage/validation/Tomato_Septoria_leaf_spot": 225,
+    "PlantVillage/validation/Tomato_healthy": 224,
+    "PlantVillage/test/Corn_Gray_leaf_spot": 77,
+    "PlantVillage/test/Corn_Common_rust": 179,
+    "PlantVillage/test/Corn_Northern_Leaf_Blight": 148,
+    "PlantVillage/test/Corn_healthy": 174,
+    "PlantVillage/test/Potato_Early_blight": 148,
+    "PlantVillage/test/Potato_Late_blight": 148,
+    "PlantVillage/test/Potato_healthy": 24,
+    "PlantVillage/test/Tomato_Early_blight": 149,
+    "PlantVillage/test/Tomato_Late_blight": 224,
+    "PlantVillage/test/Tomato_Septoria_leaf_spot": 225,
+    "PlantVillage/test/Tomato_healthy": 224,
+    "PlantDoc/test/Unsupported": 155,
+    "PlantDoc/test/Corn_Gray_leaf_spot": 4,
+    "PlantDoc/test/Corn_Common_rust": 10,
+    "PlantDoc/test/Potato_Early_blight": 6,
+    "PlantDoc/test/Potato_Late_blight": 5,
+    "PlantDoc/test/Tomato_Early_blight": 9,
+    "PlantDoc/test/Tomato_Septoria_leaf_spot": 10,
+    "PlantDoc/test/Tomato_Late_blight": 10,
+    "PlantDoc/test/Tomato_healthy": 8,
+    "PlantDoc/validation/Corn_Common_rust": 21,
+    "PlantDoc/train/Corn_Common_rust": 84,
+    "PlantDoc/validation/Corn_Gray_leaf_spot": 13,
+    "PlantDoc/train/Corn_Gray_leaf_spot": 51,
+    "PlantDoc/validation/Potato_Early_blight": 19,
+    "PlantDoc/train/Potato_Early_blight": 77,
+    "PlantDoc/validation/Potato_Late_blight": 18,
+    "PlantDoc/train/Potato_Late_blight": 70,
+    "PlantDoc/validation/Tomato_Early_blight": 14,
+    "PlantDoc/train/Tomato_Early_blight": 56,
+    "PlantDoc/validation/Tomato_Late_blight": 18,
+    "PlantDoc/train/Tomato_Late_blight": 72,
+    "PlantDoc/validation/Tomato_Septoria_leaf_spot": 25,
+    "PlantDoc/train/Tomato_Septoria_leaf_spot": 102,
+    "PlantDoc/validation/Tomato_healthy": 11,
+    "PlantDoc/train/Tomato_healthy": 44,
+    "PlantDoc/validation/Unsupported": 275,
+    "PlantDoc/train/Unsupported": 1102,
+    "HoletaExternal/external_test/Potato_healthy": 351,
+    "HoletaExternal/external_test/Potato_Late_blight": 67,
+    "FieldSupplement/train/Corn_Gray_leaf_spot": 50,
+    "FieldSupplement/validation/Corn_Gray_leaf_spot": 12,
+    "FieldSupplement/train/Corn_Northern_Leaf_Blight": 62,
+    "FieldSupplement/validation/Corn_Northern_Leaf_Blight": 16,
+    "FieldSupplement/train/Potato_Early_blight": 69,
+    "FieldSupplement/validation/Potato_Early_blight": 17,
+    "FieldSupplement/validation/Potato_Late_blight": 15,
+    "FieldSupplement/train/Potato_Late_blight": 62,
+    "FieldSupplement/train/Tomato_Early_blight": 67,
+    "FieldSupplement/validation/Tomato_Early_blight": 17,
+    "FieldSupplement/validation/Tomato_Late_blight": 13,
+    "FieldSupplement/train/Tomato_Late_blight": 50,
+    "FieldSupplement/train/Tomato_Septoria_leaf_spot": 53,
+    "FieldSupplement/validation/Tomato_Septoria_leaf_spot": 13,
+    "FieldSupplement/train/Corn_healthy": 224
+  },
+  "inventory_sha256": "d36bbab716fee9e1cab271952ae8c252aec39349a4c8cf48b46f67c2eea58fd1",
+  "new_sources": {
+    "previous/train": 9701,
+    "previous/validation": 2145,
+    "previous/test": 1937,
+    "HoletaExternal/external_test": 418,
+    "PlantWildV2/train": 413,
+    "PlantWildV2/validation": 103,
+    "CornEcuadorHealthy/train": 224
+  },
+  "rejected": [
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\corn gray leaf spot\\corn_gray_leaf_spot_google_0006.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\corn gray leaf spot\\corn_gray_leaf_spot_google_0055.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\corn gray leaf spot\\corn_gray_leaf_spot_google_0059.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\corn gray leaf spot\\corn_gray_leaf_spot_google_0076.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\corn gray leaf spot\\corn_gray_leaf_spot_google_0142.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\corn gray leaf spot\\corn_gray_leaf_spot_google_0173.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\corn gray leaf spot\\corn_gray_leaf_spot_google_0206.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\corn gray leaf spot\\corn_gray_leaf_spot_google_0214.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\corn northern leaf blight\\corn_northern_leaf_blight_50.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\corn northern leaf blight\\corn_northern_leaf_blight_58.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\corn northern leaf blight\\corn_northern_leaf_blight_64.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\corn northern leaf blight\\corn_northern_leaf_blight_66.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\corn northern leaf blight\\corn_northern_leaf_blight_google_0002.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\corn northern leaf blight\\corn_northern_leaf_blight_google_0013.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\corn northern leaf blight\\corn_northern_leaf_blight_google_0021.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\corn northern leaf blight\\corn_northern_leaf_blight_google_0031.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\corn northern leaf blight\\corn_northern_leaf_blight_google_0036.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\corn northern leaf blight\\corn_northern_leaf_blight_google_0043.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\corn northern leaf blight\\corn_northern_leaf_blight_google_0051.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\corn northern leaf blight\\corn_northern_leaf_blight_google_0053.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\corn northern leaf blight\\corn_northern_leaf_blight_google_0072.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\corn northern leaf blight\\corn_northern_leaf_blight_google_0074.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\corn northern leaf blight\\corn_northern_leaf_blight_google_0077.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\corn northern leaf blight\\corn_northern_leaf_blight_google_0079.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\corn northern leaf blight\\corn_northern_leaf_blight_google_0099.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\corn northern leaf blight\\corn_northern_leaf_blight_google_0133.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\corn northern leaf blight\\corn_northern_leaf_blight_google_0134.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\corn northern leaf blight\\corn_northern_leaf_blight_google_0135.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\corn northern leaf blight\\corn_northern_leaf_blight_google_0162.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\potato early blight\\potato_early_blight_google_0007.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\potato early blight\\potato_early_blight_google_0015.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\potato early blight\\potato_early_blight_google_0182.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\potato early blight\\potato_early_blight_google_0240.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\potato early blight\\potato_early_blight_google_0366.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\potato late blight\\potato_late_blight_google_0051.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\potato late blight\\potato_late_blight_google_0054.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\potato late blight\\potato_late_blight_google_0055.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato early blight\\tomato_early_blight_120.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato early blight\\tomato_early_blight_178.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato early blight\\tomato_early_blight_182.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato early blight\\tomato_early_blight_19.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato early blight\\tomato_early_blight_242.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato early blight\\tomato_early_blight_25.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato early blight\\tomato_early_blight_39.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato early blight\\tomato_early_blight_67.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato early blight\\tomato_early_blight_google_0021.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato early blight\\tomato_early_blight_google_0047.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato early blight\\tomato_early_blight_google_0073.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato early blight\\tomato_early_blight_google_0074.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato early blight\\tomato_early_blight_google_0077.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato early blight\\tomato_early_blight_google_0091.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato early blight\\tomato_early_blight_google_0098.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato early blight\\tomato_early_blight_google_0123.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato early blight\\tomato_early_blight_google_0140.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato early blight\\tomato_early_blight_google_0145.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato early blight\\tomato_early_blight_google_0183.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato early blight\\tomato_early_blight_google_0227.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato early blight\\tomato_early_blight_google_0258.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato early blight\\tomato_early_blight_google_0350.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato early blight\\tomato_early_blight_google_0390.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato late blight\\tomato_late_blight_107.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato late blight\\tomato_late_blight_135.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato late blight\\tomato_late_blight_162.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato late blight\\tomato_late_blight_168.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato late blight\\tomato_late_blight_170.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato late blight\\tomato_late_blight_179.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato late blight\\tomato_late_blight_18.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato late blight\\tomato_late_blight_186.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato late blight\\tomato_late_blight_189.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato late blight\\tomato_late_blight_203.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato late blight\\tomato_late_blight_216.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato late blight\\tomato_late_blight_217.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato late blight\\tomato_late_blight_220.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato late blight\\tomato_late_blight_238.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato late blight\\tomato_late_blight_246.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato late blight\\tomato_late_blight_3.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato late blight\\tomato_late_blight_30.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato late blight\\tomato_late_blight_31.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato late blight\\tomato_late_blight_39.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato late blight\\tomato_late_blight_57.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato late blight\\tomato_late_blight_65.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato late blight\\tomato_late_blight_78.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato late blight\\tomato_late_blight_83.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato late blight\\tomato_late_blight_86.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato late blight\\tomato_late_blight_google_0000.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato late blight\\tomato_late_blight_google_0012.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato late blight\\tomato_late_blight_google_0013.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato late blight\\tomato_late_blight_google_0015.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato late blight\\tomato_late_blight_google_0024.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato late blight\\tomato_late_blight_google_0031.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato late blight\\tomato_late_blight_google_0043.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato late blight\\tomato_late_blight_google_0044.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato late blight\\tomato_late_blight_google_0050.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato late blight\\tomato_late_blight_google_0058.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato late blight\\tomato_late_blight_google_0066.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato late blight\\tomato_late_blight_google_0074.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato late blight\\tomato_late_blight_google_0077.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato late blight\\tomato_late_blight_google_0083.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato late blight\\tomato_late_blight_google_0085.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato late blight\\tomato_late_blight_google_0092.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato late blight\\tomato_late_blight_google_0095.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato late blight\\tomato_late_blight_google_0101.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato late blight\\tomato_late_blight_google_0133.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato late blight\\tomato_late_blight_google_0138.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato late blight\\tomato_late_blight_google_0142.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato late blight\\tomato_late_blight_google_0156.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato late blight\\tomato_late_blight_google_0157.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato late blight\\tomato_late_blight_google_0181.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato late blight\\tomato_late_blight_google_0184.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato late blight\\tomato_late_blight_google_0206.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato late blight\\tomato_late_blight_google_0220.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato late blight\\tomato_late_blight_google_0224.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato late blight\\tomato_late_blight_google_0226.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato late blight\\tomato_late_blight_google_0235.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato late blight\\tomato_late_blight_google_0244.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato septoria leaf spot\\tomato_septoria_leaf_spot_23.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato septoria leaf spot\\tomato_septoria_leaf_spot_241.jpg",
+      "reason": "visual ambiguity at contact-sheet scale; needs expert review"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato septoria leaf spot\\tomato_septoria_leaf_spot_34.jpg",
+      "reason": "layout triage: montage, diagram or prominent text/annotation"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato septoria leaf spot\\tomato_septoria_leaf_spot_google_0015.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato septoria leaf spot\\tomato_septoria_leaf_spot_google_0039.jpg",
+      "reason": "visual ambiguity at contact-sheet scale; needs expert review"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato septoria leaf spot\\tomato_septoria_leaf_spot_google_0069.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato septoria leaf spot\\tomato_septoria_leaf_spot_google_0084.jpg",
+      "reason": "leaf-input triage: fruit, tuber or stem is main subject"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\dataset_hub_20261103\\plantwild_v2\\original\\plantwild_v2\\tomato septoria leaf spot\\tomato_septoria_leaf_spot_google_0132.jpg",
+      "reason": "visual ambiguity at contact-sheet scale; needs expert review"
+    },
+    {
+      "path": "data\\raw\\dataset_hub_20261103\\corn_ecuador_healthy_v1\\original\\Healthy\\healthy_065.jpg",
+      "reason": "exact/perceptual overlap with existing source or prior new image",
+      "matched_groups": [
+        "CornEcuadorHealthy:c82179a8fe5c8f318533c005"
+      ]
+    },
+    {
+      "path": "data\\raw\\dataset_hub_20261103\\corn_ecuador_healthy_v1\\original\\Healthy\\healthy_162.jpg",
+      "reason": "exact/perceptual overlap with existing source or prior new image",
+      "matched_groups": [
+        "CornEcuadorHealthy:78501beccc02b3c95a581e42"
+      ]
+    },
+    {
+      "path": "data\\raw\\dataset_hub_20261103\\corn_ecuador_healthy_v1\\original\\Healthy\\healthy_163.jpg",
+      "reason": "exact/perceptual overlap with existing source or prior new image",
+      "matched_groups": [
+        "CornEcuadorHealthy:2291a332bbeba78d29408ae7"
+      ]
+    },
+    {
+      "path": "data\\raw\\dataset_hub_20261103\\corn_ecuador_healthy_v1\\original\\Healthy\\healthy_164.jpg",
+      "reason": "exact/perceptual overlap with existing source or prior new image",
+      "matched_groups": [
+        "CornEcuadorHealthy:9fbdfbfc6a3bbc599931c5bf"
+      ]
+    },
+    {
+      "path": "data\\raw\\dataset_hub_20261103\\corn_ecuador_healthy_v1\\original\\Healthy\\healthy_165.jpg",
+      "reason": "exact/perceptual overlap with existing source or prior new image",
+      "matched_groups": [
+        "CornEcuadorHealthy:fae99839eb33db63fc6d670d"
+      ]
+    },
+    {
+      "path": "data\\raw\\dataset_hub_20261103\\corn_ecuador_healthy_v1\\original\\Healthy\\healthy_166.jpg",
+      "reason": "exact/perceptual overlap with existing source or prior new image",
+      "matched_groups": [
+        "CornEcuadorHealthy:be12fcc8e96639acc1280d58"
+      ]
+    },
+    {
+      "path": "data\\raw\\dataset_hub_20261103\\corn_ecuador_healthy_v1\\original\\Healthy\\healthy_167.jpg",
+      "reason": "exact/perceptual overlap with existing source or prior new image",
+      "matched_groups": [
+        "CornEcuadorHealthy:8ed681b92b8fece6813c65a0"
+      ]
+    },
+    {
+      "path": "data\\raw\\dataset_hub_20261103\\corn_ecuador_healthy_v1\\original\\Healthy\\healthy_168.jpg",
+      "reason": "exact/perceptual overlap with existing source or prior new image",
+      "matched_groups": [
+        "CornEcuadorHealthy:96c906bf7c51a138862ed1b6"
+      ]
+    },
+    {
+      "path": "data\\raw\\dataset_hub_20261103\\potato_holeta_v2\\original\\Local\\Healthy\\Healthy (241).jpg",
+      "reason": "exact/perceptual overlap with existing source or prior new image",
+      "matched_groups": [
+        "HoletaExternal:989b8a31105956007890114d"
+      ]
+    },
+    {
+      "path": "data\\raw\\dataset_hub_20261103\\potato_holeta_v2\\original\\Local\\Healthy\\Healthy (272).jpg",
+      "reason": "exact/perceptual overlap with existing source or prior new image",
+      "matched_groups": [
+        "HoletaExternal:9e8367c219c1ad57a85149aa"
+      ]
+    },
+    {
+      "path": "data\\raw\\dataset_hub_20261103\\potato_holeta_v2\\original\\Local\\Healthy\\Healthy (318).jpg",
+      "reason": "exact/perceptual overlap with existing source or prior new image",
+      "matched_groups": [
+        "HoletaExternal:0b8776c516550a177488e394"
+      ]
+    },
+    {
+      "path": "data\\raw\\dataset_hub_20261103\\potato_holeta_v2\\original\\Local\\Healthy\\Healthy (415).jpg",
+      "reason": "exact/perceptual overlap with existing source or prior new image",
+      "matched_groups": [
+        "HoletaExternal:4daa40a2452e1b8c2f5e39aa"
+      ]
+    },
+    {
+      "path": "data\\raw\\dataset_hub_20261103\\potato_holeta_v2\\original\\Local\\Healthy\\Healthy (419).jpg",
+      "reason": "exact/perceptual overlap with existing source or prior new image",
+      "matched_groups": [
+        "HoletaExternal:a8b20fadb211b2cdcd3e6485"
+      ]
+    },
+    {
+      "path": "data\\raw\\dataset_hub_20261103\\potato_holeta_v2\\original\\Local\\Healthy\\Healthy (441).jpg",
+      "reason": "exact/perceptual overlap with existing source or prior new image",
+      "matched_groups": [
+        "HoletaExternal:74151f08e30bc9c32e186ae4"
+      ]
+    },
+    {
+      "path": "data\\raw\\dataset_hub_20261103\\potato_holeta_v2\\original\\Local\\Healthy\\Healthy (445).jpg",
+      "reason": "exact/perceptual overlap with existing source or prior new image",
+      "matched_groups": [
+        "HoletaExternal:0fa7e90ef6e9093d480551b3"
+      ]
+    },
+    {
+      "path": "data\\raw\\dataset_hub_20261103\\potato_holeta_v2\\original\\Local\\Healthy\\Healthy (481).jpg",
+      "reason": "exact/perceptual overlap with existing source or prior new image",
+      "matched_groups": [
+        "HoletaExternal:c86456298ad7b78888780dd0"
+      ]
+    },
+    {
+      "path": "data\\raw\\dataset_hub_20261103\\potato_holeta_v2\\original\\Local\\Healthy\\Healthy (483).jpg",
+      "reason": "exact/perceptual overlap with existing source or prior new image",
+      "matched_groups": [
+        "HoletaExternal:fbd60f27b240f9b4d626245b"
+      ]
+    },
+    {
+      "path": "data\\raw\\dataset_hub_20261103\\potato_holeta_v2\\original\\Local\\Healthy\\Healthy (499).jpg",
+      "reason": "exact/perceptual overlap with existing source or prior new image",
+      "matched_groups": [
+        "HoletaExternal:cc5c3169bc2d352430d52feb"
+      ]
+    },
+    {
+      "path": "data\\raw\\dataset_hub_20261103\\potato_holeta_v2\\original\\Local\\Healthy\\Healthy (512).jpg",
+      "reason": "exact/perceptual overlap with existing source or prior new image",
+      "matched_groups": [
+        "HoletaExternal:17c456b334ab7228801d3640"
+      ]
+    },
+    {
+      "path": "data\\raw\\dataset_hub_20261103\\potato_holeta_v2\\original\\Local\\Healthy\\Healthy (6).jpg",
+      "reason": "exact/perceptual overlap with existing source or prior new image",
+      "matched_groups": [
+        "HoletaExternal:72637c343ce1530149d66178"
+      ]
+    }
+  ],
+  "old_holdouts_preserved": true,
+  "test_used_for_selection": false,
+  "limitations": [
+    "Public source labels and layout triage are not project expert validation.",
+    "pHash cannot guarantee different physical leaves; capture-session IDs are unavailable.",
+    "Old validation/test remain historical benchmarks; parent weights have already been selected on old validation.",
+    "HoletaExternal is reserved in entirety for one external evaluation after configuration is fixed."
+  ]
+}

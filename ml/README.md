@@ -5,6 +5,7 @@ Chạy lệnh từ thư mục SIC với dạng `python -m ml.<tên_module>`.
 | Giai đoạn | Module |
 |---|---|
 | Tải dữ liệu mới và audit | download_recommended_datasets, analyze_recommended_datasets |
+| Bổ sung dữ liệu có giữ holdout parent | download_corn_ecuador, prepare_expanded_field |
 | Tái hiện dữ liệu thí nghiệm cũ | download_dataset, download_plantdoc, prepare_dataset, prepare_field |
 | Train V2 và CNN đối chứng | train, train_gpu |
 | Thử tối ưu V2 | optimize_head, finetune_projection |
@@ -17,6 +18,8 @@ Chạy lệnh từ thư mục SIC với dạng `python -m ml.<tên_module>`.
 
 `train_field` hiện đọc `data/processed/field_mobile_v1/records.json`, có bước học classifier rồi fine-tune các block cuối của MobileNetV3-Large. `continue_field` lưu optimizer, scaler, thứ tự batch và RNG để tiếp tục đúng trạng thái.
 
-Danh mục mới nằm ở `data/raw/dataset_hub_20261103`. Cần duyệt nhãn và tạo manifest mới trước khi đưa vào trainer. Các hàm chọn checkpoint/validation hiện còn gắn với domain PlantVillage và PlantDoc; cần cập nhật khi thêm domain mới. Giữ riêng test, không chọn checkpoint hoặc điều chỉnh ngưỡng bằng test.
+Danh mục mới nằm ở `data/raw/dataset_hub_20261103`. Cần duyệt nhãn và tạo manifest mới trước khi đưa vào trainer. Metrics và validation loss hỗ trợ các domain có trong manifest; tiêu chí phát hành vẫn kiểm PlantVillage và PlantDoc theo cấu hình đã khóa. Giữ riêng test, không chọn checkpoint hoặc điều chỉnh ngưỡng bằng test.
+
+Thí nghiệm bổ sung ngày 03/11 dùng `prepare_expanded_field` để giữ holdout cũ, thêm PlantWild_v2 đã xem bố cục và ngô khỏe Ecuador, dành Holeta làm `external_test`. `continue_field --expanded-data` kiểm hash manifest parent, giữ nguyên holdout và chặn nhóm ảnh train trùng holdout. Xem [nguồn dữ liệu và cách gán nhãn](../docs/research/DATASET_SOURCES_20261103.md). Các ảnh nhãn nguồn chưa được chuyên gia của nhóm xác nhận lại.
 
 Môi trường `.venv-gpu` dùng để train bằng CUDA; `.venv` dùng phục vụ API và chạy kiểm thử. Chạy `python -m ml.package_demo` tạo gói trong `artifacts/packages/`, có manifest kiểm tra SHA-256.
