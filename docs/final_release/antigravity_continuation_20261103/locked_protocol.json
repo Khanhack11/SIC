@@ -1,0 +1,32 @@
+{
+  "source": "models\\mobilenetv3_field_v2_20261103.pt",
+  "output": "models/mobilenetv3_antigravity_warmstart_20261103.pt",
+  "data": "data\\processed\\field_mobile_v2",
+  "epochs": 4,
+  "samples_per_epoch": 6400,
+  "batch_size": 32,
+  "unfreeze_blocks": 9,
+  "backbone_lr": 5e-06,
+  "top_backbone_lr": 1e-05,
+  "head_lr": 3e-05,
+  "min_village_f1": 0.95,
+  "balanced_calibration": true,
+  "seed": 42,
+  "selection": "equal-domain raw validation NLL, with PlantVillage known F1 >=0.95; include parent",
+  "test_used_for_selection": false,
+  "external_test_run": false,
+  "Holeta_unseen_source": false,
+  "web_model_changed": false,
+  "roles": {
+    "Antigravity": "plan and text code review; CLI RunCommand auto-denied in headless mode",
+    "Codex": "implement, execute training and evaluate via authorized local tools"
+  },
+  "counts": {
+    "train": 16225,
+    "validation": 2740,
+    "test": 1937
+  },
+  "parent_sha256": "c296f938564a4beb07cfeca00d9cca579516de442666a4ad96b6748355ee4c4e",
+  "records_sha256": "4678faca1433bbb79d31185cdb6600994e29b777c9fbe8ed23bfb58fe92f5f24",
+  "antigravity_session_record": "Local artifacts/antigravity_continuation_20261103/connection.json"
+}

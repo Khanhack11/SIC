@@ -1,0 +1,19 @@
+Evaluation batch 1
+Evaluation batch 41
+Evaluation batch 81
+Evaluation batch 121
+Evaluation batch 161
+{'MultiSourceField': 0.21739703600064345, 'PlantDoc': 0.1595000985668228, 'PlantVillage': 0.9448007212310983}
+Evaluation batch 1
+Evaluation batch 41
+Evaluation batch 81
+Evaluation batch 121
+Evaluation batch 161
+{'MultiSourceField': 0.6632672188618619, 'PlantDoc': 0.5498007090314279, 'PlantVillage': 0.9816716273313788}
+Evaluation batch 1
+Evaluation batch 41
+Evaluation batch 81
+Evaluation batch 121
+Evaluation batch 161
+{'MultiSourceField': 0.6632672188618619, 'PlantDoc': 0.5498007090314279, 'PlantVillage': 0.9816716273313788}
+Keep default V2; candidate remains experimental

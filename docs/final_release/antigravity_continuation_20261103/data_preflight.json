@@ -1,0 +1,11 @@
+{
+  "records_sha256": "4678faca1433bbb79d31185cdb6600994e29b777c9fbe8ed23bfb58fe92f5f24",
+  "counts": {
+    "train": 16225,
+    "validation": 2740,
+    "test": 1937
+  },
+  "train_exact_sha_overlap_count": 0,
+  "old_holdout_records_retained": true,
+  "limitations": "Exact SHA checks do not prove independence of physical leaves or capture sessions; source labels are not project-expert adjudicated."
+}

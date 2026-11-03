@@ -7,6 +7,7 @@
 | mobilenetv3_field_continued_20261103.pt, .onnx, .json | Parent V3 thử nghiệm, chạy riêng bằng run_field_demo.cmd |
 | mobilenetv3_expanded_20261103.pt, .json | Warm-start 4 epoch với manifest bổ sung; checkpoint chọn epoch 3 bằng validation loss, chưa tự triển khai |
 | mobilenetv3_field_v2_20261103.pt, .onnx, .json | Nhánh đa nguồn khác, 6 epoch; F1 PlantDoc CPU 54,98%, chưa qua cổng accuracy/coverage; đã dùng Holeta trong train |
+| mobilenetv3_antigravity_warmstart_20261103.pt, .json | Lượt phối hợp Antigravity 4 epoch; giữ weights parent, cập nhật calibration; chưa qua cổng phát hành |
 | mobilenetv3_field_20261103.* | V3 trước lượt train tiếp tục |
 | mobilenetv2_gpu_*, mobilenetv2_head_*, mobilenetv2_projection_* | Các thí nghiệm V2 trước |
 | small_cnn_20261031.* | CNN đối chứng |

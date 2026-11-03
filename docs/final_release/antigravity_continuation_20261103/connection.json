@@ -1,0 +1,17 @@
+{
+  "transport": "installed official agy CLI",
+  "plan_response_received": true,
+  "agent_plan_checks": [
+    "new output path",
+    "full recovery state",
+    "PlantVillage F1 >=0.95"
+  ],
+  "code_review_status": "print_timeout after 90s; no review verdict received",
+  "headless_command_permission": "RunCommand auto-denied; permission settings unchanged",
+  "execution_owner": "Codex local tools",
+  "Antigravity_role": "text planning and advisory review",
+  "tests_passed": 8,
+  "test_command": ".venv/Scripts/python.exe -m unittest tests.test_field_warmstart tests.test_field_recovery tests.test_expanded_field tests.test_field_release",
+  "session_record": "Local artifacts/antigravity_continuation_20261103/connection.json",
+  "results_review_received": true
+}

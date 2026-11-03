@@ -1,0 +1,11 @@
+{
+  "unit_tests": 8,
+  "unit_exit_code": 0,
+  "validation_evaluations": 3,
+  "manifest_bound": true,
+  "parent_tensor_fallback_verified": true,
+  "recovery_optimizer_saved": true,
+  "optimizer_groups": 3,
+  "test_evaluated": false,
+  "default_changed": false
+}

@@ -19,6 +19,7 @@ Bản demo dùng checkpoint MobileNetV2 baseline, cùng ONNX FP32 đã kiểm tr
 
 | Kết quả | Hồ sơ |
 |---|---|
+| Antigravity phối hợp: 4 epoch, giữ parent; score-gate accuracy 66,67%, coverage 18,84%, chưa phát hành | [Kết quả warm-start và calibration](antigravity_continuation_20261103/RESULTS.md) |
 | V3 bổ sung dữ liệu: train 4 epoch trên RTX 2050, chọn epoch 3 theo validation loss | [Hồ sơ dữ liệu, train và đánh giá](data_expansion_20261103/README.md) |
 | V3 tiếp tục: F1 PlantDoc validation CPU 46,59%, chưa qua cổng triển khai | [Kết quả lượt tiếp tục](mobile_field/continuation_20261103/README.md) |
 | 38 unit/integration, backend/stress, frontend và mobile đều đạt | [Regression](mobile_field/continuation_20261103/regression_summary.json) |

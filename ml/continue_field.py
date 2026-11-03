@@ -2,6 +2,7 @@
 import argparse
 import hashlib
 import json
+import math
 from pathlib import Path
 import random
 import time
@@ -63,6 +64,49 @@ def validate_parent_manifest(source, digest, audit, records, expanded=False):
         raise ValueError('Expanded training overlaps a protected holdout')
 
 
+def finetuning_groups(model, blocks, backbone_lr, head_lr, top_lr=None):
+    features = list(model.features.children())
+    if not 1 <= blocks <= len(features):
+        raise ValueError('Unfreeze blocks must fit the backbone')
+    rates = [backbone_lr, head_lr] + ([] if top_lr is None else [top_lr])
+    if any(not math.isfinite(rate) or rate <= 0 for rate in rates):
+        raise ValueError('Learning rates must be finite and positive')
+    for parameter in model.features.parameters(): parameter.requires_grad_(False)
+    selected = features[-blocks:]
+    for block in selected:
+        for parameter in block.parameters(): parameter.requires_grad_(True)
+    sections = [(selected, backbone_lr)] if top_lr is None else [(selected[:-4], backbone_lr), (selected[-4:], top_lr)]
+    groups = []
+    for section, rate in sections:
+        parameters = [p for block in section for p in block.parameters() if p.requires_grad]
+        if parameters: groups.append({'params': parameters, 'lr': rate})
+    groups.append({'params': list(model.classifier.parameters()), 'lr': head_lr})
+    return groups
+
+
+def calibrate_balanced(logits, targets, rows):
+    if len(rows) != len(targets) or not rows:
+        raise ValueError('Calibration rows must align with targets')
+    domains = sorted({r['domain'] for r in rows})
+    masks = [torch.tensor([r['domain'] == domain for r in rows]) for domain in domains]
+    log_temperature = torch.zeros(1, requires_grad=True)
+    optimizer = torch.optim.LBFGS([log_temperature], lr=.1, max_iter=50)
+    def loss_at(temperature):
+        losses = nn.functional.cross_entropy(logits / temperature, targets, reduction='none')
+        return torch.stack([losses[mask].mean() for mask in masks]).mean()
+    def closure():
+        optimizer.zero_grad()
+        loss = loss_at(log_temperature.exp().clamp(.05, 10)); loss.backward()
+        return loss
+    before = float(loss_at(1.).detach())
+    optimizer.step(closure)
+    temperature = float(log_temperature.detach().exp().clamp(.05, 10))
+    after = float(loss_at(temperature).detach())
+    if not math.isfinite(after) or after > before: temperature, after = 1., before
+    return temperature, {'method': 'equal_domain_temperature_nll_validation_only', 'domains': domains,
+                         'temperature': temperature, 'validation_nll_before': before, 'validation_nll_after': after}
+
+
 def train(args):
     if args.output.exists():
         raise ValueError('Existing final candidate preserved; choose a new output')
@@ -83,21 +127,24 @@ def train(args):
     records = json.loads(manifest.read_text())
     expanded = getattr(args, 'expanded_data', False)
     validate_parent_manifest(source, digest, audit, records, expanded)
-    config = {'parent_sha256': hashlib.sha256(args.source.read_bytes()).hexdigest(),
-              'records_sha256': digest, 'epochs': args.epochs, 'batch_size': args.batch_size,
-              'seed': 42, 'backbone_lr': 1e-5, 'head_lr': 1e-4, 'expanded_data': expanded,
-              'script_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
-              'transform_sha256': hashlib.sha256(Path('backend/mobile_model.py').read_bytes()).hexdigest()}
     train_rows = [r for r in records if r['split'] == 'train']
     val_rows = [r for r in records if r['split'] == 'validation']
+    samples = args.samples_per_epoch if args.samples_per_epoch is not None else len(train_rows)
+    if min(args.epochs, args.batch_size, samples) < 1 or not 0 <= args.min_village_f1 <= 1:
+        raise ValueError('Positive training counts and a valid minimum village F1 are required')
+    config = {'parent_sha256': hashlib.sha256(args.source.read_bytes()).hexdigest(),
+              'records_sha256': digest, 'epochs': args.epochs, 'batch_size': args.batch_size,
+              'seed': 42, 'backbone_lr': args.backbone_lr, 'top_backbone_lr': args.top_backbone_lr,
+              'head_lr': args.head_lr, 'expanded_data': expanded, 'unfreeze_blocks': args.unfreeze_blocks,
+              'samples_per_epoch': samples, 'min_village_f1': args.min_village_f1,
+              'balanced_calibration': args.balanced_calibration,
+              'script_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+              'dataset_sampler_sha256': hashlib.sha256(Path('ml/train_field.py').read_bytes()).hexdigest(),
+              'transform_sha256': hashlib.sha256(Path('backend/mobile_model.py').read_bytes()).hexdigest()}
     model = build_field_model().to('cuda')
     model.load_state_dict(source['state_dict'])
-    for parameter in model.features.parameters(): parameter.requires_grad_(False)
-    for block in list(model.features.children())[-3:]:
-        for parameter in block.parameters(): parameter.requires_grad_(True)
-    optimizer = torch.optim.AdamW([
-        {'params': [p for p in model.features.parameters() if p.requires_grad], 'lr': 1e-5},
-        {'params': model.classifier.parameters(), 'lr': 1e-4}], weight_decay=.0001)
+    optimizer = torch.optim.AdamW(finetuning_groups(model, args.unfreeze_blocks, args.backbone_lr,
+                                 args.head_lr, args.top_backbone_lr), weight_decay=.0001)
     scaler = torch.amp.GradScaler('cuda')
     recovery = args.output.with_suffix('.progress.pt')
     if recovery.exists():
@@ -105,6 +152,11 @@ def train(args):
         print('Recovered batch boundary:', progress['epoch'], progress['next_sample'], flush=True)
     else:
         logits, targets = logits_for(model, val_rows, 'cuda', args.batch_size)
+        initial_metrics = domain_metrics(logits, targets, val_rows)
+        village = initial_metrics.get('PlantVillage', {}).get('known_macro_f1_present', 0.)
+        if village < args.min_village_f1:
+            raise ValueError('Parent does not satisfy the requested village validation floor')
+        print('Initial known F1:', {d:m['known_macro_f1_present'] for d,m in initial_metrics.items()}, flush=True)
         progress = {'epoch': 0, 'next_sample': 0, 'order': [], 'history': [],
                     'best_loss': validation_loss(logits, targets, val_rows),
                     'best_state': cpu_state(model), 'selected_stage': 'parent', 'active_seconds': 0.}
@@ -115,7 +167,7 @@ def train(args):
     while progress['epoch'] < args.epochs:
         check_pause()
         if not progress['order']:
-            progress['order'] = torch.multinomial(weights, len(weights), replacement=True).tolist()
+            progress['order'] = torch.multinomial(weights, samples, replacement=True).tolist()
         # A private iterator seed prevents DataLoader startup from consuming augmentation RNG on resume.
         loader = DataLoader(dataset, batch_size=args.batch_size,
                             sampler=progress['order'][progress['next_sample']:],
@@ -131,7 +183,7 @@ def train(args):
             scaler.step(optimizer); scaler.update()
             progress['next_sample'] += len(labels)
             batch = (progress['next_sample'] + args.batch_size - 1) // args.batch_size
-            if batch % 50 == 0 or progress['next_sample'] == len(train_rows) or PAUSE_FILE.exists():
+            if batch % 50 == 0 or progress['next_sample'] == samples or PAUSE_FILE.exists():
                 progress['active_seconds'] += time.perf_counter() - started; started = time.perf_counter()
                 save_progress(recovery, model, optimizer, scaler, progress, config)
                 print(f"Epoch {progress['epoch']+1}/{args.epochs}, batch {batch}, loss {float(loss.detach()):.4f}", flush=True)
@@ -141,7 +193,8 @@ def train(args):
         metrics = domain_metrics(logits, targets, val_rows)
         progress['history'].append({'epoch': progress['epoch'] + 1, 'validation_loss': value,
                                     'known_f1': {d: m['known_macro_f1_present'] for d, m in metrics.items()}})
-        if value < progress['best_loss']:
+        village = metrics.get('PlantVillage', {}).get('known_macro_f1_present', 0.)
+        if value < progress['best_loss'] and village >= args.min_village_f1:
             progress['best_loss'] = value; progress['best_state'] = cpu_state(model)
             progress['selected_stage'] = f"continued/{progress['epoch']+1}"
         print(progress['history'][-1], flush=True)
@@ -150,13 +203,13 @@ def train(args):
         save_progress(recovery, model, optimizer, scaler, progress, config)
     model.load_state_dict(progress['best_state'])
     logits, targets = logits_for(model, val_rows, 'cuda', args.batch_size)
-    temperature, calibration = calibrate(logits, targets)
+    temperature, calibration = calibrate_balanced(logits, targets, val_rows) if args.balanced_calibration else calibrate(logits, targets)
     report = {'config': config, 'architecture': FIELD_ARCHITECTURE, 'selected_stage': progress['selected_stage'],
               'history': progress['history'], 'validation': domain_metrics(logits, targets, val_rows, temperature),
               'temperature': temperature, 'training_seconds': progress['active_seconds'] + time.perf_counter() - started,
               'test_used_for_selection': False, 'test_evaluated': False,
               'gpu': torch.cuda.get_device_name(), 'torch': str(torch.__version__),
-              'parent': str(args.source), 'initial_optimizer': 'fresh AdamW; original interrupted run had no optimizer state',
+              'parent': str(args.source), 'initial_optimizer': 'fresh AdamW warm-start from parent weights; subsequent recovery restores this run optimizer',
               'recovery': 'This new run saves model, optimizer, scaler, sampler order/cursor and RNG every 50 batches and on cooperative pause.'}
     atomic_save({'architecture': FIELD_ARCHITECTURE, 'class_names': FIELD_CLASSES,
                  'preprocessing': FIELD_PREPROCESSING, 'state_dict': progress['best_state'],
@@ -173,4 +226,11 @@ if __name__ == '__main__':
     parser.add_argument('--epochs', type=int, default=2)
     parser.add_argument('--batch-size', type=int, default=32)
     parser.add_argument('--expanded-data', action='store_true', help='Require parent-bound expansion audit and preserved holdouts')
+    parser.add_argument('--samples-per-epoch', type=int)
+    parser.add_argument('--unfreeze-blocks', type=int, default=3)
+    parser.add_argument('--backbone-lr', type=float, default=1e-5)
+    parser.add_argument('--top-backbone-lr', type=float)
+    parser.add_argument('--head-lr', type=float, default=1e-4)
+    parser.add_argument('--min-village-f1', type=float, default=0.)
+    parser.add_argument('--balanced-calibration', action='store_true')
     train(parser.parse_args())

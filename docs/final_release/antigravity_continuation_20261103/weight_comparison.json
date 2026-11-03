@@ -1,0 +1,13 @@
+{
+  "parent_sha256": "c296f938564a4beb07cfeca00d9cca579516de442666a4ad96b6748355ee4c4e",
+  "candidate_sha256": "554a8e1e90443072ff98e6b1dab99576c37e2a52d041acb4bf72de5bf8a6d227",
+  "state_dict_exactly_equal": true,
+  "parent_temperature": 0.6499999761581421,
+  "candidate_temperature": 1.005058765411377,
+  "selected_stage": "parent",
+  "best_raw_domain_balanced_validation_loss": 0.5308705816666285,
+  "completed_epochs": 4,
+  "optimizer_saved": true,
+  "optimizer_groups": 3,
+  "script_matches_run": true
+}

@@ -1,0 +1,22 @@
+Initial known F1: {'MultiSourceField': 0.6596134715545984, 'PlantDoc': 0.5498007090314279, 'PlantVillage': 0.9816716273313788}
+Epoch 1/4, batch 50, loss 0.4486
+Epoch 1/4, batch 100, loss 0.6410
+Epoch 1/4, batch 150, loss 0.5758
+Epoch 1/4, batch 200, loss 0.5219
+{'epoch': 1, 'validation_loss': 0.5585253362854322, 'known_f1': {'MultiSourceField': 0.6742793782803687, 'PlantDoc': 0.5620512455669953, 'PlantVillage': 0.9810594994595647}}
+Epoch 2/4, batch 50, loss 0.6215
+Epoch 2/4, batch 100, loss 0.7083
+Epoch 2/4, batch 150, loss 0.5237
+Epoch 2/4, batch 200, loss 0.4363
+{'epoch': 2, 'validation_loss': 0.5488368198275566, 'known_f1': {'MultiSourceField': 0.6645291909053216, 'PlantDoc': 0.5519815668202764, 'PlantVillage': 0.9803592535100477}}
+Epoch 3/4, batch 50, loss 0.5741
+Epoch 3/4, batch 100, loss 0.4323
+Epoch 3/4, batch 150, loss 0.5555
+Epoch 3/4, batch 200, loss 0.4151
+{'epoch': 3, 'validation_loss': 0.5533035770058632, 'known_f1': {'MultiSourceField': 0.672337829011295, 'PlantDoc': 0.5619841417490924, 'PlantVillage': 0.9818298036677541}}
+Epoch 4/4, batch 50, loss 0.6113
+Epoch 4/4, batch 100, loss 0.5265
+Epoch 4/4, batch 150, loss 0.4090
+Epoch 4/4, batch 200, loss 0.4191
+{'epoch': 4, 'validation_loss': 0.5430652971069018, 'known_f1': {'MultiSourceField': 0.6473838279577788, 'PlantDoc': 0.5606193429050677, 'PlantVillage': 0.9815267494878889}}
+Saved continued candidate: models\mobilenetv3_antigravity_warmstart_20261103.pt

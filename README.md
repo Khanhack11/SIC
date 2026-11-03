@@ -145,6 +145,7 @@ Checkpoint mới lưu riêng. Trainer có resume và marker `artifacts/PAUSE_REQ
 - [Báo cáo và kết quả mới](docs/final_release/README.md)
 - [12 nguồn dữ liệu bổ sung và quy trình gán nhãn](docs/research/DATASET_SOURCES_20261103.md)
 - [Lượt train V3 với dữ liệu bổ sung ngày 03/11](docs/final_release/data_expansion_20261103/README.md)
+- [Lượt tiếp tục train phối hợp Antigravity](docs/final_release/antigravity_continuation_20261103/RESULTS.md)
 - [Kịch bản trình bày 20 phút](docs/final_release/PRESENTATION_20_MIN.md)
 
 PlantVillage có nền kiểm soát. Chưa đo độ chính xác ngoài đồng hoặc hiệu quả giảm thiệt hại mùa vụ. Một phần ảnh dùng định danh lá dự phòng nên audit không chứng minh tuyệt đối mọi lá vật lý đã tách biệt. Test đã được sử dụng ở các vòng trước. Model không phát hiện ảnh ngoài miền; cây khác hoặc đồ vật vẫn có thể nhận confidence cao.
