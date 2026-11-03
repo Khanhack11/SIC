@@ -1,0 +1,110 @@
+{
+  "root": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC",
+  "files": 130041,
+  "bytes": 17807685219,
+  "folders": {
+    "data": {
+      "files": 60488,
+      "bytes": 11035886429
+    },
+    ".venv-gpu": {
+      "files": 23110,
+      "bytes": 4451916407
+    },
+    "artifacts": {
+      "files": 2350,
+      "bytes": 1025087667
+    },
+    ".venv": {
+      "files": 42856,
+      "bytes": 910933891
+    },
+    "models": {
+      "files": 40,
+      "bytes": 260213863
+    },
+    "tests": {
+      "files": 383,
+      "bytes": 86934563
+    },
+    "docs": {
+      "files": 135,
+      "bytes": 13272948
+    },
+    ".git": {
+      "files": 516,
+      "bytes": 12729189
+    },
+    ".archify": {
+      "files": 52,
+      "bytes": 3288155
+    },
+    ".chart-data-EZYO4a": {
+      "files": 2,
+      "bytes": 1638095
+    },
+    ".chart-data-h8nMDH": {
+      "files": 2,
+      "bytes": 1638094
+    },
+    ".chart-data-UlZsnP": {
+      "files": 2,
+      "bytes": 1638088
+    },
+    ".chart-data-rHiNY6": {
+      "files": 2,
+      "bytes": 1638082
+    },
+    "ml": {
+      "files": 62,
+      "bytes": 543161
+    },
+    "sample_images": {
+      "files": 11,
+      "bytes": 156898
+    },
+    "backend": {
+      "files": 16,
+      "bytes": 96328
+    },
+    "(root files)": {
+      "files": 13,
+      "bytes": 68286
+    },
+    "scripts": {
+      "files": 1,
+      "bytes": 5075
+    }
+  },
+  "tracked_files": 282,
+  "tracked_extensions": {
+    ".txt": 14,
+    "(no extension)": 4,
+    ".md": 24,
+    ".json": 119,
+    ".png": 16,
+    ".html": 4,
+    ".py": 59,
+    ".ipynb": 1,
+    ".js": 2,
+    ".csv": 9,
+    ".sha256": 1,
+    ".docx": 2,
+    ".webm": 1,
+    ".pptx": 1,
+    ".log": 8,
+    ".cmd": 4,
+    ".jpg": 9,
+    ".cjs": 4
+  },
+  "read_errors": [],
+  "directory_links_not_followed": [],
+  "source_syntax_errors": [],
+  "identical_tracked_text_groups": [
+    [
+      ".archify/architecture-sic-pipeline-20261103-114010/evidence/continuation_20261103/README.md",
+      "docs/final_release/mobile_field/continuation_20261103/README.md"
+    ]
+  ],
+  "scope": "Logical file sizes; generated report directory excluded; no imports or binary model execution."
+}

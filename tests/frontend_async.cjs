@@ -18,7 +18,7 @@ const root = path.resolve(__dirname, '..');
       if (pathname === '/api/health') return route.fulfill({ json: { status: 'HEALTHY', weights_loaded: true } });
       if (pathname === '/demo/manifest.json') return route.fulfill({ json: { images: [] } });
       const file = { '/app': 'frontend_demo.html', '/frontend.js': 'frontend.js', '/crop.js': 'crop.js' }[pathname];
-      if (file) return route.fulfill({ body: await fs.readFile(path.join(root, file)), contentType: file.endsWith('.js') ? 'text/javascript' : 'text/html' });
+      if (file) return route.fulfill({ body: await fs.readFile(path.join(root, 'frontend', file)), contentType: file.endsWith('.js') ? 'text/javascript' : 'text/html' });
       return route.fulfill({ status: 404 });
     });
     await page.context().grantPermissions(['camera'], { origin: 'http://localhost:8005' });

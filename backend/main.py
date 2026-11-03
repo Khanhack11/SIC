@@ -20,7 +20,7 @@ from threading import BoundedSemaphore
 from pydantic import BaseModel
 
 from backend.config import (CONFIDENCE_THRESHOLD, CLASS_NAMES, TORCH_NUM_THREADS, INFERENCE_RUNTIME,
-                            INFERENCE_CONCURRENCY, MAX_FILE_SIZE_BYTES, BASE_DIR, SAMPLE_IMAGES_DIR)
+                            INFERENCE_CONCURRENCY, MAX_FILE_SIZE_BYTES, SAMPLE_IMAGES_DIR, FRONTEND_DIR)
 from backend.inference_engine import (
     CropDiseaseInferenceEngine,
     validate_image_file,
@@ -77,17 +77,17 @@ app.mount("/demo", StaticFiles(directory=SAMPLE_IMAGES_DIR / "demo", check_dir=F
 @app.get("/app", include_in_schema=False)
 @app.get("/frontend_demo.html", include_in_schema=False)
 def frontend():
-    return FileResponse(BASE_DIR / "frontend_demo.html")
+    return FileResponse(FRONTEND_DIR / "frontend_demo.html")
 
 
 @app.get("/frontend.js", include_in_schema=False)
 def frontend_script():
-    return FileResponse(BASE_DIR / "frontend.js", media_type="text/javascript")
+    return FileResponse(FRONTEND_DIR / "frontend.js", media_type="text/javascript")
 
 
 @app.get('/crop.js', include_in_schema=False)
 def crop_script():
-    return FileResponse(BASE_DIR / 'crop.js', media_type='text/javascript')
+    return FileResponse(FRONTEND_DIR / 'crop.js', media_type='text/javascript')
 
 
 def process_image(file_bytes, filename, threshold, crop_box=None, visible_damage=False, field_photo=True):

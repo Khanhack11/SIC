@@ -1,0 +1,103 @@
+{
+  "root": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC",
+  "files": 130112,
+  "bytes": 17915239230,
+  "folders": {
+    "data": {
+      "files": 60489,
+      "bytes": 11035887977
+    },
+    ".venv-gpu": {
+      "files": 23110,
+      "bytes": 4451916407
+    },
+    "artifacts": {
+      "files": 2364,
+      "bytes": 1126513735
+    },
+    ".venv": {
+      "files": 42856,
+      "bytes": 910933891
+    },
+    "models": {
+      "files": 41,
+      "bytes": 260215227
+    },
+    "tests": {
+      "files": 410,
+      "bytes": 99534123
+    },
+    "docs": {
+      "files": 142,
+      "bytes": 13290569
+    },
+    ".git": {
+      "files": 540,
+      "bytes": 12773146
+    },
+    ".archify": {
+      "files": 52,
+      "bytes": 3288155
+    },
+    "ml": {
+      "files": 63,
+      "bytes": 545133
+    },
+    "sample_images": {
+      "files": 11,
+      "bytes": 156898
+    },
+    "backend": {
+      "files": 16,
+      "bytes": 96449
+    },
+    "frontend": {
+      "files": 4,
+      "bytes": 34987
+    },
+    "notebooks": {
+      "files": 2,
+      "bytes": 19843
+    },
+    "scripts": {
+      "files": 3,
+      "bytes": 16574
+    },
+    "(root files)": {
+      "files": 9,
+      "bytes": 16116
+    }
+  },
+  "tracked_files": 297,
+  "tracked_extensions": {
+    ".txt": 14,
+    "(no extension)": 4,
+    ".md": 32,
+    ".json": 123,
+    ".png": 16,
+    ".html": 4,
+    ".py": 61,
+    ".csv": 10,
+    ".sha256": 1,
+    ".docx": 2,
+    ".webm": 1,
+    ".pptx": 1,
+    ".log": 8,
+    ".js": 2,
+    ".ipynb": 1,
+    ".cmd": 4,
+    ".jpg": 9,
+    ".cjs": 4
+  },
+  "source_inventory_basis": "Git index",
+  "read_errors": [],
+  "directory_links_not_followed": [],
+  "source_syntax_errors": [],
+  "identical_tracked_text_groups": [
+    [
+      ".archify/architecture-sic-pipeline-20261103-114010/evidence/continuation_20261103/README.md",
+      "docs/final_release/mobile_field/continuation_20261103/README.md"
+    ]
+  ],
+  "scope": "Logical file sizes; generated report directory excluded; no imports or binary model execution."
+}

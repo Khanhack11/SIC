@@ -1,0 +1,34 @@
+﻿[
+    {
+        "Target":  "frontend\\frontend_demo.html",
+        "Source":  "frontend_demo.html"
+    },
+    {
+        "Target":  "frontend\\frontend.js",
+        "Source":  "frontend.js"
+    },
+    {
+        "Target":  "frontend\\crop.js",
+        "Source":  "crop.js"
+    },
+    {
+        "Target":  "notebooks\\backend_development.ipynb",
+        "Source":  "backend_development.ipynb"
+    },
+    {
+        "Target":  "artifacts\\visualizations\\archive_20261103\\.chart-data-EZYO4a",
+        "Source":  ".chart-data-EZYO4a"
+    },
+    {
+        "Target":  "artifacts\\visualizations\\archive_20261103\\.chart-data-h8nMDH",
+        "Source":  ".chart-data-h8nMDH"
+    },
+    {
+        "Target":  "artifacts\\visualizations\\archive_20261103\\.chart-data-rHiNY6",
+        "Source":  ".chart-data-rHiNY6"
+    },
+    {
+        "Target":  "artifacts\\visualizations\\archive_20261103\\.chart-data-UlZsnP",
+        "Source":  ".chart-data-UlZsnP"
+    }
+]

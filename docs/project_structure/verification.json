@@ -1,0 +1,57 @@
+{
+  "test_summary": {
+    "passed": true,
+    "exit_codes": {
+      "unit_integration": 0,
+      "backend": 0,
+      "stress_edge": 0,
+      "browser": 0,
+      "frontend_async": 0,
+      "mobile_browsers": 0
+    },
+    "browser_requested": true,
+    "mobile_requested": true
+  },
+  "python_unit_tests": 50,
+  "frontend_checks": 25,
+  "camera_crop_regressions": 4,
+  "mobile": {
+    "passed": true,
+    "results": [
+      {
+        "engine": "chromium",
+        "passed": true,
+        "viewports": [
+          360,
+          390,
+          412,
+          844
+        ],
+        "touch_controls": true,
+        "crop": true,
+        "restore": true,
+        "damage_review": true,
+        "page_errors": []
+      },
+      {
+        "engine": "webkit",
+        "passed": true,
+        "viewports": [
+          360,
+          390,
+          412,
+          844
+        ],
+        "touch_controls": true,
+        "crop": true,
+        "restore": true,
+        "damage_review": true,
+        "page_errors": []
+      }
+    ],
+    "limitation": "Desktop Windows engines with mobile viewport/touch emulation. Physical Android/iPhone and physical camera not tested."
+  },
+  "physical_devices_tested": false,
+  "full_notebook_executed": false,
+  "test_logs": "tests/results/20261103_142801_949545"
+}

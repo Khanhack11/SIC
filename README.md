@@ -14,6 +14,23 @@ Lượt tiếp tục ngày 03/11 đã hoàn tất thêm hai epoch và sửa lỗ
 
 Samsung Innovation Campus, Group 5. Chuẩn bị báo cáo **04–05/11/2026**, thời lượng 20 phút.
 
+## Tìm mã nguồn và tài liệu
+
+| Thư mục | Nội dung |
+|---|---|
+| [frontend](frontend/README.md) | HTML, JavaScript upload, crop và kết quả |
+| backend | FastAPI, inference, preprocessing và tư vấn |
+| [ml](ml/README.md) | Tải dữ liệu, train, đánh giá, export và đóng gói |
+| [data](data/README.md) | Kho tri thức, ảnh gốc và manifest đã xử lý |
+| [models](models/README.md) | Trọng số đang dùng và checkpoint thí nghiệm |
+| [tests](tests/README.md) | Toàn bộ test, fixture và kết quả mỗi lần chạy |
+| [docs](docs/README.md) | Báo cáo, số liệu và kịch bản demo |
+| [notebooks](notebooks/README.md) | Notebook khám phá backend |
+| [scripts](scripts/README.md) | Kiểm kê thư mục và dung lượng |
+| artifacts | Cache, log, công cụ và file sinh ra trên máy |
+
+[Bản đồ và kết quả sắp xếp thư mục](docs/project_structure/README.md) ghi thay đổi đường dẫn cùng hồ sơ kiểm tra. Mở web bằng `run_demo.cmd`; URL `/app` và các lệnh `python -m ml.*` vẫn giữ.
+
 | Thành viên | Phạm vi công việc |
 |---|---|
 | Đinh Gia Bảo | Điều phối, phát triển và đánh giá model |

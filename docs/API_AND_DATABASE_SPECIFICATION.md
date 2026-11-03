@@ -14,7 +14,7 @@ V3 thử nghiệm có thể dùng ONNX FP32 bằng `SIC_FIELD_MODEL_PATH` cùng 
 
 Ứng viên MobileNetV3-Large dùng `SIC_FIELD_MODEL_PATH=models/mobilenetv3_field_20261103.pt`, chạy eager CPU, letterbox 224 và thêm đầu ra `Unsupported`. Không đặt biến này thì serving vẫn dùng V2/ONNX. Health cho biết kiến trúc/runtime thực tế. Model ứng viên thiếu/sai hợp đồng làm health báo chưa sẵn sàng; không tự chạy weights ngẫu nhiên.
 
-FastAPI phục vụ giao diện `/app`, script `/frontend.js` và ảnh `/demo`. `/` giữ metadata JSON để tương thích client cũ. Hai subsystem nhận diện và tư vấn nối bằng class ID trong `backend/config.py`.
+FastAPI phục vụ giao diện `/app`, script `/frontend.js`, `/crop.js` và ảnh `/demo`. Mã giao diện nằm trong `frontend/`, được định vị bằng `FRONTEND_DIR` trong `backend/config.py`. `/` giữ metadata JSON để tương thích client cũ. Hai subsystem nhận diện và tư vấn nối bằng class ID trong `backend/config.py`.
 
 | Method | Path | Nội dung |
 |---|---|---|

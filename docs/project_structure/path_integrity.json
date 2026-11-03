@@ -1,0 +1,25 @@
+{
+  "frontend_demo.html": {
+    "same_text_ignoring_checkout_line_endings": true,
+    "sha256_after_move": "fdf00418e2f92990cf073ecf6c0820399bd8ef022a51c70a5112f48815f72bad"
+  },
+  "frontend.js": {
+    "same_text_ignoring_checkout_line_endings": true,
+    "sha256_after_move": "a7b3b3638c0932237c6d4a2bfa435cb08028e956aaa3300d30212fd3a0dddc8d"
+  },
+  "crop.js": {
+    "same_text_ignoring_checkout_line_endings": true,
+    "sha256_after_move": "28c5508d40f0e663c2f0f5dde030bec15b9866db33fd1f9891678294ba909b61"
+  },
+  "notebook": {
+    "changed_cells": [
+      1
+    ],
+    "root_resolution_verified_from": [
+      "SIC",
+      "SIC/notebooks"
+    ],
+    "full_execution": false
+  },
+  "existing_data_manifests": "match original audits"
+}

@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "served_from_extracted_package": true,
+  "routes": {
+    "/app": 200,
+    "/frontend_demo.html": 200,
+    "/frontend.js": 200,
+    "/crop.js": 200,
+    "/demo/manifest.json": 200
+  },
+  "inference_runtime": "onnx",
+  "diagnose_status": 200,
+  "package": "artifacts/packages/SIC_organized_20261103.zip",
+  "package_bytes": 80338857,
+  "package_sha256": "9793c59844da6737038308b640ff29d4a5a93d42ec9c160228c3ef694c37dfdc",
+  "archive_entries": 302,
+  "raw_data_and_environments_excluded": true,
+  "test_scope": "Path migration and inference smoke; not an accuracy measurement"
+}

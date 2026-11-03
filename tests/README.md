@@ -32,6 +32,7 @@ Có thể mở `run_tests.cmd` để chạy cả browser và giữ cửa sổ xe
 | `test_field_onnx.py` | Export V3, đối chiếu batch 1/4 và ảnh thật qua preprocessing, từ chối graph không khớp checkpoint; cần dependencies ONNX |
 | `test_dataset_acquisition.py` | Kiểm tra ZIP, đường dẫn Windows, tên khác chữ hoa/thường, checksum và Git blob bằng dữ liệu nhân tạo |
 | `test_dataset_analysis.py` | Kiểm tra nhãn mơ hồ, ảnh hỏng, hash ảnh, hộp nằm ngoài ảnh và loại ứng viên trùng tập đánh giá |
+| `test_project_inventory.py` | Kiểm kê trong thư mục giải nén không có Git, loại chính thư mục kết quả và giữ nguyên file đầu vào |
 | `run_all.py` | Chạy các bộ test, giữ log và mã thoát |
 | `fixtures/` | Ảnh nhân tạo và file lỗi để kiểm tra API; không dùng đo chất lượng model |
 

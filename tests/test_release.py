@@ -30,6 +30,8 @@ class ReleaseTests(unittest.TestCase):
             self.assertIn('frontend.js', response.text)
             self.assertIn('capture="environment"', response.text)
             self.assertEqual(client.get('/frontend.js').status_code, 200)
+            self.assertEqual(client.get('/crop.js').status_code, 200)
+            self.assertEqual(client.get('/frontend_demo.html').text, response.text)
             self.assertIn(client.get('/api/health').json()['inference_runtime'], ['eager', 'torchscript', 'onnx'])
             self.assertEqual(client.get('/api/diseases/Tomato_Early_blight').json()['advisory_data']['chemical_controls'], [])
 

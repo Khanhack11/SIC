@@ -10,15 +10,16 @@ from backend.config import BASE_DIR, MODEL_WEIGHTS_PATH, ONNX_MODEL_PATH
 
 def package(output):
     files = []
-    for folder in ['backend', 'ml', 'tests', 'sample_images/demo', 'docs/final_release', 'docs/data_optimization', 'docs/research']:
+    for folder in ['backend', 'frontend', 'ml', 'scripts', 'notebooks', 'tests', 'sample_images',
+                   'docs/final_release', 'docs/data_optimization', 'docs/research', 'docs/datasets', 'docs/project_structure']:
         files.extend(p for p in (BASE_DIR / folder).rglob('*')
                      if p.is_file() and '__pycache__' not in p.parts and 'node_modules' not in p.parts
                      and not p.is_relative_to(BASE_DIR / 'tests/results'))
     diagram_folder = BASE_DIR / '.archify/architecture-sic-pipeline-20261103-114010'
     files.extend(p for p in diagram_folder.rglob('*') if p.is_file())
-    for name in ['frontend_demo.html', 'frontend.js', 'crop.js', 'run_demo.cmd', 'run_mobile_demo.cmd', 'run_field_demo.cmd', 'README.md',
+    for name in ['run_demo.cmd', 'run_mobile_demo.cmd', 'run_field_demo.cmd', 'README.md',
                  'requirements.txt', 'requirements-demo.txt', 'requirements-onnx.txt',
-                 'data/advisory_knowledge_base.json',
+                 'data/advisory_knowledge_base.json', 'data/README.md', 'models/README.md', 'docs/README.md',
                  'docs/API_AND_DATABASE_SPECIFICATION.md', 'docs/MOBILE_FIELD_PHASES.md', 'docs/FIELD_RELEASE_CRITERIA.json']:
         files.append(BASE_DIR / name)
     files.extend([MODEL_WEIGHTS_PATH, ONNX_MODEL_PATH])
@@ -50,5 +51,5 @@ def package(output):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--output', type=Path, default=Path('artifacts/SIC_demo_20261104.zip'))
+    parser.add_argument('--output', type=Path, default=Path('artifacts/packages/SIC_demo.zip'))
     package(parser.parse_args().output)
