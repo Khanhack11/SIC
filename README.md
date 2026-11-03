@@ -44,6 +44,7 @@ Mỗi record có nguồn và phạm vi đối chiếu với UMN Extension, Corne
 | MobileNetV2 backbone frozen | 94,48% | 93,76% | Giữ để phục vụ |
 | CNN nhỏ, 8 epoch GPU | 75,87% | 75,47% | Đối chứng |
 | MobileNetV2 fine-tune GPU, chọn epoch 5 | 95,01% | Không đọc test ứng viên | Loại vì recall một lớp giảm quá giới hạn |
+| Fine-tune 03/11, chọn epoch 3, validation CPU | 94.64% | Không đọc test ứng viên | Chưa đạt gate tăng 0,5 điểm F1 |
 
 Recall `Corn_Gray_leaf_spot` của ứng viên giảm 9,09 điểm phần trăm. Giới hạn phát hành đã đặt là không giảm quá 2 điểm ở bất kỳ lớp nào, nên giữ baseline và graph mặc định.
 
@@ -59,10 +60,12 @@ Baseline đạt accuracy 94,19% trên 1.720 ảnh test. Temperature fit bằng v
 
 ## Kiểm thử
 
+Toàn bộ file test nằm trong [tests](tests/README.md). Mở `tests/run_tests.cmd` để chạy cả browser hoặc chạy `python tests/run_all.py` bằng môi trường `.venv`. Log và screenshot lưu theo từng lần chạy trong `tests/results/`.
+
 ```powershell
 .\.venv\Scripts\python.exe -m unittest discover -s tests -v
-.\.venv\Scripts\python.exe test_backend.py
-.\.venv\Scripts\python.exe stress_and_edge_test.py
+.\.venv\Scripts\python.exe tests/test_backend.py
+.\.venv\Scripts\python.exe tests/stress_and_edge_test.py
 ```
 
 Hồ sơ frontend có kiểm tra tự động và screenshot desktop/mobile. Camera mô phỏng xác minh luồng phần mềm; cần thử camera vật lý trước buổi trình bày.

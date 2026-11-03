@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "source_extracted_to_separate_folder": true,
+  "unit_integration_passed": 25,
+  "backend_passed": 10,
+  "stress_edge_passed": 17,
+  "test_fixtures_present": true,
+  "candidate_checkpoint_present": true,
+  "runtime_results_and_node_modules_excluded": true,
+  "environment": "Existing installed serving Python environment; separate physical machine and offline dependency installation not tested.",
+  "final_archive_checksums": "Verified by ml.package_demo against PACKAGE_MANIFEST.json after adding this evidence."
+}

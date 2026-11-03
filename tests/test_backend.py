@@ -10,10 +10,12 @@ from pathlib import Path
 from fastapi.testclient import TestClient
 
 # Ensure backend package can be imported
-sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from backend.main import app
-from backend.config import SAMPLE_IMAGES_DIR, CONFIDENCE_THRESHOLD
+from backend.config import CONFIDENCE_THRESHOLD
+
+SAMPLE_IMAGES_DIR = Path(__file__).resolve().parent / 'fixtures'
 
 client = TestClient(app)
 

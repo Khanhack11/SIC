@@ -91,8 +91,8 @@ python -u -m ml.train
 python -u -m ml.evaluate
 python -u -m ml.benchmark
 python -m unittest discover -s tests -v
-python test_backend.py
-python stress_and_edge_test.py
+python tests/test_backend.py
+python tests/stress_and_edge_test.py
 ```
 
 Downloader kiểm tra lại và tiếp tục các file chưa đủ. Nếu đã có `data/processed/plantvillage/audit.json`, không chạy lại prepare vào cùng thư mục; dùng manifest đã có hoặc chọn thư mục output mới. Huấn luyện lưu feature theo batch và trạng thái optimizer theo epoch; chạy lại cùng tham số để tiếp tục khi chưa có checkpoint cuối cùng.

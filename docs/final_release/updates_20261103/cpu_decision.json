@@ -1,0 +1,26 @@
+{
+  "runtime": "eager PyTorch CPU, batch 16, threads 2",
+  "split": "validation",
+  "baseline_macro_f1": 0.9448007212310983,
+  "candidate_macro_f1": 0.9463597558427747,
+  "gain_percentage_points": 0.1559034611676391,
+  "required_gain_percentage_points": 0.5,
+  "maximum_allowed_class_recall_drop_percentage_points": 2,
+  "class_recall_delta_percentage_points": {
+    "Corn_Common_rust": 0.0,
+    "Corn_Gray_leaf_spot": 0.0,
+    "Corn_Northern_Leaf_Blight": 1.3513513513513487,
+    "Corn_healthy": 0.0,
+    "Potato_Early_blight": 0.0,
+    "Potato_Late_blight": -1.3157894736842146,
+    "Potato_healthy": 0.0,
+    "Tomato_Early_blight": 0.0,
+    "Tomato_Late_blight": 0.8888888888888835,
+    "Tomato_Septoria_leaf_spot": 0.0,
+    "Tomato_healthy": 0.0
+  },
+  "validation_gate_passed": false,
+  "test_candidate_evaluated": false,
+  "baseline_sha256": "ea7f52fc69187c7e5ee701b943bf80046ce26ff90d12aecb559967815a62a423",
+  "candidate_sha256": "5bc3f3c9dea72e63a8ce2e37bcf6061a85e281e37020451189b2d161fc4eab54"
+}

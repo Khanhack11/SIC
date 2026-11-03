@@ -1,0 +1,246 @@
+{
+  "accuracy": 0.9474292316580012,
+  "macro_precision": 0.9435816460788775,
+  "macro_recall": 0.9499951068550213,
+  "macro_f1": 0.9463597558427747,
+  "per_class": {
+    "Corn_Common_rust": {
+      "precision": 0.9888888888888889,
+      "recall": 0.994413407821229,
+      "f1": 0.9916434540389972,
+      "support": 179
+    },
+    "Corn_Gray_leaf_spot": {
+      "precision": 0.8372093023255814,
+      "recall": 0.935064935064935,
+      "f1": 0.8834355828220859,
+      "support": 77
+    },
+    "Corn_Northern_Leaf_Blight": {
+      "precision": 0.9642857142857143,
+      "recall": 0.9121621621621622,
+      "f1": 0.9375,
+      "support": 148
+    },
+    "Corn_healthy": {
+      "precision": 0.9942857142857143,
+      "recall": 1.0,
+      "f1": 0.9971346704871061,
+      "support": 174
+    },
+    "Potato_Early_blight": {
+      "precision": 0.9805194805194806,
+      "recall": 0.993421052631579,
+      "f1": 0.9869281045751634,
+      "support": 152
+    },
+    "Potato_Late_blight": {
+      "precision": 0.9671052631578947,
+      "recall": 0.9671052631578947,
+      "f1": 0.9671052631578947,
+      "support": 152
+    },
+    "Potato_healthy": {
+      "precision": 0.96,
+      "recall": 1.0,
+      "f1": 0.9795918367346939,
+      "support": 24
+    },
+    "Tomato_Early_blight": {
+      "precision": 0.8732394366197183,
+      "recall": 0.8211920529801324,
+      "f1": 0.8464163822525597,
+      "support": 151
+    },
+    "Tomato_Late_blight": {
+      "precision": 0.9070796460176991,
+      "recall": 0.9111111111111111,
+      "f1": 0.9090909090909091,
+      "support": 225
+    },
+    "Tomato_Septoria_leaf_spot": {
+      "precision": 0.9333333333333333,
+      "recall": 0.9333333333333333,
+      "f1": 0.9333333333333333,
+      "support": 225
+    },
+    "Tomato_healthy": {
+      "precision": 0.9734513274336283,
+      "recall": 0.9821428571428571,
+      "f1": 0.9777777777777777,
+      "support": 224
+    }
+  },
+  "confusion_matrix": [
+    [
+      178,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      72,
+      5,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      13,
+      135,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      174,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      151,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      147,
+      0,
+      0,
+      4,
+      1,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      24,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      3,
+      3,
+      0,
+      124,
+      10,
+      7,
+      4
+    ],
+    [
+      2,
+      0,
+      0,
+      1,
+      0,
+      2,
+      0,
+      9,
+      205,
+      6,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      8,
+      5,
+      210,
+      2
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      2,
+      0,
+      220
+    ]
+  ],
+  "confusion_matrix_axes": "rows=true, columns=predicted",
+  "class_names": [
+    "Corn_Common_rust",
+    "Corn_Gray_leaf_spot",
+    "Corn_Northern_Leaf_Blight",
+    "Corn_healthy",
+    "Potato_Early_blight",
+    "Potato_Late_blight",
+    "Potato_healthy",
+    "Tomato_Early_blight",
+    "Tomato_Late_blight",
+    "Tomato_Septoria_leaf_spot",
+    "Tomato_healthy"
+  ],
+  "loss": 0.14849227666854858,
+  "calibration": {
+    "nll": 0.1456199586391449,
+    "ece": 0.011822221222246299,
+    "ece_bins": 15,
+    "confidence_threshold": 0.75,
+    "accepted_count": 1610,
+    "accepted_coverage": 0.9300982356071472,
+    "accepted_accuracy": 0.9770186543464661
+  },
+  "split": "validation",
+  "count": 1731,
+  "weights_sha256": "5bc3f3c9dea72e63a8ce2e37bcf6061a85e281e37020451189b2d161fc4eab54"
+}

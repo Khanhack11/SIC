@@ -13,11 +13,13 @@ from PIL import Image
 import numpy as np
 
 # Ensure backend package can be imported
-sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from fastapi.testclient import TestClient
 from backend.main import app
-from backend.config import CLASS_NAMES, SAMPLE_IMAGES_DIR
+from backend.config import CLASS_NAMES
+
+SAMPLE_IMAGES_DIR = Path(__file__).resolve().parent / 'fixtures'
 
 client = TestClient(app)
 
@@ -157,6 +159,7 @@ def test_all():
     else:
         print(f" CÓ {total - passed} LỖI CẦN XỬ LÝ.")
     print("=" * 80)
+    return passed == total
 
 if __name__ == "__main__":
-    test_all()
+    sys.exit(0 if test_all() else 1)

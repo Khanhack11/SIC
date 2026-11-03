@@ -1,5 +1,7 @@
 # Bản chuẩn bị báo cáo ngày 04 và 05 tháng 11 năm 2026
 
+[Cập nhật train và sửa lỗi demo ngày 03/11](updates_20261103/README.md). Gói bàn giao mới là `Reports/SIC_demo_20261103.zip`. Toàn bộ file test nằm trong `tests/`, mở `tests/run_tests.cmd` để chạy chung. Báo cáo Word, slide và hồ sơ bên dưới ghi kết quả tại ngày 31/10.
+
 Bản demo dùng checkpoint MobileNetV2 baseline, cùng ONNX FP32 đã kiểm tra. Frontend và API chạy chung tại `/app`. Có camera, upload, validation phía client/server, trạng thái model chưa sẵn sàng, panel tham khảo và nguồn cho 11 record. Các hướng dẫn thuốc/công thức sinh học chưa duyệt bị ẩn tại API.
 
 ## Tài liệu bàn giao

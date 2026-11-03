@@ -119,7 +119,7 @@ Test hiện có đã được xem trong các vòng trước. Vì vậy không g�
 
 Kiểm thử bắt buộc sau thay đổi:
 
-- `python -m unittest discover -s tests -v`, `python test_backend.py`, `python stress_and_edge_test.py` bằng môi trường phục vụ bản nộp.
+- `python -m unittest discover -s tests -v`, `python tests/test_backend.py`, `python tests/stress_and_edge_test.py` bằng môi trường phục vụ bản nộp.
 - Thêm kiểm tra cần thiết cho logic mới: checkpoint GPU lưu về CPU, freeze layer, frontend/model chưa sẵn sàng và nguồn tư vấn theo schema mới.
 - Demo end-to-end: một lá khỏe, một ảnh bệnh đủ confidence, một trường hợp UNCERTAIN được xác nhận thực tế; thêm file hỏng, file quá dung lượng, server offline và camera bị từ chối nếu dùng getUserMedia. Không gán sẵn kết quả đúng cho ảnh chỉ vì tên file.
 - Nếu API khó phát sinh UNCERTAIN ổn định, dùng fixture riêng trong test tự động; video demo phân biệt rõ fixture và inference thật.

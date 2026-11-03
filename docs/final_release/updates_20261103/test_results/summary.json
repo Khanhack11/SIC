@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "exit_codes": {
+    "unit_integration": 0,
+    "backend": 0,
+    "stress_edge": 0,
+    "browser": 0
+  },
+  "browser_requested": true
+}

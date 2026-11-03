@@ -1,0 +1,10 @@
+{
+  "name": "sic-demo-tests",
+  "private": true,
+  "scripts": {
+    "browser": "node frontend_demo.cjs"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1"
+  }
+}

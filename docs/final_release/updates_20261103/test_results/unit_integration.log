@@ -1,0 +1,90 @@
+D:\AI_SIC_ICTU_2026\Final_SIC_AI_2026\Project\SIC\.venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+  from starlette.testclient import TestClient as TestClient  # noqa
+[AdvisoryEngine] Loaded 11 crop disease profiles from Knowledge Base.
+test_health_does_not_wait_for_inference (test_api_concurrency.ApiConcurrencyTests.test_health_does_not_wait_for_inference) ... ok
+test_thresholds_are_isolated_and_cpu_work_is_bounded (test_api_concurrency.ApiConcurrencyTests.test_thresholds_are_isolated_and_cpu_work_is_bounded) ... ok
+test_api_reports_missing_model_as_503 (test_data_pipeline.DataPipelineTests.test_api_reports_missing_model_as_503) ... ok
+test_checkpoint_label_order_mismatch_is_rejected (test_data_pipeline.DataPipelineTests.test_checkpoint_label_order_mismatch_is_rejected) ... ok
+test_curation_is_reproducible_and_leaf_disjoint (test_data_pipeline.DataPipelineTests.test_curation_is_reproducible_and_leaf_disjoint) ... [InferenceEngine] Checkpoint unavailable: Checkpoint class_names differs from the serving contract
+Auditing 234 paths in D:\AI_SIC_ICTU_2026\Final_SIC_AI_2026\Project\SIC\artifacts\test_temp\tmpl4xste4f\raw
+{
+  "curated": 220,
+  "excluded": 2,
+  "splits": {
+    "train": 154,
+    "validation": 44,
+    "test": 22
+  }
+}
+Auditing 234 paths in D:\AI_SIC_ICTU_2026\Final_SIC_AI_2026\Project\SIC\artifacts\test_temp\tmpl4xste4f\raw
+ok
+test_invalid_resolution_and_disguised_content (test_data_pipeline.DataPipelineTests.test_invalid_resolution_and_disguised_content) ... ok
+test_mapping_covers_backend_labels_exactly (test_data_pipeline.DataPipelineTests.test_mapping_covers_backend_labels_exactly) ... ok
+test_metrics_count_all_classes_and_confusion_orientation (test_data_pipeline.DataPipelineTests.test_metrics_count_all_classes_and_confusion_orientation) ... ok
+test_missing_weights_cannot_produce_a_diagnosis (test_data_pipeline.DataPipelineTests.test_missing_weights_cannot_produce_a_diagnosis) ... ok
+test_preprocessing_matches_serving_and_is_deterministic (test_data_pipeline.DataPipelineTests.test_preprocessing_matches_serving_and_is_deterministic) ... ok
+test_finetune_only_updates_selected_blocks_and_keeps_batchnorm_frozen (test_gpu_training.GpuTrainingTests.test_finetune_only_updates_selected_blocks_and_keeps_batchnorm_frozen) ... ok
+test_small_cnn_trains_saves_and_reloads_on_cpu (test_gpu_training.GpuTrainingTests.test_small_cnn_trains_saves_and_reloads_on_cpu) ... {
+  "curated": 220,
+  "excluded": 2,
+  "splits": {
+    "train": 154,
+    "validation": 44,
+    "test": 22
+  }
+}
+[InferenceEngine] No trained checkpoint found; diagnosis is unavailable until weights are provided.
+Epoch 1: validation F1=0.015152, loss=2.393250, best epoch=1
+Saved C:\Users\MSI\AppData\Local\Temp\tmp1ppx2at5\cnn.pt; selected validation F1=0.015152
+ok
+test_standardization_folds_into_linear_layer (test_head_optimization.HeadOptimizationTests.test_standardization_folds_into_linear_layer) ... ok
+test_batch_shapes_and_logits_agree_with_fp32_checkpoint (test_onnx_runtime.OnnxRuntimeTests.test_batch_shapes_and_logits_agree_with_fp32_checkpoint) ... ok
+test_graph_from_another_checkpoint_is_rejected (test_onnx_runtime.OnnxRuntimeTests.test_graph_from_another_checkpoint_is_rejected) ... ok
+test_onnx_defaults_to_cpu_even_when_cuda_is_available (test_onnx_runtime.OnnxRuntimeTests.test_onnx_defaults_to_cpu_even_when_cuda_is_available) ... ok
+test_index_returns_only_hashes_within_radius (test_perceptual_audit.PerceptualAuditTests.test_index_returns_only_hashes_within_radius) ... ok
+test_rotation_and_reflection_have_same_canonical_hash (test_perceptual_audit.PerceptualAuditTests.test_rotation_and_reflection_have_same_canonical_hash) ... ok
+test_cached_tail_matches_full_model (test_projection_finetune.ProjectionTests.test_cached_tail_matches_full_model) ... ok
+test_individual_samples_can_mix_across_class_sorted_shards (test_projection_finetune.ProjectionTests.test_individual_samples_can_mix_across_class_sorted_shards) ... ok
+test_only_projection_and_head_receive_gradients (test_projection_finetune.ProjectionTests.test_only_projection_and_head_receive_gradients) ... ok
+test_every_class_has_traceable_reference_and_review_scope (test_release.ReleaseTests.test_every_class_has_traceable_reference_and_review_scope) ... ok
+test_frontend_and_health_are_served_by_the_api (test_release.ReleaseTests.test_frontend_and_health_are_served_by_the_api) ... ok
+test_internal_error_is_not_exposed_to_the_client (test_release.ReleaseTests.test_internal_error_is_not_exposed_to_the_client) ... Diagnosis processing failed
+Traceback (most recent call last):
+  File "D:\AI_SIC_ICTU_2026\Final_SIC_AI_2026\Project\SIC\backend\main.py", line 162, in diagnose_leaf_image
+    payload = await anyio.to_thread.run_sync(partial(process_image, file_bytes,
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                   file.filename or "uploaded_image.jpg", custom_threshold),
+                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                            limiter=getattr(app.state, "inference_limiter", None))
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\AI_SIC_ICTU_2026\Final_SIC_AI_2026\Project\SIC\.venv\Lib\site-packages\anyio\to_thread.py", line 65, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\AI_SIC_ICTU_2026\Final_SIC_AI_2026\Project\SIC\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 2706, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "D:\AI_SIC_ICTU_2026\Final_SIC_AI_2026\Project\SIC\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 1100, in run
+    result = context.run(func, *args)
+  File "D:\AI_SIC_ICTU_2026\Final_SIC_AI_2026\Project\SIC\backend\main.py", line 85, in process_image
+    inference_result = inference_engine.predict(file_bytes)
+  File "C:\Users\MSI\AppData\Local\Programs\Python\Python313\Lib\unittest\mock.py", line 1169, in __call__
+    return self._mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\AppData\Local\Programs\Python\Python313\Lib\unittest\mock.py", line 1173, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\AppData\Local\Programs\Python\Python313\Lib\unittest\mock.py", line 1228, in _execute_mock_call
+    raise effect
+RuntimeError: secret-internal-path
+ok
+test_unreviewed_treatments_are_withheld_without_mutating_database (test_release.ReleaseTests.test_unreviewed_treatments_are_withheld_without_mutating_database) ... ok
+
+----------------------------------------------------------------------
+Ran 25 tests in 6.117s
+
+OK
+[InferenceEngine] Loaded model weights from D:\AI_SIC_ICTU_2026\Final_SIC_AI_2026\Project\SIC\models\mobilenetv2_crop_disease.pt

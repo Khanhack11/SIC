@@ -212,11 +212,18 @@ async function loadSamples() {
       const button = document.createElement('button');
       button.type = 'button'; button.className = 'btn-sample'; button.textContent = sample.caption;
       button.addEventListener('click', async () => {
+        if (busy) return;
+        const version = ++selectionVersion;
+        selectedFile = null;
+        updateSubmit();
         try {
           const image = await fetch(`${API_BASE}/demo/${encodeURIComponent(sample.filename)}`);
           if (!image.ok) throw new Error();
-          await selectFile(new File([await image.blob()], sample.filename, { type: 'image/jpeg' }));
-        } catch { inputError('Không tải được ảnh mẫu. Hãy chọn ảnh từ máy.'); }
+          const blob = await image.blob();
+          if (version === selectionVersion) await selectFile(new File([blob], sample.filename, { type: 'image/jpeg' }));
+        } catch {
+          if (version === selectionVersion) inputError('Không tải được ảnh mẫu. Hãy chọn ảnh từ máy.');
+        }
       });
       byId('sample-buttons').append(button);
     }

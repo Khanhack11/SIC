@@ -104,8 +104,8 @@ Tối ưu serving gồm tái sử dụng transform, `torch.inference_mode()`, b�
 
 ```powershell
 python -m unittest discover -s tests -v
-python test_backend.py
-python stress_and_edge_test.py
+python tests/test_backend.py
+python tests/stress_and_edge_test.py
 ```
 
 Kiểm tra mới bao phủ tính tái lập, leaf-disjoint split, ảnh hỏng/trùng, hợp đồng nhãn, train-serving parity và trường hợp thiếu model. Fixture tổng hợp dùng để kiểm tra logic; chỉ các báo cáo tạo từ bộ ảnh thật mới được dùng làm kết quả chất lượng.
