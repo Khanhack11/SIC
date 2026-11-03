@@ -1,5 +1,7 @@
 # Các phase sửa hệ thống ảnh thực địa và điện thoại
 
+Ưu tiên cập nhật theo yêu cầu người dùng: xử lý ảnh có sẵn tải từ máy trước. Camera/điện thoại giữ làm chức năng bổ sung để hoàn thiện sau, mặc định thu gọn trong giao diện. Không yêu cầu thử camera vật lý cho luồng demo chính hiện tại.
+
 Yêu cầu xác nhận ngày 03/11/2026: Android phổ thông và iPhone dùng web gọi API; model chạy trên server. Không cần cài model lên điện thoại.
 
 Cập nhật thực hiện: phase 1–3 đã triển khai; phase 4 đã train và đánh giá một ứng viên V3, chưa qua cổng triển khai nên giữ baseline; phase 5 đã kiểm tra trình duyệt mô phỏng và API, chưa có điện thoại vật lý. [Số liệu và giới hạn](final_release/mobile_field/RESULTS.md). [Ba sơ đồ và giải thích model](../.archify/architecture-sic-pipeline-20261103-114010/README.md).

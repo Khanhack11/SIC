@@ -22,11 +22,11 @@ Có thể mở `run_tests.cmd` để chạy cả browser và giữ cửa sổ xe
 |---|---|
 | `test_*.py` | Unit/integration; `test_backend.py` có thêm 10 kiểm tra khi chạy trực tiếp |
 | `stress_and_edge_test.py` | 17 tình huống edge/concurrency và latency |
-| `frontend_demo.cjs` | 24 kiểm tra Chrome, gồm camera mô phỏng, ảnh lỗi, disease/healthy/uncertain, lỗi mạng/API, retry, crop/khôi phục và pixels preview/upload |
+| `frontend_demo.cjs` | 25 kiểm tra Chrome, gồm upload làm luồng chính không hỏi quyền camera, camera bổ sung, ảnh lỗi, disease/healthy/uncertain, retry, crop/khôi phục và pixels preview/upload |
 | `mobile_browsers.cjs` | Chromium và WebKit với thao tác chạm và viewport 360/390/412/844; không phải điện thoại thật |
 | `field_demo.py` | Chạy riêng bằng Python khi có weights V3: kiểm tra API thật, crop và đo latency CPU sau warmup |
 | `architecture_diagrams.cjs` | Kiểm tra riêng file HTML Archify bằng Chrome ở 1440/1920 px; truyền thư mục sơ đồ làm đối số |
-| `frontend_async.cjs` | Callback camera đến chậm sau khi chọn file khác/đóng camera và crop sát mép ảnh rộng lẻ; không cần chạy model |
+| `frontend_async.cjs` | Callback camera đến chậm sau khi đổi file, đóng camera hoặc thu gọn mục bổ sung, và crop sát mép ảnh rộng lẻ |
 | `test_field_recovery.py` | Khôi phục optimizer, RNG và vị trí lấy mẫu; kiểm tra bước train tiếp theo khớp với trạng thái đã lưu |
 | `test_field_release.py` | Không dùng test hoặc manifest khác để quyết định phát hành; trường hợp F1 tăng vẫn trượt cổng độ chính xác |
 | `test_field_onnx.py` | Export V3, đối chiếu batch 1/4 và ảnh thật qua preprocessing, từ chối graph không khớp checkpoint; cần dependencies ONNX |

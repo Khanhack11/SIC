@@ -1,0 +1,46 @@
+{
+  "passed": true,
+  "primary_flow": "Select local image -> preview -> optional manual crop -> analyze -> result",
+  "camera": "Preserved under closed optional details; no permission request during file upload; streams stop when collapsed",
+  "frontend_check_count": 25,
+  "async_checks": [
+    "new file",
+    "close camera",
+    "close options",
+    "odd-width crop preserves source boundary"
+  ],
+  "mobile_browser_results": [
+    {
+      "engine": "chromium",
+      "passed": true,
+      "viewports": [
+        360,
+        390,
+        412,
+        844
+      ],
+      "touch_controls": true,
+      "crop": true,
+      "restore": true,
+      "damage_review": true,
+      "page_errors": []
+    },
+    {
+      "engine": "webkit",
+      "passed": true,
+      "viewports": [
+        360,
+        390,
+        412,
+        844
+      ],
+      "touch_controls": true,
+      "crop": true,
+      "restore": true,
+      "damage_review": true,
+      "page_errors": []
+    }
+  ],
+  "physical_camera_testing": "Deferred by user; not tested",
+  "logs": "tests/results/upload_priority_20261103"
+}

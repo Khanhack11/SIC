@@ -257,6 +257,7 @@
     .crop-coordinates input { display:block; width:100%; min-height:44px; font-size:18px; padding:6px; }
     .crop-actions { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
     .metrics-row > * { min-width:140px; }
+    #camera-options > summary { min-height:44px; }
   </style>
 </head>
 <body>
@@ -274,16 +275,10 @@
         <h2 id="input-title">Ảnh lá cây</h2>
         <fieldset id="input-controls">
           <label class="upload-zone" for="file-input">
-            <strong>Chọn một ảnh rõ nét</strong>
-            <p>JPG hoặc PNG, tối đa 10 MB. Chụp gần lá, đủ sáng.</p>
+            <strong>Chọn ảnh từ máy</strong>
+            <p>JPG hoặc PNG, tối đa 10 MB. Chọn ảnh lá rõ nét, đủ sáng.</p>
             <input type="file" id="file-input" accept="image/jpeg,image/png">
           </label>
-          <div class="sample-buttons"><button id="open-camera" type="button" class="secondary">Chụp ảnh</button></div>
-          <input type="file" id="camera-file" accept="image/jpeg,image/png" capture="environment" hidden>
-          <div id="camera-panel" hidden>
-            <video id="camera-video" autoplay playsinline muted aria-label="Xem trước camera"></video>
-            <div class="camera-actions"><button id="capture" class="secondary" type="button">Dùng ảnh này</button><button id="close-camera" class="secondary" type="button">Đóng camera</button></div>
-          </div>
           <p id="input-error" role="alert" hidden></p>
           <img id="image-preview" alt="Ảnh lá đã chọn">
           <p id="file-info" role="status"></p>
@@ -305,6 +300,16 @@
           <button id="btn-submit" type="button" class="btn-submit" disabled>Phân tích ảnh</button>
           <p class="hint">Ngưỡng hiển thị tư vấn: 75%. Ảnh ngoài ba cây được hỗ trợ có thể cho kết quả sai dù độ tin cậy cao.</p>
           <details><summary>Thử với ảnh lá mẫu</summary><p class="hint">Ảnh từ tập validation PlantVillage, chỉ dùng minh họa thao tác. Nhãn mẫu không thay cho kết quả model.</p><div id="sample-buttons" class="sample-buttons"></div></details>
+          <details id="camera-options">
+            <summary>Chụp ảnh (chức năng bổ sung)</summary>
+            <p class="hint">Hiện ưu tiên phân tích ảnh tải lên. Phần chụp ảnh được giữ để thử và hoàn thiện sau.</p>
+            <div class="sample-buttons"><button id="open-camera" type="button" class="secondary">Chụp ảnh</button></div>
+            <input type="file" id="camera-file" accept="image/jpeg,image/png" capture="environment" hidden>
+            <div id="camera-panel" hidden>
+              <video id="camera-video" autoplay playsinline muted aria-label="Xem trước camera"></video>
+              <div class="camera-actions"><button id="capture" class="secondary" type="button">Dùng ảnh này</button><button id="close-camera" class="secondary" type="button">Đóng camera</button></div>
+            </div>
+          </details>
         </fieldset>
       </section>
       <section class="card" aria-labelledby="result-title" aria-busy="false" id="result-card">

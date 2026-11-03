@@ -27,7 +27,8 @@ const root = path.resolve(__dirname, '..');
     await page.locator('#file-input').setInputFiles(path.join(root, 'sample_images/demo/Potato_healthy.jpg'));
     await page.waitForFunction(() => document.querySelector('#file-info').textContent.includes('Potato_healthy.jpg'));
 
-    for (const action of ['new file', 'close camera']) {
+    for (const action of ['new file', 'close camera', 'close options']) {
+      if (!await page.locator('#camera-options').evaluate(details=>details.open)) await page.locator('#camera-options > summary').click();
       await page.locator('#open-camera').click();
       await page.waitForFunction(() => document.querySelector('#camera-video').videoWidth > 0);
       await page.evaluate(() => {
@@ -37,14 +38,18 @@ const root = path.resolve(__dirname, '..');
           native.call(this, blob => { window.releaseCameraBlob = () => callback(blob); }, ...args);
         };
         window.releaseCameraBlob = null;
+        window.captureTracks = cameraStream.getTracks();
         window.captureJob = captureImage();
       });
       await page.waitForFunction(() => window.releaseCameraBlob !== null);
       if (action === 'new file') {
         await page.locator('#file-input').setInputFiles(path.join(root, 'sample_images/demo/Tomato_Early_blight.jpg'));
         await page.waitForFunction(() => document.querySelector('#file-info').textContent.includes('Tomato_Early_blight.jpg'));
-      } else {
+      } else if (action === 'close camera') {
         await page.locator('#close-camera').click();
+      } else {
+        await page.locator('#camera-options > summary').click();
+        await page.locator('#camera-panel').waitFor({state:'hidden'});
       }
       const expected = await page.locator('#file-info').textContent();
       await page.evaluate(() => window.releaseCameraBlob());
@@ -52,6 +57,7 @@ const root = path.resolve(__dirname, '..');
       assert.equal(await page.locator('#file-info').textContent(), expected,
         `A slow capture replaced the image after: ${action}`);
       assert(await page.locator('#camera-panel').isHidden());
+      assert(await page.evaluate(()=>window.captureTracks.every(track=>track.readyState==='ended')));
       checks.push(action);
     }
     // A crop touching the right edge of an odd-width image must not add a black column.

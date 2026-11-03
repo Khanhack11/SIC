@@ -32,6 +32,8 @@ let server,serverPid,active;
     page.on('pageerror',e=>errors.push(e.message));
     await page.goto('http://127.0.0.1:8002/app');
     await page.getByText('Model sẵn sàng',{exact:true}).waitFor();
+    assert(await page.locator('#file-input').isVisible());
+    assert.equal(await page.locator('#camera-options').evaluate(details=>details.open),false);
     await page.locator('#file-input').setInputFiles('sample_images/demo/Potato_healthy.jpg');
     await page.locator('#crop-panel:not([hidden])').waitFor();
     await page.getByText('Chọn vùng lá để phân tích',{exact:true}).tap();

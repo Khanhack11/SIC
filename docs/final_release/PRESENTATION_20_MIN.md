@@ -25,7 +25,7 @@ Cập nhật ngày 03/11: deck và video giữ kết quả baseline ngày 31/10.
 
 1. Cắm nguồn, mở `run_demo.cmd`, đợi trạng thái Model sẵn sàng. Không đổi Python environment hoặc weights sát giờ báo cáo.
 2. Mở `/app`, thử ảnh ngô gỉ sắt, lá khoai tây và ảnh khó. Kiểm tra có nguồn tư vấn, không có liều thuốc chưa duyệt.
-3. Thử camera thật trên máy sẽ trình bày. Nếu không có camera hoặc bị từ chối quyền, dùng ảnh từ máy; không nói rằng camera vật lý đã được kiểm chứng bằng test mô phỏng.
+3. Demo chính dùng ảnh có sẵn từ máy. Chức năng chụp được giữ trong mục bổ sung, dành cho giai đoạn sau; không cần dùng camera trong buổi trình bày hiện tại.
 4. Mở deck và video `SIC_Demo.webm` để dự phòng. Video không có lời thuyết minh; dùng lời giải thích trực tiếp khi phát.
 5. Giữ một bản ZIP demo và tài liệu trên USB. Môi trường Python không nằm trong ZIP; cài dependency trước khi chuyển sang máy khác.
 
@@ -37,7 +37,7 @@ Chọn Khoai tây, lá khỏe. Nói rõ model xếp ảnh vào lớp khỏe tron
 
 Dành khoảng một phút trong phần này để chọn file từ máy, mở khung crop, áp dụng rồi khôi phục. Giải thích rằng khung do người dùng chọn, chưa tự tách lá. Đánh dấu có tổn thương và phân tích ảnh lá khỏe để cho thấy cảnh báo xung đột. Điểm 59,6% của ảnh khó thuộc V2 trên ảnh mẫu gốc; V3 hoặc vùng crop khác có thể cho điểm khác.
 
-Chọn một file hỏng hoặc file trên 10 MB để minh họa validation. Nếu camera đã thử trước buổi trình bày, chụp một ảnh để cho thấy luồng capture và preview. Không dùng ảnh vật thể ngoài phạm vi để khẳng định model biết từ chối ảnh lạ: hệ thống hiện chưa có chức năng đó.
+Chọn một file hỏng hoặc file trên 10 MB để minh họa validation. Giữ phần camera bổ sung thu gọn khi demo. Không dùng ảnh vật thể ngoài phạm vi để khẳng định model biết từ chối ảnh lạ: ngưỡng điểm không bảo đảm phát hiện ảnh ngoài phạm vi.
 
 ## Giải thích các câu hỏi kỹ thuật
 

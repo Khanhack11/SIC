@@ -36,12 +36,26 @@ function stopServer() {
   const browser = await chromium.launch({executablePath:process.env.CHROME_PATH || 'C:/Program Files/Google/Chrome/Application/chrome.exe',headless:true,args:['--disable-gpu','--use-fake-device-for-media-stream']});
   activeBrowser=browser;
   const page = await browser.newPage({viewport:{width:1280,height:900}});
+  await page.addInitScript(()=>{
+    window.cameraRequests=0;
+    const capture=navigator.mediaDevices.getUserMedia.bind(navigator.mediaDevices);
+    navigator.mediaDevices.getUserMedia=(...args)=>{window.cameraRequests++;return capture(...args);};
+  });
   const errors=[];
   page.on('pageerror', error=>errors.push(error.message));
   await page.goto('http://127.0.0.1:8001/app');
   await page.getByText('Model sẵn sàng',{exact:true}).waitFor();
   await fs.mkdir(outputDir,{recursive:true});
   await page.screenshot({path:path.join(outputDir,'desktop-empty.png'),fullPage:true});
+  assert(await page.locator('#file-input').isVisible());
+  assert.equal(await page.locator('#camera-options').evaluate(details=>details.open),false);
+  assert(await page.locator('#open-camera').isHidden());
+  await page.locator('#file-input').setInputFiles('sample_images/demo/Corn_Common_rust.jpg');
+  await page.locator('#btn-submit:not([disabled])').waitFor();
+  await page.locator('#btn-submit').click();
+  await page.getByText('Đạt ngưỡng tham khảo',{exact:true}).waitFor();
+  assert.equal(await page.evaluate(()=>window.cameraRequests),0,'Uploading must not request camera permission');
+  await page.locator('#camera-options > summary').click();
   await page.context().grantPermissions(['camera'],{origin:'http://127.0.0.1:8001'});
   await page.locator('#open-camera').click();
   await page.locator('#camera-panel:not([hidden])').waitFor();
@@ -156,8 +170,8 @@ function stopServer() {
   await page.getByText('Chưa kết nối được máy chủ. Kiểm tra server rồi thử lại.',{exact:true}).waitFor();
   assert(await page.locator('#btn-submit').isDisabled());
   assert.deepEqual(errors,[]);
-  await fs.writeFile(path.join(outputDir,'frontend_verification.json'),JSON.stringify({passed:true,checks:['simulated camera capture and stream cleanup','camera permission denied','corrupt image','oversize image','disease inference','duplicate submission prevention','sources','unreviewed treatments withheld','uncertain guidance','healthy leaf','mobile overflow','model not ready','offline server','slow sample does not replace newer local file','HTTP 400 recovery','HTTP 500 recovery','HTTP 503 recovery','network failure recovery','successful retry','manual crop dimensions','restore original','preview/upload pixel parity','healthy/damage conflict','readable result typography'],page_errors:errors},null,2));
+  await fs.writeFile(path.join(outputDir,'frontend_verification.json'),JSON.stringify({passed:true,checks:['file upload primary without camera permission','simulated camera capture and stream cleanup','camera permission denied','corrupt image','oversize image','disease inference','duplicate submission prevention','sources','unreviewed treatments withheld','uncertain guidance','healthy leaf','mobile overflow','model not ready','offline server','slow sample does not replace newer local file','HTTP 400 recovery','HTTP 500 recovery','HTTP 503 recovery','network failure recovery','successful retry','manual crop dimensions','restore original','preview/upload pixel parity','healthy/damage conflict','readable result typography'],page_errors:errors},null,2));
   await browser.close();
   stopServer();
-  console.log('Frontend verification passed: existing cases plus crop, restore, pixel parity, damage conflict and readable results. Camera used a simulated device.');
+  console.log('Frontend verification passed: upload-first flow and preserved optional camera, crop, retry and result checks. Camera used a simulated device.');
 })().catch(async error=>{console.error(error);if(activeBrowser)await activeBrowser.close();stopServer();process.exitCode=1;});

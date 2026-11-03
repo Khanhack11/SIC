@@ -253,6 +253,7 @@ byId('camera-file').addEventListener('change', (event) => selectFile(event.targe
 byId('btn-submit').addEventListener('click', submitDiagnosis);
 byId('open-camera').addEventListener('click', openCamera);
 byId('close-camera').addEventListener('click', stopCamera);
+byId('camera-options').addEventListener('toggle', event => { if (!event.target.open) stopCamera(); });
 byId('capture').addEventListener('click', captureImage);
 window.addEventListener('pagehide', () => { stopCamera(); if (previewUrl) URL.revokeObjectURL(previewUrl); });
 checkServerHealth();

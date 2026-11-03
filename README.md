@@ -2,6 +2,8 @@
 
 Hệ thống nhận diện ảnh lá cà chua, khoai tây và ngô, sau đó trả thông tin chăm sóc tham khảo. MobileNetV2 phân loại 11 lớp gồm 8 bệnh và 3 lớp lá khỏe. FastAPI phục vụ cả frontend tại `/app` và API.
 
+Phạm vi ưu tiên hiện tại: chọn ảnh có sẵn từ máy → xem trước → crop nếu cần → phân tích → đọc kết quả. Chụp bằng điện thoại được để sang giai đoạn sau; chức năng camera vẫn có trong mục “Chụp ảnh (chức năng bổ sung)”, mặc định thu gọn. Chọn file không yêu cầu quyền camera.
+
 Luồng điện thoại và ảnh thực địa được ghi trong [các phase](docs/MOBILE_FIELD_PHASES.md). Frontend có crop thủ công và chữ kết quả lớn hơn. Ảnh người dùng mặc định là ảnh thực địa: dự đoán lớp khỏe vẫn yêu cầu kiểm tra lại. Điểm dự đoán không phải độ chính xác chẩn đoán. MobileNetV3-Large có thêm lớp ngoài phạm vi là ứng viên riêng, chỉ nạp khi đặt `SIC_FIELD_MODEL_PATH`; không tự thay checkpoint baseline.
 
 Để hiểu model hoạt động, mở [sơ đồ hệ thống bằng Archify](.archify/architecture-sic-pipeline-20261103-114010/he-thong.html), [pipeline train](.archify/architecture-sic-pipeline-20261103-114010/huan-luyen.html), [pipeline suy luận](.archify/architecture-sic-pipeline-20261103-114010/suy-luan.html) và [giải thích từng bước](.archify/architecture-sic-pipeline-20261103-114010/README.md). V3 mới đã train và đánh giá, nhưng chưa qua tiêu chí triển khai; xem [kết quả và giới hạn](docs/final_release/mobile_field/RESULTS.md).
@@ -21,7 +23,7 @@ Samsung Innovation Campus, Group 5. Chuẩn bị báo cáo **04–05/11/2026**, 
 
 ## Chạy demo trên Windows
 
-Gói bàn giao `SIC_demo_20261104.zip` có source, ảnh demo và weights baseline. Git chỉ giữ code và hồ sơ kết quả; raw data, môi trường Python và weights được bàn giao riêng.
+Gói bàn giao `SIC_mobile_field_20261103.zip` có source, ảnh demo và weights. Git chỉ giữ code và hồ sơ kết quả; raw data, môi trường Python và weights được bàn giao riêng.
 
 Môi trường đã kiểm tra: Windows 11, Python 3.13.9. Chạy trong thư mục project:
 
@@ -39,7 +41,7 @@ Model cần `models/mobilenetv2_crop_disease.pt` và graph tương ứng `models
 
 ## Sử dụng và phạm vi tư vấn
 
-Chọn JPG/PNG hoặc bấm Chụp ảnh. File tối đa 10 MB, mỗi cạnh ít nhất 32 px, không quá 20 megapixel. Camera trực tiếp cần localhost/HTTPS và quyền camera. Thiết bị không hỗ trợ sẽ chuyển sang trình chọn ảnh/camera của thiết bị.
+Chọn JPG/PNG từ máy, xem ảnh và chọn vùng lá nếu cần, rồi bấm Phân tích ảnh. File tối đa 10 MB, mỗi cạnh ít nhất 32 px, không quá 20 megapixel. Phần camera bổ sung chỉ mở khi người dùng chọn; đóng mục này sẽ dừng camera. Camera trực tiếp cần localhost/HTTPS và quyền camera.
 
 Ngưỡng giao diện cố định 75%. Confidence thấp sẽ chỉ trả hướng dẫn chụp lại. Khi đạt ngưỡng, app hiển thị triệu chứng, canh tác và nguồn tài liệu. `custom_threshold` vẫn có trong API để kiểm thử.
 
