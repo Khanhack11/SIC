@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "ok": false,
+  "command": "finalize",
+  "status": "fail",
+  "type": "dataflow",
+  "quality": "showcase",
+  "specification": {
+    "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.archify\\architecture-sic-pipeline-20261103-114010\\inference.candidate.json",
+    "sha256": "69d98ab8a79c6c45dea715c027e14bbf28a03a7bf42dc9bfa595173cc89299b4",
+    "bytes": 5791
+  },
+  "artifact": {
+    "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.archify\\architecture-sic-pipeline-20261103-114010\\suy-luan.html",
+    "sha256": "fe8ec6747db65608650ba7fd73fd00ce9a09d4aa429c3ac0e52d73996537afe2",
+    "bytes": 835636
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "fail"
+  },
+  "failedStage": "browser-check",
+  "diagnostics": [
+    {
+      "code": "viewer/temp-cleanup-incomplete",
+      "severity": "error",
+      "message": "Browser cleanup could not safely finish; inspect the reported retained path.",
+      "subject": {
+        "artifact": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.archify\\architecture-sic-pipeline-20261103-114010\\suy-luan.html"
+      },
+      "evidence": {
+        "reason": "Chrome did not exit; retained temporary profile \"C:\\Users\\MSI\\AppData\\Local\\Temp\\archify-visual-check-profile-r6eojH\".",
+        "retainedDirectory": "C:\\Users\\MSI\\AppData\\Local\\Temp\\archify-visual-check-profile-r6eojH"
+      },
+      "supportedFixes": [
+        "resolve the reported process or filesystem failure; verify directory ownership before manual cleanup"
+      ]
+    }
+  ],
+  "diagnosticSummary": {
+    "total": 1,
+    "shown": 1,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.archify\\architecture-sic-pipeline-20261103-114010\\suy-luan.finalize.json",
+    "summaryReceipt": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.archify\\architecture-sic-pipeline-20261103-114010\\suy-luan.finalize-summary.json",
+    "browserCheckReceipt": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.archify\\architecture-sic-pipeline-20261103-114010\\suy-luan.browser-check.json"
+  },
+  "visualReview": "not-requested",
+  "durationMs": 15743,
+  "browserCheck": {
+    "requested": true,
+    "ran": false
+  }
+}

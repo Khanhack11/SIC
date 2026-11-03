@@ -1,0 +1,576 @@
+{
+  "split": "test",
+  "model": "baseline_v2_onnx",
+  "domains": {
+    "PlantVillage": {
+      "accuracy": 0.9418604651162791,
+      "macro_precision": 0.8554220310479992,
+      "macro_recall": 0.8656187775476125,
+      "macro_f1": 0.8594964471712322,
+      "per_class": {
+        "Corn_Common_rust": {
+          "precision": 0.994413407821229,
+          "recall": 0.994413407821229,
+          "f1": 0.994413407821229,
+          "support": 179
+        },
+        "Corn_Gray_leaf_spot": {
+          "precision": 0.7954545454545454,
+          "recall": 0.9090909090909091,
+          "f1": 0.8484848484848484,
+          "support": 77
+        },
+        "Corn_Northern_Leaf_Blight": {
+          "precision": 0.9492753623188406,
+          "recall": 0.8851351351351351,
+          "f1": 0.916083916083916,
+          "support": 148
+        },
+        "Corn_healthy": {
+          "precision": 1.0,
+          "recall": 0.9942528735632183,
+          "f1": 0.9971181556195965,
+          "support": 174
+        },
+        "Potato_Early_blight": {
+          "precision": 0.9932885906040269,
+          "recall": 1.0,
+          "f1": 0.9966329966329966,
+          "support": 148
+        },
+        "Potato_Late_blight": {
+          "precision": 1.0,
+          "recall": 0.9256756756756757,
+          "f1": 0.9614035087719298,
+          "support": 148
+        },
+        "Potato_healthy": {
+          "precision": 0.8888888888888888,
+          "recall": 1.0,
+          "f1": 0.9411764705882353,
+          "support": 24
+        },
+        "Tomato_Early_blight": {
+          "precision": 0.8451612903225807,
+          "recall": 0.8791946308724832,
+          "f1": 0.8618421052631579,
+          "support": 149
+        },
+        "Tomato_Late_blight": {
+          "precision": 0.8865546218487395,
+          "recall": 0.9419642857142857,
+          "f1": 0.9134199134199134,
+          "support": 224
+        },
+        "Tomato_Septoria_leaf_spot": {
+          "precision": 0.9471153846153846,
+          "recall": 0.8755555555555555,
+          "f1": 0.9099307159353348,
+          "support": 225
+        },
+        "Tomato_healthy": {
+          "precision": 0.9649122807017544,
+          "recall": 0.9821428571428571,
+          "f1": 0.9734513274336283,
+          "support": 224
+        },
+        "Unsupported": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 0
+        }
+      },
+      "confusion_matrix": [
+        [
+          178,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          70,
+          7,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          16,
+          131,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          173,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          148,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1,
+          137,
+          3,
+          0,
+          7,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          24,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          131,
+          11,
+          5,
+          2,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          6,
+          211,
+          6,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          17,
+          6,
+          197,
+          5,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          3,
+          0,
+          220,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "confusion_matrix_axes": "rows=true, columns=predicted",
+      "class_names": [
+        "Corn_Common_rust",
+        "Corn_Gray_leaf_spot",
+        "Corn_Northern_Leaf_Blight",
+        "Corn_healthy",
+        "Potato_Early_blight",
+        "Potato_Late_blight",
+        "Potato_healthy",
+        "Tomato_Early_blight",
+        "Tomato_Late_blight",
+        "Tomato_Septoria_leaf_spot",
+        "Tomato_healthy",
+        "Unsupported"
+      ],
+      "macro_f1_present": 0.9376324878231624,
+      "known_macro_f1_present": 0.9376324878231624,
+      "calibration": {
+        "nll": null,
+        "ece": 0.00565446404107206,
+        "ece_bins": 15,
+        "confidence_threshold": 0.75,
+        "accepted_count": 1563,
+        "accepted_coverage": 0.9087209105491638,
+        "accepted_accuracy": 0.9750480055809021
+      },
+      "score_gate_coverage": 0.9087209105491638,
+      "score_gate_accuracy": 0.9750480055809021,
+      "known_diseased_count": 1298,
+      "known_diseased_high_confidence_healthy_count": 4,
+      "known_diseased_high_confidence_healthy_rate": 0.0030816642101854086
+    },
+    "PlantDoc": {
+      "accuracy": 0.0967741935483871,
+      "macro_precision": 0.08039198606271776,
+      "macro_recall": 0.21134259259259258,
+      "macro_f1": 0.1020378474182822,
+      "per_class": {
+        "Corn_Common_rust": {
+          "precision": 0.125,
+          "recall": 0.1,
+          "f1": 0.11111111111111112,
+          "support": 10
+        },
+        "Corn_Gray_leaf_spot": {
+          "precision": 0.14285714285714285,
+          "recall": 0.5,
+          "f1": 0.22222222222222224,
+          "support": 4
+        },
+        "Corn_Northern_Leaf_Blight": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 0
+        },
+        "Corn_healthy": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 0
+        },
+        "Potato_Early_blight": {
+          "precision": 0.2,
+          "recall": 0.16666666666666666,
+          "f1": 0.1818181818181818,
+          "support": 6
+        },
+        "Potato_Late_blight": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 5
+        },
+        "Potato_healthy": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 0
+        },
+        "Tomato_Early_blight": {
+          "precision": 0.11428571428571428,
+          "recall": 0.4444444444444444,
+          "f1": 0.1818181818181818,
+          "support": 9
+        },
+        "Tomato_Late_blight": {
+          "precision": 0.0975609756097561,
+          "recall": 0.8,
+          "f1": 0.1739130434782609,
+          "support": 10
+        },
+        "Tomato_Septoria_leaf_spot": {
+          "precision": 0.16,
+          "recall": 0.4,
+          "f1": 0.22857142857142856,
+          "support": 10
+        },
+        "Tomato_healthy": {
+          "precision": 0.125,
+          "recall": 0.125,
+          "f1": 0.125,
+          "support": 8
+        },
+        "Unsupported": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 155
+        }
+      },
+      "confusion_matrix": [
+        [
+          1,
+          6,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          2,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          0,
+          1,
+          2,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          5,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          4,
+          3,
+          1,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          2,
+          8,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          6,
+          0,
+          4,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          3,
+          4,
+          0,
+          1,
+          0
+        ],
+        [
+          6,
+          6,
+          0,
+          5,
+          4,
+          15,
+          13,
+          18,
+          62,
+          20,
+          6,
+          0
+        ]
+      ],
+      "confusion_matrix_axes": "rows=true, columns=predicted",
+      "class_names": [
+        "Corn_Common_rust",
+        "Corn_Gray_leaf_spot",
+        "Corn_Northern_Leaf_Blight",
+        "Corn_healthy",
+        "Potato_Early_blight",
+        "Potato_Late_blight",
+        "Potato_healthy",
+        "Tomato_Early_blight",
+        "Tomato_Late_blight",
+        "Tomato_Septoria_leaf_spot",
+        "Tomato_healthy",
+        "Unsupported"
+      ],
+      "macro_f1_present": 0.13605046322437628,
+      "known_macro_f1_present": 0.1530567711274233,
+      "calibration": {
+        "nll": null,
+        "ece": 0.6763445800170302,
+        "ece_bins": 15,
+        "confidence_threshold": 0.75,
+        "accepted_count": 128,
+        "accepted_coverage": 0.5898617506027222,
+        "accepted_accuracy": 0.1328125
+      },
+      "score_gate_coverage": 0.5898617506027222,
+      "score_gate_accuracy": 0.1328125,
+      "known_diseased_count": 54,
+      "known_diseased_high_confidence_healthy_count": 2,
+      "known_diseased_high_confidence_healthy_rate": 0.03703703731298447
+    }
+  },
+  "temperature": 1.0312894582748413,
+  "runtime": "onnx",
+  "records_sha256": "aba85a5d50dd6d3f763d39ec3e21cae7ba7645e54374f90c99b9ff0a7a6db4b5",
+  "weights_sha256": "ea7f52fc69187c7e5ee701b943bf80046ce26ff90d12aecb559967815a62a423",
+  "seconds": 73.52271540000004,
+  "count": 1937,
+  "score_gate_definition": "max probability >=0.75 and predicted != Unsupported, before field-healthy review; not final API acceptance",
+  "limitations": "Proxy/internet labels; no local expert adjudication. Present-class metrics exclude absent ground-truth classes and retain confusion into all 12 labels."
+}

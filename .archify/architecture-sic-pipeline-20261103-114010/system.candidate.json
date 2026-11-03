@@ -1,0 +1,298 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "SIC: từ ảnh điện thoại đến kết quả",
+    "locale": "vi",
+    "output": ".archify/architecture-sic-pipeline-20261103-114010/he-thong.html",
+    "quality_profile": "showcase",
+    "repository": {
+      "url": "https://github.com/Khanhack11/SIC.git",
+      "revision": "6b5857919c47424eae1931bb4def61a34ebb7df1"
+    }
+  },
+  "components": [
+    {
+      "id": "phone",
+      "type": "frontend",
+      "label": "Chụp / chọn ảnh",
+      "sublabel": "Android và iPhone",
+      "pos": [
+        40,
+        40
+      ],
+      "size": [
+        150,
+        70
+      ],
+      "sources": [
+        {
+          "path": "frontend.js",
+          "line": 179,
+          "end_line": 214
+        }
+      ]
+    },
+    {
+      "id": "crop",
+      "type": "frontend",
+      "label": "Crop thủ công",
+      "sublabel": "Ảnh xem trước = ảnh gửi",
+      "pos": [
+        300,
+        40
+      ],
+      "size": [
+        160,
+        70
+      ],
+      "sources": [
+        {
+          "path": "crop.js",
+          "line": 55,
+          "end_line": 81
+        },
+        {
+          "path": "frontend.js",
+          "line": 148,
+          "end_line": 168
+        }
+      ]
+    },
+    {
+      "id": "api",
+      "type": "backend",
+      "label": "FastAPI",
+      "sublabel": "Kiểm tra ảnh, điều phối",
+      "pos": [
+        600,
+        40
+      ],
+      "size": [
+        160,
+        70
+      ],
+      "sources": [
+        {
+          "path": "backend/main.py",
+          "line": 93,
+          "end_line": 100
+        },
+        {
+          "path": "backend/main.py",
+          "line": 153,
+          "end_line": 192
+        }
+      ]
+    },
+    {
+      "id": "v2",
+      "type": "backend",
+      "label": "MobileNetV2",
+      "sublabel": "Mặc định, 11 lớp",
+      "pos": [
+        900,
+        40
+      ],
+      "size": [
+        150,
+        70
+      ],
+      "sources": [
+        {
+          "path": "backend/main.py",
+          "line": 66,
+          "end_line": 71
+        },
+        {
+          "path": "backend/inference_engine.py",
+          "line": 223,
+          "end_line": 266
+        }
+      ]
+    },
+    {
+      "id": "v3",
+      "type": "backend",
+      "label": "MobileNetV3",
+      "sublabel": "Tùy chọn, 12 lớp",
+      "pos": [
+        900,
+        320
+      ],
+      "size": [
+        150,
+        70
+      ],
+      "sources": [
+        {
+          "path": "backend/main.py",
+          "line": 66,
+          "end_line": 71
+        },
+        {
+          "path": "backend/mobile_model.py",
+          "line": 9,
+          "end_line": 37
+        },
+        {
+          "path": "backend/field_inference.py",
+          "line": 13,
+          "end_line": 46
+        }
+      ]
+    },
+    {
+      "id": "review",
+      "type": "backend",
+      "label": "Kiểm tra kết quả",
+      "sublabel": "Điểm số + chính sách",
+      "pos": [
+        1190,
+        40
+      ],
+      "size": [
+        170,
+        70
+      ],
+      "sources": [
+        {
+          "path": "backend/advisory_engine.py",
+          "line": 77,
+          "end_line": 154
+        }
+      ]
+    },
+    {
+      "id": "kb",
+      "type": "database",
+      "label": "Tri thức JSON",
+      "sublabel": "Thông tin bệnh đã soạn",
+      "pos": [
+        1500,
+        40
+      ],
+      "size": [
+        150,
+        70
+      ],
+      "sources": [
+        {
+          "path": "backend/advisory_engine.py",
+          "line": 21,
+          "end_line": 40
+        },
+        {
+          "path": "backend/config.py",
+          "line": 17,
+          "end_line": 17
+        }
+      ]
+    },
+    {
+      "id": "result",
+      "type": "frontend",
+      "label": "Kết quả trên web",
+      "sublabel": "Dự đoán và lưu ý",
+      "pos": [
+        1190,
+        320
+      ],
+      "size": [
+        170,
+        70
+      ],
+      "sources": [
+        {
+          "path": "frontend.js",
+          "line": 110,
+          "end_line": 146
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "photo-crop",
+      "from": "phone",
+      "to": "crop",
+      "label": "JPG / PNG",
+      "variant": "emphasis"
+    },
+    {
+      "id": "crop-upload",
+      "from": "crop",
+      "to": "api",
+      "label": "POST ảnh",
+      "variant": "emphasis"
+    },
+    {
+      "id": "api-v2",
+      "from": "api",
+      "to": "v2",
+      "label": "Mặc định",
+      "variant": "emphasis"
+    },
+    {
+      "id": "api-v3",
+      "from": "api",
+      "to": "v3",
+      "label": "Có biến cấu hình",
+      "variant": "default"
+    },
+    {
+      "id": "v2-review",
+      "from": "v2",
+      "to": "review",
+      "label": "Nhãn + điểm",
+      "variant": "emphasis"
+    },
+    {
+      "id": "v3-review",
+      "from": "v3",
+      "to": "review",
+      "label": "Nhãn + điểm",
+      "variant": "default"
+    },
+    {
+      "id": "kb-review",
+      "from": "kb",
+      "to": "review",
+      "label": "Tra theo nhãn",
+      "variant": "default"
+    },
+    {
+      "id": "review-render",
+      "from": "review",
+      "to": "result",
+      "label": "JSON qua API",
+      "variant": "emphasis"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Điện thoại gọi máy chủ",
+      "items": [
+        "Trình duyệt chụp hoặc chọn JPG/PNG, có thể crop trước khi gửi. Model chạy trên máy chủ, không chạy trực tiếp trong điện thoại.",
+        "Crop là hình chữ nhật do người dùng chọn. Hệ thống chưa có model tự phát hiện hoặc phân đoạn lá."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Hai model là hai lựa chọn",
+      "items": [
+        "MobileNetV2 là đường mặc định. MobileNetV3 chỉ được nạp khi đặt SIC_FIELD_MODEL_PATH; mỗi yêu cầu chạy một model.",
+        "V3 được huấn luyện thêm với PlantDoc và có lớp Unsupported. Chưa có bảo đảm nhận ra mọi ảnh ngoài phạm vi."
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "Điểm cao vẫn cần đối chiếu",
+      "items": [
+        "Ảnh thực địa bị dự đoán khỏe luôn cần xem lại. Nếu đánh dấu lá có tổn thương, kết quả khỏe bị chặn kết luận.",
+        "Điểm softmax không phải độ chính xác trên ảnh này. Tri thức chăm sóc được tra từ JSON, không phải nội dung model tự viết."
+      ]
+    }
+  ]
+}

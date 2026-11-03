@@ -1,0 +1,414 @@
+{
+  "schemaVersion": 1,
+  "ok": false,
+  "command": "finalize",
+  "status": "fail",
+  "type": "architecture",
+  "quality": "showcase",
+  "startedAt": "2026-11-03T04:40:17.933Z",
+  "specification": {
+    "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.archify\\architecture-sic-pipeline-20261103-114010\\system.candidate.json",
+    "sha256": "deb21e0819425d71374c87d5260f924dcb902af98afafed618495ea346ca7a51",
+    "bytes": 6812
+  },
+  "artifact": {
+    "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.archify\\architecture-sic-pipeline-20261103-114010\\he-thong.html",
+    "sha256": "5df9bbf2d495010367442573be4b0ced612db81c3dbc5cff79b59def5a2756d4",
+    "bytes": 846086
+  },
+  "stages": {
+    "validate": {
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": null,
+      "execution": "embedded-in-deliver",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\artifacts\\tools\\archify_package\\archify\\bin\\archify.mjs",
+        "deliver",
+        "architecture",
+        "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.archify\\architecture-sic-pipeline-20261103-114010\\system.candidate.json",
+        "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.archify\\architecture-sic-pipeline-20261103-114010\\he-thong.html",
+        "--quality",
+        "showcase",
+        "--repo-root",
+        "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC",
+        "--json"
+      ],
+      "receipt": {
+        "schemaVersion": 1,
+        "ok": true,
+        "command": "validate",
+        "specification": {
+          "sha256": "deb21e0819425d71374c87d5260f924dcb902af98afafed618495ea346ca7a51",
+          "bytes": 6812
+        },
+        "validation": {
+          "checksPassed": 9,
+          "checkCount": 9,
+          "compositionProfile": "showcase",
+          "compositionStatus": "pass",
+          "errors": 0,
+          "warnings": 0
+        }
+      }
+    },
+    "deliver": {
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": 2634,
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\artifacts\\tools\\archify_package\\archify\\bin\\archify.mjs",
+        "deliver",
+        "architecture",
+        "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.archify\\architecture-sic-pipeline-20261103-114010\\system.candidate.json",
+        "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.archify\\architecture-sic-pipeline-20261103-114010\\he-thong.html",
+        "--quality",
+        "showcase",
+        "--repo-root",
+        "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC",
+        "--json"
+      ],
+      "receipt": {
+        "schemaVersion": 1,
+        "receiptId": "6d94cee9-cdb3-4f64-b8d6-1d79d5f03dc2",
+        "ok": true,
+        "command": "deliver",
+        "type": "architecture",
+        "input": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.archify\\architecture-sic-pipeline-20261103-114010\\system.candidate.json",
+        "output": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.archify\\architecture-sic-pipeline-20261103-114010\\he-thong.html",
+        "specification": {
+          "sha256": "deb21e0819425d71374c87d5260f924dcb902af98afafed618495ea346ca7a51",
+          "bytes": 6812
+        },
+        "artifact": {
+          "sha256": "5df9bbf2d495010367442573be4b0ced612db81c3dbc5cff79b59def5a2756d4",
+          "bytes": 846086
+        },
+        "validation": {
+          "checksPassed": 9,
+          "checkCount": 9,
+          "compositionProfile": "showcase",
+          "compositionStatus": "pass",
+          "errors": 0,
+          "warnings": 0
+        },
+        "evidence": {
+          "verified": true,
+          "repository": "https://github.com/Khanhack11/SIC",
+          "revision": "6b5857919c47424eae1931bb4def61a34ebb7df1",
+          "references": 14
+        },
+        "diagnostics": [
+          {
+            "code": "i18n/locale-fallback",
+            "severity": "warning",
+            "message": "meta.locale \"vi\" has no bundled catalog and no usable meta.translations; the Viewer chrome and <html lang> fall back to English.",
+            "subject": {
+              "diagramType": "architecture",
+              "path": "/meta/locale"
+            },
+            "evidence": {
+              "locale": "vi",
+              "bundledLocales": [
+                "en",
+                "zh-CN",
+                "zh-TW",
+                "es",
+                "ko",
+                "ar"
+              ]
+            },
+            "supportedFixes": [
+              "Supply meta.translations for this locale.",
+              "Use a bundled locale: en, zh-CN, zh-TW, es, ko, ar."
+            ]
+          }
+        ],
+        "update": {
+          "status": "unavailable",
+          "installedVersion": null,
+          "availableVersion": null,
+          "releaseNotes": null,
+          "checkedAt": null,
+          "source": null,
+          "noticeRequired": false,
+          "noticeText": null,
+          "reason": "disabled"
+        }
+      },
+      "stderr": "archify: meta.locale \"vi\" has no bundled catalog and no usable meta.translations; the Viewer chrome and <html lang> fall back to English."
+    },
+    "check": {
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": 377,
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\artifacts\\tools\\archify_package\\archify\\bin\\archify.mjs",
+        "check",
+        "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.archify\\architecture-sic-pipeline-20261103-114010\\he-thong.html",
+        "--require-provenance"
+      ],
+      "receipt": {
+        "ok": true,
+        "file": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.archify\\architecture-sic-pipeline-20261103-114010\\he-thong.html",
+        "artifact": {
+          "sha256": "5df9bbf2d495010367442573be4b0ced612db81c3dbc5cff79b59def5a2756d4",
+          "bytes": 846086
+        },
+        "checks": [
+          {
+            "name": "single_svg",
+            "ok": true,
+            "details": [
+              "found 1 <svg> block(s)"
+            ]
+          },
+          {
+            "name": "finite_svg",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "orthogonal_arrows",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "label_route_clearance",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "relationship_crossings",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "relationship_corridors",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "container_border_runs",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "route_rhythm",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "legend_clearance",
+            "ok": true,
+            "details": []
+          }
+        ],
+        "composition": {
+          "schemaVersion": 1,
+          "profile": "showcase",
+          "status": "pass",
+          "summary": {
+            "errors": 0,
+            "warnings": 0
+          },
+          "metrics": {
+            "properCrossings": 0,
+            "resolvedCrossovers": 0,
+            "ambiguousCorridors": 0,
+            "arrowheadCollisions": 0,
+            "containerBorderRuns": 0,
+            "labelRouteClearanceIssues": 0,
+            "labelCanvasOverflowIssues": 0,
+            "minLabelRouteClearance": 21,
+            "desktopReadabilityIssues": 0,
+            "viewportHeightIssues": 0,
+            "minProjectedNodeTextPx": 6.371597633136095,
+            "maxBends": 2,
+            "routesOverSuggestedBends": 0,
+            "maxStretch": 1,
+            "routesOverSuggestedStretch": 0,
+            "minSegmentPx": 70,
+            "minInteriorSegmentPx": 273,
+            "shortSegmentCount": 0,
+            "shortEndpointSegmentCount": 0,
+            "shortInteriorSegmentCount": 0,
+            "microSegmentCount": 0
+          },
+          "suggestedLimits": {
+            "bendsPerRelationship": 2,
+            "stretch": 1.35,
+            "segmentPx": 16,
+            "microSegmentPx": 8
+          },
+          "routeReview": {
+            "crossings": [],
+            "detours": []
+          },
+          "leadingSpace": {
+            "measured": true,
+            "emptyTopPx": 40,
+            "emptyTopRatio": 0.087,
+            "occupiedTop": 40,
+            "viewBoxTop": 0,
+            "canvasHeight": 458,
+            "typicalNodeHeight": 70,
+            "reviewSuggested": false
+          },
+          "desktopReadability": {
+            "budgetBasis": "recognized-declared-wide",
+            "readerContract": "declared-wide-v1",
+            "availableDiagramWidth": 1346,
+            "actualBudgetPx": 1346,
+            "actualReaderWidth": 1376,
+            "desiredReaderWidth": 1614.375,
+            "viewportCap": 1376,
+            "limit": "viewport-cap",
+            "requestedTargetPx": 7.5,
+            "requestedTargetMet": false,
+            "hardFloorPx": 6,
+            "hardFloorMet": true,
+            "minimumOwner": {
+              "kind": "edge",
+              "id": "photo-crop",
+              "from": "phone",
+              "to": "crop"
+            },
+            "minimumSourceTextPx": 8,
+            "minimumProjectedTextPx": 6.371597633136095,
+            "semanticTextCount": 24
+          },
+          "issues": []
+        },
+        "provenance": "current",
+        "deliveryReceiptId": "6d94cee9-cdb3-4f64-b8d6-1d79d5f03dc2"
+      }
+    },
+    "browser-check": {
+      "status": "fail",
+      "exitCode": 1,
+      "durationMs": 11916,
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\artifacts\\tools\\archify_package\\archify\\bin\\archify.mjs",
+        "browser-check",
+        "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.archify\\architecture-sic-pipeline-20261103-114010\\he-thong.html",
+        "--json",
+        "--require-provenance"
+      ],
+      "execution": "in-process",
+      "receipt": {
+        "schemaVersion": 1,
+        "ok": false,
+        "command": "browser-check",
+        "evidenceKind": "automated-browser",
+        "status": "fail",
+        "visualReview": "not-requested",
+        "provenance": "current",
+        "deliveryReceiptId": "6d94cee9-cdb3-4f64-b8d6-1d79d5f03dc2",
+        "artifact": {
+          "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.archify\\architecture-sic-pipeline-20261103-114010\\he-thong.html",
+          "sha256": "5df9bbf2d495010367442573be4b0ced612db81c3dbc5cff79b59def5a2756d4",
+          "bytes": 846086
+        },
+        "state": {
+          "detail": "read",
+          "motion": "still"
+        },
+        "chrome": {
+          "status": "available",
+          "executable": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+        },
+        "diagnostics": [
+          {
+            "code": "viewer/temp-cleanup-incomplete",
+            "severity": "error",
+            "message": "Browser cleanup could not safely finish; inspect the reported retained path.",
+            "subject": {
+              "artifact": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.archify\\architecture-sic-pipeline-20261103-114010\\he-thong.html"
+            },
+            "evidence": {
+              "reason": "Chrome did not exit; retained temporary profile \"C:\\Users\\MSI\\AppData\\Local\\Temp\\archify-visual-check-profile-ihCw3J\".",
+              "retainedDirectory": "C:\\Users\\MSI\\AppData\\Local\\Temp\\archify-visual-check-profile-ihCw3J"
+            },
+            "supportedFixes": [
+              "resolve the reported process or filesystem failure; verify directory ownership before manual cleanup"
+            ]
+          }
+        ],
+        "containment": {
+          "status": "fail",
+          "policy": "fit-or-reader-declared-readable-vertical-scroll",
+          "viewports": []
+        },
+        "themeStates": {
+          "status": "fail",
+          "viewports": []
+        },
+        "readability": {
+          "status": "fail",
+          "minimumProjectedNodeTextPx": 6,
+          "viewports": []
+        },
+        "viewerChrome": {
+          "status": "fail",
+          "viewports": []
+        },
+        "captures": {
+          "status": "not-requested",
+          "screenshots": [],
+          "contactSheet": null
+        },
+        "sidecars": {
+          "receipt": "he-thong.browser-check.json",
+          "files": []
+        },
+        "error": "Chrome did not exit; retained temporary profile \"C:\\Users\\MSI\\AppData\\Local\\Temp\\archify-visual-check-profile-ihCw3J\"."
+      }
+    }
+  },
+  "browserCheck": {
+    "requested": true,
+    "ran": false
+  },
+  "diagnostics": [
+    {
+      "code": "viewer/temp-cleanup-incomplete",
+      "severity": "error",
+      "message": "Browser cleanup could not safely finish; inspect the reported retained path.",
+      "subject": {
+        "artifact": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.archify\\architecture-sic-pipeline-20261103-114010\\he-thong.html"
+      },
+      "evidence": {
+        "reason": "Chrome did not exit; retained temporary profile \"C:\\Users\\MSI\\AppData\\Local\\Temp\\archify-visual-check-profile-ihCw3J\".",
+        "retainedDirectory": "C:\\Users\\MSI\\AppData\\Local\\Temp\\archify-visual-check-profile-ihCw3J"
+      },
+      "supportedFixes": [
+        "resolve the reported process or filesystem failure; verify directory ownership before manual cleanup"
+      ]
+    }
+  ],
+  "evidence": {
+    "receipt": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.archify\\architecture-sic-pipeline-20261103-114010\\he-thong.finalize.json",
+    "summaryReceipt": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.archify\\architecture-sic-pipeline-20261103-114010\\he-thong.finalize-summary.json",
+    "browserCheckReceipt": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.archify\\architecture-sic-pipeline-20261103-114010\\he-thong.browser-check.json"
+  },
+  "visualReview": "not-requested",
+  "failedStage": "browser-check",
+  "finishedAt": "2026-11-03T04:40:34.245Z",
+  "durationMs": 16312,
+  "update": {
+    "status": "unavailable",
+    "installedVersion": null,
+    "availableVersion": null,
+    "releaseNotes": null,
+    "checkedAt": null,
+    "source": null,
+    "noticeRequired": false,
+    "noticeText": null,
+    "reason": "disabled"
+  }
+}

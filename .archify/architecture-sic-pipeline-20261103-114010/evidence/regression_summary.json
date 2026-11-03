@@ -1,0 +1,28 @@
+{
+  "passed": true,
+  "exit_codes": {
+    "unit_integration": 0,
+    "backend": 0,
+    "stress_edge": 0,
+    "browser": 0,
+    "mobile_browsers": 0
+  },
+  "browser_requested": true,
+  "mobile_requested": true,
+  "scope": "Baseline regression; new V3 real-weight API smoke/latency is field_demo.json, diagrams checked independently.",
+  "unit_integration_count": 34,
+  "backend_cases": 10,
+  "stress_edge_cases": 17,
+  "browser_cases": 24,
+  "mobile_engines": [
+    "Chromium",
+    "WebKit"
+  ],
+  "viewports": [
+    360,
+    390,
+    412,
+    844
+  ],
+  "physical_devices_tested": false
+}

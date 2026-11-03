@@ -1,0 +1,17 @@
+{
+  "repository": "https://github.com/tt-a1i/archify",
+  "package_url": "https://raw.githubusercontent.com/tt-a1i/archify/main/archify.zip",
+  "package_sha256": "ee790b00aed5426cb93eb385d849bf307b44eed26f79adf60a52c0f6238e1c4f",
+  "skill_version": "3.2",
+  "license": "Apache-2.0",
+  "method": "Downloaded full upstream source archive at pinned revision and official bundled skill/CLI ZIP; used the CLI without modifying its implementation.",
+  "viewer_language": "Authored content Vietnamese; fixed Viewer UI falls back to English.",
+  "source_archive": {
+    "repository": "https://github.com/tt-a1i/archify",
+    "revision": "a4065941f12be7967436261d9934784e381d423c",
+    "archive_url": "https://codeload.github.com/tt-a1i/archify/zip/a4065941f12be7967436261d9934784e381d423c",
+    "archive_sha256": "c1e4308b9fcd967157eb41fdf33a0f0b42800c87d068a3d118815b61dfd154e6",
+    "bytes": 53529110
+  },
+  "bundled_zip_matches_source_archive": true
+}

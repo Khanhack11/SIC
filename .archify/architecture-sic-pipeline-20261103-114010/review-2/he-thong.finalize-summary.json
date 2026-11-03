@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "ok": false,
+  "command": "finalize",
+  "status": "fail",
+  "type": "architecture",
+  "quality": "showcase",
+  "specification": {
+    "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.archify\\architecture-sic-pipeline-20261103-114010\\system.candidate.json",
+    "sha256": "deb21e0819425d71374c87d5260f924dcb902af98afafed618495ea346ca7a51",
+    "bytes": 6812
+  },
+  "artifact": {
+    "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.archify\\architecture-sic-pipeline-20261103-114010\\he-thong.html",
+    "sha256": "5df9bbf2d495010367442573be4b0ced612db81c3dbc5cff79b59def5a2756d4",
+    "bytes": 846086
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "fail"
+  },
+  "failedStage": "browser-check",
+  "diagnostics": [
+    {
+      "code": "viewer/temp-cleanup-incomplete",
+      "severity": "error",
+      "message": "Browser cleanup could not safely finish; inspect the reported retained path.",
+      "subject": {
+        "artifact": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.archify\\architecture-sic-pipeline-20261103-114010\\he-thong.html"
+      },
+      "evidence": {
+        "reason": "Chrome did not exit; retained temporary profile \"C:\\Users\\MSI\\AppData\\Local\\Temp\\archify-visual-check-profile-zpwoM0\".",
+        "retainedDirectory": "C:\\Users\\MSI\\AppData\\Local\\Temp\\archify-visual-check-profile-zpwoM0"
+      },
+      "supportedFixes": [
+        "resolve the reported process or filesystem failure; verify directory ownership before manual cleanup"
+      ]
+    }
+  ],
+  "diagnosticSummary": {
+    "total": 1,
+    "shown": 1,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.archify\\architecture-sic-pipeline-20261103-114010\\review-2\\he-thong.finalize.json",
+    "summaryReceipt": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.archify\\architecture-sic-pipeline-20261103-114010\\review-2\\he-thong.finalize-summary.json",
+    "browserCheckReceipt": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.archify\\architecture-sic-pipeline-20261103-114010\\review-2\\he-thong.browser-check.json"
+  },
+  "visualReview": "not-requested",
+  "durationMs": 12372,
+  "browserCheck": {
+    "requested": true,
+    "ran": false
+  }
+}

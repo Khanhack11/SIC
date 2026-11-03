@@ -1,0 +1,1186 @@
+{
+  "config": {
+    "records_sha256": "aba85a5d50dd6d3f763d39ec3e21cae7ba7645e54374f90c99b9ff0a7a6db4b5",
+    "seed": 42,
+    "head_epochs": 100,
+    "finetune_epochs": 4,
+    "batch_size": 32,
+    "script_sha256": "b4337df90f7808d174dd2c069e480c2f9a90e23674f27b906e928948be40bb24",
+    "transform_sha256": "b6fe1e2d6aed75ae1e1c4e939f65f4427387cab55236304fd802f68337bf9551"
+  },
+  "architecture": "mobilenet_v3_large_field_v1",
+  "selected_stage": "finetune/2",
+  "history": [
+    {
+      "stage": "head",
+      "epoch": 1,
+      "validation_loss": 0.8468632698059082,
+      "f1": {
+        "PlantVillage": 0.9150469846815472,
+        "PlantDoc": 0.4494325317574615
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 2,
+      "validation_loss": 0.6624232679605484,
+      "f1": {
+        "PlantVillage": 0.9211782200897016,
+        "PlantDoc": 0.48726163745901474
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 3,
+      "validation_loss": 0.6569921746850014,
+      "f1": {
+        "PlantVillage": 0.9401673338198102,
+        "PlantDoc": 0.47583700644297117
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 4,
+      "validation_loss": 0.6521322578191757,
+      "f1": {
+        "PlantVillage": 0.9427927734698421,
+        "PlantDoc": 0.47453151100025703
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 5,
+      "validation_loss": 0.5738453567028046,
+      "f1": {
+        "PlantVillage": 0.9468340919470559,
+        "PlantDoc": 0.49365058048130805
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 6,
+      "validation_loss": 0.5581600517034531,
+      "f1": {
+        "PlantVillage": 0.9429537486436115,
+        "PlantDoc": 0.5087661043056514
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 7,
+      "validation_loss": 0.5632832199335098,
+      "f1": {
+        "PlantVillage": 0.945021171583964,
+        "PlantDoc": 0.4963403524553983
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 8,
+      "validation_loss": 0.5820861160755157,
+      "f1": {
+        "PlantVillage": 0.9612631167668052,
+        "PlantDoc": 0.5105447001195063
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 9,
+      "validation_loss": 0.5760449543595314,
+      "f1": {
+        "PlantVillage": 0.9604734630265818,
+        "PlantDoc": 0.5040424067025122
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 10,
+      "validation_loss": 0.5539437904953957,
+      "f1": {
+        "PlantVillage": 0.9593228941441324,
+        "PlantDoc": 0.5068574742518027
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 11,
+      "validation_loss": 0.5662831813097,
+      "f1": {
+        "PlantVillage": 0.9587605965815484,
+        "PlantDoc": 0.5150218276128311
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 12,
+      "validation_loss": 0.5646274387836456,
+      "f1": {
+        "PlantVillage": 0.958034764531167,
+        "PlantDoc": 0.5181703116489689
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 13,
+      "validation_loss": 0.5458721816539764,
+      "f1": {
+        "PlantVillage": 0.9667064659330591,
+        "PlantDoc": 0.4948527728251892
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 14,
+      "validation_loss": 0.5370215550065041,
+      "f1": {
+        "PlantVillage": 0.9632599580935625,
+        "PlantDoc": 0.5236009637167275
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 15,
+      "validation_loss": 0.5388545840978622,
+      "f1": {
+        "PlantVillage": 0.9646338746621796,
+        "PlantDoc": 0.5067723032490625
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 16,
+      "validation_loss": 0.537537656724453,
+      "f1": {
+        "PlantVillage": 0.9670503481977971,
+        "PlantDoc": 0.5108194974127238
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 17,
+      "validation_loss": 0.5363802164793015,
+      "f1": {
+        "PlantVillage": 0.9588933194000039,
+        "PlantDoc": 0.5210689754092805
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 18,
+      "validation_loss": 0.5329906940460205,
+      "f1": {
+        "PlantVillage": 0.9721093426442784,
+        "PlantDoc": 0.5021453573674919
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 19,
+      "validation_loss": 0.5350191742181778,
+      "f1": {
+        "PlantVillage": 0.9726792436150067,
+        "PlantDoc": 0.5002679616739353
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 20,
+      "validation_loss": 0.5339408293366432,
+      "f1": {
+        "PlantVillage": 0.9740564882229571,
+        "PlantDoc": 0.5196437407415981
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 21,
+      "validation_loss": 0.5294170379638672,
+      "f1": {
+        "PlantVillage": 0.9709643527065606,
+        "PlantDoc": 0.5077324453544418
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 22,
+      "validation_loss": 0.5226642116904259,
+      "f1": {
+        "PlantVillage": 0.9735129374212622,
+        "PlantDoc": 0.5065778836239541
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 23,
+      "validation_loss": 0.526617519557476,
+      "f1": {
+        "PlantVillage": 0.9674525152479156,
+        "PlantDoc": 0.5028921291013501
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 24,
+      "validation_loss": 0.53047876060009,
+      "f1": {
+        "PlantVillage": 0.970667335857237,
+        "PlantDoc": 0.5045164892170995
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 25,
+      "validation_loss": 0.5204062461853027,
+      "f1": {
+        "PlantVillage": 0.9679589645790451,
+        "PlantDoc": 0.5179322620584486
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 26,
+      "validation_loss": 0.5129245258867741,
+      "f1": {
+        "PlantVillage": 0.975790960038491,
+        "PlantDoc": 0.5171596434630406
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 27,
+      "validation_loss": 0.5151024684309959,
+      "f1": {
+        "PlantVillage": 0.9753528462675256,
+        "PlantDoc": 0.506518262444766
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 28,
+      "validation_loss": 0.5156867839396,
+      "f1": {
+        "PlantVillage": 0.9723268232162497,
+        "PlantDoc": 0.5014299839327648
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 29,
+      "validation_loss": 0.5112174339592457,
+      "f1": {
+        "PlantVillage": 0.9727384939539927,
+        "PlantDoc": 0.5076293019627971
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 30,
+      "validation_loss": 0.5224235989153385,
+      "f1": {
+        "PlantVillage": 0.974556835843858,
+        "PlantDoc": 0.5081582604909177
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 31,
+      "validation_loss": 0.5249499417841434,
+      "f1": {
+        "PlantVillage": 0.9715520093153374,
+        "PlantDoc": 0.5111785048529828
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 32,
+      "validation_loss": 0.5276935324072838,
+      "f1": {
+        "PlantVillage": 0.9769344198731967,
+        "PlantDoc": 0.5052192806525768
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 33,
+      "validation_loss": 0.522583644837141,
+      "f1": {
+        "PlantVillage": 0.9767628122787624,
+        "PlantDoc": 0.510430834757598
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 34,
+      "validation_loss": 0.5264526903629303,
+      "f1": {
+        "PlantVillage": 0.9802418207112382,
+        "PlantDoc": 0.4995170848766326
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 35,
+      "validation_loss": 0.5172836035490036,
+      "f1": {
+        "PlantVillage": 0.9749193469485199,
+        "PlantDoc": 0.49387045706732124
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 36,
+      "validation_loss": 0.5180727913975716,
+      "f1": {
+        "PlantVillage": 0.9754563531850944,
+        "PlantDoc": 0.49315714989896076
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 37,
+      "validation_loss": 0.5214779935777187,
+      "f1": {
+        "PlantVillage": 0.9778927275915325,
+        "PlantDoc": 0.4954055486460109
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 38,
+      "validation_loss": 0.5171543657779694,
+      "f1": {
+        "PlantVillage": 0.9725908489656997,
+        "PlantDoc": 0.49311198300216386
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 39,
+      "validation_loss": 0.5098597966134548,
+      "f1": {
+        "PlantVillage": 0.9734696147949177,
+        "PlantDoc": 0.49280569806954133
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 40,
+      "validation_loss": 0.5363179929554462,
+      "f1": {
+        "PlantVillage": 0.9745670755564082,
+        "PlantDoc": 0.49489201574722963
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 41,
+      "validation_loss": 0.5176037698984146,
+      "f1": {
+        "PlantVillage": 0.9775663348582831,
+        "PlantDoc": 0.49018645214445516
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 42,
+      "validation_loss": 0.5156645178794861,
+      "f1": {
+        "PlantVillage": 0.9733439067495621,
+        "PlantDoc": 0.4953446075949941
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 43,
+      "validation_loss": 0.5137855038046837,
+      "f1": {
+        "PlantVillage": 0.978426125964916,
+        "PlantDoc": 0.49960068613848235
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 44,
+      "validation_loss": 0.5102943703532219,
+      "f1": {
+        "PlantVillage": 0.9786646101473817,
+        "PlantDoc": 0.5086235245824482
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 45,
+      "validation_loss": 0.512410469353199,
+      "f1": {
+        "PlantVillage": 0.9767886241792412,
+        "PlantDoc": 0.48936867484963176
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 46,
+      "validation_loss": 0.5112949684262276,
+      "f1": {
+        "PlantVillage": 0.9793989500535936,
+        "PlantDoc": 0.49088426046285644
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 47,
+      "validation_loss": 0.4995577335357666,
+      "f1": {
+        "PlantVillage": 0.9757162050239213,
+        "PlantDoc": 0.48652021846466287
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 48,
+      "validation_loss": 0.5101133100688457,
+      "f1": {
+        "PlantVillage": 0.98086339468807,
+        "PlantDoc": 0.5040528355804136
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 49,
+      "validation_loss": 0.5099938325583935,
+      "f1": {
+        "PlantVillage": 0.9736169470976868,
+        "PlantDoc": 0.4940446573381973
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 50,
+      "validation_loss": 0.5190514102578163,
+      "f1": {
+        "PlantVillage": 0.9753443857056004,
+        "PlantDoc": 0.490704351529497
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 51,
+      "validation_loss": 0.5066359527409077,
+      "f1": {
+        "PlantVillage": 0.9760118808865864,
+        "PlantDoc": 0.47291692287364817
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 52,
+      "validation_loss": 0.5203912369906902,
+      "f1": {
+        "PlantVillage": 0.9775641325280137,
+        "PlantDoc": 0.4879657944420188
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 53,
+      "validation_loss": 0.5148737691342831,
+      "f1": {
+        "PlantVillage": 0.9758872419338874,
+        "PlantDoc": 0.4774280163502753
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 54,
+      "validation_loss": 0.5144086852669716,
+      "f1": {
+        "PlantVillage": 0.9755218794850016,
+        "PlantDoc": 0.4782377885574841
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 55,
+      "validation_loss": 0.5069059170782566,
+      "f1": {
+        "PlantVillage": 0.9779125263868559,
+        "PlantDoc": 0.4753414697785441
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 56,
+      "validation_loss": 0.5144679099321365,
+      "f1": {
+        "PlantVillage": 0.974492811570343,
+        "PlantDoc": 0.4918315393667067
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 57,
+      "validation_loss": 0.5170359537005424,
+      "f1": {
+        "PlantVillage": 0.9789586832767431,
+        "PlantDoc": 0.4692114910110657
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 58,
+      "validation_loss": 0.5099676474928856,
+      "f1": {
+        "PlantVillage": 0.9776703351802055,
+        "PlantDoc": 0.4844809517701876
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 59,
+      "validation_loss": 0.5066178441047668,
+      "f1": {
+        "PlantVillage": 0.9790735424795212,
+        "PlantDoc": 0.48089304548427436
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 60,
+      "validation_loss": 0.5123204775154591,
+      "f1": {
+        "PlantVillage": 0.9786520784329124,
+        "PlantDoc": 0.49242553369893494
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 61,
+      "validation_loss": 0.508497953414917,
+      "f1": {
+        "PlantVillage": 0.9762898786690603,
+        "PlantDoc": 0.46985999809995277
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 62,
+      "validation_loss": 0.5125062167644501,
+      "f1": {
+        "PlantVillage": 0.9788666047342335,
+        "PlantDoc": 0.48297011810916957
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 63,
+      "validation_loss": 0.5072700493037701,
+      "f1": {
+        "PlantVillage": 0.9797318274657734,
+        "PlantDoc": 0.4982427961118844
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 64,
+      "validation_loss": 0.5071363411843777,
+      "f1": {
+        "PlantVillage": 0.9795371992575059,
+        "PlantDoc": 0.47846382395929715
+      }
+    },
+    {
+      "stage": "head",
+      "epoch": 65,
+      "validation_loss": 0.508629847317934,
+      "f1": {
+        "PlantVillage": 0.9749988196172708,
+        "PlantDoc": 0.4830986132370341
+      }
+    },
+    {
+      "stage": "finetune",
+      "epoch": 1,
+      "validation_loss": 0.5140250399708748,
+      "f1": {
+        "PlantVillage": 0.9757097586327668,
+        "PlantDoc": 0.4852477228168844
+      }
+    },
+    {
+      "stage": "finetune",
+      "epoch": 2,
+      "validation_loss": 0.49273470789194107,
+      "f1": {
+        "PlantVillage": 0.9801918311804911,
+        "PlantDoc": 0.5059081963813307
+      }
+    }
+  ],
+  "validation": {
+    "PlantVillage": {
+      "accuracy": 0.9826689774696707,
+      "macro_precision": 0.8962635372652894,
+      "macro_recall": 0.9009778053453718,
+      "macro_f1": 0.898509178582117,
+      "per_class": {
+        "Corn_Common_rust": {
+          "precision": 1.0,
+          "recall": 0.9888268156424581,
+          "f1": 0.9943820224719102,
+          "support": 179
+        },
+        "Corn_Gray_leaf_spot": {
+          "precision": 0.9259259259259259,
+          "recall": 0.974025974025974,
+          "f1": 0.949367088607595,
+          "support": 77
+        },
+        "Corn_Northern_Leaf_Blight": {
+          "precision": 0.9726027397260274,
+          "recall": 0.9594594594594594,
+          "f1": 0.9659863945578231,
+          "support": 148
+        },
+        "Corn_healthy": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 174
+        },
+        "Potato_Early_blight": {
+          "precision": 0.9934640522875817,
+          "recall": 1.0,
+          "f1": 0.9967213114754099,
+          "support": 152
+        },
+        "Potato_Late_blight": {
+          "precision": 1.0,
+          "recall": 0.9802631578947368,
+          "f1": 0.9900332225913622,
+          "support": 152
+        },
+        "Potato_healthy": {
+          "precision": 0.96,
+          "recall": 1.0,
+          "f1": 0.9795918367346939,
+          "support": 24
+        },
+        "Tomato_Early_blight": {
+          "precision": 0.9473684210526315,
+          "recall": 0.9536423841059603,
+          "f1": 0.9504950495049505,
+          "support": 151
+        },
+        "Tomato_Late_blight": {
+          "precision": 0.9737991266375546,
+          "recall": 0.9911111111111112,
+          "f1": 0.9823788546255506,
+          "support": 225
+        },
+        "Tomato_Septoria_leaf_spot": {
+          "precision": 0.9864864864864865,
+          "recall": 0.9733333333333334,
+          "f1": 0.9798657718120806,
+          "support": 225
+        },
+        "Tomato_healthy": {
+          "precision": 0.9955156950672646,
+          "recall": 0.9910714285714286,
+          "f1": 0.9932885906040269,
+          "support": 224
+        },
+        "Unsupported": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 0
+        }
+      },
+      "confusion_matrix": [
+        [
+          177,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          75,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          6,
+          142,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          174,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          152,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          149,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          24,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          144,
+          3,
+          3,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          2,
+          223,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          5,
+          0,
+          219,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          222,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "confusion_matrix_axes": "rows=true, columns=predicted",
+      "class_names": [
+        "Corn_Common_rust",
+        "Corn_Gray_leaf_spot",
+        "Corn_Northern_Leaf_Blight",
+        "Corn_healthy",
+        "Potato_Early_blight",
+        "Potato_Late_blight",
+        "Potato_healthy",
+        "Tomato_Early_blight",
+        "Tomato_Late_blight",
+        "Tomato_Septoria_leaf_spot",
+        "Tomato_healthy",
+        "Unsupported"
+      ],
+      "macro_f1_present": 0.9801918311804911,
+      "known_macro_f1_present": 0.9801918311804911,
+      "calibration": {
+        "nll": 0.06762772798538208,
+        "ece": 0.022782499770983122,
+        "ece_bins": 15,
+        "confidence_threshold": 0.75,
+        "accepted_count": 1661,
+        "accepted_coverage": 0.9595609307289124,
+        "accepted_accuracy": 0.9927754402160645
+      }
+    },
+    "PlantDoc": {
+      "accuracy": 0.7294685990338164,
+      "macro_precision": 0.3794700439600937,
+      "macro_recall": 0.38647009910167807,
+      "macro_f1": 0.37943114728599797,
+      "per_class": {
+        "Corn_Common_rust": {
+          "precision": 0.85,
+          "recall": 0.8095238095238095,
+          "f1": 0.8292682926829269,
+          "support": 21
+        },
+        "Corn_Gray_leaf_spot": {
+          "precision": 0.6666666666666666,
+          "recall": 0.7692307692307693,
+          "f1": 0.7142857142857142,
+          "support": 13
+        },
+        "Corn_Northern_Leaf_Blight": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 0
+        },
+        "Corn_healthy": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 0
+        },
+        "Potato_Early_blight": {
+          "precision": 0.3333333333333333,
+          "recall": 0.2631578947368421,
+          "f1": 0.29411764705882354,
+          "support": 19
+        },
+        "Potato_Late_blight": {
+          "precision": 0.3888888888888889,
+          "recall": 0.3888888888888889,
+          "f1": 0.3888888888888889,
+          "support": 18
+        },
+        "Potato_healthy": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 0
+        },
+        "Tomato_Early_blight": {
+          "precision": 0.18518518518518517,
+          "recall": 0.35714285714285715,
+          "f1": 0.24390243902439024,
+          "support": 14
+        },
+        "Tomato_Late_blight": {
+          "precision": 0.42857142857142855,
+          "recall": 0.3333333333333333,
+          "f1": 0.375,
+          "support": 18
+        },
+        "Tomato_Septoria_leaf_spot": {
+          "precision": 0.4,
+          "recall": 0.4,
+          "f1": 0.4000000000000001,
+          "support": 25
+        },
+        "Tomato_healthy": {
+          "precision": 0.4166666666666667,
+          "recall": 0.45454545454545453,
+          "f1": 0.43478260869565216,
+          "support": 11
+        },
+        "Unsupported": {
+          "precision": 0.8843283582089553,
+          "recall": 0.8618181818181818,
+          "f1": 0.8729281767955801,
+          "support": 275
+        }
+      },
+      "confusion_matrix": [
+        [
+          17,
+          4,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          3,
+          10,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          5,
+          6,
+          0,
+          5,
+          1,
+          0,
+          0,
+          2
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          4,
+          7,
+          0,
+          1,
+          1,
+          1,
+          0,
+          4
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          3,
+          0,
+          0,
+          5,
+          0,
+          1,
+          0,
+          5
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1,
+          3,
+          0,
+          2,
+          6,
+          0,
+          0,
+          6
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          0,
+          4,
+          0,
+          10,
+          1,
+          8
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          5,
+          6
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          1,
+          1,
+          0,
+          10,
+          6,
+          13,
+          6,
+          237
+        ]
+      ],
+      "confusion_matrix_axes": "rows=true, columns=predicted",
+      "class_names": [
+        "Corn_Common_rust",
+        "Corn_Gray_leaf_spot",
+        "Corn_Northern_Leaf_Blight",
+        "Corn_healthy",
+        "Potato_Early_blight",
+        "Potato_Late_blight",
+        "Potato_healthy",
+        "Tomato_Early_blight",
+        "Tomato_Late_blight",
+        "Tomato_Septoria_leaf_spot",
+        "Tomato_healthy",
+        "Unsupported"
+      ],
+      "macro_f1_present": 0.5059081963813307,
+      "known_macro_f1_present": 0.4600306988295495,
+      "calibration": {
+        "nll": 0.9398059248924255,
+        "ece": 0.11486699746455997,
+        "ece_bins": 15,
+        "confidence_threshold": 0.75,
+        "accepted_count": 302,
+        "accepted_coverage": 0.729468584060669,
+        "accepted_accuracy": 0.8245033025741577
+      }
+    }
+  },
+  "temperature": 0.7880007028579712,
+  "training_seconds": null,
+  "test_used_for_selection": false,
+  "training_interrupted": true,
+  "recovery": {
+    "source": "models\\mobilenetv3_field_20261103.resume.pt",
+    "sha256": "4eceaba1dc9cc9b6e3294885c06404bb23bddc7f5a8e2c7d1dcd4fca1f0feb52",
+    "completed_finetune_epochs": 2,
+    "note": "Epoch 3 interrupted; unsaved partial updates discarded. No optimizer or batch resume."
+  },
+  "gpu": "NVIDIA GeForce RTX 2050",
+  "torch": "2.14.1+cu126",
+  "pretraining": "Torchvision MobileNet_V3_Large_Weights.IMAGENET1K_V2",
+  "head": "960 -> 256 Hardswish Dropout(0.2) -> 12"
+}

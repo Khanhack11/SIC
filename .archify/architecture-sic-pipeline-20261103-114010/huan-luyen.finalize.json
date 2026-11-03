@@ -1,0 +1,403 @@
+{
+  "schemaVersion": 1,
+  "ok": false,
+  "command": "finalize",
+  "status": "fail",
+  "type": "dataflow",
+  "quality": "showcase",
+  "startedAt": "2026-11-03T04:41:31.630Z",
+  "specification": {
+    "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.archify\\architecture-sic-pipeline-20261103-114010\\training.candidate.json",
+    "sha256": "2dc54a177c0b9662adb9bfcd58ace35a0aa2f700ded3609aaf95d5ab562b9c97",
+    "bytes": 7485
+  },
+  "artifact": {
+    "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.archify\\architecture-sic-pipeline-20261103-114010\\huan-luyen.html",
+    "sha256": "39349b54205abb49a8484db9b7f5f1a1f093368a532c2def5a24d5fe071ce3e8",
+    "bytes": 844443
+  },
+  "stages": {
+    "validate": {
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": null,
+      "execution": "embedded-in-deliver",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\artifacts\\tools\\archify_package\\archify\\bin\\archify.mjs",
+        "deliver",
+        "dataflow",
+        "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.archify\\architecture-sic-pipeline-20261103-114010\\training.candidate.json",
+        "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.archify\\architecture-sic-pipeline-20261103-114010\\huan-luyen.html",
+        "--quality",
+        "showcase",
+        "--repo-root",
+        "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC",
+        "--json"
+      ],
+      "receipt": {
+        "schemaVersion": 1,
+        "ok": true,
+        "command": "validate",
+        "specification": {
+          "sha256": "2dc54a177c0b9662adb9bfcd58ace35a0aa2f700ded3609aaf95d5ab562b9c97",
+          "bytes": 7485
+        },
+        "validation": {
+          "checksPassed": 9,
+          "checkCount": 9,
+          "compositionProfile": "showcase",
+          "compositionStatus": "pass",
+          "errors": 0,
+          "warnings": 0
+        }
+      }
+    },
+    "deliver": {
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": 2271,
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\artifacts\\tools\\archify_package\\archify\\bin\\archify.mjs",
+        "deliver",
+        "dataflow",
+        "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.archify\\architecture-sic-pipeline-20261103-114010\\training.candidate.json",
+        "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.archify\\architecture-sic-pipeline-20261103-114010\\huan-luyen.html",
+        "--quality",
+        "showcase",
+        "--repo-root",
+        "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC",
+        "--json"
+      ],
+      "receipt": {
+        "schemaVersion": 1,
+        "receiptId": "ba1acc4c-a5dc-4469-8b99-d28144ab12dc",
+        "ok": true,
+        "command": "deliver",
+        "type": "dataflow",
+        "input": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.archify\\architecture-sic-pipeline-20261103-114010\\training.candidate.json",
+        "output": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.archify\\architecture-sic-pipeline-20261103-114010\\huan-luyen.html",
+        "specification": {
+          "sha256": "2dc54a177c0b9662adb9bfcd58ace35a0aa2f700ded3609aaf95d5ab562b9c97",
+          "bytes": 7485
+        },
+        "artifact": {
+          "sha256": "39349b54205abb49a8484db9b7f5f1a1f093368a532c2def5a24d5fe071ce3e8",
+          "bytes": 844443
+        },
+        "validation": {
+          "checksPassed": 9,
+          "checkCount": 9,
+          "compositionProfile": "showcase",
+          "compositionStatus": "pass",
+          "errors": 0,
+          "warnings": 0
+        },
+        "evidence": {
+          "verified": true,
+          "repository": "https://github.com/Khanhack11/SIC",
+          "revision": "6b5857919c47424eae1931bb4def61a34ebb7df1",
+          "references": 14
+        },
+        "diagnostics": [
+          {
+            "code": "i18n/locale-fallback",
+            "severity": "warning",
+            "message": "meta.locale \"vi\" has no bundled catalog and no usable meta.translations; the Viewer chrome and <html lang> fall back to English.",
+            "subject": {
+              "diagramType": "dataflow",
+              "path": "/meta/locale"
+            },
+            "evidence": {
+              "locale": "vi",
+              "bundledLocales": [
+                "en",
+                "zh-CN",
+                "zh-TW",
+                "es",
+                "ko",
+                "ar"
+              ]
+            },
+            "supportedFixes": [
+              "Supply meta.translations for this locale.",
+              "Use a bundled locale: en, zh-CN, zh-TW, es, ko, ar."
+            ]
+          }
+        ],
+        "update": {
+          "status": "unavailable",
+          "installedVersion": null,
+          "availableVersion": null,
+          "releaseNotes": null,
+          "checkedAt": null,
+          "source": null,
+          "noticeRequired": false,
+          "noticeText": null,
+          "reason": "disabled"
+        }
+      },
+      "stderr": "archify: meta.locale \"vi\" has no bundled catalog and no usable meta.translations; the Viewer chrome and <html lang> fall back to English."
+    },
+    "check": {
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": 595,
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\artifacts\\tools\\archify_package\\archify\\bin\\archify.mjs",
+        "check",
+        "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.archify\\architecture-sic-pipeline-20261103-114010\\huan-luyen.html",
+        "--require-provenance"
+      ],
+      "receipt": {
+        "ok": true,
+        "file": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.archify\\architecture-sic-pipeline-20261103-114010\\huan-luyen.html",
+        "artifact": {
+          "sha256": "39349b54205abb49a8484db9b7f5f1a1f093368a532c2def5a24d5fe071ce3e8",
+          "bytes": 844443
+        },
+        "checks": [
+          {
+            "name": "single_svg",
+            "ok": true,
+            "details": [
+              "found 1 <svg> block(s)"
+            ]
+          },
+          {
+            "name": "finite_svg",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "orthogonal_arrows",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "label_route_clearance",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "relationship_crossings",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "relationship_corridors",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "container_border_runs",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "route_rhythm",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "legend_clearance",
+            "ok": true,
+            "details": []
+          }
+        ],
+        "composition": {
+          "schemaVersion": 1,
+          "profile": "showcase",
+          "status": "pass",
+          "summary": {
+            "errors": 0,
+            "warnings": 0
+          },
+          "metrics": {
+            "properCrossings": 0,
+            "resolvedCrossovers": 0,
+            "ambiguousCorridors": 0,
+            "arrowheadCollisions": 0,
+            "containerBorderRuns": 0,
+            "labelRouteClearanceIssues": 0,
+            "labelCanvasOverflowIssues": 0,
+            "minLabelRouteClearance": 6,
+            "desktopReadabilityIssues": 0,
+            "viewportHeightIssues": 0,
+            "minProjectedNodeTextPx": 6.095505617977528,
+            "maxBends": 2,
+            "routesOverSuggestedBends": 0,
+            "maxStretch": 1,
+            "routesOverSuggestedStretch": 0,
+            "minSegmentPx": 51.5,
+            "minInteriorSegmentPx": 101,
+            "shortSegmentCount": 0,
+            "shortEndpointSegmentCount": 0,
+            "shortInteriorSegmentCount": 0,
+            "microSegmentCount": 0
+          },
+          "suggestedLimits": {
+            "bendsPerRelationship": 2,
+            "stretch": 1.35,
+            "segmentPx": 16,
+            "microSegmentPx": 8
+          },
+          "routeReview": {
+            "crossings": [],
+            "detours": []
+          },
+          "leadingSpace": {
+            "measured": false,
+            "reviewSuggested": false
+          },
+          "desktopReadability": {
+            "budgetBasis": "legacy-930",
+            "readerContract": "declared-wide-v1",
+            "availableDiagramWidth": 930,
+            "actualBudgetPx": 930,
+            "limit": "legacy",
+            "requestedTargetPx": null,
+            "requestedTargetMet": null,
+            "hardFloorPx": 6,
+            "hardFloorMet": true,
+            "minimumOwner": {
+              "kind": "node",
+              "id": "pv"
+            },
+            "minimumSourceTextPx": 7,
+            "minimumProjectedTextPx": 6.095505617977528,
+            "semanticTextCount": 31
+          },
+          "issues": []
+        },
+        "provenance": "current",
+        "deliveryReceiptId": "ba1acc4c-a5dc-4469-8b99-d28144ab12dc"
+      }
+    },
+    "browser-check": {
+      "status": "fail",
+      "exitCode": 1,
+      "durationMs": 10165,
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\artifacts\\tools\\archify_package\\archify\\bin\\archify.mjs",
+        "browser-check",
+        "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.archify\\architecture-sic-pipeline-20261103-114010\\huan-luyen.html",
+        "--json",
+        "--require-provenance"
+      ],
+      "execution": "in-process",
+      "receipt": {
+        "schemaVersion": 1,
+        "ok": false,
+        "command": "browser-check",
+        "evidenceKind": "automated-browser",
+        "status": "fail",
+        "visualReview": "not-requested",
+        "provenance": "current",
+        "deliveryReceiptId": "ba1acc4c-a5dc-4469-8b99-d28144ab12dc",
+        "artifact": {
+          "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.archify\\architecture-sic-pipeline-20261103-114010\\huan-luyen.html",
+          "sha256": "39349b54205abb49a8484db9b7f5f1a1f093368a532c2def5a24d5fe071ce3e8",
+          "bytes": 844443
+        },
+        "state": {
+          "detail": "read",
+          "motion": "still"
+        },
+        "chrome": {
+          "status": "available",
+          "executable": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+        },
+        "diagnostics": [
+          {
+            "code": "viewer/temp-cleanup-incomplete",
+            "severity": "error",
+            "message": "Browser cleanup could not safely finish; inspect the reported retained path.",
+            "subject": {
+              "artifact": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.archify\\architecture-sic-pipeline-20261103-114010\\huan-luyen.html"
+            },
+            "evidence": {
+              "reason": "Chrome did not exit; retained temporary profile \"C:\\Users\\MSI\\AppData\\Local\\Temp\\archify-visual-check-profile-eIY5Ps\".",
+              "retainedDirectory": "C:\\Users\\MSI\\AppData\\Local\\Temp\\archify-visual-check-profile-eIY5Ps"
+            },
+            "supportedFixes": [
+              "resolve the reported process or filesystem failure; verify directory ownership before manual cleanup"
+            ]
+          }
+        ],
+        "containment": {
+          "status": "fail",
+          "policy": "fit-or-reader-declared-readable-vertical-scroll",
+          "viewports": []
+        },
+        "themeStates": {
+          "status": "fail",
+          "viewports": []
+        },
+        "readability": {
+          "status": "fail",
+          "minimumProjectedNodeTextPx": 6,
+          "viewports": []
+        },
+        "viewerChrome": {
+          "status": "fail",
+          "viewports": []
+        },
+        "captures": {
+          "status": "not-requested",
+          "screenshots": [],
+          "contactSheet": null
+        },
+        "sidecars": {
+          "receipt": "huan-luyen.browser-check.json",
+          "files": []
+        },
+        "error": "Chrome did not exit; retained temporary profile \"C:\\Users\\MSI\\AppData\\Local\\Temp\\archify-visual-check-profile-eIY5Ps\"."
+      }
+    }
+  },
+  "browserCheck": {
+    "requested": true,
+    "ran": false
+  },
+  "diagnostics": [
+    {
+      "code": "viewer/temp-cleanup-incomplete",
+      "severity": "error",
+      "message": "Browser cleanup could not safely finish; inspect the reported retained path.",
+      "subject": {
+        "artifact": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.archify\\architecture-sic-pipeline-20261103-114010\\huan-luyen.html"
+      },
+      "evidence": {
+        "reason": "Chrome did not exit; retained temporary profile \"C:\\Users\\MSI\\AppData\\Local\\Temp\\archify-visual-check-profile-eIY5Ps\".",
+        "retainedDirectory": "C:\\Users\\MSI\\AppData\\Local\\Temp\\archify-visual-check-profile-eIY5Ps"
+      },
+      "supportedFixes": [
+        "resolve the reported process or filesystem failure; verify directory ownership before manual cleanup"
+      ]
+    }
+  ],
+  "evidence": {
+    "receipt": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.archify\\architecture-sic-pipeline-20261103-114010\\huan-luyen.finalize.json",
+    "summaryReceipt": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.archify\\architecture-sic-pipeline-20261103-114010\\huan-luyen.finalize-summary.json",
+    "browserCheckReceipt": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.archify\\architecture-sic-pipeline-20261103-114010\\huan-luyen.browser-check.json"
+  },
+  "visualReview": "not-requested",
+  "failedStage": "browser-check",
+  "finishedAt": "2026-11-03T04:41:45.701Z",
+  "durationMs": 14071,
+  "update": {
+    "status": "unavailable",
+    "installedVersion": null,
+    "availableVersion": null,
+    "releaseNotes": null,
+    "checkedAt": null,
+    "source": null,
+    "noticeRequired": false,
+    "noticeText": null,
+    "reason": "disabled"
+  }
+}

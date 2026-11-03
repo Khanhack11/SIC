@@ -1,0 +1,308 @@
+{
+  "schema_version": 1,
+  "diagram_type": "dataflow",
+  "meta": {
+    "title": "SIC: dữ liệu đi đâu khi huấn luyện?",
+    "locale": "vi",
+    "output": ".archify/architecture-sic-pipeline-20261103-114010/huan-luyen.html",
+    "quality_profile": "showcase",
+    "repository": {
+      "url": "https://github.com/Khanhack11/SIC.git",
+      "revision": "6b5857919c47424eae1931bb4def61a34ebb7df1"
+    }
+  },
+  "stages": [
+    {
+      "label": "Nguồn ảnh"
+    },
+    {
+      "label": "Kiểm tra"
+    },
+    {
+      "label": "Chia dữ liệu"
+    },
+    {
+      "label": "Học trọng số"
+    },
+    {
+      "label": "Đo kết quả"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "pv",
+      "type": "external",
+      "label": "PlantVillage",
+      "sublabel": "Ảnh có nhãn",
+      "stage": 0,
+      "row": 0,
+      "sources": [
+        {
+          "path": "ml/download_dataset.py",
+          "line": 48,
+          "end_line": 66
+        }
+      ]
+    },
+    {
+      "id": "pd",
+      "type": "external",
+      "label": "PlantDoc",
+      "sublabel": "Ảnh Internet",
+      "stage": 0,
+      "row": 4,
+      "sources": [
+        {
+          "path": "ml/download_plantdoc.py",
+          "line": 9,
+          "end_line": 10
+        },
+        {
+          "path": "ml/download_plantdoc.py",
+          "line": 20,
+          "end_line": 49
+        }
+      ]
+    },
+    {
+      "id": "audit",
+      "type": "backend",
+      "label": "Lọc dữ liệu",
+      "sublabel": "Hash, trùng, nhãn",
+      "stage": 1,
+      "row": 1,
+      "sources": [
+        {
+          "path": "ml/prepare_field.py",
+          "line": 24,
+          "end_line": 91
+        }
+      ]
+    },
+    {
+      "id": "records",
+      "type": "database",
+      "label": "records.json",
+      "sublabel": "Đường dẫn + split",
+      "stage": 1,
+      "row": 3,
+      "sources": [
+        {
+          "path": "ml/prepare_field.py",
+          "line": 92,
+          "end_line": 103
+        }
+      ]
+    },
+    {
+      "id": "train",
+      "type": "backend",
+      "label": "Train",
+      "sublabel": "Ảnh để học",
+      "stage": 2,
+      "row": 0,
+      "sources": [
+        {
+          "path": "ml/train_field.py",
+          "line": 70,
+          "end_line": 85
+        },
+        {
+          "path": "ml/train_field.py",
+          "line": 88,
+          "end_line": 108
+        }
+      ]
+    },
+    {
+      "id": "val",
+      "type": "backend",
+      "label": "Validation",
+      "sublabel": "Chọn, chỉnh T",
+      "stage": 2,
+      "row": 2,
+      "sources": [
+        {
+          "path": "ml/train_field.py",
+          "line": 117,
+          "end_line": 129
+        },
+        {
+          "path": "ml/train_field.py",
+          "line": 149,
+          "end_line": 159
+        }
+      ]
+    },
+    {
+      "id": "test",
+      "type": "backend",
+      "label": "Test",
+      "sublabel": "Giữ đến cuối",
+      "stage": 2,
+      "row": 4,
+      "sources": [
+        {
+          "path": "ml/evaluate_field.py",
+          "line": 16,
+          "end_line": 35
+        }
+      ]
+    },
+    {
+      "id": "learn",
+      "type": "backend",
+      "label": "Học V3",
+      "sublabel": "Loss, cập nhật",
+      "stage": 3,
+      "row": 1,
+      "sources": [
+        {
+          "path": "ml/train_field.py",
+          "line": 109,
+          "end_line": 129
+        },
+        {
+          "path": "ml/train_field.py",
+          "line": 133,
+          "end_line": 159
+        }
+      ]
+    },
+    {
+      "id": "weights",
+      "type": "database",
+      "label": "Checkpoint",
+      "sublabel": "Trọng số + T",
+      "stage": 4,
+      "row": 1,
+      "sources": [
+        {
+          "path": "ml/train_field.py",
+          "line": 157,
+          "end_line": 169
+        }
+      ]
+    },
+    {
+      "id": "evaluate",
+      "type": "backend",
+      "label": "Đánh giá",
+      "sublabel": "F1, nhầm lớp",
+      "stage": 4,
+      "row": 4,
+      "sources": [
+        {
+          "path": "ml/evaluate_field.py",
+          "line": 16,
+          "end_line": 60
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "id": "pv-audit",
+      "from": "pv",
+      "to": "audit",
+      "label": "Ảnh và nhãn",
+      "variant": "emphasis"
+    },
+    {
+      "id": "pd-audit",
+      "from": "pd",
+      "to": "audit",
+      "label": "Ảnh và nhãn",
+      "variant": "default"
+    },
+    {
+      "id": "audit-records",
+      "from": "audit",
+      "to": "records",
+      "label": "Manifest",
+      "variant": "default"
+    },
+    {
+      "id": "records-train",
+      "from": "records",
+      "to": "train",
+      "label": "Split train",
+      "variant": "emphasis"
+    },
+    {
+      "id": "records-val",
+      "from": "records",
+      "to": "val",
+      "label": "Split val",
+      "variant": "default"
+    },
+    {
+      "id": "records-test",
+      "from": "records",
+      "to": "test",
+      "label": "Split test",
+      "variant": "default"
+    },
+    {
+      "id": "train-learn",
+      "from": "train",
+      "to": "learn",
+      "label": "Ảnh + nhãn",
+      "variant": "emphasis"
+    },
+    {
+      "id": "val-learn",
+      "from": "val",
+      "to": "learn",
+      "label": "Đo loss, chỉnh T",
+      "variant": "default"
+    },
+    {
+      "id": "learn-weights",
+      "from": "learn",
+      "to": "weights",
+      "label": "Lưu model",
+      "variant": "emphasis"
+    },
+    {
+      "id": "weights-eval",
+      "from": "weights",
+      "to": "evaluate",
+      "label": "Model cố định",
+      "variant": "default"
+    },
+    {
+      "id": "test-eval",
+      "from": "test",
+      "to": "evaluate",
+      "label": "Ảnh chưa học",
+      "variant": "default"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Tải về và kiểm tra",
+      "items": [
+        "Script tải ảnh từ GitHub tại revision cố định, kiểm tra hash rồi lưu ở data/raw. records.json lưu đường dẫn, nhãn, hash và split; không chứa trọng số model.",
+        "Loại nhãn ngô blight mơ hồ, ảnh hỏng và nhóm trùng có nhãn xung đột. Một ảnh đại diện cho mỗi nhóm trùng PlantDoc; đây chưa phải chứng nhận tách riêng từng lá vật lý."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Model học như thế nào?",
+      "items": [
+        "V3 bắt đầu từ trọng số ImageNet. Đầu tiên giữ cố định CNN để học đầu phân loại, sau đó mở ba khối cuối để fine-tune trên GPU.",
+        "Ảnh train được lật, xoay nhẹ và đổi sáng/màu. Loss đo độ lệch với nhãn; backprop tính hướng sửa trọng số, AdamW thực hiện cập nhật."
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "Ba phần dữ liệu có vai trò khác nhau",
+      "items": [
+        "Train cập nhật trọng số. Validation chọn checkpoint và hiệu chỉnh một số T cho softmax; không dùng gradient validation để sửa CNN.",
+        "Test chỉ đo sau khi chốt model. Báo cáo tách PlantVillage và PlantDoc vì ảnh chụp có kiểm soát và ảnh thực địa có mức khó khác nhau."
+      ]
+    }
+  ]
+}

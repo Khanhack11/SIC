@@ -4,6 +4,8 @@ Hệ thống nhận diện ảnh lá cà chua, khoai tây và ngô, sau đó tr�
 
 Luồng điện thoại và ảnh thực địa được ghi trong [các phase](docs/MOBILE_FIELD_PHASES.md). Frontend có crop thủ công và chữ kết quả lớn hơn. Ảnh người dùng mặc định là ảnh thực địa: dự đoán lớp khỏe vẫn yêu cầu kiểm tra lại. Điểm dự đoán không phải độ chính xác chẩn đoán. MobileNetV3-Large có thêm lớp ngoài phạm vi là ứng viên riêng, chỉ nạp khi đặt `SIC_FIELD_MODEL_PATH`; không tự thay checkpoint baseline.
 
+Để hiểu model hoạt động, mở [sơ đồ hệ thống bằng Archify](.archify/architecture-sic-pipeline-20261103-114010/he-thong.html), [pipeline train](.archify/architecture-sic-pipeline-20261103-114010/huan-luyen.html), [pipeline suy luận](.archify/architecture-sic-pipeline-20261103-114010/suy-luan.html) và [giải thích từng bước](.archify/architecture-sic-pipeline-20261103-114010/README.md). V3 mới đã train và đánh giá, nhưng chưa qua tiêu chí triển khai; xem [kết quả và giới hạn](docs/final_release/mobile_field/RESULTS.md).
+
 Samsung Innovation Campus, Group 5. Chuẩn bị báo cáo **04–05/11/2026**, thời lượng 20 phút.
 
 | Thành viên | Phạm vi công việc |

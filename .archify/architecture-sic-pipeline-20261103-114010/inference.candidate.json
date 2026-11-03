@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "diagram_type": "dataflow",
+  "meta": {
+    "title": "SIC: model đánh giá một ảnh như thế nào?",
+    "locale": "vi",
+    "output": ".archify/architecture-sic-pipeline-20261103-114010/suy-luan.html",
+    "quality_profile": "showcase",
+    "repository": {
+      "url": "https://github.com/Khanhack11/SIC.git",
+      "revision": "6b5857919c47424eae1931bb4def61a34ebb7df1"
+    }
+  },
+  "stages": [
+    {
+      "label": "Ảnh đầu vào"
+    },
+    {
+      "label": "Chuẩn hóa"
+    },
+    {
+      "label": "Đặc trưng"
+    },
+    {
+      "label": "Điểm thô"
+    },
+    {
+      "label": "Điểm dự đoán"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "input",
+      "type": "frontend",
+      "label": "Ảnh đã chọn",
+      "sublabel": "Crop nếu cần",
+      "stage": 0,
+      "row": 1,
+      "sources": [
+        {
+          "path": "crop.js",
+          "line": 55,
+          "end_line": 68
+        },
+        {
+          "path": "frontend.js",
+          "line": 148,
+          "end_line": 168
+        }
+      ]
+    },
+    {
+      "id": "tensor",
+      "type": "backend",
+      "label": "Tensor RGB",
+      "sublabel": "1 × 3 × 224 × 224",
+      "stage": 1,
+      "row": 1,
+      "sources": [
+        {
+          "path": "backend/preprocessing.py",
+          "line": 10,
+          "end_line": 29
+        },
+        {
+          "path": "backend/mobile_model.py",
+          "line": 14,
+          "end_line": 37
+        },
+        {
+          "path": "backend/field_inference.py",
+          "line": 33,
+          "end_line": 39
+        }
+      ]
+    },
+    {
+      "id": "cnn",
+      "type": "backend",
+      "label": "CNN + pooling",
+      "sublabel": "Học đặc trưng",
+      "stage": 2,
+      "row": 1,
+      "sources": [
+        {
+          "path": "backend/mobile_model.py",
+          "line": 21,
+          "end_line": 24
+        },
+        {
+          "path": "ml/train_field.py",
+          "line": 95,
+          "end_line": 100
+        }
+      ]
+    },
+    {
+      "id": "head",
+      "type": "backend",
+      "label": "Đầu phân loại",
+      "sublabel": "11 hoặc 12 logits",
+      "stage": 3,
+      "row": 1,
+      "sources": [
+        {
+          "path": "backend/mobile_model.py",
+          "line": 9,
+          "end_line": 24
+        },
+        {
+          "path": "backend/inference_engine.py",
+          "line": 235,
+          "end_line": 243
+        }
+      ]
+    },
+    {
+      "id": "temp",
+      "type": "database",
+      "label": "Checkpoint",
+      "sublabel": "Số T đã học",
+      "stage": 3,
+      "row": 3,
+      "sources": [
+        {
+          "path": "backend/field_inference.py",
+          "line": 18,
+          "end_line": 26
+        },
+        {
+          "path": "ml/train_field.py",
+          "line": 157,
+          "end_line": 169
+        }
+      ]
+    },
+    {
+      "id": "score",
+      "type": "backend",
+      "label": "Softmax",
+      "sublabel": "Chọn điểm cao nhất",
+      "stage": 4,
+      "row": 1,
+      "sources": [
+        {
+          "path": "backend/field_inference.py",
+          "line": 39,
+          "end_line": 46
+        },
+        {
+          "path": "backend/inference_engine.py",
+          "line": 235,
+          "end_line": 243
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "id": "input-tensor",
+      "from": "input",
+      "to": "tensor",
+      "label": "Pixel ảnh",
+      "variant": "emphasis"
+    },
+    {
+      "id": "tensor-cnn",
+      "from": "tensor",
+      "to": "cnn",
+      "label": "Tensor",
+      "variant": "emphasis"
+    },
+    {
+      "id": "cnn-head",
+      "from": "cnn",
+      "to": "head",
+      "label": "Vector đặc trưng",
+      "variant": "emphasis"
+    },
+    {
+      "id": "head-score",
+      "from": "head",
+      "to": "score",
+      "label": "Logits",
+      "variant": "emphasis"
+    },
+    {
+      "id": "temp-score",
+      "from": "temp",
+      "to": "score",
+      "label": "Chia logits cho T",
+      "variant": "default"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Crop và resize khác nhau",
+      "items": [
+        "Crop lấy vùng lá do bạn chọn và bỏ phần ngoài khung. Resize đưa ảnh về kích thước model yêu cầu. Crop tốt vẫn cần giữ đủ vết tổn thương.",
+        "V2 resize trực tiếp về 224 × 224 nên có thể đổi tỷ lệ hình. V3 giữ tỷ lệ, thêm viền xám để đủ 224 × 224 (letterbox), sau đó chuẩn hóa RGB."
+      ]
+    },
+    {
+      "dot": "violet",
+      "title": "CNN không đọc tên bệnh từ ảnh",
+      "items": [
+        "Các lớp tích chập học bộ lọc từ dữ liệu, tạo tín hiệu về màu, đường nét và hoa văn. Pooling gom tín hiệu thành vector, đầu phân loại tạo một điểm thô cho mỗi lớp.",
+        "V3 có đầu 960 → 256 → 12. Lớp thứ 12 là Unsupported. Model là bộ phân loại ảnh, chưa khoanh vị trí vết bệnh hay nhận ra mọi loại sâu hại."
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "Vì sao có thể sai với điểm rất cao?",
+      "items": [
+        "Softmax biến logits/T thành các điểm có tổng bằng 1. Ví dụ 0,99 chỉ nói model nghiêng mạnh về một lựa chọn trong các lớp được học.",
+        "Nền ảnh, ánh sáng hoặc tổn thương ngoài bộ nhãn có thể làm model chọn sai với điểm cao. Khi tải ảnh lên, trọng số giữ nguyên; đây không phải một lần train mới."
+      ]
+    }
+  ]
+}

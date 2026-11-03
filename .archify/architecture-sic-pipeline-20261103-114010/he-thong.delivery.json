@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "b76315fc-205c-4b7f-98b0-668dcbf5b044",
+  "status": "current",
+  "command": "deliver",
+  "type": "architecture",
+  "input": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.archify\\architecture-sic-pipeline-20261103-114010\\system.candidate.json",
+  "output": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.archify\\architecture-sic-pipeline-20261103-114010\\he-thong.html",
+  "specification": {
+    "sha256": "deb21e0819425d71374c87d5260f924dcb902af98afafed618495ea346ca7a51",
+    "bytes": 6812
+  },
+  "artifact": {
+    "sha256": "5df9bbf2d495010367442573be4b0ced612db81c3dbc5cff79b59def5a2756d4",
+    "bytes": 846086
+  }
+}

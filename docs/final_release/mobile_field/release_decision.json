@@ -1,0 +1,35 @@
+{
+  "selection": "validation only",
+  "criteria_file": "docs/FIELD_RELEASE_CRITERIA.json",
+  "checks": {
+    "field_f1_gain": {
+      "value_pp": 29.948018009465947,
+      "minimum_pp": 5,
+      "passed": true
+    },
+    "village_f1_drop": {
+      "value_pp": -3.4779069845473853,
+      "maximum_pp": 2,
+      "passed": true
+    },
+    "field_score_gate_accuracy": {
+      "value": 0.550000011920929,
+      "minimum": 0.85,
+      "passed": false
+    },
+    "field_score_gate_coverage": {
+      "value": 0.19323670864105225,
+      "minimum": 0.25,
+      "passed": false
+    },
+    "known_diseased_false_healthy": {
+      "value": 0.0,
+      "maximum": 0.05,
+      "passed": true
+    }
+  },
+  "all_passed": false,
+  "decision": "Keep V2 default; V3 optional experiment, not validated for deployment",
+  "candidate_weights_sha256": "04c4d63ab7ea56294758440882f74269c76c5860b3a8292b4fda4cd6cfc5ffde",
+  "test_used_for_selection": false
+}

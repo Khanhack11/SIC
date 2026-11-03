@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "ba1acc4c-a5dc-4469-8b99-d28144ab12dc",
+  "status": "current",
+  "command": "deliver",
+  "type": "dataflow",
+  "input": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.archify\\architecture-sic-pipeline-20261103-114010\\training.candidate.json",
+  "output": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\.archify\\architecture-sic-pipeline-20261103-114010\\huan-luyen.html",
+  "specification": {
+    "sha256": "2dc54a177c0b9662adb9bfcd58ace35a0aa2f700ded3609aaf95d5ab562b9c97",
+    "bytes": 7485
+  },
+  "artifact": {
+    "sha256": "39349b54205abb49a8484db9b7f5f1a1f093368a532c2def5a24d5fe071ce3e8",
+    "bytes": 844443
+  }
+}

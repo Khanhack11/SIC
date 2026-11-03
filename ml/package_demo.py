@@ -14,6 +14,8 @@ def package(output):
         files.extend(p for p in (BASE_DIR / folder).rglob('*')
                      if p.is_file() and '__pycache__' not in p.parts and 'node_modules' not in p.parts
                      and not p.is_relative_to(BASE_DIR / 'tests/results'))
+    diagram_folder = BASE_DIR / '.archify/architecture-sic-pipeline-20261103-114010'
+    files.extend(p for p in diagram_folder.rglob('*') if p.is_file())
     for name in ['frontend_demo.html', 'frontend.js', 'crop.js', 'run_demo.cmd', 'run_mobile_demo.cmd', 'README.md',
                  'requirements.txt', 'requirements-demo.txt', 'requirements-onnx.txt',
                  'data/advisory_knowledge_base.json',

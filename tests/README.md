@@ -24,6 +24,8 @@ Có thể mở `run_tests.cmd` để chạy cả browser và giữ cửa sổ xe
 | `stress_and_edge_test.py` | 17 tình huống edge/concurrency và latency |
 | `frontend_demo.cjs` | 24 kiểm tra Chrome, gồm camera mô phỏng, ảnh lỗi, disease/healthy/uncertain, lỗi mạng/API, retry, crop/khôi phục và pixels preview/upload |
 | `mobile_browsers.cjs` | Chromium và WebKit với thao tác chạm và viewport 360/390/412/844; không phải điện thoại thật |
+| `field_demo.py` | Chạy riêng bằng Python khi có weights V3: kiểm tra API thật, crop và đo latency CPU sau warmup |
+| `architecture_diagrams.cjs` | Kiểm tra riêng file HTML Archify bằng Chrome ở 1440/1920 px; truyền thư mục sơ đồ làm đối số |
 | `run_all.py` | Chạy các bộ test, giữ log và mã thoát |
 | `fixtures/` | Ảnh nhân tạo và file lỗi để kiểm tra API; không dùng đo chất lượng model |
 
