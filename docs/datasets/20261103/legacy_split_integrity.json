@@ -1,0 +1,9 @@
+{
+  "verified_unchanged_against_original_audit": true,
+  "sha256": {
+    "plantvillage/train": "7acf2f27e2854f541b70a8362408e13bc0b5a29e76e003df5fd120f989392552",
+    "plantvillage/validation": "75c87109a18776fa9d0c140a28b42cb73e953c443ce1f9e4b13c7e92724745a6",
+    "plantvillage/test": "10aa14d2d7a6f1fd2d079205c04689dc6a11de01e3c6149e4bf721ca0095c5c2",
+    "field_mobile_v1/records": "aba85a5d50dd6d3f763d39ec3e21cae7ba7645e54374f90c99b9ff0a7a6db4b5"
+  }
+}

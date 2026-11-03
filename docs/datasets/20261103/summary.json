@@ -1,0 +1,317 @@
+{
+  "datasets": {
+    "plantdoc_classification": {
+      "images": 2578,
+      "source_labels": 28,
+      "status": {
+        "valid": 2578
+      },
+      "bytes": 996322499,
+      "dimensions": {
+        "min_width": 115,
+        "max_width": 6000,
+        "min_height": 69,
+        "max_height": 6000
+      },
+      "official_splits": {
+        "test": 236,
+        "train": 2342
+      },
+      "candidate_target_labels": [
+        "Corn_Common_rust",
+        "Corn_Gray_leaf_spot",
+        "Potato_Early_blight",
+        "Potato_Late_blight",
+        "Tomato_Early_blight",
+        "Tomato_Late_blight",
+        "Tomato_Septoria_leaf_spot",
+        "Tomato_healthy"
+      ],
+      "direct_name_target_counts": {
+        "Corn_Gray_leaf_spot": 68,
+        "Potato_Early_blight": 117,
+        "Potato_Late_blight": 105,
+        "Tomato_Early_blight": 88,
+        "Tomato_Septoria_leaf_spot": 151,
+        "Tomato_Late_blight": 111
+      },
+      "hash_verified_image_blobs": 2578
+    },
+    "plantdoc_detection": {
+      "images": 2603,
+      "source_labels": 37,
+      "status": {
+        "valid": 2603
+      },
+      "bytes": 1005788633,
+      "dimensions": {
+        "min_width": 115,
+        "max_width": 6000,
+        "min_height": 69,
+        "max_height": 6000
+      },
+      "official_splits": {
+        "test": 239,
+        "train": 2364
+      },
+      "candidate_target_labels": [
+        "Corn_Common_rust",
+        "Corn_Gray_leaf_spot",
+        "Potato_Early_blight",
+        "Potato_Late_blight",
+        "Tomato_Early_blight",
+        "Tomato_Late_blight",
+        "Tomato_Septoria_leaf_spot",
+        "Tomato_healthy"
+      ],
+      "direct_name_target_counts": {},
+      "hash_verified_image_blobs": 2603
+    },
+    "plantseg": {
+      "images": 7774,
+      "source_labels": 115,
+      "status": {
+        "valid": 7774
+      },
+      "bytes": 1026632649,
+      "dimensions": {
+        "min_width": 93,
+        "max_width": 6000,
+        "min_height": 87,
+        "max_height": 5408
+      },
+      "official_splits": {
+        "val": 846,
+        "test": 1561,
+        "train": 5367
+      },
+      "candidate_target_labels": [
+        "Corn_Common_rust",
+        "Corn_Gray_leaf_spot",
+        "Corn_Northern_Leaf_Blight",
+        "Potato_Early_blight",
+        "Potato_Late_blight",
+        "Tomato_Early_blight",
+        "Tomato_Late_blight",
+        "Tomato_Septoria_leaf_spot"
+      ],
+      "direct_name_target_counts": {
+        "Potato_Early_blight": 68,
+        "Corn_Gray_leaf_spot": 76,
+        "Tomato_Septoria_leaf_spot": 99,
+        "Corn_Northern_Leaf_Blight": 92,
+        "Potato_Late_blight": 78,
+        "Tomato_Early_blight": 153,
+        "Tomato_Late_blight": 117
+      },
+      "hash_verified_image_blobs": 0
+    },
+    "plantvillage": {
+      "images": 11504,
+      "source_labels": 11,
+      "status": {
+        "valid": 11504
+      },
+      "bytes": 186562075,
+      "dimensions": {
+        "min_width": 256,
+        "max_width": 256,
+        "min_height": 256,
+        "max_height": 256
+      },
+      "official_splits": {
+        "unspecified": 11504
+      },
+      "candidate_target_labels": [
+        "Corn_Common_rust",
+        "Corn_Gray_leaf_spot",
+        "Corn_Northern_Leaf_Blight",
+        "Corn_healthy",
+        "Potato_Early_blight",
+        "Potato_Late_blight",
+        "Potato_healthy",
+        "Tomato_Early_blight",
+        "Tomato_Late_blight",
+        "Tomato_Septoria_leaf_spot",
+        "Tomato_healthy"
+      ],
+      "direct_name_target_counts": {
+        "Corn_Common_rust": 1192,
+        "Corn_Gray_leaf_spot": 513,
+        "Corn_Northern_Leaf_Blight": 985,
+        "Corn_healthy": 1162,
+        "Potato_Early_blight": 1000,
+        "Potato_Late_blight": 1000,
+        "Potato_healthy": 152,
+        "Tomato_Early_blight": 1000,
+        "Tomato_Late_blight": 1500,
+        "Tomato_Septoria_leaf_spot": 1500,
+        "Tomato_healthy": 1500
+      },
+      "hash_verified_image_blobs": 11504
+    },
+    "plantwild_v2": {
+      "images": 11488,
+      "source_labels": 115,
+      "status": {
+        "valid": 11486,
+        "invalid_or_excluded": 2
+      },
+      "bytes": 1657884613,
+      "dimensions": {
+        "min_width": 65,
+        "max_width": 6000,
+        "min_height": 52,
+        "max_height": 5408
+      },
+      "official_splits": {
+        "unspecified": 11488
+      },
+      "candidate_target_labels": [
+        "Corn_Common_rust",
+        "Corn_Gray_leaf_spot",
+        "Corn_Northern_Leaf_Blight",
+        "Potato_Early_blight",
+        "Potato_Late_blight",
+        "Tomato_Early_blight",
+        "Tomato_Late_blight",
+        "Tomato_Septoria_leaf_spot"
+      ],
+      "direct_name_target_counts": {
+        "Tomato_Late_blight": 163,
+        "Tomato_Early_blight": 187,
+        "Corn_Northern_Leaf_Blight": 130,
+        "Corn_Gray_leaf_spot": 107,
+        "Potato_Early_blight": 126,
+        "Potato_Late_blight": 117,
+        "Tomato_Septoria_leaf_spot": 130
+      },
+      "hash_verified_image_blobs": 0
+    }
+  },
+  "detection": {
+    "counts": {
+      "total_boxes": 8921,
+      "valid_geometry": 8813,
+      "missing_image": 11,
+      "requires_exif_coordinate_transform": 76,
+      "annotation_image_size_mismatch": 5,
+      "invalid_or_outside_image_box;annotation_image_size_mismatch;requires_exif_coordinate_transform": 7,
+      "invalid_or_outside_image_box;annotation_image_size_mismatch": 4,
+      "annotation_image_size_mismatch;requires_exif_coordinate_transform": 5
+    },
+    "classes": {
+      "Apple Scab Leaf": 171,
+      "Apple leaf": 247,
+      "Apple rust leaf": 179,
+      "Bell_pepper leaf": 323,
+      "Bell_pepper leaf spot": 264,
+      "Blueberry leaf": 849,
+      "Cherry leaf": 240,
+      "Corn Gray leaf spot": 79,
+      "Corn leaf blight": 372,
+      "Corn rust leaf": 127,
+      "Peach leaf": 620,
+      "Potato leaf": 11,
+      "Potato leaf early blight": 333,
+      "Potato leaf late blight": 250,
+      "Raspberry leaf": 556,
+      "Soyabean leaf": 266,
+      "Squash Powdery mildew leaf": 257,
+      "Strawberry leaf": 492,
+      "Tomato Early blight leaf": 214,
+      "Tomato Septoria leaf spot": 436,
+      "Tomato leaf": 396,
+      "Tomato leaf bacterial spot": 280,
+      "Tomato leaf late blight": 221,
+      "Tomato leaf mosaic virus": 261,
+      "Tomato leaf yellow virus": 829,
+      "Tomato mold leaf": 293,
+      "Tomato two spotted spider mites leaf": 2,
+      "grape leaf": 220,
+      "grape leaf black rot": 133
+    },
+    "images_without_csv_boxes": 25,
+    "note": "Geometry checks do not verify disease identity or complete leaf coverage."
+  },
+  "segmentation": {
+    "mask_counts": {
+      "valid_mask": 7745,
+      "requires_exif_coordinate_transform": 9,
+      "image_mask_size_mismatch;requires_exif_coordinate_transform": 8,
+      "unexpected_class_values": 12
+    },
+    "foreground_ratio_percentiles": {
+      "0": 4.2253181060917016e-05,
+      "25": 0.05941235919120548,
+      "50": 0.13860423280423279,
+      "75": 0.2987242958612066,
+      "100": 1.0
+    },
+    "coco": {
+      "train": {
+        "images": 5367,
+        "annotations": 52898,
+        "categories": 0
+      },
+      "val": {
+        "images": 846,
+        "annotations": 8927,
+        "categories": 0
+      },
+      "test": {
+        "images": 1561,
+        "annotations": 15569,
+        "categories": 0
+      }
+    },
+    "encoding": "PNG background=0, disease value=Metadata.Index+1; COCO category_id=Metadata.Index",
+    "note": "Masks cover diseased parts, not the entire leaf. Missing COCO categories must be reconstructed from Metadata.csv."
+  },
+  "duplicates": {
+    "exact_file_duplicate_groups": 10132,
+    "exact_pixel_duplicate_groups": 10113,
+    "duplicate_or_similarity_groups": 9651,
+    "pairs": 13823,
+    "label_conflict_groups": 47,
+    "pair_counts": {
+      "plantdoc_classification / plantdoc_classification: exact_oriented_rgb_pixels": 16,
+      "plantdoc_classification / plantdoc_classification: perceptual_review_candidate": 56,
+      "plantdoc_classification / plantdoc_detection: exact_oriented_rgb_pixels": 2488,
+      "plantdoc_classification / plantdoc_detection: perceptual_review_candidate": 112,
+      "plantdoc_classification / plantseg: perceptual_review_candidate": 120,
+      "plantdoc_classification / plantwild_v2: exact_oriented_rgb_pixels": 90,
+      "plantdoc_classification / plantwild_v2: perceptual_review_candidate": 160,
+      "plantdoc_detection / plantdoc_detection: perceptual_review_candidate": 56,
+      "plantdoc_detection / plantseg: perceptual_review_candidate": 121,
+      "plantdoc_detection / plantwild_v2: exact_oriented_rgb_pixels": 90,
+      "plantdoc_detection / plantwild_v2: perceptual_review_candidate": 162,
+      "plantseg / plantseg: perceptual_review_candidate": 480,
+      "plantseg / plantwild_v2: exact_oriented_rgb_pixels": 7774,
+      "plantseg / plantwild_v2: perceptual_review_candidate": 1026,
+      "plantvillage / plantvillage: exact_oriented_rgb_pixels": 10,
+      "plantvillage / plantvillage: perceptual_review_candidate": 3,
+      "plantvillage / plantwild_v2: perceptual_review_candidate": 3,
+      "plantwild_v2 / plantwild_v2: exact_oriented_rgb_pixels": 404,
+      "plantwild_v2 / plantwild_v2: perceptual_review_candidate": 652
+    },
+    "method": "Dimension-aware EXIF-oriented RGB SHA256; canonical rotations/reflections of <=256px grayscale, pHash <=3 and dHash <=4.",
+    "limitations": [
+      "Perceptual pairs need visual review and can miss crops or different views of the same leaf.",
+      "No matches does not establish independence of a field test set.",
+      "Pair counts are graph edges, not independent sample counts; exact pairs use a star per group."
+    ]
+  },
+  "plantwild_candidate_counts": {
+    "needs_visual_label_review": 639,
+    "exclude_overlap_with_protected_holdout": 227,
+    "exclude_overlap_with_existing_train": 40,
+    "review_conflicting_labels": 51,
+    "exclude_duplicate_within_new_source": 2,
+    "review_rust_species": 177,
+    "review_image_quality": 1
+  },
+  "training_started": false,
+  "existing_splits_modified": false,
+  "serving_model_changed": false
+}

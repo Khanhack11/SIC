@@ -1,0 +1,50 @@
+{
+  "plantvillage": {
+    "status": "complete",
+    "files": 11504,
+    "git_blob_hashes_verified": true,
+    "reused_existing_data": true
+  },
+  "plantwild_v2": {
+    "status": "complete",
+    "files": 11488,
+    "uncompressed_bytes": 1657884613,
+    "renamed_windows_paths": 0,
+    "zip_crc_verified": true,
+    "archive_bytes": 1640342849,
+    "archive_sha256": "5c3fd0c6ecf9a346c9d2dd03ff47769c71e581eb1170a68477d718ab43cfee5b",
+    "upstream_checksum": "sha256:5c3fd0c6ecf9a346c9d2dd03ff47769c71e581eb1170a68477d718ab43cfee5b"
+  },
+  "plantdoc_classification": {
+    "status": "complete",
+    "files": 2581,
+    "uncompressed_bytes": 997044151,
+    "renamed_windows_paths": 623,
+    "zip_crc_verified": true,
+    "archive_bytes": 984592720,
+    "archive_sha256": "94e2b99a500a63efbd48923ed48588fbb01f9b1db66a2d3b5c24eed6466da20f",
+    "upstream_checksum": null,
+    "git_blob_files_verified": 2581
+  },
+  "plantdoc_detection": {
+    "status": "complete",
+    "files": 5200,
+    "uncompressed_bytes": 1009813410,
+    "renamed_windows_paths": 1034,
+    "zip_crc_verified": true,
+    "archive_bytes": 995128551,
+    "archive_sha256": "45811ced89d3e40fac185dbe56eb7935745aad34c5c1402d937f0281eae0d813",
+    "upstream_checksum": null,
+    "git_blob_files_verified": 5200
+  },
+  "plantseg": {
+    "status": "complete",
+    "files": 15552,
+    "uncompressed_bytes": 1134343284,
+    "renamed_windows_paths": 0,
+    "zip_crc_verified": true,
+    "archive_bytes": 1057281724,
+    "archive_sha256": "cbdfb273eb26fea93fda52bbfe4766cc31881feb3a1202b13e4d85e8a4c0bcfa",
+    "upstream_checksum": "md5:9358a66dff88cdd15c4fe009763c40a3"
+  }
+}

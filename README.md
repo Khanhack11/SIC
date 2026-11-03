@@ -84,7 +84,16 @@ Hồ sơ frontend có kiểm tra tự động và screenshot desktop/mobile. Cam
 
 ## Huấn luyện
 
-Pipeline ứng viên mới ghép PlantDoc với split PlantVillage đã audit, giữ test riêng và có lớp `Unsupported`. Xem [audit dữ liệu](docs/final_release/mobile_field/data_audit.json) và [tiêu chí phát hành](docs/FIELD_RELEASE_CRITERIA.json). Với `.venv` đã cài, tải và chuẩn bị:
+[Danh mục và phân tích dữ liệu ngày 03/11](docs/datasets/20261103/README.md) tập hợp PlantVillage 11 lớp, PlantDoc Classification/Detection, PlantWild_v2 và PlantSeg trong `data/raw/dataset_hub_20261103`. Đã quét 35.947 bản ghi ảnh, tách 639 ứng viên mới để duyệt nhãn và đánh dấu các trường hợp cần xử lý hộp/mask. Toàn bộ ảnh PlantSeg trùng pixel với ảnh PlantWild_v2; không dùng hai bộ như hai nguồn đánh giá độc lập.
+
+```powershell
+.\.venv\Scripts\python.exe -m ml.download_recommended_datasets
+.\.venv\Scripts\python.exe -m ml.analyze_recommended_datasets
+```
+
+Bản PlantDoc mới bảo toàn tên khác chữ hoa/thường và ký tự Windows bằng `extraction_map.json`. Snapshot PlantDoc cũ có 6 Git blob bị ghi trùng tên trên Windows. Đợt train tiếp theo cần nối manifest đã duyệt với đường dẫn mới; `ml.prepare_field` hiện chưa đọc ánh xạ này. Chưa train lại hoặc thay model phục vụ từ danh mục bổ sung.
+
+Pipeline thí nghiệm trước ghép PlantDoc với split PlantVillage đã audit, giữ test riêng và có lớp `Unsupported`. Xem [audit dữ liệu của thí nghiệm](docs/final_release/mobile_field/data_audit.json) và [tiêu chí phát hành](docs/FIELD_RELEASE_CRITERIA.json). Các lệnh dưới đây mô tả pipeline cũ, chưa dùng danh mục bổ sung:
 
 ```powershell
 .\.venv\Scripts\python.exe -m ml.download_plantdoc

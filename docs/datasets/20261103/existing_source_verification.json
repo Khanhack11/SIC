@@ -1,0 +1,25 @@
+[
+  {
+    "name": "plantvillage",
+    "root": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\plantvillage",
+    "revision": "7f7ecc7e1eaca78107e3affe7cb5abd9427e139a",
+    "verified_files": 11504,
+    "bytes": 186562075,
+    "mismatches": []
+  },
+  {
+    "name": "plantdoc_snapshot",
+    "root": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\plantdoc_snapshot",
+    "revision": "5467f6012d78d1c446145d5f582da6096f852ae8",
+    "verified_files": 2580,
+    "bytes": 997513484,
+    "mismatches": [
+      "train/Apple rust leaf/car1.jpg",
+      "train/Blueberry leaf/Blueberry-Leaf.jpg",
+      "train/Blueberry leaf/Blueberry-leaves.jpg",
+      "train/Corn leaf blight/Northern-Corn-Leaf-Blight.jpg",
+      "train/Peach leaf/peach-leaf.jpg",
+      "train/Potato leaf early blight/potato-blight-phytophora-infestans-close-up-of-infected-leaf-showing-A60HXN.jpg"
+    ]
+  }
+]

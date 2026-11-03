@@ -1,0 +1,577 @@
+[
+  {
+    "id": 0,
+    "name": "apple black rot",
+    "mask_value": 1
+  },
+  {
+    "id": 1,
+    "name": "apple mosaic virus",
+    "mask_value": 2
+  },
+  {
+    "id": 2,
+    "name": "apple rust",
+    "mask_value": 3
+  },
+  {
+    "id": 3,
+    "name": "apple scab",
+    "mask_value": 4
+  },
+  {
+    "id": 4,
+    "name": "banana anthracnose",
+    "mask_value": 5
+  },
+  {
+    "id": 5,
+    "name": "banana black leaf streak",
+    "mask_value": 6
+  },
+  {
+    "id": 6,
+    "name": "banana bunchy top",
+    "mask_value": 7
+  },
+  {
+    "id": 7,
+    "name": "banana cigar end rot",
+    "mask_value": 8
+  },
+  {
+    "id": 8,
+    "name": "banana cordana leaf spot",
+    "mask_value": 9
+  },
+  {
+    "id": 9,
+    "name": "banana panama disease",
+    "mask_value": 10
+  },
+  {
+    "id": 10,
+    "name": "basil downy mildew",
+    "mask_value": 11
+  },
+  {
+    "id": 11,
+    "name": "bean halo blight",
+    "mask_value": 12
+  },
+  {
+    "id": 12,
+    "name": "bean mosaic virus",
+    "mask_value": 13
+  },
+  {
+    "id": 13,
+    "name": "bean rust",
+    "mask_value": 14
+  },
+  {
+    "id": 14,
+    "name": "bell pepper bacterial spot",
+    "mask_value": 15
+  },
+  {
+    "id": 15,
+    "name": "bell pepper blossom end rot",
+    "mask_value": 16
+  },
+  {
+    "id": 16,
+    "name": "bell pepper frogeye leaf spot",
+    "mask_value": 17
+  },
+  {
+    "id": 17,
+    "name": "bell pepper powdery mildew",
+    "mask_value": 18
+  },
+  {
+    "id": 18,
+    "name": "blueberry anthracnose",
+    "mask_value": 19
+  },
+  {
+    "id": 19,
+    "name": "blueberry botrytis blight",
+    "mask_value": 20
+  },
+  {
+    "id": 20,
+    "name": "blueberry mummy berry",
+    "mask_value": 21
+  },
+  {
+    "id": 21,
+    "name": "blueberry rust",
+    "mask_value": 22
+  },
+  {
+    "id": 22,
+    "name": "blueberry scorch",
+    "mask_value": 23
+  },
+  {
+    "id": 23,
+    "name": "broccoli alternaria leaf spot",
+    "mask_value": 24
+  },
+  {
+    "id": 24,
+    "name": "broccoli downy mildew",
+    "mask_value": 25
+  },
+  {
+    "id": 25,
+    "name": "broccoli ring spot",
+    "mask_value": 26
+  },
+  {
+    "id": 26,
+    "name": "cabbage alternaria leaf spot",
+    "mask_value": 27
+  },
+  {
+    "id": 27,
+    "name": "cabbage black rot",
+    "mask_value": 28
+  },
+  {
+    "id": 28,
+    "name": "cabbage downy mildew",
+    "mask_value": 29
+  },
+  {
+    "id": 29,
+    "name": "carrot alternaria leaf blight",
+    "mask_value": 30
+  },
+  {
+    "id": 30,
+    "name": "carrot cavity spot",
+    "mask_value": 31
+  },
+  {
+    "id": 31,
+    "name": "carrot cercospora leaf blight",
+    "mask_value": 32
+  },
+  {
+    "id": 32,
+    "name": "cauliflower alternaria leaf spot",
+    "mask_value": 33
+  },
+  {
+    "id": 33,
+    "name": "cauliflower bacterial soft rot",
+    "mask_value": 34
+  },
+  {
+    "id": 34,
+    "name": "celery anthracnose",
+    "mask_value": 35
+  },
+  {
+    "id": 35,
+    "name": "celery early blight",
+    "mask_value": 36
+  },
+  {
+    "id": 36,
+    "name": "cherry leaf spot",
+    "mask_value": 37
+  },
+  {
+    "id": 37,
+    "name": "cherry powdery mildew",
+    "mask_value": 38
+  },
+  {
+    "id": 38,
+    "name": "citrus canker",
+    "mask_value": 39
+  },
+  {
+    "id": 39,
+    "name": "citrus greening disease",
+    "mask_value": 40
+  },
+  {
+    "id": 40,
+    "name": "coffee berry blotch",
+    "mask_value": 41
+  },
+  {
+    "id": 41,
+    "name": "coffee black rot",
+    "mask_value": 42
+  },
+  {
+    "id": 42,
+    "name": "coffee brown eye spot",
+    "mask_value": 43
+  },
+  {
+    "id": 43,
+    "name": "coffee leaf rust",
+    "mask_value": 44
+  },
+  {
+    "id": 44,
+    "name": "corn gray leaf spot",
+    "mask_value": 45
+  },
+  {
+    "id": 45,
+    "name": "corn northern leaf blight",
+    "mask_value": 46
+  },
+  {
+    "id": 46,
+    "name": "corn rust",
+    "mask_value": 47
+  },
+  {
+    "id": 47,
+    "name": "corn smut",
+    "mask_value": 48
+  },
+  {
+    "id": 48,
+    "name": "cucumber angular leaf spot",
+    "mask_value": 49
+  },
+  {
+    "id": 49,
+    "name": "cucumber bacterial wilt",
+    "mask_value": 50
+  },
+  {
+    "id": 50,
+    "name": "cucumber powdery mildew",
+    "mask_value": 51
+  },
+  {
+    "id": 51,
+    "name": "eggplant cercospora leaf spot",
+    "mask_value": 52
+  },
+  {
+    "id": 52,
+    "name": "eggplant phomopsis fruit rot",
+    "mask_value": 53
+  },
+  {
+    "id": 53,
+    "name": "eggplant phytophthora blight",
+    "mask_value": 54
+  },
+  {
+    "id": 54,
+    "name": "garlic leaf blight",
+    "mask_value": 55
+  },
+  {
+    "id": 55,
+    "name": "garlic rust",
+    "mask_value": 56
+  },
+  {
+    "id": 56,
+    "name": "ginger leaf spot",
+    "mask_value": 57
+  },
+  {
+    "id": 57,
+    "name": "ginger sheath blight",
+    "mask_value": 58
+  },
+  {
+    "id": 58,
+    "name": "grape black rot",
+    "mask_value": 59
+  },
+  {
+    "id": 59,
+    "name": "grape downy mildew",
+    "mask_value": 60
+  },
+  {
+    "id": 60,
+    "name": "grape leaf spot",
+    "mask_value": 61
+  },
+  {
+    "id": 61,
+    "name": "grapevine leafroll disease",
+    "mask_value": 62
+  },
+  {
+    "id": 62,
+    "name": "lettuce downy mildew",
+    "mask_value": 63
+  },
+  {
+    "id": 63,
+    "name": "lettuce mosaic virus",
+    "mask_value": 64
+  },
+  {
+    "id": 64,
+    "name": "maple tar spot",
+    "mask_value": 65
+  },
+  {
+    "id": 65,
+    "name": "peach anthracnose",
+    "mask_value": 66
+  },
+  {
+    "id": 66,
+    "name": "peach brown rot",
+    "mask_value": 67
+  },
+  {
+    "id": 67,
+    "name": "peach leaf curl",
+    "mask_value": 68
+  },
+  {
+    "id": 68,
+    "name": "peach rust",
+    "mask_value": 69
+  },
+  {
+    "id": 69,
+    "name": "peach scab",
+    "mask_value": 70
+  },
+  {
+    "id": 70,
+    "name": "plum bacterial spot",
+    "mask_value": 71
+  },
+  {
+    "id": 71,
+    "name": "plum brown rot",
+    "mask_value": 72
+  },
+  {
+    "id": 72,
+    "name": "plum pocket disease",
+    "mask_value": 73
+  },
+  {
+    "id": 73,
+    "name": "plum pox virus",
+    "mask_value": 74
+  },
+  {
+    "id": 74,
+    "name": "plum rust",
+    "mask_value": 75
+  },
+  {
+    "id": 75,
+    "name": "potato early blight",
+    "mask_value": 76
+  },
+  {
+    "id": 76,
+    "name": "potato late blight",
+    "mask_value": 77
+  },
+  {
+    "id": 77,
+    "name": "raspberry fire blight",
+    "mask_value": 78
+  },
+  {
+    "id": 78,
+    "name": "raspberry gray mold",
+    "mask_value": 79
+  },
+  {
+    "id": 79,
+    "name": "raspberry leaf spot",
+    "mask_value": 80
+  },
+  {
+    "id": 80,
+    "name": "raspberry yellow rust",
+    "mask_value": 81
+  },
+  {
+    "id": 81,
+    "name": "rice blast",
+    "mask_value": 82
+  },
+  {
+    "id": 82,
+    "name": "rice sheath blight",
+    "mask_value": 83
+  },
+  {
+    "id": 83,
+    "name": "soybean bacterial blight",
+    "mask_value": 84
+  },
+  {
+    "id": 84,
+    "name": "soybean brown spot",
+    "mask_value": 85
+  },
+  {
+    "id": 85,
+    "name": "soybean downy mildew",
+    "mask_value": 86
+  },
+  {
+    "id": 86,
+    "name": "soybean frog eye leaf spot",
+    "mask_value": 87
+  },
+  {
+    "id": 87,
+    "name": "soybean mosaic",
+    "mask_value": 88
+  },
+  {
+    "id": 88,
+    "name": "soybean rust",
+    "mask_value": 89
+  },
+  {
+    "id": 89,
+    "name": "squash powdery mildew",
+    "mask_value": 90
+  },
+  {
+    "id": 90,
+    "name": "strawberry anthracnose",
+    "mask_value": 91
+  },
+  {
+    "id": 91,
+    "name": "strawberry leaf scorch",
+    "mask_value": 92
+  },
+  {
+    "id": 92,
+    "name": "tobacco blue mold",
+    "mask_value": 93
+  },
+  {
+    "id": 93,
+    "name": "tobacco brown spot",
+    "mask_value": 94
+  },
+  {
+    "id": 94,
+    "name": "tobacco frogeye leaf spot",
+    "mask_value": 95
+  },
+  {
+    "id": 95,
+    "name": "tobacco mosaic virus",
+    "mask_value": 96
+  },
+  {
+    "id": 96,
+    "name": "tomato bacterial leaf spot",
+    "mask_value": 97
+  },
+  {
+    "id": 97,
+    "name": "tomato early blight",
+    "mask_value": 98
+  },
+  {
+    "id": 98,
+    "name": "tomato late blight",
+    "mask_value": 99
+  },
+  {
+    "id": 99,
+    "name": "tomato leaf mold",
+    "mask_value": 100
+  },
+  {
+    "id": 100,
+    "name": "tomato mosaic virus",
+    "mask_value": 101
+  },
+  {
+    "id": 101,
+    "name": "tomato septoria leaf spot",
+    "mask_value": 102
+  },
+  {
+    "id": 102,
+    "name": "tomato yellow leaf curl virus",
+    "mask_value": 103
+  },
+  {
+    "id": 103,
+    "name": "wheat bacterial leaf streak (black chaff)",
+    "mask_value": 104
+  },
+  {
+    "id": 104,
+    "name": "wheat head scab",
+    "mask_value": 105
+  },
+  {
+    "id": 105,
+    "name": "wheat leaf rust",
+    "mask_value": 106
+  },
+  {
+    "id": 106,
+    "name": "wheat loose smut",
+    "mask_value": 107
+  },
+  {
+    "id": 107,
+    "name": "wheat powdery mildew",
+    "mask_value": 108
+  },
+  {
+    "id": 108,
+    "name": "wheat septoria blotch",
+    "mask_value": 109
+  },
+  {
+    "id": 109,
+    "name": "wheat stem rust",
+    "mask_value": 110
+  },
+  {
+    "id": 110,
+    "name": "wheat stripe rust",
+    "mask_value": 111
+  },
+  {
+    "id": 111,
+    "name": "zucchini bacterial wilt",
+    "mask_value": 112
+  },
+  {
+    "id": 112,
+    "name": "zucchini downy mildew",
+    "mask_value": 113
+  },
+  {
+    "id": 113,
+    "name": "zucchini powdery mildew",
+    "mask_value": 114
+  },
+  {
+    "id": 114,
+    "name": "zucchini yellow mosaic virus",
+    "mask_value": 115
+  }
+]

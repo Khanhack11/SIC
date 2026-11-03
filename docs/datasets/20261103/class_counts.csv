@@ -1,0 +1,307 @@
+﻿dataset,source_label,target_label,mapping_status,images
+plantdoc_classification,Apple Scab Leaf,,outside_current_11_classes,93
+plantdoc_classification,Apple leaf,,outside_current_11_classes,91
+plantdoc_classification,Apple rust leaf,,outside_current_11_classes,89
+plantdoc_classification,Bell_pepper leaf,,outside_current_11_classes,61
+plantdoc_classification,Bell_pepper leaf spot,,outside_current_11_classes,71
+plantdoc_classification,Blueberry leaf,,outside_current_11_classes,117
+plantdoc_classification,Cherry leaf,,outside_current_11_classes,57
+plantdoc_classification,Corn Gray leaf spot,Corn_Gray_leaf_spot,direct_name_candidate,68
+plantdoc_classification,Corn leaf blight,,ambiguous_corn_blight,192
+plantdoc_classification,Corn rust leaf,Corn_Common_rust,review_rust_species,116
+plantdoc_classification,Peach leaf,,outside_current_11_classes,112
+plantdoc_classification,Potato leaf early blight,Potato_Early_blight,direct_name_candidate,117
+plantdoc_classification,Potato leaf late blight,Potato_Late_blight,direct_name_candidate,105
+plantdoc_classification,Raspberry leaf,,outside_current_11_classes,119
+plantdoc_classification,Soyabean leaf,,outside_current_11_classes,65
+plantdoc_classification,Squash Powdery mildew leaf,,outside_current_11_classes,130
+plantdoc_classification,Strawberry leaf,,outside_current_11_classes,96
+plantdoc_classification,Tomato Early blight leaf,Tomato_Early_blight,direct_name_candidate,88
+plantdoc_classification,Tomato Septoria leaf spot,Tomato_Septoria_leaf_spot,direct_name_candidate,151
+plantdoc_classification,Tomato leaf,Tomato_healthy,review_generic_healthy_label,63
+plantdoc_classification,Tomato leaf bacterial spot,,outside_current_11_classes,110
+plantdoc_classification,Tomato leaf late blight,Tomato_Late_blight,direct_name_candidate,111
+plantdoc_classification,Tomato leaf mosaic virus,,outside_current_11_classes,54
+plantdoc_classification,Tomato leaf yellow virus,,outside_current_11_classes,76
+plantdoc_classification,Tomato mold leaf,,outside_current_11_classes,91
+plantdoc_classification,Tomato two spotted spider mites leaf,,outside_current_11_classes,2
+plantdoc_classification,grape leaf,,outside_current_11_classes,69
+plantdoc_classification,grape leaf black rot,,outside_current_11_classes,64
+plantdoc_detection,,,bounding_boxes_not_image_class,25
+plantdoc_detection,Apple Scab Leaf,,bounding_boxes_not_image_class,93
+plantdoc_detection,Apple leaf,,bounding_boxes_not_image_class,91
+plantdoc_detection,Apple rust leaf,,bounding_boxes_not_image_class,89
+plantdoc_detection,Bell_pepper leaf,,bounding_boxes_not_image_class,61
+plantdoc_detection,Bell_pepper leaf spot,,bounding_boxes_not_image_class,71
+plantdoc_detection,Blueberry leaf,,bounding_boxes_not_image_class,117
+plantdoc_detection,Cherry leaf,,bounding_boxes_not_image_class,57
+plantdoc_detection,Corn Gray leaf spot,Corn_Gray_leaf_spot,bounding_boxes_not_image_class,68
+plantdoc_detection,Corn leaf blight,,bounding_boxes_not_image_class,192
+plantdoc_detection,Corn rust leaf,Corn_Common_rust,bounding_boxes_not_image_class,116
+plantdoc_detection,Peach leaf,,bounding_boxes_not_image_class,112
+plantdoc_detection,Potato leaf early blight,Potato_Early_blight,bounding_boxes_not_image_class,113
+plantdoc_detection,Potato leaf early blight | Potato leaf late blight,,bounding_boxes_not_image_class,2
+plantdoc_detection,Potato leaf early blight | Tomato Early blight leaf,,bounding_boxes_not_image_class,1
+plantdoc_detection,Potato leaf late blight,Potato_Late_blight,bounding_boxes_not_image_class,104
+plantdoc_detection,Potato leaf | Potato leaf early blight,,bounding_boxes_not_image_class,3
+plantdoc_detection,Raspberry leaf,,bounding_boxes_not_image_class,119
+plantdoc_detection,Soyabean leaf,,bounding_boxes_not_image_class,65
+plantdoc_detection,Squash Powdery mildew leaf,,bounding_boxes_not_image_class,130
+plantdoc_detection,Strawberry leaf,,bounding_boxes_not_image_class,96
+plantdoc_detection,Tomato Early blight leaf,Tomato_Early_blight,bounding_boxes_not_image_class,79
+plantdoc_detection,Tomato Early blight leaf | Tomato leaf,,bounding_boxes_not_image_class,8
+plantdoc_detection,Tomato Early blight leaf | Tomato leaf bacterial spot | Tomato two spotted spider mites leaf,,bounding_boxes_not_image_class,2
+plantdoc_detection,Tomato Septoria leaf spot,Tomato_Septoria_leaf_spot,bounding_boxes_not_image_class,150
+plantdoc_detection,Tomato Septoria leaf spot | Tomato leaf,,bounding_boxes_not_image_class,1
+plantdoc_detection,Tomato leaf,Tomato_healthy,bounding_boxes_not_image_class,60
+plantdoc_detection,Tomato leaf bacterial spot,,bounding_boxes_not_image_class,110
+plantdoc_detection,Tomato leaf late blight,Tomato_Late_blight,bounding_boxes_not_image_class,111
+plantdoc_detection,Tomato leaf mosaic virus,,bounding_boxes_not_image_class,54
+plantdoc_detection,Tomato leaf yellow virus,,bounding_boxes_not_image_class,76
+plantdoc_detection,Tomato leaf | Tomato leaf bacterial spot,,bounding_boxes_not_image_class,1
+plantdoc_detection,Tomato leaf | Tomato leaf late blight,,bounding_boxes_not_image_class,1
+plantdoc_detection,Tomato leaf | Tomato leaf mosaic virus,,bounding_boxes_not_image_class,1
+plantdoc_detection,Tomato mold leaf,,bounding_boxes_not_image_class,91
+plantdoc_detection,grape leaf,,bounding_boxes_not_image_class,69
+plantdoc_detection,grape leaf black rot,,bounding_boxes_not_image_class,64
+plantseg,apple black rot,,outside_current_11_classes,63
+plantseg,apple mosaic virus,,outside_current_11_classes,73
+plantseg,apple rust,,outside_current_11_classes,98
+plantseg,apple scab,,outside_current_11_classes,168
+plantseg,banana anthracnose,,outside_current_11_classes,50
+plantseg,banana black leaf streak,,outside_current_11_classes,114
+plantseg,banana bunchy top,,outside_current_11_classes,78
+plantseg,banana cigar end rot,,outside_current_11_classes,33
+plantseg,banana cordana leaf spot,,outside_current_11_classes,30
+plantseg,banana panama disease,,outside_current_11_classes,49
+plantseg,basil downy mildew,,outside_current_11_classes,41
+plantseg,bean halo blight,,outside_current_11_classes,35
+plantseg,bean mosaic virus,,outside_current_11_classes,34
+plantseg,bean rust,,outside_current_11_classes,75
+plantseg,bell pepper bacterial spot,,outside_current_11_classes,53
+plantseg,bell pepper blossom end rot,,outside_current_11_classes,81
+plantseg,bell pepper frogeye leaf spot,,outside_current_11_classes,24
+plantseg,bell pepper powdery mildew,,outside_current_11_classes,18
+plantseg,blueberry anthracnose,,outside_current_11_classes,28
+plantseg,blueberry botrytis blight,,outside_current_11_classes,19
+plantseg,blueberry mummy berry,,outside_current_11_classes,29
+plantseg,blueberry rust,,outside_current_11_classes,33
+plantseg,blueberry scorch,,outside_current_11_classes,33
+plantseg,broccoli alternaria leaf spot,,outside_current_11_classes,56
+plantseg,broccoli downy mildew,,outside_current_11_classes,23
+plantseg,broccoli ring spot,,outside_current_11_classes,12
+plantseg,cabbage alternaria leaf spot,,outside_current_11_classes,39
+plantseg,cabbage black rot,,outside_current_11_classes,93
+plantseg,cabbage downy mildew,,outside_current_11_classes,49
+plantseg,carrot alternaria leaf blight,,outside_current_11_classes,45
+plantseg,carrot cavity spot,,outside_current_11_classes,42
+plantseg,carrot cercospora leaf blight,,outside_current_11_classes,18
+plantseg,cauliflower alternaria leaf spot,,outside_current_11_classes,34
+plantseg,cauliflower bacterial soft rot,,outside_current_11_classes,19
+plantseg,celery anthracnose,,outside_current_11_classes,11
+plantseg,celery early blight,,outside_current_11_classes,29
+plantseg,cherry leaf spot,,outside_current_11_classes,66
+plantseg,cherry powdery mildew,,outside_current_11_classes,25
+plantseg,citrus canker,,outside_current_11_classes,323
+plantseg,citrus greening disease,,outside_current_11_classes,93
+plantseg,coffee berry blotch,,outside_current_11_classes,69
+plantseg,coffee black rot,,outside_current_11_classes,3
+plantseg,coffee brown eye spot,,outside_current_11_classes,17
+plantseg,coffee leaf rust,,outside_current_11_classes,107
+plantseg,corn gray leaf spot,Corn_Gray_leaf_spot,direct_name_candidate,76
+plantseg,corn northern leaf blight,Corn_Northern_Leaf_Blight,direct_name_candidate,92
+plantseg,corn rust,Corn_Common_rust,review_rust_species,120
+plantseg,corn smut,,outside_current_11_classes,131
+plantseg,cucumber angular leaf spot,,outside_current_11_classes,148
+plantseg,cucumber bacterial wilt,,outside_current_11_classes,82
+plantseg,cucumber powdery mildew,,outside_current_11_classes,153
+plantseg,eggplant cercospora leaf spot,,outside_current_11_classes,38
+plantseg,eggplant phomopsis fruit rot,,outside_current_11_classes,32
+plantseg,eggplant phytophthora blight,,outside_current_11_classes,22
+plantseg,garlic leaf blight,,outside_current_11_classes,79
+plantseg,garlic rust,,outside_current_11_classes,80
+plantseg,ginger leaf spot,,outside_current_11_classes,22
+plantseg,ginger sheath blight,,outside_current_11_classes,59
+plantseg,grape black rot,,outside_current_11_classes,88
+plantseg,grape downy mildew,,outside_current_11_classes,211
+plantseg,grape leaf spot,,outside_current_11_classes,69
+plantseg,grapevine leafroll disease,,outside_current_11_classes,32
+plantseg,lettuce downy mildew,,outside_current_11_classes,54
+plantseg,lettuce mosaic virus,,outside_current_11_classes,22
+plantseg,maple tar spot,,outside_current_11_classes,58
+plantseg,peach anthracnose,,outside_current_11_classes,10
+plantseg,peach brown rot,,outside_current_11_classes,96
+plantseg,peach leaf curl,,outside_current_11_classes,121
+plantseg,peach rust,,outside_current_11_classes,5
+plantseg,peach scab,,outside_current_11_classes,55
+plantseg,plum bacterial spot,,outside_current_11_classes,10
+plantseg,plum brown rot,,outside_current_11_classes,42
+plantseg,plum pocket disease,,outside_current_11_classes,28
+plantseg,plum pox virus,,outside_current_11_classes,23
+plantseg,plum rust,,outside_current_11_classes,17
+plantseg,potato early blight,Potato_Early_blight,direct_name_candidate,68
+plantseg,potato late blight,Potato_Late_blight,direct_name_candidate,78
+plantseg,raspberry fire blight,,outside_current_11_classes,25
+plantseg,raspberry gray mold,,outside_current_11_classes,18
+plantseg,raspberry leaf spot,,outside_current_11_classes,11
+plantseg,raspberry yellow rust,,outside_current_11_classes,23
+plantseg,rice blast,,outside_current_11_classes,50
+plantseg,rice sheath blight,,outside_current_11_classes,55
+plantseg,soybean bacterial blight,,outside_current_11_classes,61
+plantseg,soybean brown spot,,outside_current_11_classes,55
+plantseg,soybean downy mildew,,outside_current_11_classes,76
+plantseg,soybean frog eye leaf spot,,outside_current_11_classes,153
+plantseg,soybean mosaic,,outside_current_11_classes,89
+plantseg,soybean rust,,outside_current_11_classes,66
+plantseg,squash powdery mildew,,outside_current_11_classes,144
+plantseg,strawberry anthracnose,,outside_current_11_classes,30
+plantseg,strawberry leaf scorch,,outside_current_11_classes,19
+plantseg,tobacco blue mold,,outside_current_11_classes,36
+plantseg,tobacco brown spot,,outside_current_11_classes,50
+plantseg,tobacco frogeye leaf spot,,outside_current_11_classes,19
+plantseg,tobacco mosaic virus,,outside_current_11_classes,29
+plantseg,tomato bacterial leaf spot,,outside_current_11_classes,90
+plantseg,tomato early blight,Tomato_Early_blight,direct_name_candidate,153
+plantseg,tomato late blight,Tomato_Late_blight,direct_name_candidate,117
+plantseg,tomato leaf mold,,outside_current_11_classes,102
+plantseg,tomato mosaic virus,,outside_current_11_classes,43
+plantseg,tomato septoria leaf spot,Tomato_Septoria_leaf_spot,direct_name_candidate,99
+plantseg,tomato yellow leaf curl virus,,outside_current_11_classes,63
+plantseg,wheat bacterial leaf streak (black chaff),,outside_current_11_classes,83
+plantseg,wheat head scab,,outside_current_11_classes,230
+plantseg,wheat leaf rust,,outside_current_11_classes,75
+plantseg,wheat loose smut,,outside_current_11_classes,141
+plantseg,wheat powdery mildew,,outside_current_11_classes,178
+plantseg,wheat septoria blotch,,outside_current_11_classes,142
+plantseg,wheat stem rust,,outside_current_11_classes,89
+plantseg,wheat stripe rust,,outside_current_11_classes,228
+plantseg,zucchini bacterial wilt,,outside_current_11_classes,57
+plantseg,zucchini downy mildew,,outside_current_11_classes,33
+plantseg,zucchini powdery mildew,,outside_current_11_classes,133
+plantseg,zucchini yellow mosaic virus,,outside_current_11_classes,56
+plantvillage,Corn_Common_rust,Corn_Common_rust,project_label,1192
+plantvillage,Corn_Gray_leaf_spot,Corn_Gray_leaf_spot,project_label,513
+plantvillage,Corn_Northern_Leaf_Blight,Corn_Northern_Leaf_Blight,project_label,985
+plantvillage,Corn_healthy,Corn_healthy,project_label,1162
+plantvillage,Potato_Early_blight,Potato_Early_blight,project_label,1000
+plantvillage,Potato_Late_blight,Potato_Late_blight,project_label,1000
+plantvillage,Potato_healthy,Potato_healthy,project_label,152
+plantvillage,Tomato_Early_blight,Tomato_Early_blight,project_label,1000
+plantvillage,Tomato_Late_blight,Tomato_Late_blight,project_label,1500
+plantvillage,Tomato_Septoria_leaf_spot,Tomato_Septoria_leaf_spot,project_label,1500
+plantvillage,Tomato_healthy,Tomato_healthy,project_label,1500
+plantwild_v2,apple black rot,,outside_current_11_classes,83
+plantwild_v2,apple mosaic virus,,outside_current_11_classes,89
+plantwild_v2,apple rust,,outside_current_11_classes,139
+plantwild_v2,apple scab,,outside_current_11_classes,258
+plantwild_v2,banana anthracnose,,outside_current_11_classes,71
+plantwild_v2,banana black leaf streak,,outside_current_11_classes,167
+plantwild_v2,banana bunchy top,,outside_current_11_classes,157
+plantwild_v2,banana cigar end rot,,outside_current_11_classes,60
+plantwild_v2,banana cordana leaf spot,,outside_current_11_classes,55
+plantwild_v2,banana panama disease,,outside_current_11_classes,63
+plantwild_v2,basil downy mildew,,outside_current_11_classes,63
+plantwild_v2,bean halo blight,,outside_current_11_classes,56
+plantwild_v2,bean mosaic virus,,outside_current_11_classes,58
+plantwild_v2,bean rust,,outside_current_11_classes,115
+plantwild_v2,bell pepper bacterial spot,,outside_current_11_classes,76
+plantwild_v2,bell pepper blossom end rot,,outside_current_11_classes,112
+plantwild_v2,bell pepper frogeye leaf spot,,outside_current_11_classes,31
+plantwild_v2,bell pepper powdery mildew,,outside_current_11_classes,28
+plantwild_v2,blueberry anthracnose,,outside_current_11_classes,42
+plantwild_v2,blueberry botrytis blight,,outside_current_11_classes,36
+plantwild_v2,blueberry mummy berry,,outside_current_11_classes,47
+plantwild_v2,blueberry rust,,outside_current_11_classes,44
+plantwild_v2,blueberry scorch,,outside_current_11_classes,43
+plantwild_v2,broccoli alternaria leaf spot,,outside_current_11_classes,65
+plantwild_v2,broccoli downy mildew,,outside_current_11_classes,29
+plantwild_v2,broccoli ring spot,,outside_current_11_classes,16
+plantwild_v2,cabbage alternaria leaf spot,,outside_current_11_classes,63
+plantwild_v2,cabbage black rot,,outside_current_11_classes,131
+plantwild_v2,cabbage downy mildew,,outside_current_11_classes,84
+plantwild_v2,carrot alternaria leaf blight,,outside_current_11_classes,60
+plantwild_v2,carrot cavity spot,,outside_current_11_classes,72
+plantwild_v2,carrot cercospora leaf blight,,outside_current_11_classes,19
+plantwild_v2,cauliflower alternaria leaf spot,,outside_current_11_classes,54
+plantwild_v2,cauliflower bacterial soft rot,,outside_current_11_classes,36
+plantwild_v2,celery anthracnose,,outside_current_11_classes,29
+plantwild_v2,celery early blight,,outside_current_11_classes,36
+plantwild_v2,cherry leaf spot,,outside_current_11_classes,107
+plantwild_v2,cherry powdery mildew,,outside_current_11_classes,33
+plantwild_v2,citrus canker,,outside_current_11_classes,390
+plantwild_v2,citrus greening disease,,outside_current_11_classes,133
+plantwild_v2,coffee berry blotch,,outside_current_11_classes,118
+plantwild_v2,coffee black rot,,outside_current_11_classes,7
+plantwild_v2,coffee brown eye spot,,outside_current_11_classes,20
+plantwild_v2,coffee leaf rust,,outside_current_11_classes,159
+plantwild_v2,corn gray leaf spot,Corn_Gray_leaf_spot,direct_name_candidate,107
+plantwild_v2,corn northern leaf blight,Corn_Northern_Leaf_Blight,direct_name_candidate,130
+plantwild_v2,corn rust,Corn_Common_rust,review_rust_species,177
+plantwild_v2,corn smut,,outside_current_11_classes,202
+plantwild_v2,cucumber angular leaf spot,,outside_current_11_classes,182
+plantwild_v2,cucumber bacterial wilt,,outside_current_11_classes,108
+plantwild_v2,cucumber powdery mildew,,outside_current_11_classes,189
+plantwild_v2,eggplant cercospora leaf spot,,outside_current_11_classes,60
+plantwild_v2,eggplant phomopsis fruit rot,,outside_current_11_classes,46
+plantwild_v2,eggplant phytophthora blight,,outside_current_11_classes,33
+plantwild_v2,garlic leaf blight,,outside_current_11_classes,92
+plantwild_v2,garlic rust,,outside_current_11_classes,106
+plantwild_v2,ginger leaf spot,,outside_current_11_classes,25
+plantwild_v2,ginger sheath blight,,outside_current_11_classes,68
+plantwild_v2,grape black rot,,outside_current_11_classes,122
+plantwild_v2,grape downy mildew,,outside_current_11_classes,281
+plantwild_v2,grape leaf spot,,outside_current_11_classes,91
+plantwild_v2,grapevine leafroll disease,,outside_current_11_classes,71
+plantwild_v2,lettuce downy mildew,,outside_current_11_classes,84
+plantwild_v2,lettuce mosaic virus,,outside_current_11_classes,39
+plantwild_v2,maple tar spot,,outside_current_11_classes,114
+plantwild_v2,peach anthracnose,,outside_current_11_classes,13
+plantwild_v2,peach brown rot,,outside_current_11_classes,173
+plantwild_v2,peach leaf curl,,outside_current_11_classes,182
+plantwild_v2,peach rust,,outside_current_11_classes,8
+plantwild_v2,peach scab,,outside_current_11_classes,78
+plantwild_v2,plum bacterial spot,,outside_current_11_classes,16
+plantwild_v2,plum brown rot,,outside_current_11_classes,81
+plantwild_v2,plum pocket disease,,outside_current_11_classes,57
+plantwild_v2,plum pox virus,,outside_current_11_classes,33
+plantwild_v2,plum rust,,outside_current_11_classes,34
+plantwild_v2,potato early blight,Potato_Early_blight,direct_name_candidate,126
+plantwild_v2,potato late blight,Potato_Late_blight,direct_name_candidate,117
+plantwild_v2,raspberry fire blight,,outside_current_11_classes,34
+plantwild_v2,raspberry gray mold,,outside_current_11_classes,40
+plantwild_v2,raspberry leaf spot,,outside_current_11_classes,19
+plantwild_v2,raspberry yellow rust,,outside_current_11_classes,37
+plantwild_v2,rice blast,,outside_current_11_classes,83
+plantwild_v2,rice sheath blight,,outside_current_11_classes,76
+plantwild_v2,soybean bacterial blight,,outside_current_11_classes,91
+plantwild_v2,soybean brown spot,,outside_current_11_classes,71
+plantwild_v2,soybean downy mildew,,outside_current_11_classes,153
+plantwild_v2,soybean frog eye leaf spot,,outside_current_11_classes,238
+plantwild_v2,soybean mosaic,,outside_current_11_classes,117
+plantwild_v2,soybean rust,,outside_current_11_classes,118
+plantwild_v2,squash powdery mildew,,outside_current_11_classes,182
+plantwild_v2,strawberry anthracnose,,outside_current_11_classes,58
+plantwild_v2,strawberry leaf scorch,,outside_current_11_classes,39
+plantwild_v2,tobacco blue mold,,outside_current_11_classes,60
+plantwild_v2,tobacco brown spot,,outside_current_11_classes,66
+plantwild_v2,tobacco frogeye leaf spot,,outside_current_11_classes,28
+plantwild_v2,tobacco mosaic virus,,outside_current_11_classes,41
+plantwild_v2,tomato bacterial leaf spot,,outside_current_11_classes,110
+plantwild_v2,tomato early blight,Tomato_Early_blight,direct_name_candidate,187
+plantwild_v2,tomato late blight,Tomato_Late_blight,direct_name_candidate,163
+plantwild_v2,tomato leaf mold,,outside_current_11_classes,156
+plantwild_v2,tomato mosaic virus,,outside_current_11_classes,63
+plantwild_v2,tomato septoria leaf spot,Tomato_Septoria_leaf_spot,direct_name_candidate,130
+plantwild_v2,tomato yellow leaf curl virus,,outside_current_11_classes,93
+plantwild_v2,wheat bacterial leaf streak (black chaff),,outside_current_11_classes,117
+plantwild_v2,wheat head scab,,outside_current_11_classes,319
+plantwild_v2,wheat leaf rust,,outside_current_11_classes,132
+plantwild_v2,wheat loose smut,,outside_current_11_classes,215
+plantwild_v2,wheat powdery mildew,,outside_current_11_classes,271
+plantwild_v2,wheat septoria blotch,,outside_current_11_classes,232
+plantwild_v2,wheat stem rust,,outside_current_11_classes,148
+plantwild_v2,wheat stripe rust,,outside_current_11_classes,358
+plantwild_v2,zucchini bacterial wilt,,outside_current_11_classes,81
+plantwild_v2,zucchini downy mildew,,outside_current_11_classes,45
+plantwild_v2,zucchini powdery mildew,,outside_current_11_classes,223
+plantwild_v2,zucchini yellow mosaic virus,,outside_current_11_classes,95
