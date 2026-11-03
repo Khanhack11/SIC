@@ -61,7 +61,7 @@ function stopServer() {
   await page.getByRole('button',{name:'Ngô, gỉ sắt',exact:true}).click();
   await page.locator('#btn-submit:not([disabled])').waitFor();
   let posts=0;
-  page.on('request',request=>{if(request.url().endsWith('/api/diagnose') && request.method()==='POST') posts++;});
+  page.on('request',request=>{if(request.url().includes('/api/diagnose') && request.method()==='POST') posts++;});
   await page.locator('#btn-submit').evaluate(button=>{button.click();button.click();});
   await page.getByText('Đạt ngưỡng tham khảo',{exact:true}).waitFor();
   assert.equal(posts,1);
@@ -81,7 +81,7 @@ function stopServer() {
   await page.getByRole('button',{name:'Khoai tây, lá khỏe',exact:true}).click();
   await page.locator('#btn-submit:not([disabled])').waitFor();
   await page.locator('#btn-submit').click();
-  await page.getByText('Lớp lá khỏe',{exact:true}).waitFor();
+  await page.getByText('Chưa xác nhận lá khỏe',{exact:true}).waitFor();
   assert(await page.evaluate(()=>document.documentElement.scrollWidth <= document.documentElement.clientWidth));
   await page.screenshot({path:path.join(outputDir,'mobile-healthy.png'),fullPage:true});
   // A slow earlier sample must never replace the user's newer local selection.
@@ -106,20 +106,45 @@ function stopServer() {
   await page.unroute('**/demo/Corn_Common_rust.jpg');
   // HTTP errors and a broken connection must restore controls for retry.
   for (const status of [400,500,503]) {
-    await page.route('**/api/diagnose',route=>route.fulfill({status,json:{detail:`Demo error ${status}`}}));
+    await page.route('**/api/diagnose*',route=>route.fulfill({status,json:{detail:`Demo error ${status}`}}));
     await page.locator('#btn-submit:not([disabled])').waitFor();
     await page.locator('#btn-submit').click();
     await page.getByText(`Demo error ${status}`,{exact:true}).waitFor();
     await page.locator('#btn-submit:not([disabled])').waitFor();
-    await page.unroute('**/api/diagnose');
+    await page.unroute('**/api/diagnose*');
   }
-  await page.route('**/api/diagnose',route=>route.abort());
+  await page.route('**/api/diagnose*',route=>route.abort());
   await page.locator('#btn-submit').click();
   await page.getByText('Mất kết nối máy chủ. Hãy kiểm tra server rồi thử lại.',{exact:true}).waitFor();
   await page.locator('#btn-submit:not([disabled])').waitFor();
-  await page.unroute('**/api/diagnose');
+  await page.unroute('**/api/diagnose*');
   await page.locator('#btn-submit').click();
-  await page.getByText('Lớp lá khỏe',{exact:true}).waitFor();
+  await page.getByText('Chưa thể xác nhận lá khỏe',{exact:true}).waitFor();
+  await page.getByText('Chọn vùng lá để phân tích',{exact:true}).click();
+  await page.locator('#crop-x').fill('25');
+  await page.locator('#crop-width').fill('50');
+  await page.locator('#apply-crop').click();
+  await page.waitForFunction(()=>document.querySelector('#file-info').textContent.includes('leaf_crop.jpg'));
+  assert.equal(await page.locator('#image-preview').evaluate(image=>image.naturalWidth),128);
+  assert.equal(await page.locator('#image-preview').evaluate(image=>image.naturalHeight),256);
+  assert(await page.evaluate(async()=>{
+    const preview=new Uint8Array(await (await fetch(previewUrl)).arrayBuffer());
+    const upload=new Uint8Array(await selectedFile.arrayBuffer());
+    return preview.length===upload.length && preview.every((value,index)=>value===upload[index]);
+  }),'Preview and upload differ');
+  await page.locator('#crop-editor').evaluate(details=>{details.open=true;});
+  await page.locator('#restore-image').click();
+  await page.waitForFunction(()=>document.querySelector('#file-info').textContent.includes('Potato_healthy.jpg'));
+  await page.locator('#visible-damage').check();
+  await page.locator('#btn-submit:not([disabled])').waitFor();
+  await page.locator('#btn-submit').click();
+  await page.getByText('Cần kiểm tra tổn thương',{exact:true}).waitFor();
+  assert(await page.locator('#advisory-panels').isHidden());
+  assert((await page.locator('#result-message').textContent()).includes('Chưa thể kết luận lá khỏe'));
+  assert(parseFloat(await page.locator('#result-card').evaluate(e=>getComputedStyle(e).fontSize))>=18);
+  assert(parseFloat(await page.locator('#disease-name').evaluate(e=>getComputedStyle(e).fontSize))>=26);
+  await page.screenshot({path:path.join(outputDir,'mobile-damage-review.png'),fullPage:true});
+  await page.locator('#visible-damage').uncheck();
   await page.route('**/api/health',route=>route.fulfill({json:{status:'MODEL_NOT_READY',weights_loaded:false}}));
   await page.evaluate(()=>checkServerHealth());
   await page.getByText('Máy chủ đã chạy, model chưa sẵn sàng',{exact:true}).waitFor();
@@ -131,8 +156,8 @@ function stopServer() {
   await page.getByText('Chưa kết nối được máy chủ. Kiểm tra server rồi thử lại.',{exact:true}).waitFor();
   assert(await page.locator('#btn-submit').isDisabled());
   assert.deepEqual(errors,[]);
-  await fs.writeFile(path.join(outputDir,'frontend_verification.json'),JSON.stringify({passed:true,checks:['simulated camera capture and stream cleanup','camera permission denied','corrupt image','oversize image','disease inference','duplicate submission prevention','sources','unreviewed treatments withheld','uncertain guidance','healthy leaf','mobile overflow','model not ready','offline server','slow sample does not replace newer local file','HTTP 400 recovery','HTTP 500 recovery','HTTP 503 recovery','network failure recovery','successful retry'],page_errors:errors},null,2));
+  await fs.writeFile(path.join(outputDir,'frontend_verification.json'),JSON.stringify({passed:true,checks:['simulated camera capture and stream cleanup','camera permission denied','corrupt image','oversize image','disease inference','duplicate submission prevention','sources','unreviewed treatments withheld','uncertain guidance','healthy leaf','mobile overflow','model not ready','offline server','slow sample does not replace newer local file','HTTP 400 recovery','HTTP 500 recovery','HTTP 503 recovery','network failure recovery','successful retry','manual crop dimensions','restore original','preview/upload pixel parity','healthy/damage conflict','readable result typography'],page_errors:errors},null,2));
   await browser.close();
   stopServer();
-  console.log('Frontend verification passed: 19 checks, no JavaScript page errors. Camera used a simulated device.');
+  console.log('Frontend verification passed: existing cases plus crop, restore, pixel parity, damage conflict and readable results. Camera used a simulated device.');
 })().catch(async error=>{console.error(error);if(activeBrowser)await activeBrowser.close();stopServer();process.exitCode=1;});

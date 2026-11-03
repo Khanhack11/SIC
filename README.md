@@ -2,6 +2,8 @@
 
 Hệ thống nhận diện ảnh lá cà chua, khoai tây và ngô, sau đó trả thông tin chăm sóc tham khảo. MobileNetV2 phân loại 11 lớp gồm 8 bệnh và 3 lớp lá khỏe. FastAPI phục vụ cả frontend tại `/app` và API.
 
+Luồng điện thoại và ảnh thực địa được ghi trong [các phase](docs/MOBILE_FIELD_PHASES.md). Frontend có crop thủ công và chữ kết quả lớn hơn. Ảnh người dùng mặc định là ảnh thực địa: dự đoán lớp khỏe vẫn yêu cầu kiểm tra lại. Điểm dự đoán không phải độ chính xác chẩn đoán. MobileNetV3-Large có thêm lớp ngoài phạm vi là ứng viên riêng, chỉ nạp khi đặt `SIC_FIELD_MODEL_PATH`; không tự thay checkpoint baseline.
+
 Samsung Innovation Campus, Group 5. Chuẩn bị báo cáo **04–05/11/2026**, thời lượng 20 phút.
 
 | Thành viên | Phạm vi công việc |
@@ -24,6 +26,8 @@ python -m venv .venv
 ```
 
 Mở **http://127.0.0.1:8000/app**. Khi `.venv` đã có, có thể chạy `run_demo.cmd`. Giữ cửa sổ server mở trong buổi demo. Swagger: http://127.0.0.1:8000/docs.
+
+Để dùng điện thoại cùng mạng, chạy `run_mobile_demo.cmd`, lấy IPv4 máy server bằng `ipconfig`, rồi mở `http://IP_SERVER:8000/app` trên điện thoại. Không dùng `127.0.0.1` của điện thoại để gọi máy server. Camera web trực tiếp cần HTTPS; HTTP dùng chọn file/camera gốc của thiết bị. Chưa kiểm tra điện thoại vật lý, NAT hoặc cấu hình firewall của từng mạng.
 
 Model cần `models/mobilenetv2_crop_disease.pt` và graph tương ứng `models/mobilenetv2_crop_disease.onnx`. ONNX là mặc định khi graph và dependency phù hợp; còn lại dùng TorchScript. Khi không có checkpoint hợp lệ, health báo `MODEL_NOT_READY`, diagnose trả HTTP 503 và giao diện khóa nút phân tích. Graph phải khớp hash checkpoint.
 
@@ -71,6 +75,16 @@ Toàn bộ file test nằm trong [tests](tests/README.md). Mở `tests/run_tests
 Hồ sơ frontend có kiểm tra tự động và screenshot desktop/mobile. Camera mô phỏng xác minh luồng phần mềm; cần thử camera vật lý trước buổi trình bày.
 
 ## Huấn luyện
+
+Pipeline ứng viên mới ghép PlantDoc với split PlantVillage đã audit, giữ test riêng và có lớp `Unsupported`. Xem [audit dữ liệu](docs/final_release/mobile_field/data_audit.json) và [tiêu chí phát hành](docs/FIELD_RELEASE_CRITERIA.json). Với `.venv` đã cài, tải và chuẩn bị:
+
+```powershell
+.\.venv\Scripts\python.exe -m ml.download_plantdoc
+.\.venv\Scripts\python.exe -m ml.prepare_field
+.\.venv-gpu\Scripts\python.exe -m ml.train_field
+```
+
+Pretrained ImageNet V2 của Torchvision được tải khi train lần đầu. Model mới dùng letterbox 224 để giữ tỷ lệ; JPEG lớn được giải mã giảm kích thước trước khi tạo tensor. Học classifier từ đặc trưng cache, sau đó mở ba block cuối để fine-tune. Chọn checkpoint/temperature trên validation; không dùng test để chọn tiếp. Checkpoint `.resume.pt` của pipeline này chỉ giữ best weights và lịch sử, chưa khôi phục optimizer/vị trí batch. Model cũ dùng pipeline bên dưới.
 
 Pipeline dùng PlantVillage ghim revision, chia 8.043/1.731/1.720 ảnh train/validation/test. [Hướng dẫn dữ liệu](docs/data_optimization/README.md).
 

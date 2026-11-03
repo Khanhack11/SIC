@@ -12,7 +12,8 @@ Lệnh trên chạy unit/integration, backend và stress/edge. Log từng bộ t
 
 ```powershell
 npm --prefix tests install
-.\.venv\Scripts\python.exe tests/run_all.py --web
+.\tests\node_modules\.bin\playwright.cmd install webkit
+.\.venv\Scripts\python.exe tests/run_all.py --web --mobile
 ```
 
 Có thể mở `run_tests.cmd` để chạy cả browser và giữ cửa sổ xem kết quả. Nếu Chrome cài ở vị trí khác, đặt biến `CHROME_PATH` trỏ đến file thực thi. Nếu Playwright đã có ở thư mục dùng chung, đặt `NODE_PATH` trỏ đến thư mục chứa module đó. Không cần tải Chromium khi dùng Chrome sẵn có.
@@ -21,7 +22,8 @@ Có thể mở `run_tests.cmd` để chạy cả browser và giữ cửa sổ xe
 |---|---|
 | `test_*.py` | Unit/integration; `test_backend.py` có thêm 10 kiểm tra khi chạy trực tiếp |
 | `stress_and_edge_test.py` | 17 tình huống edge/concurrency và latency |
-| `frontend_demo.cjs` | 19 kiểm tra Chrome: camera mô phỏng, ảnh lỗi, disease/healthy/uncertain, responsive, lỗi mạng/API, retry và chọn ảnh khi tải chậm |
+| `frontend_demo.cjs` | 24 kiểm tra Chrome, gồm camera mô phỏng, ảnh lỗi, disease/healthy/uncertain, lỗi mạng/API, retry, crop/khôi phục và pixels preview/upload |
+| `mobile_browsers.cjs` | Chromium và WebKit với thao tác chạm và viewport 360/390/412/844; không phải điện thoại thật |
 | `run_all.py` | Chạy các bộ test, giữ log và mã thoát |
 | `fixtures/` | Ảnh nhân tạo và file lỗi để kiểm tra API; không dùng đo chất lượng model |
 

@@ -1,0 +1,1107 @@
+{
+  "plantdoc_source": "https://github.com/pratikkayal/PlantDoc-Dataset",
+  "revision": "5467f6012d78d1c446145d5f582da6096f852ae8",
+  "labels": [
+    "Corn_Common_rust",
+    "Corn_Gray_leaf_spot",
+    "Corn_Northern_Leaf_Blight",
+    "Corn_healthy",
+    "Potato_Early_blight",
+    "Potato_Late_blight",
+    "Potato_healthy",
+    "Tomato_Early_blight",
+    "Tomato_Late_blight",
+    "Tomato_Septoria_leaf_spot",
+    "Tomato_healthy",
+    "Unsupported"
+  ],
+  "mapping": {
+    "corn gray leaf spot": "Corn_Gray_leaf_spot",
+    "corn rust leaf": "Corn_Common_rust",
+    "potato leaf": "Potato_healthy",
+    "potato leaf early blight": "Potato_Early_blight",
+    "potato leaf late blight": "Potato_Late_blight",
+    "tomato leaf": "Tomato_healthy",
+    "tomato early blight leaf": "Tomato_Early_blight",
+    "tomato leaf late blight": "Tomato_Late_blight",
+    "tomato septoria leaf spot": "Tomato_Septoria_leaf_spot"
+  },
+  "seed": 42,
+  "records_sha256": "aba85a5d50dd6d3f763d39ec3e21cae7ba7645e54374f90c99b9ff0a7a6db4b5",
+  "counts": {
+    "PlantVillage/train/Corn_Gray_leaf_spot": 359,
+    "PlantVillage/train/Corn_Common_rust": 834,
+    "PlantVillage/train/Corn_Northern_Leaf_Blight": 689,
+    "PlantVillage/train/Corn_healthy": 814,
+    "PlantVillage/train/Potato_Early_blight": 700,
+    "PlantVillage/train/Potato_Late_blight": 700,
+    "PlantVillage/train/Potato_healthy": 104,
+    "PlantVillage/train/Tomato_Early_blight": 700,
+    "PlantVillage/train/Tomato_Late_blight": 1047,
+    "PlantVillage/train/Tomato_Septoria_leaf_spot": 1050,
+    "PlantVillage/train/Tomato_healthy": 1046,
+    "PlantVillage/validation/Corn_Gray_leaf_spot": 77,
+    "PlantVillage/validation/Corn_Common_rust": 179,
+    "PlantVillage/validation/Corn_Northern_Leaf_Blight": 148,
+    "PlantVillage/validation/Corn_healthy": 174,
+    "PlantVillage/validation/Potato_Early_blight": 152,
+    "PlantVillage/validation/Potato_Late_blight": 152,
+    "PlantVillage/validation/Potato_healthy": 24,
+    "PlantVillage/validation/Tomato_Early_blight": 151,
+    "PlantVillage/validation/Tomato_Late_blight": 225,
+    "PlantVillage/validation/Tomato_Septoria_leaf_spot": 225,
+    "PlantVillage/validation/Tomato_healthy": 224,
+    "PlantVillage/test/Corn_Gray_leaf_spot": 77,
+    "PlantVillage/test/Corn_Common_rust": 179,
+    "PlantVillage/test/Corn_Northern_Leaf_Blight": 148,
+    "PlantVillage/test/Corn_healthy": 174,
+    "PlantVillage/test/Potato_Early_blight": 148,
+    "PlantVillage/test/Potato_Late_blight": 148,
+    "PlantVillage/test/Potato_healthy": 24,
+    "PlantVillage/test/Tomato_Early_blight": 149,
+    "PlantVillage/test/Tomato_Late_blight": 224,
+    "PlantVillage/test/Tomato_Septoria_leaf_spot": 225,
+    "PlantVillage/test/Tomato_healthy": 224,
+    "PlantDoc/test/Unsupported": 155,
+    "PlantDoc/test/Corn_Gray_leaf_spot": 4,
+    "PlantDoc/test/Corn_Common_rust": 10,
+    "PlantDoc/test/Potato_Early_blight": 6,
+    "PlantDoc/test/Potato_Late_blight": 5,
+    "PlantDoc/test/Tomato_Early_blight": 9,
+    "PlantDoc/test/Tomato_Septoria_leaf_spot": 10,
+    "PlantDoc/test/Tomato_Late_blight": 10,
+    "PlantDoc/test/Tomato_healthy": 8,
+    "PlantDoc/validation/Corn_Common_rust": 21,
+    "PlantDoc/train/Corn_Common_rust": 84,
+    "PlantDoc/validation/Corn_Gray_leaf_spot": 13,
+    "PlantDoc/train/Corn_Gray_leaf_spot": 51,
+    "PlantDoc/validation/Potato_Early_blight": 19,
+    "PlantDoc/train/Potato_Early_blight": 77,
+    "PlantDoc/validation/Potato_Late_blight": 18,
+    "PlantDoc/train/Potato_Late_blight": 70,
+    "PlantDoc/validation/Tomato_Early_blight": 14,
+    "PlantDoc/train/Tomato_Early_blight": 56,
+    "PlantDoc/validation/Tomato_Late_blight": 18,
+    "PlantDoc/train/Tomato_Late_blight": 72,
+    "PlantDoc/validation/Tomato_Septoria_leaf_spot": 25,
+    "PlantDoc/train/Tomato_Septoria_leaf_spot": 102,
+    "PlantDoc/validation/Tomato_healthy": 11,
+    "PlantDoc/train/Tomato_healthy": 44,
+    "PlantDoc/validation/Unsupported": 275,
+    "PlantDoc/train/Unsupported": 1102
+  },
+  "duplicate_representatives_removed": 38,
+  "rejected": [
+    {
+      "path": "test\\Corn leaf blight\\02c.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "test\\Corn leaf blight\\0796.20graylssymt.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "test\\Corn leaf blight\\07c.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "test\\Corn leaf blight\\0c.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "test\\Corn leaf blight\\1321189.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "test\\Corn leaf blight\\160314_web.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "test\\Corn leaf blight\\2013Corn_GrayLeafSpot_0815_0003.JPG.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "test\\Corn leaf blight\\2015070295153021.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "test\\Corn leaf blight\\Common%20Diseases%20Figure%201.JPG.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "test\\Corn leaf blight\\Corn-SCLB-2017-1.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "test\\Corn leaf blight\\corn-disease-update-fig-3-gray-leaf-spot.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "test\\Corn leaf blight\\corn-gray-leaf-spot-f4.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "test\\Tomato Septoria leaf spot\\RARZ4.jpg",
+      "reason": "Invalid dimensions"
+    },
+    {
+      "path": "train\\Apple Scab Leaf\\img_1916.jpg",
+      "reason": "Invalid dimensions"
+    },
+    {
+      "path": "train\\Apple Scab Leaf\\img_1920.jpg",
+      "reason": "Invalid dimensions"
+    },
+    {
+      "path": "train\\Blueberry leaf\\blueberry_leaves_berries_fresh_wood_1280x960_hd-wallpaper-1763513.jpg",
+      "reason": "Invalid dimensions"
+    },
+    {
+      "path": "train\\Corn leaf blight\\00c.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\011.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\01c.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\02.JPG.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\022.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\03c.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\04c.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\05c.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\06c.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\071409%20Vincelli%20nlb%20on%20corn%20leaf.JPG.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\0796.33anthracn.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\0805Fig3400.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\09c.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\1-495x400.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\1200px-Northern_corn_leaf_blight.JPG.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\186116-325x209-Northern-Corn-Leaf-Blight-Chilvers.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\2-3%20Gray%20leaf%20spot%20BRUCE.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\2014-07-23-corngosswilt.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\20140826_131630.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\20160812__13ST_xanthomonas~1.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\20160826-corndisease-unlt.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\203725159.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\2159_0.jpeg?itok=eBFRbolm.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\220px-Sporulation_on_leaf.JPG.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\24154194959_fd4b42edde_b.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\28380-1024x768.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\28430_rel.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\28430_web.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\4885423651_3c983eaa16_b.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\80102321.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\BacterialLeafStreakinCornImage1.png.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\Bsglqj_IYAATS3C.jpg%2Blarge.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\CORN-DISEASE.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\CmyiAkUUIAAqSEa.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\Cochliobolus_heterostrophus.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\Corn+Blight+1970+Fungus%3A+Southern+Corn+Leaf+Blight.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\Corn-Disease-NCLB-A-Nelson-6-18-2015-F1.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\Corn-GLS-Picture2-e1403817927977-1024x416.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\Corn-Gray-Leaf-Spot-7-31-F2.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\Corn-NCLB.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\Corn-disease-small-NCLB-lesions-A-Nelson-6-16-2015-F2.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\Corn-gray-leaf-spot-8-14-15-F1.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\Corn-gray-leaf-spot-8-21.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\Corn-gray-leaf-spot-F2-8-7-15.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\Corn-northern%20corn%20leaf%20blight-8-21.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\Corn020Fig2.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\Corn_Fig10.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\DSCN0119.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\DSCN0128.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\Erv-sprayed-4.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\FJ_018_F16271-2.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\Fig%201b%20BLS%20backlit%20new%20copy.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\Fig1_Northern_corn_leaf_blight.JPG.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\Figure%202%20Foliar%20symptoms%20of%20similar%20diseases%20to%20Goss.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\Figure%202.JPG.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\Figure-2-.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\Freckles-in-older-lesion1.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\GLSvsNCLB.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\Henrycorn1.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\IMG_1153.JPG.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\IMG_1347.JPG.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\IMG_1385.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\IMG_1468-431x323.JPG.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\IMG_20140601_143916_7931.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\IMG_20140601_143928_0711.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\IMG_42231.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\Kelley%20NCLB.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\N.-Corn-Leaf-Blight-20lx3t9.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\NCLB-2.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\NCLB6.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\NoCornLeafBlight13b.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\Northern-Corn-Blight.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\Northern-Corn-Leaf-Blight-Lesions.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\Northern-Corn-Leaf-Blight-NCLB-med.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\Northern-Corn-Leaf-Blight-in-Sweet-Corn.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\Northern-Corn-Leaf-Blight.ashx.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\Northern-Corn-Leaf-Blight.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\Northern-Corn-Leaf-Blight4.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\Northern-corn-leaf-blight-NM-F1a.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\Northern-corn-leaf-blight-NM-F2.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\Northern-corn-leaf-blight-V12-leaf-NM-F3.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\Northern-corn-leaf-blight2_twitter.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\Northern-corn-leafblight.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\Northern-leaf-blight-in-corn.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\NorthernCornLeafBlight.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\Ontario-Field-Crop-Report_July_27_2017_f1-1024x768.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\P1000367.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\P6120019.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\Risk+factors+for+Goss%E2%80%99s+wilt+and+leaf+blight+Percent+surface+residue.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\SAM_0376.JPG.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\Slide1.preview.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\Southern-Corn-Leaf-Blight-USDA.ashx?w=770.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\Stewarts-Leaf-Blight-Phase-24.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\agriculture-crop-disease-northern-corn-leaf-blight-fungus-exserohilum-FRA00E.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\agriculture-crop-disease-northern-corn-leaf-blight-fungus-exserohilum-turcicum-closeup-of-lesions-on-corn-leaves-texas-usa-x74mbx.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\anthracnoseblight.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\article-fungicides-northern-corn-leaf-blight.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\bacterial-corn-1.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\bacterial-corn-300x300.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\bacterial-leaf-streak-corn.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\bacterial-leaf-streak-of-corn-450-F1.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\bacterial-leaf-streak-of-corn.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\bls-lesions-tjz-hr.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\clip_image010.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\corn-BLS-irregular-lesions.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\corn-bacterial-leaf-streak-V4-AdamsCnty-THartman-F1a.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\corn-bacterial-leaf-streak-backlit-severe-lesions.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\corn-bacterial-leaf-streak-f1.JPG.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\corn-bacterial-leaf-streak-f4.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\corn-bacterial-leaf-streak-f7a-b.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\corn-bacterial-leaf-streak-narrow-stripes.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\corn-bacterial-leaf-streak-zoomed.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\corn-baterial-leaf-stripe-f1b.JPG.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\corn-disease-update-fig-1-northern-leaf-blight.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\corn-disease-update-fig-2-diplodia-leaf-streak1.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\corn-fig-1.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\corn-fig-2.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\corn-gray-leaf-spot-f5.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\corn-large-wavy-Xanth-lesions-f3.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\corn-leaf-scald-9a.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\corn-leaf-scald-9c.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\corn-leaf-scald-9d.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\corn-mature-bacterial-leaf-streak.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\corn-northern-corn-leaf-blight-f6.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\corn-northern-corn-leaf-blight.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\corn-several-Holcus%20spot%20lesions-f4.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\corn-short-backlit-Xanth-lesions-halos-f2-.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\corn-short-backlit-Xanth-lesions-halos-f2.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\corn-stalk-rot-leaf-symptoms-F1.jpg.jpeg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\corn1.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\corn_disease_clip_image001_0003.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\corn_gray_leaf_spot.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\cp_VA-123_northern_corn_leaf_blight_article.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\disease.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\disease3.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\disease4.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\dsc5270.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\dsc5582.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\f7bd710e84db49829a918d85a2ff809c1.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\fi00245.JPG.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\ga-2015-05-20-nclb.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\gls99-anamosa-400x334.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\gosswilt_TMB.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\gray-leaf-spot-lesions-F4.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\gray-leaf-spot-severe--.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\helminthosporium-or-turcicum-leaf-stains-on-corn-leaf-disease-of-corn-plant-R5GR3C.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\image.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\image393.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\image_1500x1500%253E.jpeg?1473988930.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\image_1500x1500%253E.jpeg?1473988931.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\img_0099-2.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\img_5593211e4bf88_49361.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\leafblightcorn.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\nclb-2015-n-mcghee.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\nclb3_rob_factsheetimage.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\nclb3x1200.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\nclb4x1200.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\nclb7x1200.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\ncls-2016-a-shirley.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\ncorn_leaf_blight_0796_02.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\northern-corn-leaf-blight-exserohilum-turcicum-lesions-on-a-maize-BBFWRB.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\northern-corn-leaf-blight-exserohilum-turcicum-lesions-on-a-maize-BX3K2K.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\northern-corn-leaf-blight-exserohilum-turcicum-lesions-on-a-maize-leaf-south-africa-XDYJWY.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\northern-corn-leaf-blight-exserohilum-turcicum-lesions-on-a-maize-leaf-south-africa-xe3a7j.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\northern-corn-leaf-blight.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\northern_corn_leaf_blight_university_of_delaware-600x400.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\northern_leaf_blight.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\photo-7-004.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\possible-northerncornleafspot.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\rsz0731northernleafblightcigarshapedlesionsfig5.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\show_picture.asp?id=aaaaaaaaaanoroz&w=524.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\smaller-Septoria2.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\stewartswilt.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\stock-photo-northern-corn-leaf-blight-nclb-is-a-foliar-disease-of-corn-maize-caused-by-exserohilum-turcicum-592778840.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\stock-photo-northern-corn-leaf-blight-nclb-is-a-foliar-disease-of-corn-maize-caused-by-exserohilum-turcicum-592778861.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\stock-photo-northern-corn-leaf-blight-nclb-is-a-foliar-disease-of-corn-maize-caused-by-exserohilum-turcicum-592778870.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\stock-photo-northern-corn-leaf-blight-nclb-is-a-foliar-disease-of-corn-maize-caused-by-exserohilum-turcicum-592778882.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\swcdg1-e1482969712678-300x188.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\swcdg1.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Corn leaf blight\\sweetcorn_Northern-corn-leaf-blight_zoom.jpg",
+      "reason": "Ambiguous corn blight label excluded"
+    },
+    {
+      "path": "train\\Potato leaf late blight\\Late-blight-infected-potato-plants_2.jpg",
+      "reason": "Invalid dimensions"
+    },
+    {
+      "path": "train\\Tomato mold leaf\\OLU13.jpg",
+      "reason": "Invalid dimensions"
+    },
+    {
+      "path": "train\\Tomato mold leaf\\Ormvn.jpg",
+      "reason": "Invalid dimensions"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\plantdoc_snapshot\\test\\Potato leaf early blight\\backus-056-potato-blight.jpg",
+      "reason": "Conflicting labels in perceptual group"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\plantdoc_snapshot\\train\\Potato leaf late blight\\backus-056-potato-blight.jpg",
+      "reason": "Conflicting labels in perceptual group"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\plantdoc_snapshot\\test\\Potato leaf early blight\\earlyblightpotato.jpg",
+      "reason": "Conflicting labels in perceptual group"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\plantdoc_snapshot\\train\\Tomato Early blight leaf\\earlyblightpotato.jpg",
+      "reason": "Conflicting labels in perceptual group"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\plantdoc_snapshot\\test\\Potato leaf late blight\\b4b700e15327c1669a7c8f99cce90b0c92db2752.jpg",
+      "reason": "Conflicting labels in perceptual group"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\plantdoc_snapshot\\train\\Potato leaf early blight\\b4b700e15327c1669a7c8f99cce90b0c92db2752.jpg",
+      "reason": "Conflicting labels in perceptual group"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\plantdoc_snapshot\\test\\Potato leaf late blight\\5816740026_d42ef24413_Phytophthora-Infestans.jpg",
+      "reason": "Conflicting labels in perceptual group"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\plantdoc_snapshot\\train\\Potato leaf early blight\\5816740026_d42ef24413_Phytophthora-Infestans.jpg",
+      "reason": "Conflicting labels in perceptual group"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\plantdoc_snapshot\\train\\Tomato leaf late blight\\tomato-late-blight-foliar-lesions_Scot-Nelson_CC-BY-SA-2.0.jpg",
+      "reason": "Conflicting labels in perceptual group"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\plantdoc_snapshot\\test\\Potato leaf late blight\\irish-blight-symptoms-on-potato-leaves-atmf8b.jpg",
+      "reason": "Conflicting labels in perceptual group"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\plantdoc_snapshot\\train\\Potato leaf early blight\\irish-blight-symptoms-on-potato-leaves-atmf8b.jpg",
+      "reason": "Conflicting labels in perceptual group"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\plantdoc_snapshot\\test\\Tomato leaf bacterial spot\\tomato_V8.jpg",
+      "reason": "Conflicting labels in perceptual group"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\plantdoc_snapshot\\train\\Tomato Septoria leaf spot\\tomato_V8.jpg",
+      "reason": "Conflicting labels in perceptual group"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\plantdoc_snapshot\\train\\Bell_pepper leaf spot\\Septoria-leaf-spot.jpg",
+      "reason": "Conflicting labels in perceptual group"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\plantdoc_snapshot\\train\\Tomato Septoria leaf spot\\tomato-blight-treatment-blight.jpg",
+      "reason": "Conflicting labels in perceptual group"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\plantdoc_snapshot\\train\\Potato leaf early blight\\14321627273_58d893c3e2_potato-plant.jpg",
+      "reason": "Conflicting labels in perceptual group"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\plantdoc_snapshot\\train\\Potato leaf late blight\\14321627273_58d893c3e2_b.jpg",
+      "reason": "Conflicting labels in perceptual group"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\plantdoc_snapshot\\train\\Potato leaf early blight\\18028_1.jpg",
+      "reason": "Conflicting labels in perceptual group"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\plantdoc_snapshot\\train\\Potato leaf late blight\\24064_1.jpg",
+      "reason": "Conflicting labels in perceptual group"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\plantdoc_snapshot\\train\\Potato leaf early blight\\36-early-blight-concentric-rings.jpg",
+      "reason": "Conflicting labels in perceptual group"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\plantdoc_snapshot\\train\\Tomato Early blight leaf\\EBTomato.jpg",
+      "reason": "Conflicting labels in perceptual group"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\plantdoc_snapshot\\train\\Tomato Early blight leaf\\tomatoblight.jpg",
+      "reason": "Conflicting labels in perceptual group"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\plantdoc_snapshot\\train\\Potato leaf early blight\\45035_1.jpg",
+      "reason": "Conflicting labels in perceptual group"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\plantdoc_snapshot\\train\\Potato leaf late blight\\Late+blight+on+potato.jpg",
+      "reason": "Conflicting labels in perceptual group"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\plantdoc_snapshot\\train\\Potato leaf early blight\\Blght.jpg",
+      "reason": "Conflicting labels in perceptual group"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\plantdoc_snapshot\\train\\Tomato leaf late blight\\LBleaf2INIA_0.jpg",
+      "reason": "Conflicting labels in perceptual group"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\plantdoc_snapshot\\train\\Potato leaf early blight\\Early-Blight-Leaves-56a348bf3df78cf7727cb35e.jpg",
+      "reason": "Conflicting labels in perceptual group"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\plantdoc_snapshot\\train\\Tomato leaf late blight\\Pest2369.jpg",
+      "reason": "Conflicting labels in perceptual group"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\plantdoc_snapshot\\train\\Potato leaf early blight\\IMG_9055.JPG.jpg",
+      "reason": "Conflicting labels in perceptual group"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\plantdoc_snapshot\\train\\Tomato Septoria leaf spot\\caf212ccf4696675469a0beaa9e57213.jpg",
+      "reason": "Conflicting labels in perceptual group"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\plantdoc_snapshot\\train\\Potato leaf early blight\\backus-045-potato-blight.jpg",
+      "reason": "Conflicting labels in perceptual group"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\plantdoc_snapshot\\train\\Tomato leaf late blight\\a7710b5901ba1f8e9759ef7576cd9f09.jpg",
+      "reason": "Conflicting labels in perceptual group"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\plantdoc_snapshot\\train\\Potato leaf early blight\\early-blight-closeup-NCSU.jpg",
+      "reason": "Conflicting labels in perceptual group"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\plantdoc_snapshot\\train\\Tomato Early blight leaf\\early-blight-closeup-sm.jpg",
+      "reason": "Conflicting labels in perceptual group"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\plantdoc_snapshot\\train\\Potato leaf late blight\\IMG_5813-1024x768.jpg",
+      "reason": "Conflicting labels in perceptual group"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\plantdoc_snapshot\\train\\Tomato leaf late blight\\IMG_5813.jpg",
+      "reason": "Conflicting labels in perceptual group"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\plantdoc_snapshot\\train\\Potato leaf late blight\\Jessore-potato-late-blight-8-2h2fdkl.jpg",
+      "reason": "Conflicting labels in perceptual group"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\plantdoc_snapshot\\train\\Tomato leaf late blight\\symptoms_of_late_blight_0.jpg",
+      "reason": "Conflicting labels in perceptual group"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\plantdoc_snapshot\\train\\Tomato Early blight leaf\\MPC105550.jpg.rendition.largest.ss.jpg",
+      "reason": "Conflicting labels in perceptual group"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\plantdoc_snapshot\\train\\Tomato Septoria leaf spot\\MPC105550.jpg.rendition.largest.550.jpg",
+      "reason": "Conflicting labels in perceptual group"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\plantdoc_snapshot\\train\\Tomato Early blight leaf\\b54d0e40027ff5e90e8ba7e1e9abf9bd--garden-guide-garden-ideas.jpg",
+      "reason": "Conflicting labels in perceptual group"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\plantdoc_snapshot\\train\\Tomato Septoria leaf spot\\b54d0e40027ff5e90e8ba7e1e9abf9bd.jpg",
+      "reason": "Conflicting labels in perceptual group"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\plantdoc_snapshot\\train\\Tomato Early blight leaf\\p1020084s.jpg",
+      "reason": "Conflicting labels in perceptual group"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\plantdoc_snapshot\\train\\Tomato leaf late blight\\tomato_late-blight_04_zoom.jpg",
+      "reason": "Conflicting labels in perceptual group"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\plantdoc_snapshot\\train\\Tomato Septoria leaf spot\\Sept9-300x225.jpg",
+      "reason": "Conflicting labels in perceptual group"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\plantdoc_snapshot\\train\\Tomato leaf bacterial spot\\FS547-4-big.jpg",
+      "reason": "Conflicting labels in perceptual group"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\plantdoc_snapshot\\train\\Tomato Septoria leaf spot\\Tomato%20bacterial%20spot%20closeup-050S.JPG.jpg",
+      "reason": "Conflicting labels in perceptual group"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\plantdoc_snapshot\\train\\Tomato leaf bacterial spot\\RyBx7MH.jpg",
+      "reason": "Conflicting labels in perceptual group"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\plantdoc_snapshot\\train\\Tomato leaf mosaic virus\\ab40cce958c60d8b6e0ec2e4fdb8f526.jpg",
+      "reason": "Conflicting labels in perceptual group"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\plantdoc_snapshot\\train\\Tomato leaf yellow virus\\Tomato2.jpg",
+      "reason": "Conflicting labels in perceptual group"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\plantdoc_snapshot\\train\\Tomato leaf yellow virus\\tomato-yellow-leaf-curl-disease.jpg",
+      "reason": "Conflicting labels in perceptual group"
+    },
+    {
+      "path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\raw\\plantdoc_snapshot\\train\\Tomato mold leaf\\tylc.jpg",
+      "reason": "Conflicting labels in perceptual group"
+    }
+  ],
+  "limitations": [
+    "Internet images and proxy labels, not locally expert-verified",
+    "Corn rust label mapped to project common-rust class, species ambiguity remains",
+    "Generic corn leaf blight excluded; no PlantDoc corn-healthy class",
+    "Conservative perceptual grouping is not proof of physical-leaf disjointness",
+    "Other PlantDoc labels mapped to Unsupported; does not cover all possible OOD inputs"
+  ]
+}

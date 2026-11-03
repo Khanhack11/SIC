@@ -5,7 +5,7 @@ if not exist ".venv\Scripts\python.exe" (
   pause
   exit /b 1
 )
-".venv\Scripts\python.exe" tests/run_all.py --web
+".venv\Scripts\python.exe" tests/run_all.py --web --mobile
 set "test_result=%errorlevel%"
 pause
 exit /b %test_result%

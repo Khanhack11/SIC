@@ -6,6 +6,7 @@ SIC Capstone Project - Group 5
 
 import time
 import logging
+import os
 import torch
 from typing import Optional, List, Dict, Any
 from fastapi import FastAPI, File, UploadFile, HTTPException, Query, status
@@ -25,6 +26,7 @@ from backend.inference_engine import (
     validate_image_file,
     InputValidationError,
     ModelNotReadyError,
+    crop_upload,
 )
 from backend.advisory_engine import AdvisoryKnowledgeBase
 
@@ -61,7 +63,12 @@ app.add_middleware(
 
 # Instantiate engines
 torch.set_num_threads(TORCH_NUM_THREADS)
-inference_engine = CropDiseaseInferenceEngine(runtime=INFERENCE_RUNTIME)
+field_model_path = os.environ.get('SIC_FIELD_MODEL_PATH')
+if field_model_path:
+    from backend.field_inference import FieldInferenceEngine
+    inference_engine = FieldInferenceEngine(field_model_path)
+else:
+    inference_engine = CropDiseaseInferenceEngine(runtime=INFERENCE_RUNTIME)
 advisory_engine = AdvisoryKnowledgeBase()
 inference_slots = BoundedSemaphore(INFERENCE_CONCURRENCY)
 app.mount("/demo", StaticFiles(directory=SAMPLE_IMAGES_DIR / "demo", check_dir=False), name="demo")
@@ -78,11 +85,18 @@ def frontend_script():
     return FileResponse(BASE_DIR / "frontend.js", media_type="text/javascript")
 
 
-def process_image(file_bytes, filename, threshold):
+@app.get('/crop.js', include_in_schema=False)
+def crop_script():
+    return FileResponse(BASE_DIR / 'crop.js', media_type='text/javascript')
+
+
+def process_image(file_bytes, filename, threshold, crop_box=None, visible_damage=False, field_photo=True):
     """Run CPU work off the event loop with request-local advisory settings."""
     with inference_slots:
         validate_image_file(file_bytes, filename)
-        inference_result = inference_engine.predict(file_bytes)
+        inference_result = inference_engine.predict(crop_upload(file_bytes,crop_box))
+        inference_result['visible_damage'] = visible_damage
+        inference_result['field_photo'] = field_photo
         return advisory_engine.process_diagnosis(inference_result, threshold=threshold)
 
 
@@ -124,7 +138,7 @@ def health_check() -> HealthCheckResponse:
         status="HEALTHY" if inference_engine.weights_loaded else "MODEL_NOT_READY",
         service="SIC Crop Disease Advisory API",
         version="1.0.0",
-        model_architecture="MobileNetV2 (224x224 RGB)",
+        model_architecture="MobileNetV3-Large field (224x224 RGB letterbox)" if field_model_path else "MobileNetV2 (224x224 RGB)",
         weights_loaded=inference_engine.weights_loaded,
         num_supported_classes=len(CLASS_NAMES),
         confidence_threshold=advisory_engine.threshold,
@@ -138,6 +152,9 @@ def health_check() -> HealthCheckResponse:
 @app.post("/api/diagnose", tags=["Diagnosis"])
 async def diagnose_leaf_image(
     file: UploadFile = File(..., description="Uploaded leaf photograph (JPEG or PNG)"),
+    crop_box: Optional[str] = Query(None, description="Optional normalized x,y,width,height crop, each in [0,1]"),
+    visible_damage: bool = Query(False, description="User observes holes, spots or deformation; healthy predictions require review"),
+    field_photo: bool = Query(True, description="Default for user photographs; false is reserved for controlled validation examples"),
     custom_threshold: Optional[float] = Query(
         None, ge=0.0, le=1.0, description="Override confidence cutoff threshold"
     )
@@ -160,7 +177,7 @@ async def diagnose_leaf_image(
         # Read file bytes
         file_bytes = await file.read(MAX_FILE_SIZE_BYTES + 1)
         payload = await anyio.to_thread.run_sync(partial(process_image, file_bytes,
-                                                       file.filename or "uploaded_image.jpg", custom_threshold),
+                                                       file.filename or "uploaded_image.jpg", custom_threshold, crop_box, visible_damage, field_photo),
                                                 limiter=getattr(app.state, "inference_limiter", None))
 
         # Include file metadata

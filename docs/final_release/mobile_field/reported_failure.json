@@ -1,0 +1,26 @@
+{
+  "origin": "Leaf area extracted from user screenshot, not original photograph; not used for training or quantitative accuracy evaluation.",
+  "prediction": {
+    "predicted_class": "Corn_healthy",
+    "crop": "Corn",
+    "is_healthy": true,
+    "confidence": 0.9999,
+    "confidence_percentage": "99.99%",
+    "latency_ms": 71.13,
+    "benchmark_met": true,
+    "calibrated": true,
+    "all_probabilities": {
+      "Corn_Common_rust": 0.0,
+      "Corn_Gray_leaf_spot": 0.0,
+      "Corn_Northern_Leaf_Blight": 0.0,
+      "Corn_healthy": 0.9999,
+      "Potato_Early_blight": 0.0,
+      "Potato_Late_blight": 0.0,
+      "Potato_healthy": 0.0,
+      "Tomato_Early_blight": 0.0,
+      "Tomato_Late_blight": 0.0001,
+      "Tomato_Septoria_leaf_spot": 0.0,
+      "Tomato_healthy": 0.0
+    }
+  }
+}

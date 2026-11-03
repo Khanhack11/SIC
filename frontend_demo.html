@@ -241,6 +241,22 @@
     ::selection { background:#c8e6c9; color:#14391a; }
     @media(max-width:600px) { header h1 { font-size:23px; } .card { padding:18px; } .container { padding:0 12px; } }
     @media(prefers-reduced-motion:reduce) { *, *::before, *::after { animation:none !important; transition:none !important; } }
+    #result-card { font-size:18px; line-height:1.7; }
+    #result-card h2 { font-size:24px; }
+    .disease-title { font-size:clamp(26px,4vw,34px); line-height:1.3; }
+    #result-card .scientific-name, #result-card .hint, #result-card .disclaimer-text { font-size:16px; }
+    #result-card .badge, #result-card .metric-pill .label { font-size:16px; }
+    #result-card .metric-pill .val { font-size:28px; }
+    #result-card summary { font-size:20px; min-height:44px; }
+    .damage-check { display:flex; align-items:center; gap:12px; min-height:48px; margin-top:14px; font-size:18px; }
+    .damage-check input { width:22px; height:22px; flex-shrink:0; accent-color:var(--primary); }
+    #crop-panel { margin-top:16px; }
+    #crop-canvas { display:block; width:100%; height:auto; touch-action:none; border:1px solid #67916b; }
+    .crop-coordinates { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:12px 0; }
+    .crop-coordinates label { font-size:16px; }
+    .crop-coordinates input { display:block; width:100%; min-height:44px; font-size:18px; padding:6px; }
+    .crop-actions { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
+    .metrics-row > * { min-width:140px; }
   </style>
 </head>
 <body>
@@ -271,6 +287,21 @@
           <p id="input-error" role="alert" hidden></p>
           <img id="image-preview" alt="Ảnh lá đã chọn">
           <p id="file-info" role="status"></p>
+          <div id="crop-panel" hidden>
+            <details id="crop-editor"><summary>Chọn vùng lá để phân tích</summary>
+              <p class="hint">Kéo một khung quanh lá hoặc vùng có tổn thương. Giữ đủ phần lá để nhận diện, hạn chế nền và các lá khác.</p>
+              <canvas id="crop-canvas" width="400" height="300" aria-label="Kéo để chọn vùng ảnh; có thể nhập tọa độ bên dưới"></canvas>
+              <div class="crop-coordinates">
+                <label>Trái (%)<input id="crop-x" type="number" min="0" max="99" value="0"></label>
+                <label>Trên (%)<input id="crop-y" type="number" min="0" max="99" value="0"></label>
+                <label>Rộng (%)<input id="crop-width" type="number" min="1" max="100" value="100"></label>
+                <label>Cao (%)<input id="crop-height" type="number" min="1" max="100" value="100"></label>
+              </div>
+              <div class="crop-actions"><button id="apply-crop" type="button" class="secondary">Cắt vùng đã chọn</button><button id="restore-image" type="button" class="secondary">Dùng lại ảnh gốc</button></div>
+              <p id="crop-status" role="status" class="hint">Chưa cắt ảnh.</p>
+            </details>
+          </div>
+          <label class="damage-check"><input id="visible-damage" type="checkbox">Tôi thấy lá có lỗ, đốm hoặc biến dạng</label>
           <button id="btn-submit" type="button" class="btn-submit" disabled>Phân tích ảnh</button>
           <p class="hint">Ngưỡng hiển thị tư vấn: 75%. Ảnh ngoài ba cây được hỗ trợ có thể cho kết quả sai dù độ tin cậy cao.</p>
           <details><summary>Thử với ảnh lá mẫu</summary><p class="hint">Ảnh từ tập validation PlantVillage, chỉ dùng minh họa thao tác. Nhãn mẫu không thay cho kết quả model.</p><div id="sample-buttons" class="sample-buttons"></div></details>
@@ -281,7 +312,8 @@
         <p id="empty-state" class="empty-state" role="status">Chọn ảnh để xem dự đoán và thông tin chăm sóc tham khảo.</p>
         <div id="result-box" class="result-box" hidden>
           <div class="diagnosis-header"><div><h3 id="disease-name" class="disease-title"></h3><p id="scientific-name" class="scientific-name"></p></div><span id="status-badge" class="badge"></span></div>
-          <div class="metrics-row"><div class="metric-pill"><div class="label">Độ tin cậy model</div><div id="metric-conf" class="val"></div></div><div class="metric-pill"><div class="label">Tiền xử lý và suy luận</div><div id="metric-latency" class="val"></div></div></div>
+          <div class="metrics-row"><div class="metric-pill"><div class="label">Điểm dự đoán của model</div><div id="metric-conf" class="val"></div></div><div class="metric-pill"><div class="label">Tiền xử lý và suy luận</div><div id="metric-latency" class="val"></div></div></div>
+          <p class="hint">Điểm dự đoán không phải tỷ lệ chẩn đoán đúng. Ảnh ngoài phạm vi đã học vẫn có thể nhận điểm cao.</p>
           <meter id="confidence-meter" min="0" max="100" value="0" aria-label="Độ tin cậy dự đoán"></meter>
           <p id="request-time" class="hint"></p>
           <p id="result-message" class="notice"></p>
@@ -297,6 +329,7 @@
       </section>
     </div>
   </main>
+  <script src="crop.js" defer></script>
   <script src="frontend.js" defer></script>
 </body>
 </html>

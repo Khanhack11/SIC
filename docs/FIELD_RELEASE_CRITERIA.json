@@ -1,0 +1,13 @@
+{
+  "defined_before_training": true,
+  "selection_data": "validation only; report PlantDoc and PlantVillage separately",
+  "field_known_macro_f1_min_gain_percentage_points": 5,
+  "plantvillage_known_macro_f1_max_drop_percentage_points": 2,
+  "field_accepted_accuracy_min": 0.85,
+  "field_accepted_coverage_min": 0.25,
+  "known_diseased_field_high_confidence_healthy_rate_max": 0.05,
+  "confidence_threshold": 0.75,
+  "acceptance_definition": "Raw model max probability >=0.75 and predicted != Unsupported, before API field-healthy review. Coverage denominator is all PlantDoc validation records, including Unsupported.",
+  "deployment": "Candidate remains optional unless all validation criteria pass. Test is measured once after configuration and calibration are fixed, not used to tune.",
+  "limitations": "No score threshold guarantees OOD detection. Manual crop is not leaf segmentation. Physical Android/iPhone and new pest classes require separate testing/data."
+}

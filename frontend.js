@@ -2,6 +2,12 @@
 const API_BASE = (location.protocol === 'file:' || location.port === '8080')
   ? 'http://127.0.0.1:8000' : location.origin;
 const byId = (id) => document.getElementById(id);
+function requestTimeout(milliseconds) {
+  if (typeof AbortSignal !== 'undefined' && typeof AbortSignal.timeout === 'function') return AbortSignal.timeout(milliseconds);
+  const controller = new AbortController();
+  setTimeout(() => controller.abort(), milliseconds);
+  return controller.signal;
+}
 let selectedFile = null;
 let previewUrl = null;
 let selectionVersion = 0;
@@ -10,6 +16,7 @@ let busy = false;
 let cameraStream = null;
 let cameraOpening = false;
 let cameraVersion = 0;
+let fieldPhoto = true;
 
 function updateSubmit() {
   byId('btn-submit').disabled = busy || !modelReady || !selectedFile;
@@ -26,7 +33,7 @@ function inputError(message = '') {
 async function checkServerHealth() {
   const status = byId('server-status');
   try {
-    const response = await fetch(`${API_BASE}/api/health`, { signal: AbortSignal.timeout(5000) });
+    const response = await fetch(`${API_BASE}/api/health`, { signal: requestTimeout(5000) });
     if (!response.ok) throw new Error('health');
     const health = await response.json();
     modelReady = health.status === 'HEALTHY' && health.weights_loaded === true;
@@ -48,9 +55,10 @@ function stopCamera() {
   byId('camera-panel').hidden = true;
 }
 
-async function selectFile(file) {
+async function selectFile(file, { fromCrop = false, isDemo = false } = {}) {
   if (busy || !file) return;
   const version = ++selectionVersion;
+  if (!fromCrop) fieldPhoto = !isDemo;
   selectedFile = null;
   inputError();
   byId('result-box').hidden = true;
@@ -60,6 +68,7 @@ async function selectFile(file) {
   byId('file-info').textContent = '';
   if (previewUrl) URL.revokeObjectURL(previewUrl);
   previewUrl = null;
+  if (!fromCrop) window.leafCrop.clear();
   updateSubmit();
   if (!file.size) return inputError('Ảnh đang rỗng. Hãy chọn file khác.');
   if (file.size > 10 * 1024 * 1024) return inputError('Ảnh vượt 10 MB. Hãy giảm kích thước hoặc chọn ảnh khác.');
@@ -79,6 +88,7 @@ async function selectFile(file) {
     selectedFile = file;
     byId('image-preview').src = url;
     byId('image-preview').style.display = 'block';
+    if (!fromCrop) window.leafCrop.setImage(image, file);
     byId('file-info').textContent = `${file.name} · ${image.naturalWidth} × ${image.naturalHeight} px · ${(file.size / 1024).toFixed(0)} KB`;
   } catch (error) {
     URL.revokeObjectURL(url);
@@ -103,15 +113,15 @@ function renderResult(data, requestMs) {
   const advice = data.advisory_details || {};
   byId('empty-state').hidden = true;
   byId('result-box').hidden = false;
-  byId('disease-name').textContent = confirmed ? (prediction.is_healthy ? 'Ảnh lá thuộc lớp khỏe' : advice.vietnamese_name || prediction.disease_id) : 'Chưa đủ độ tin cậy';
-  byId('scientific-name').textContent = confirmed ? advice.scientific_name || '' : `Dự đoán sơ bộ: ${advice.preliminary_assessment || 'chưa xác định'}`;
-  byId('status-badge').textContent = confirmed ? (prediction.is_healthy ? 'Lớp lá khỏe' : 'Đạt ngưỡng tham khảo') : 'Cần chụp lại';
+  byId('disease-name').textContent = confirmed ? (prediction.is_healthy ? 'Dự đoán: lá thuộc lớp khỏe' : advice.vietnamese_name || prediction.disease_id) : (data.review_reason === 'visible_damage_conflict' ? 'Cần kiểm tra tổn thương' : data.review_reason === 'field_healthy_unverified' ? 'Chưa thể xác nhận lá khỏe' : data.review_reason ? 'Chưa xác định được tình trạng lá' : 'Chưa đủ độ tin cậy');
+  byId('scientific-name').textContent = prediction.is_healthy && data.review_reason ? 'Model nghiêng về lớp khỏe, cần kiểm tra lại.' : confirmed ? advice.scientific_name || '' : `Dự đoán sơ bộ: ${advice.preliminary_assessment || 'chưa xác định'}`;
+  byId('status-badge').textContent = confirmed ? (prediction.is_healthy ? 'Chưa xác nhận lá khỏe' : 'Đạt ngưỡng tham khảo') : 'Cần chụp lại';
   byId('status-badge').className = `badge ${confirmed ? 'badge-online' : 'badge-offline'}`;
-  byId('metric-conf').textContent = `${(prediction.confidence * 100).toLocaleString('vi-VN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}%`;
+  byId('metric-conf').textContent = prediction.confidence >= .99995 ? '≥99,99%' : `${(prediction.confidence * 100).toLocaleString('vi-VN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}%`;
   byId('metric-latency').textContent = `${prediction.latency_ms.toFixed(1)} ms`;
   byId('confidence-meter').value = prediction.confidence * 100;
   byId('request-time').textContent = `Toàn bộ yêu cầu: ${requestMs.toFixed(0)} ms. Ngưỡng tư vấn: ${(prediction.threshold_applied * 100).toFixed(0)}%.`;
-  byId('result-message').textContent = data.message;
+  byId('result-message').textContent = confirmed && prediction.is_healthy ? `${data.message} Kết quả này chưa xác nhận cây khỏe. Các dạng tổn thương khác có thể chưa nằm trong bộ lớp đã học.` : data.message;
   byId('advisory-panels').hidden = !confirmed;
   byId('uncertain-guidance').hidden = confirmed;
   fillList('guidance-list', advice.guidance_for_farmer);
@@ -148,7 +158,8 @@ async function submitDiagnosis() {
   try {
     const form = new FormData();
     form.append('file', selectedFile);
-    const response = await fetch(`${API_BASE}/api/diagnose`, { method: 'POST', body: form, signal: AbortSignal.timeout(45000) });
+    const query = `?field_photo=${fieldPhoto}&visible_damage=${byId('visible-damage').checked}`;
+    const response = await fetch(`${API_BASE}/api/diagnose${query}`, { method: 'POST', body: form, signal: requestTimeout(45000) });
     const data = await response.json();
     if (!response.ok) {
       if (response.status === 503) modelReady = false;
@@ -217,10 +228,10 @@ async function loadSamples() {
         selectedFile = null;
         updateSubmit();
         try {
-          const image = await fetch(`${API_BASE}/demo/${encodeURIComponent(sample.filename)}`);
+          const image = await fetch(`${API_BASE}/demo/${encodeURIComponent(sample.filename)}`, { signal: requestTimeout(10000) });
           if (!image.ok) throw new Error();
           const blob = await image.blob();
-          if (version === selectionVersion) await selectFile(new File([blob], sample.filename, { type: 'image/jpeg' }));
+          if (version === selectionVersion) await selectFile(new File([blob], sample.filename, { type: 'image/jpeg' }), {isDemo:true});
         } catch {
           if (version === selectionVersion) inputError('Không tải được ảnh mẫu. Hãy chọn ảnh từ máy.');
         }

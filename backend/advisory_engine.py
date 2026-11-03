@@ -90,9 +90,17 @@ class AdvisoryKnowledgeBase:
 
         # Retrieve disease details from database
         disease_record = self.get_disease_by_id(predicted_class)
+        review_reason = None
+        if disease_record is None:
+            review_reason = 'unsupported_class'
+        elif inference_result.get('visible_damage') and inference_result.get('is_healthy'):
+            review_reason = 'visible_damage_conflict'
+        elif inference_result.get('field_photo') and inference_result.get('is_healthy'):
+            review_reason = 'field_healthy_unverified'
+        accepted = confidence >= applied_threshold and review_reason is None
 
         # Decision Logic: Check confidence gate
-        if confidence >= applied_threshold:
+        if accepted:
             # Case 1: High confidence prediction
             status = "CONFIRMED"
             message = "Dự đoán đạt ngưỡng hiển thị thông tin tham khảo. Cần đối chiếu triệu chứng thực tế."
@@ -118,9 +126,17 @@ class AdvisoryKnowledgeBase:
                 ]
             }
             remediation_notice = "Khuyến nghị chụp lại ảnh chất lượng cao hơn hoặc tham vấn chuyên gia."
+            if review_reason == 'visible_damage_conflict':
+                message = 'Bạn đã ghi nhận lá có tổn thương nhưng model dự đoán lớp khỏe. Chưa thể kết luận lá khỏe; cần kiểm tra vết tổn thương hoặc hỏi cán bộ BVTV.'
+            elif review_reason == 'unsupported_class':
+                message = 'Ảnh có thể nằm ngoài các bệnh được hỗ trợ. Hệ thống chưa xác định được tình trạng lá.'
+            elif review_reason == 'field_healthy_unverified':
+                message = 'Model nghiêng về lớp khỏe nhưng chưa đủ cơ sở xác nhận sức khỏe cây từ ảnh thực địa. Hãy đối chiếu các lỗ, đốm hoặc biến dạng và chụp riêng từng lá.'
 
         return {
             "diagnosis_status": status,
+            "review_reason": review_reason,
+            "diagnostic_confirmation": False,
             "message": message,
             "prediction": {
                 "disease_id": predicted_class,
@@ -129,7 +145,7 @@ class AdvisoryKnowledgeBase:
                 "confidence": confidence,
                 "confidence_percentage": f"{confidence * 100:.2f}%",
                 "threshold_applied": applied_threshold,
-                "confidence_gate_passed": confidence >= applied_threshold,
+                "confidence_gate_passed": accepted,
                 "latency_ms": latency_ms,
             },
             "advisory_details": advisory_payload,

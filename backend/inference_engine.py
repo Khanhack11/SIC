@@ -8,6 +8,7 @@ import io
 import time
 import hashlib
 import json
+import math
 from pathlib import Path
 from typing import Dict, Any
 from PIL import Image
@@ -36,6 +37,29 @@ class InputValidationError(Exception):
 
 class ModelNotReadyError(RuntimeError):
     """No verified, trained checkpoint is available for diagnosis."""
+
+
+def crop_upload(image_bytes, crop_box):
+    """Crop an EXIF-oriented image using normalized x,y,width,height coordinates."""
+    if crop_box is None:
+        return image_bytes
+    try:
+        box = [float(value) for value in crop_box.split(',')]
+        if len(box) != 4 or not all(math.isfinite(v) for v in box):
+            raise ValueError('four finite coordinates required')
+        x, y, width, height = box
+        if min(x,y) < 0 or min(width,height) <= 0 or x+width > 1.000001 or y+height > 1.000001:
+            raise ValueError('coordinates must stay inside image')
+        with Image.open(io.BytesIO(image_bytes)) as source:
+            image = orient_rgb(source)
+            bounds = (round(x*image.width), round(y*image.height), round((x+width)*image.width), round((y+height)*image.height))
+            if min(bounds[2]-bounds[0], bounds[3]-bounds[1]) < 32:
+                raise ValueError('crop must be at least 32 pixels on each side')
+            output = io.BytesIO()
+            image.crop(bounds).save(output,format='JPEG',quality=95)
+            return output.getvalue()
+    except (ValueError,OSError) as error:
+        raise InputValidationError('Vùng cắt không hợp lệ. Dùng x,y,rộng,cao từ 0 đến 1; mỗi cạnh sau cắt ít nhất 32 px.') from error
 
 
 def validate_image_file(file_bytes: bytes, filename: str) -> None:
@@ -234,7 +258,7 @@ class CropDiseaseInferenceEngine:
             "predicted_class": predicted_class,
             "crop": crop,
             "is_healthy": is_healthy,
-            "confidence": round(confidence, 4),
+            "confidence": confidence,
             "confidence_percentage": f"{confidence * 100:.2f}%",
             "latency_ms": latency_ms,
             "benchmark_met": latency_ms < 200.0,

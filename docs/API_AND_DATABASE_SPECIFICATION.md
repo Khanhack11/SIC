@@ -1,5 +1,15 @@
 # API và kho tri thức SIC
 
+## Bổ sung cho điện thoại và crop
+
+`POST /api/diagnose` nhận thêm query `crop_box=x,y,width,height`, tọa độ chuẩn hóa từ 0 đến 1 sau khi xoay EXIF. Vùng cắt phải nằm trong ảnh và mỗi cạnh ít nhất 32 px. Ví dụ `crop_box=0.25,0.1,0.5,0.8`. API cắt ảnh trước khi tạo tensor; frontend có thể gửi trực tiếp JPEG đã crop với preview trùng bytes upload.
+
+`field_photo=true` là mặc định cho ảnh người dùng. Dự đoán lớp khỏe trên ảnh thực địa trả `UNCERTAIN`, `review_reason=field_healthy_unverified`, giữ nguyên score. `visible_damage=true` chuyển trường hợp khỏe sang `visible_damage_conflict`. Chỉ các ảnh validation minh họa có nguồn xác định dùng `field_photo=false`. Các lớp không có trong kho tri thức trả `unsupported_class`. Đây là quy tắc thận trọng, không phải bộ phát hiện sâu bệnh hoặc OOD hoàn chỉnh.
+
+`diagnostic_confirmation=false` nêu rõ kết quả không xác nhận chẩn đoán. Giá trị cũ `CONFIRMED` chỉ có nghĩa đã qua cổng score/phạm vi để hiển thị thông tin tham khảo, không xác nhận sức khỏe cây. Cổng score trong hồ sơ đánh giá được đo trước chính sách yêu cầu xem lại ảnh khỏe thực địa; không gọi đó là tỷ lệ API chấp nhận cuối cùng.
+
+Ứng viên MobileNetV3-Large dùng `SIC_FIELD_MODEL_PATH=models/mobilenetv3_field_20261103.pt`, chạy eager CPU, letterbox 224 và thêm đầu ra `Unsupported`. Không đặt biến này thì serving vẫn dùng V2/ONNX. Health cho biết kiến trúc/runtime thực tế. Model ứng viên thiếu/sai hợp đồng làm health báo chưa sẵn sàng; không tự chạy weights ngẫu nhiên.
+
 FastAPI phục vụ giao diện `/app`, script `/frontend.js` và ảnh `/demo`. `/` giữ metadata JSON để tương thích client cũ. Hai subsystem nhận diện và tư vấn nối bằng class ID trong `backend/config.py`.
 
 | Method | Path | Nội dung |
