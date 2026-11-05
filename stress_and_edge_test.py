@@ -4,9 +4,17 @@ Tests all endpoints, edge cases, error handling, input validation, and latency b
 """
 
 import sys
+from pathlib import Path
+
+# Ensure UTF-8 output on Windows consoles
+if sys.platform == "win32":
+    try:
+        sys.stdout.reconfigure(encoding="utf-8")
+    except Exception:
+        pass
+
 import io
 import time
-from pathlib import Path
 from PIL import Image
 import numpy as np
 

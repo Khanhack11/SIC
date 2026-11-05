@@ -115,6 +115,8 @@ class AdvisoryKnowledgeBase:
                 "threshold_applied": self.threshold,
                 "confidence_gate_passed": confidence >= self.threshold,
                 "latency_ms": latency_ms,
+                "top_candidates": inference_result.get("top_candidates", []),
+                "all_probabilities": inference_result.get("all_probabilities", {}),
             },
             "advisory_details": advisory_payload,
             "remediation_notice": remediation_notice,

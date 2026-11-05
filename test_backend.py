@@ -5,6 +5,14 @@ Tests all endpoints, inference engine, knowledge base, and validation rules.
 
 import sys
 from pathlib import Path
+
+# Ensure UTF-8 output on Windows consoles
+if sys.platform == "win32":
+    try:
+        sys.stdout.reconfigure(encoding="utf-8")
+    except Exception:
+        pass
+
 from fastapi.testclient import TestClient
 
 # Ensure backend package can be imported

@@ -6,7 +6,7 @@ SIC Capstone Project - Group 5
 
 import io
 import time
-from typing import Dict, Tuple, Any
+from typing import Dict, Tuple, Any, List
 from PIL import Image
 import torch
 import torch.nn as nn
@@ -96,8 +96,21 @@ class CropDiseaseInferenceEngine:
 
         if weights_path and weights_path.exists():
             try:
-                state_dict = torch.load(weights_path, map_location=self.device)
-                self.model.load_state_dict(state_dict)
+                try:
+                    checkpoint = torch.load(weights_path, map_location=self.device, weights_only=False)
+                except TypeError:
+                    checkpoint = torch.load(weights_path, map_location=self.device)
+
+                if isinstance(checkpoint, dict):
+                    if "model_state_dict" in checkpoint:
+                        self.model.load_state_dict(checkpoint["model_state_dict"])
+                    elif "state_dict" in checkpoint:
+                        self.model.load_state_dict(checkpoint["state_dict"])
+                    else:
+                        self.model.load_state_dict(checkpoint)
+                elif isinstance(checkpoint, nn.Module):
+                    self.model = checkpoint
+
                 self.weights_loaded = True
                 print(f"[InferenceEngine] Loaded model weights from {weights_path}")
             except Exception as e:
@@ -118,7 +131,7 @@ class CropDiseaseInferenceEngine:
     def predict(self, image_bytes: bytes) -> Dict[str, Any]:
         """
         Runs model inference on input image bytes.
-        Profiles latency and returns top prediction with confidence and all probabilities.
+        Profiles latency and returns top prediction with confidence, top-3 candidates, and all probabilities.
         """
         start_time = time.perf_counter()
 
@@ -130,9 +143,9 @@ class CropDiseaseInferenceEngine:
             outputs = self.model(input_tensor)
             probabilities = torch.softmax(outputs, dim=1)[0]
 
-        top_prob, top_idx = torch.topk(probabilities, 1)
-        predicted_idx = top_idx.item()
-        confidence = float(top_prob.item())
+        top_probs, top_indices = torch.topk(probabilities, min(3, self.num_classes))
+        predicted_idx = top_indices[0].item()
+        confidence = float(top_probs[0].item())
         predicted_class = self.class_names[predicted_idx]
 
         latency_ms = round((time.perf_counter() - start_time) * 1000, 2)
@@ -142,6 +155,16 @@ class CropDiseaseInferenceEngine:
             self.class_names[i]: round(float(probabilities[i].item()), 4)
             for i in range(self.num_classes)
         }
+
+        # Build top-3 candidates list
+        top_candidates = [
+            {
+                "class_name": self.class_names[top_indices[k].item()],
+                "confidence": round(float(top_probs[k].item()), 4),
+                "confidence_percentage": f"{float(top_probs[k].item()) * 100:.2f}%"
+            }
+            for k in range(len(top_indices))
+        ]
 
         # Crop name extraction (Tomato, Potato, Corn)
         crop = predicted_class.split("_")[0]
@@ -155,5 +178,6 @@ class CropDiseaseInferenceEngine:
             "confidence_percentage": f"{confidence * 100:.2f}%",
             "latency_ms": latency_ms,
             "benchmark_met": latency_ms < 200.0,
+            "top_candidates": top_candidates,
             "all_probabilities": all_probs,
         }
