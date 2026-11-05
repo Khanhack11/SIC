@@ -1,7 +1,10 @@
 """
 Agricultural Advisory Engine (Subsystem B)
-Author: Nguyen Quoc Khanh (Backend Developer & Database Architect)
-SIC Capstone Project - Group 5
+Author: SIC Capstone Project - Group 5
+Enhanced by: Dinh Gia Bao (ML Lead)
+
+Handles knowledge base retrieval and confidence-gated decision logic.
+Safeguards against false-healthy declarations on diseased crops.
 """
 
 import json
@@ -66,34 +69,53 @@ class AdvisoryKnowledgeBase:
         Confidence-Gated Decision Logic (Subsystem B Core):
         1. Evaluates confidence against the configured threshold.
         2. If confidence >= threshold: returns full agronomic advisory card.
-        3. If confidence < threshold: returns warning prompt for clearer photos.
+        3. If confidence < threshold: returns safe guidance and never proclaims sick leaves healthy.
         """
         predicted_class = inference_result["predicted_class"]
         confidence = inference_result["confidence"]
         latency_ms = inference_result.get("latency_ms", 0.0)
+        has_lesions = inference_result.get("has_lesions", False)
+        is_healthy = inference_result.get("is_healthy", False)
 
         # Retrieve disease details from database
         disease_record = self.get_disease_by_id(predicted_class)
+        raw_name = disease_record.get("vietnamese_name") if disease_record else "Chưa xác định"
 
         # Decision Logic: Check confidence gate
         if confidence >= self.threshold:
             # Case 1: High confidence prediction
             status = "CONFIRMED"
-            message = "Độ tin cậy đạt chuẩn. Đã trích xuất phác đồ tư vấn nông nghiệp chính xác."
+            message = "Độ tin cậy đạt chuẩn an toàn. Đã trích xuất phác đồ tư vấn nông nghiệp chính xác."
             advisory_payload = disease_record
             remediation_notice = None
         else:
             # Case 2: Low confidence prediction (< threshold)
             status = "UNCERTAIN"
-            message = (
-                f"Độ tin cậy mô hình ({confidence * 100:.1f}%) thấp hơn ngưỡng an toàn ({self.threshold * 100:.0f}%). "
-                "Hệ thống tạm giữ phác đồ hóa chất để tránh can thiệp sai lầm."
-            )
+            if has_lesions:
+                prelim = f"Nghi ngờ: {raw_name} (Cần kiểm tra thêm)"
+                message = (
+                    f"Phát hiện dấu hiệu tổn thương/đốm bệnh trên phiến lá, nhưng độ tin cậy mô hình ({confidence * 100:.1f}%) "
+                    f"chưa đạt ngưỡng an toàn ({self.threshold * 100:.0f}%). "
+                    "Hệ thống tạm giữ phác đồ hóa chất để tránh can thiệp sai lầm."
+                )
+            elif is_healthy:
+                prelim = "Chưa đủ cơ sở xác nhận lá khỏe mạnh"
+                message = (
+                    f"Độ tin cậy nhận diện ({confidence * 100:.1f}%) thấp hơn ngưỡng an toàn. "
+                    "Hệ thống không xác nhận lá khỏe mạnh khi ảnh chụp chưa đủ thông tin phân tích."
+                )
+            else:
+                prelim = f"Nghi ngờ: {raw_name} (Độ tin cậy thấp)"
+                message = (
+                    f"Độ tin cậy mô hình ({confidence * 100:.1f}%) thấp hơn ngưỡng an toàn ({self.threshold * 100:.0f}%). "
+                    "Hệ thống tạm giữ phác đồ hóa chất để tránh can thiệp sai lầm."
+                )
+
             # Safe Fallback Guidance
             advisory_payload = {
-                "preliminary_assessment": (
-                    disease_record.get("vietnamese_name") if disease_record else "Chưa xác định"
-                ),
+                "preliminary_assessment": prelim,
+                "suspected_disease": raw_name,
+                "has_lesions_detected": has_lesions,
                 "guidance_for_farmer": [
                     "1. Chụp lại ảnh lá cây ở cự ly gần (15 - 30cm), lấy nét trực diện vào vết bệnh hoặc đốm lá.",
                     "2. Chụp trong điều kiện ánh sáng tự nhiên đầy đủ, tránh chụp ngược sáng hoặc bóng râm che khuất.",
@@ -101,15 +123,19 @@ class AdvisoryKnowledgeBase:
                     "4. Liên hệ trực tiếp với cán bộ Trạm Khuyến nông / Trạm BVTV địa phương để kiểm tra mẫu lá thực địa."
                 ]
             }
-            remediation_notice = "Khuyến nghị chụp lại ảnh chất lượng cao hơn hoặc tham vấn chuyên gia."
+            remediation_notice = "Khuyến nghị chụp lại ảnh cận cảnh vết bệnh rõ nét hơn hoặc tham vấn cán bộ chuyên môn."
 
         return {
             "diagnosis_status": status,
             "message": message,
             "prediction": {
                 "disease_id": predicted_class,
+                "disease_name_vi": raw_name,
                 "crop": inference_result.get("crop"),
-                "is_healthy": inference_result.get("is_healthy", False),
+                "disease_name": inference_result.get("disease_name"),
+                "is_healthy": is_healthy,
+                "has_lesions": has_lesions,
+                "crop_filter_applied": inference_result.get("crop_filter_applied", "auto"),
                 "confidence": confidence,
                 "confidence_percentage": f"{confidence * 100:.2f}%",
                 "threshold_applied": self.threshold,

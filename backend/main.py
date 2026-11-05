@@ -1,6 +1,7 @@
 """
 FastAPI RESTful Service for Crop Disease Advisory System
 Author: Nguyen Quoc Khanh (Backend Developer & Database Architect)
+Enhanced by: Dinh Gia Bao (ML Lead)
 SIC Capstone Project - Group 5
 """
 
@@ -26,7 +27,7 @@ app = FastAPI(
         "RESTful API service for foliar crop disease diagnosis and agronomic advisory. "
         "Capstone Project - Samsung Innovation Campus (SIC) - Group 5."
     ),
-    version="1.0.0",
+    version="1.1.0",
     docs_url="/docs",
     redoc_url="/redoc",
 )
@@ -78,8 +79,8 @@ def health_check() -> HealthCheckResponse:
     return HealthCheckResponse(
         status="HEALTHY",
         service="SIC Crop Disease Advisory API",
-        version="1.0.0",
-        model_architecture="MobileNetV2 (224x224 RGB)",
+        version="1.1.0",
+        model_architecture="MobileNetV2 (PlantVillage 54k & Transfer Learning)",
         weights_loaded=inference_engine.weights_loaded,
         num_supported_classes=len(CLASS_NAMES),
         confidence_threshold=advisory_engine.threshold,
@@ -92,12 +93,15 @@ async def diagnose_leaf_image(
     file: UploadFile = File(..., description="Uploaded leaf photograph (JPEG or PNG)"),
     custom_threshold: Optional[float] = Query(
         None, ge=0.0, le=1.0, description="Override confidence cutoff threshold"
+    ),
+    crop_filter: Optional[str] = Query(
+        "auto", description="Tập trung chẩn đoán theo loài cây: auto, tomato, potato, corn"
     )
 ) -> JSONResponse:
     """
     Main Diagnosis Endpoint:
     1. Validates image format, resolution, and corruption.
-    2. Runs MobileNetV2 inference and computes calibrated confidence.
+    2. Runs MobileNetV2 inference with visual lesion detection and crop filtering.
     3. Queries Agricultural Advisory Engine through confidence-gated logic.
     4. Delivers consolidated JSON payload with treatments, safety disclaimers, and latency.
     """
@@ -114,8 +118,8 @@ async def diagnose_leaf_image(
         # Step 1: Input Validation
         validate_image_file(file_bytes, file.filename or "uploaded_image.jpg")
 
-        # Step 2: Model Inference
-        inference_result = inference_engine.predict(file_bytes)
+        # Step 2: Model Inference with Crop Filter
+        inference_result = inference_engine.predict(file_bytes, crop_filter=crop_filter or "auto")
 
         # Step 3: Confidence-Gated Decision Engine
         if custom_threshold is not None:
