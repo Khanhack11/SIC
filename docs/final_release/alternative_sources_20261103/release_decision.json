@@ -1,0 +1,41 @@
+{
+  "selection": "validation only",
+  "checks": {
+    "field_f1_gain": {
+      "value": 35.427722553026875,
+      "minimum": 5,
+      "unit": "percentage points",
+      "passed": true
+    },
+    "village_f1_drop": {
+      "value": -3.6204148356025256,
+      "maximum": 2,
+      "unit": "percentage points",
+      "passed": true
+    },
+    "field_score_gate_accuracy": {
+      "value": 0.6617646813392639,
+      "minimum": 0.85,
+      "passed": false
+    },
+    "field_score_gate_coverage": {
+      "value": 0.1642512083053589,
+      "minimum": 0.25,
+      "passed": false
+    },
+    "known_diseased_false_healthy": {
+      "value": 0.0,
+      "maximum": 0.05,
+      "passed": true
+    }
+  },
+  "all_passed": false,
+  "decision": "Keep default V2; candidate remains experimental",
+  "candidate_weights_sha256": "be9c25e38f37ebd162e3fbaa9ea4b88eaa364040679572a4e013a2a98ea67900",
+  "test_used_for_selection": false,
+  "evidence_sha256": {
+    "docs\\final_release\\alternative_sources_20261103\\baseline_validation.json": "dbf6467cda35014c0fff025910f87501ce374e7166e8488ef166222061dcd9b3",
+    "docs\\final_release\\alternative_sources_20261103\\trained_validation.json": "139d020c436933fb43248e253eadec6d76938aeba07b392e7169303f33c8bfb0",
+    "docs\\FIELD_RELEASE_CRITERIA.json": "cf9895c37fbccbb9701e31ffab837a0e379b8ae345eb92c0137b3a904ba94175"
+  }
+}

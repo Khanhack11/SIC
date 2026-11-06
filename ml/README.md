@@ -6,6 +6,7 @@ Chạy từ thư mục SIC bằng `python -m ml.<module>`. Model phục vụ n�
 |---|---|
 | Tải và kiểm kê dữ liệu | `download_recommended_datasets`, `download_additional_field_datasets`, `analyze_recommended_datasets` |
 | Chuẩn hóa nhãn | `labels`, `prepare_dataset`, `prepare_field_v2` |
+| Bổ sung nguồn CCMT/BARI/Ecuador, giữ holdout | `prepare_alternative_field` |
 | Xem nhãn thực tế và class index | `inspect_labels` |
 | Train baseline V2 | `train`, `train_gpu` |
 | Train candidate V3 từ đầu | `train_field` |

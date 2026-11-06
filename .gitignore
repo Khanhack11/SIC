@@ -37,3 +37,8 @@ artifacts/
 .chart-data-*/
 tests/results/
 node_modules/
+
+# Secrets
+.env
+.env.*
+!.env.example

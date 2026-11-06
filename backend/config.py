@@ -66,3 +66,20 @@ CLASS_NAMES = [
     "Tomato_Septoria_leaf_spot",
     "Tomato_healthy"
 ]
+
+# Google Gemini API Configuration for Agronomy Chatbot
+_env_file = BASE_DIR / ".env"
+if _env_file.is_file():
+    for _line in _env_file.read_text(encoding="utf-8").splitlines():
+        _line = _line.strip()
+        if _line and not _line.startswith("#") and "=" in _line:
+            _k, _v = _line.split("=", 1)
+            os.environ.setdefault(_k.strip(), _v.strip().strip('"').strip("'"))
+
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY") or ""
+GEMINI_MODEL_CANDIDATES = [
+    "gemini-3.1-flash-lite",
+    "gemini-flash-lite-latest",
+    "gemini-3.5-flash-lite",
+    "gemini-flash-latest"
+]

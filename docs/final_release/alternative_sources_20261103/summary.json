@@ -1,0 +1,90 @@
+{
+  "completed_at": "2026-11-04T01:08:34.928834+07:00",
+  "epochs": 6,
+  "sample_exposures": 38400,
+  "selected_stage": "continued/3",
+  "changed_state_tensors": 99,
+  "same_network_tensors_as_parent": false,
+  "last_epoch_changed_state_tensors": 99,
+  "parent_weights_sha256": "0eeb20ec4ef5f3f11cd477920ccc63f33e2b721bb37e394900467f64dc284577",
+  "trained_weights_sha256": "be9c25e38f37ebd162e3fbaa9ea4b88eaa364040679572a4e013a2a98ea67900",
+  "records_sha256": "c8883301ff26b47bb12c8c4ec4869cebf621cca32de1837e762c5cadc1d1925e",
+  "training_seconds": 3539.2959492999726,
+  "gpu": "NVIDIA GeForce RTX 2050",
+  "torch": "2.14.1+cu126",
+  "new_sources": {
+    "ccmt_ghana_v1": 2535,
+    "potato_bari_v1": 71,
+    "corn_ecuador_healthy_v1": 223
+  },
+  "test_evaluated": false,
+  "release_criteria_passed": false,
+  "cpu_validation": {
+    "baseline": {
+      "MultiSourceField": {
+        "accuracy": 0.1546218487394958,
+        "known_macro_f1_present": 0.21739703600064345,
+        "score_gate_accuracy": 0.18902438879013062,
+        "score_gate_coverage": 0.5512605309486389
+      },
+      "PlantDoc": {
+        "accuracy": 0.10144927536231885,
+        "known_macro_f1_present": 0.1595000985668228,
+        "score_gate_accuracy": 0.12280701845884323,
+        "score_gate_coverage": 0.5507246255874634
+      },
+      "PlantVillage": {
+        "accuracy": 0.9462738301559792,
+        "known_macro_f1_present": 0.9448007212310983,
+        "score_gate_accuracy": 0.9737007021903992,
+        "score_gate_coverage": 0.9225881099700928
+      }
+    },
+    "parent": {
+      "MultiSourceField": {
+        "accuracy": 0.7798319327731092,
+        "known_macro_f1_present": 0.6632672188618619,
+        "score_gate_accuracy": 0.8744588494300842,
+        "score_gate_coverage": 0.38823530077934265
+      },
+      "PlantDoc": {
+        "accuracy": 0.7584541062801933,
+        "known_macro_f1_present": 0.5498007090314279,
+        "score_gate_accuracy": 0.6666666865348816,
+        "score_gate_coverage": 0.18840579688549042
+      },
+      "PlantVillage": {
+        "accuracy": 0.9826689774696707,
+        "known_macro_f1_present": 0.9816716273313788,
+        "score_gate_accuracy": 0.997521698474884,
+        "score_gate_coverage": 0.9324089884757996
+      }
+    },
+    "trained": {
+      "MultiSourceField": {
+        "accuracy": 0.7714285714285715,
+        "known_macro_f1_present": 0.6486373300634483,
+        "score_gate_accuracy": 0.8836206793785095,
+        "score_gate_coverage": 0.38991597294807434
+      },
+      "PlantDoc": {
+        "accuracy": 0.7705314009661836,
+        "known_macro_f1_present": 0.5137773240970915,
+        "score_gate_accuracy": 0.6617646813392639,
+        "score_gate_coverage": 0.1642512083053589
+      },
+      "PlantVillage": {
+        "accuracy": 0.9820912767186597,
+        "known_macro_f1_present": 0.9810048695871235,
+        "score_gate_accuracy": 0.9956843256950378,
+        "score_gate_coverage": 0.9370306134223938
+      }
+    }
+  },
+  "limitations": [
+    "New source capture-session IDs unavailable; all new sources train-only.",
+    "Perceptual hash filtering is heuristic, not proof of physical-leaf independence.",
+    "Published labels are not independently adjudicated by this project.",
+    "Validation is historical and has been used by parent selection; no fresh external test claim."
+  ]
+}

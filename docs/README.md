@@ -12,6 +12,7 @@
 | [Hồ sơ phát hành](final_release/README.md) | Demo, model, kết quả và giới hạn |
 | [Kịch bản báo cáo 20 phút](final_release/PRESENTATION_20_MIN.md) | Trình bày và demo |
 | [Kết quả V3](final_release/mobile_field/RESULTS.md) | So sánh domain và điều kiện triển khai |
+| [Train nguồn CCMT/BARI/Ecuador](final_release/alternative_sources_20261103/README.md) | Dữ liệu bổ sung, kiểm tra nhãn và đối chiếu model |
 | [Lượt train tiếp tục](final_release/mobile_field/continuation_20261103/README.md) | Kết quả thực nghiệm tiếp theo |
 | [ViLLite](final_release/villite_adaptation/README.md) | Những phần pipeline đã áp dụng |
 | [Dữ liệu và tối ưu ban đầu](data_optimization/README.md) | Manifest cùng các thí nghiệm cũ |

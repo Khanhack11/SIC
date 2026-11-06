@@ -63,3 +63,7 @@ Lưu ảnh gốc, loài cây, mã cây/lá và phiên chụp. Người duyệt c
 CSV review là bản xuất chỉ đọc. Sửa các cột đề xuất chưa tự sửa manifest hay train lại. Sau khi duyệt, cần tạo phiên bản dữ liệu mới, nhóm cùng lá/phiên chụp, lọc trùng rồi khóa split. Không chỉnh holdout để nâng điểm model đã xem kết quả. Hiện chưa có UI gán nhãn thủ công hoặc quy trình chuyên gia hoàn chỉnh.
 
 Detection cần hộp bao lá; segmentation cần mask pixel. Nhãn phân loại không cung cấp vị trí tổn thương, nên classifier hiện tại không tự tìm vùng crop. Holeta đã nằm train của candidate đa nguồn, không phải external test độc lập cho candidate này.
+
+## Đánh giá mức đầy đủ của nhãn
+
+[Kiểm tra chất lượng nhãn và quy trình duyệt](LABEL_QUALITY_REVIEW.md) nêu các trường còn thiếu, nhãn cần kiểm chứng và hàng đợi train đã tạo. Nhãn từ nguồn và nhãn được nhóm xác nhận cần có trạng thái riêng.

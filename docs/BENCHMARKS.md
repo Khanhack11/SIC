@@ -89,3 +89,7 @@ Cùng 2,740 ảnh validation: khác nhãn 0, khác cổng score 0; chênh xác s
 ## Kiểm thử phần mềm sau khi sắp xếp model
 
 61 unit/integration, 10 backend, 17 stress/edge, 25 frontend và 4 async checks đã đạt. Chromium/WebKit đạt ở viewport 360/390/412/844 px; đây là mô phỏng trên Windows, chưa phải điện thoại thật. API candidate đã kiểm riêng trên CPU và CUDA, gồm crop/ảnh lỗi. [Bằng chứng kiểm thử](benchmarks/deployment_20261103/software_checks.json). Log gốc nằm trong `tests/results/20261103_225746_236046/`.
+
+## Thí nghiệm bổ sung nguồn dữ liệu
+
+[Lượt CCMT/BARI/Ecuador bắt đầu 03/11/2026](final_release/alternative_sources_20261103/README.md) có manifest mới và báo cáo đối chiếu riêng. Các bảng phía trên vẫn là bằng chứng của hai model được đo trước lượt thử nghiệm này.

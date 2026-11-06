@@ -10,6 +10,7 @@
 | GPU NVIDIA | `./run_gpu_demo.cmd` | V2 `.pt`, PyTorch CUDA | http://127.0.0.1:8000/app |
 | Candidate CPU | `./run_field_demo.cmd` | V3 `.pt`, PyTorch CPU | http://127.0.0.1:8003/app |
 | Candidate GPU | `./run_field_demo.cmd gpu` | V3 `.pt`, PyTorch CUDA | http://127.0.0.1:8003/app |
+| Trial nguồn dữ liệu mới | `./run_alternative_demo.cmd` | V3 sau train CCMT/BARI/Ecuador, thử nghiệm | http://127.0.0.1:8004/app |
 | Candidate ONNX CPU | `./run_field_demo.cmd onnx` | V3 ONNX, CPUExecutionProvider | http://127.0.0.1:8003/app |
 
 Chọn một chế độ cho mỗi cổng. Giữ server chạy khi dùng web. `/api/health` báo `device`, `inference_runtime`, `weights_loaded`; GPU phải báo `cuda`, không tự đổi sang CPU. Máy hiện tại: Intel Core i5-12450H 64-bit và NVIDIA RTX 2050 4 GB.

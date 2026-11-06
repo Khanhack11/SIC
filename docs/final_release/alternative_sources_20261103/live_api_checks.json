@@ -1,0 +1,58 @@
+{
+  "8003": {
+    "health": {
+      "status": "HEALTHY",
+      "service": "SIC Crop Disease Advisory API",
+      "version": "1.0.0",
+      "model_architecture": "MobileNetV3-Large field (224x224 RGB letterbox)",
+      "weights_loaded": true,
+      "num_supported_classes": 11,
+      "confidence_threshold": 0.75,
+      "target_latency": "< 200 ms",
+      "inference_runtime": "onnx",
+      "device": "cpu",
+      "calibrated": true
+    },
+    "page_status": 200,
+    "upload_status": 200,
+    "prediction": {
+      "disease_id": "Corn_Common_rust",
+      "crop": "Corn",
+      "is_healthy": false,
+      "confidence": 0.9776149392127991,
+      "confidence_percentage": "97.76%",
+      "threshold_applied": 0.75,
+      "confidence_gate_passed": true,
+      "latency_ms": 264.83
+    },
+    "diagnostic_confirmation": false
+  },
+  "8004": {
+    "health": {
+      "status": "HEALTHY",
+      "service": "SIC Crop Disease Advisory API",
+      "version": "1.0.0",
+      "model_architecture": "MobileNetV3-Large field (224x224 RGB letterbox)",
+      "weights_loaded": true,
+      "num_supported_classes": 11,
+      "confidence_threshold": 0.75,
+      "target_latency": "< 200 ms",
+      "inference_runtime": "onnx",
+      "device": "cpu",
+      "calibrated": true
+    },
+    "page_status": 200,
+    "upload_status": 200,
+    "prediction": {
+      "disease_id": "Corn_Common_rust",
+      "crop": "Corn",
+      "is_healthy": false,
+      "confidence": 0.9766750335693359,
+      "confidence_percentage": "97.67%",
+      "threshold_applied": 0.75,
+      "confidence_gate_passed": true,
+      "latency_ms": 138.85
+    },
+    "diagnostic_confirmation": false
+  }
+}

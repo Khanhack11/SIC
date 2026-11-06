@@ -1,0 +1,36 @@
+{
+  "parent_records_path": "D:\\AI_SIC_ICTU_2026\\Final_SIC_AI_2026\\Project\\SIC\\data\\processed\\field_mobile_v2\\records.json",
+  "parent_records_sha256": "4678faca1433bbb79d31185cdb6600994e29b777c9fbe8ed23bfb58fe92f5f24",
+  "records_sha256": "c8883301ff26b47bb12c8c4ec4869cebf621cca32de1837e762c5cadc1d1925e",
+  "old_holdouts_preserved": true,
+  "preparation_script_sha256": "388f19d5e01f11af8a5f2847d0a8af12adf1d7627fc6d13bb788b3a49f52cc1e",
+  "new_sources_train_only": true,
+  "counts": {
+    "PlantVillage/train": 8043,
+    "PlantVillage/validation": 1731,
+    "PlantVillage/test": 1720,
+    "PlantDoc/test": 217,
+    "PlantDoc/validation": 414,
+    "PlantDoc/train": 1614,
+    "MultiSourceField/validation": 595,
+    "MultiSourceField/train": 5801
+  },
+  "new_sources": {
+    "ccmt_ghana_v1": 2535,
+    "potato_bari_v1": 71,
+    "corn_ecuador_healthy_v1": 223
+  },
+  "test_used_for_selection": false,
+  "limitations": [
+    "New source capture-session IDs unavailable; all new sources train-only.",
+    "Perceptual hash filtering is heuristic, not proof of physical-leaf independence.",
+    "Published labels are not independently adjudicated by this project.",
+    "Validation is historical and has been used by parent selection; no fresh external test claim."
+  ],
+  "exclusion_counts": {
+    "generic_healthy_pending_review": 44,
+    "crop_lineage_pending_review": 3160,
+    "taxonomic_mapping_pending_review": 392,
+    "duplicate_or_near_match_parent_or_new": 505
+  }
+}

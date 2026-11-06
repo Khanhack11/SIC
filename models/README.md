@@ -18,3 +18,7 @@ Candidate có F1 PlantDoc CPU 54,98%, score-gate accuracy 66,67%, coverage 18,84
 Model cũ/progress/resume được chuyển sang `Reports/SIC_Model_Archive_20261103_222709`, ngoài project. Manifest ở đó ghi tên cũ/mới và SHA. Một số PT có cùng tensor nhưng khác calibration/metadata nên hash cả file vẫn khác; chúng được giữ để truy nguyên thí nghiệm.
 
 Lượt train mới ghi vào `artifacts/training_runs/<run>/model.pt`. Chỉ đưa một ứng viên đã chọn vào `models/candidate/` sau khi kiểm chất lượng và runtime. Gói demo chỉ chứa hai model hiện tại. Weights không lưu trong Git; bàn giao riêng. [Lệnh CPU/GPU và native libraries](../docs/RUNTIME.md).
+
+## Trial nguồn dữ liệu khác
+
+Lượt CCMT/BARI/Ecuador lưu riêng trong `artifacts/training_runs/alternative_sources_20261103/`. Model được chọn theo NLL có F1 PlantDoc CPU 51,38%, thấp hơn parent 54,98%, và chưa đạt tiêu chí phát hành. Hai model đăng ký trong thư mục này giữ nguyên. [Báo cáo và checkpoint](../docs/final_release/alternative_sources_20261103/README.md). `run_alternative_demo.cmd` mở bản trial ở cổng 8004 khi đã có weights và báo cáo đối chiếu runtime.

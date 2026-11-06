@@ -1,0 +1,32 @@
+{
+  "collaboration": "Antigravity <-> OpenAI Codex CLI",
+  "codex_cli_executable": "C:\\Users\\MSI\\AppData\\Roaming\\npm\\codex.ps1",
+  "codex_cli_version": "0.166.0",
+  "codex_model": "gpt-6.1-sol",
+  "codex_auth_mode": "ChatGPT",
+  "codex_session_id": "01a1a17f-ad23-7262-a7ec-695f39054e74",
+  "sandbox_mode": "read-only",
+  "artifacts": {
+    "plan_events": "artifacts/codex_collaboration_20261103/plan_events.jsonl",
+    "plan_response": "artifacts/codex_collaboration_20261103/plan_response.txt",
+    "code_review": "artifacts/codex_collaboration_20261103/code_review.txt",
+    "results_review": "artifacts/codex_collaboration_20261103/results_review.txt"
+  },
+  "training": {
+    "parent_checkpoint": "models/mobilenetv3_field_v2_20261103.pt",
+    "parent_sha256": "c296f938564a4beb07cfeca00d9cca579516de442666a4ad96b6748355ee4c4e",
+    "output_checkpoint": "models/mobilenetv3_codex_collab_20261103.pt",
+    "output_sha256": "0eeb20ec4ef5f3f11cd477920ccc63f33e2b721bb37e394900467f64dc284577",
+    "training_report": "models/mobilenetv3_codex_collab_20261103.json",
+    "data_manifest": "data/processed/field_mobile_v2/records.json",
+    "records_sha256": "4678faca1433bbb79d31185cdb6600994e29b777c9fbe8ed23bfb58fe92f5f24",
+    "selected_stage": "parent",
+    "test_used_for_selection": false,
+    "test_evaluated": false
+  },
+  "evaluations": {
+    "validation_field_v2": "docs/final_release/codex_collaboration_20261103/validation_field_v2_evaluation.json",
+    "validation_field_v1": "docs/final_release/codex_collaboration_20261103/validation_field_v1_evaluation.json",
+    "release_decision": "docs/final_release/codex_collaboration_20261103/release_decision.json"
+  }
+}
