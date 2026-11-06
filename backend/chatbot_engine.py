@@ -14,6 +14,11 @@ import urllib.error
 
 from backend.advisory_engine import AdvisoryKnowledgeBase
 from backend.config import KNOWLEDGE_BASE_PATH, GEMINI_API_KEY, GEMINI_MODEL_CANDIDATES
+from backend.crop_guardrails import (
+    detect_crop_scope,
+    GEMINI_SCOPE_GUARDRAIL_INSTRUCTION,
+    SUPPORTED_CROPS
+)
 
 logger = logging.getLogger(__name__)
 
@@ -39,12 +44,7 @@ class AgronomyChatbot:
         if not self.api_key:
             return None
 
-        system_instruction = (
-            "Bạn là Trợ lý Chuyên gia Nông học AI cao cấp của dự án Samsung Innovation Campus (SIC) - Group 5. "
-            "Nhiệm vụ của bạn là tư vấn cho nông dân và kỹ sư nông nghiệp về cách chăm sóc cây trồng (Cà chua, Khoai tây, Ngô), "
-            "chẩn đoán bệnh, yêu cầu đất trồng, bón phân, phòng trừ sinh học và phác đồ thuốc BVTV đặc trị kèm liều lượng chuẩn xác. "
-            "Hãy trả lời ân cần, khoa học, định dạng Markdown rõ ràng, nhấn mạnh nguyên tắc 4 đúng và thời gian cách ly (PHI)."
-        )
+        system_instruction = GEMINI_SCOPE_GUARDRAIL_INSTRUCTION
 
         user_content = query
         if kb_context:
@@ -106,6 +106,28 @@ class AgronomyChatbot:
                     "Thuốc Ridomil Gold phun liều lượng thế nào?",
                     "Cây ngô bị bệnh gỉ sắt",
                     "Thời tiết ẩm ướt phòng bệnh gì cho cà chua?"
+                ]
+            }
+
+        # Pre-flight Scope Check: Restrict strictly to 3 target crops (Tomato, Potato, Corn)
+        scope_check = detect_crop_scope(raw_query)
+        if not scope_check["is_in_scope"]:
+            refusal_msg = scope_check["refusal_message"]
+            return {
+                "answer": refusal_msg,
+                "reply": refusal_msg,
+                "disease_id": None,
+                "matched_disease": None,
+                "crop": None,
+                "is_in_scope": False,
+                "detected_out_of_scope_crop": scope_check.get("detected_crop"),
+                "engine": "SIC Crop Guardrails (Safety Filter)",
+                "references": [],
+                "suggestions": [
+                    "Bệnh mốc sương trên Cà chua dùng thuốc gì?",
+                    "Cách xử lý đất và độ pH trồng Khoai tây",
+                    "Đặc trị bệnh gỉ sắt trên cây Ngô (Bắp)",
+                    "Liều lượng pha thuốc Ridomil Gold cho Cà chua"
                 ]
             }
 

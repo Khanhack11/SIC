@@ -198,6 +198,15 @@ class AdvisoryKnowledgeBase:
 
     def agricultural_chat(self, query: str):
         """Agricultural Chatbot Knowledge Assistant answering questions about crops, soil, pests, and treatments."""
+        from backend.crop_guardrails import detect_crop_scope
+        scope = detect_crop_scope(query)
+        if not scope["is_in_scope"]:
+            return {
+                "answer": scope["refusal_message"],
+                "matched_disease": None,
+                "references": []
+            }
+
         q = query.lower().strip()
         q_clean = strip_accents(q)
 

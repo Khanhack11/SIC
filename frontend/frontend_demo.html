@@ -418,17 +418,22 @@
     <section id="sec-chat" class="agro-card" aria-labelledby="chat-heading">
       <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:6px;">
         <h2 id="chat-heading" style="margin-bottom:0;">Trợ lý AI Nông nghiệp & Tư vấn Chăm sóc Cây trồng</h2>
-        <span class="pill-badge pill-green" style="font-size:13px;">✨ Đã kết nối: Google Gemini AI & Tri thức Nông học SIC</span>
+        <div style="display:flex; gap:6px; flex-wrap:wrap;">
+          <span class="pill-badge pill-purple" style="font-size:12px; background:#f3e5f5; color:#7b1fa2; border:1px solid #ce93d8;">🛡️ Giới hạn an toàn: Chỉ 3 cây trồng (Cà chua, Khoai tây, Ngô)</span>
+          <span class="pill-badge pill-green" style="font-size:12px;">✨ Đã kết nối: Google Gemini AI & Tri thức Nông học SIC</span>
+        </div>
       </div>
-      <p class="hint">Hỏi đáp trực tiếp về liều lượng thuốc, cách xử lý đất, sâu bệnh môi giới và các biện pháp điều trị dứt điểm cho Cà chua, Khoai tây, Ngô.</p>
+      <p class="hint"><strong>Quy tắc an toàn sinh học:</strong> Chuyên gia AI chỉ giải đáp và kê đơn thuốc cho <strong>3 cây trồng chính được huấn luyện (🍅 Cà chua, 🥔 Khoai tây, 🌽 Ngô)</strong>. Hệ thống sẽ từ chối các cây ngoài danh mục để tránh rủi ro nông nghiệp.</p>
       
       <div class="chat-container">
         <div id="chat-box" class="chat-messages">
-          <div class="chat-msg bot">Xin chào bà con! Tôi là Trợ lý Nông nghiệp AI SIC Group 5. Bà con có thể hỏi tôi về:
-• Liều lượng và cách phun thuốc (Ridomil Gold, Amistar Top, Tilt Super, Score, Daconil...)
-• Yêu cầu đất trồng, độ pH và cách bón phân cân đối
-• Sâu hại môi giới truyền bệnh và cách phòng trừ sinh học (Trichoderma, dầu neem)
-• Cảnh báo dịch bệnh theo thời tiết thực tế</div>
+          <div class="chat-msg bot">Xin chào bà con! Tôi là Trợ lý Nông nghiệp AI SIC Group 5.
+🛡️ <strong>QUY TẮC PHẠM VI HOẠT ĐỘNG:</strong> Tôi được huấn luyện và thẩm định an toàn sinh học CHUYÊN SÂU CHO 3 LOẠI CÂY TRỒNG:
+• 🍅 <strong>Cà chua</strong>: Mốc sương, đốm vòng, đốm lá Septoria, liều lượng Ridomil Gold, Amistar Top.
+• 🥔 <strong>Khoai tây</strong>: Sương mai tàn lụi, đốm vòng sớm, kỹ thuật đất cát pha & pH.
+• 🌽 <strong>Ngô (Bắp)</strong>: Gỉ sắt, cháy lá hình thoi, đốm xám, cân đối phân N-P-K.
+
+⚠️ <em>Lưu ý: Hệ thống sẽ từ chối tư vấn cây ngoài danh mục (như lúa, sầu riêng, cà phê, cam, bưởi, rau khác...) để tránh nguy cơ ngộ độc hoặc sai lệch phác đồ.</em></div>
         </div>
         <div class="chat-quick-tags">
           <span style="font-size:12px; color:#555; align-self:center;">Gợi ý:</span>
@@ -438,7 +443,7 @@
           <button type="button" class="chat-tag-btn" onclick="askChat('Sâu hại nào truyền bệnh đốm vòng cà chua?')">Sâu hại truyền bệnh?</button>
         </div>
         <form id="chat-form" class="chat-input-row" onsubmit="handleChatSubmit(event)">
-          <input type="text" id="chat-input" placeholder="Nhập câu hỏi về cây trồng, bệnh hại hoặc phân thuốc..." autocomplete="off">
+          <input type="text" id="chat-input" placeholder="Hỏi về bệnh, liều thuốc, đất trồng cho Cà chua, Khoai tây, Ngô..." autocomplete="off">
           <button type="submit" id="btn-chat-send">Gửi</button>
         </form>
       </div>
