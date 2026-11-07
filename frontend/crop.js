@@ -153,8 +153,12 @@
       const data = await resp.json();
 
       detectedBoxes = data.boxes || [];
-      if (detectedBoxes.length === 0) {
-        el('crop-status').textContent = 'Không tìm thấy cụm lá rõ nét. Vui lòng tự kéo khung thủ công.';
+      if (detectedBoxes.length === 0 || data.has_leaves === false) {
+        detectedBoxes = [];
+        rectangle = [0, 0, 1, 1];
+        renderBoxButtons([]);
+        draw();
+        el('crop-status').textContent = data.message ? `⚠️ ${data.message}` : '⚠️ Không tìm thấy lá cây trong ảnh. Vui lòng chụp rõ một phiến lá cây trồng.';
         return;
       }
 

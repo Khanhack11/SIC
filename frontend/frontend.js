@@ -112,11 +112,35 @@ function fillList(id, values = []) {
 }
 
 function renderResult(data, requestMs) {
-  const prediction = data.prediction;
-  const confirmed = data.diagnosis_status === 'CONFIRMED';
+  const prediction = data.prediction || {};
+  const isNonPlant = data.status === 'NON_PLANT_IMAGE' || data.is_plant === false || data.diagnosis_status === 'REJECTED_NON_PLANT';
+  const confirmed = !isNonPlant && data.diagnosis_status === 'CONFIRMED';
   const advice = data.advisory_details || {};
   byId('empty-state').hidden = true;
   byId('result-box').hidden = false;
+
+  if (isNonPlant) {
+    byId('disease-name').textContent = '⚠️ Không phát hiện lá cây trong ảnh';
+    byId('scientific-name').textContent = advice.scientific_name || 'Ảnh không chứa phiến lá thực vật phù hợp';
+    byId('status-badge').textContent = 'Ảnh không hợp lệ';
+    byId('status-badge').className = 'badge badge-offline';
+    byId('metric-conf').textContent = '0,00%';
+    byId('metric-latency').textContent = `${(prediction.latency_ms || 1.0).toFixed(1)} ms`;
+    byId('confidence-meter').value = 0;
+    byId('request-time').textContent = `Toàn bộ yêu cầu: ${requestMs.toFixed(0)} ms. (Bộ lọc Out-Of-Distribution đã kích hoạt)`;
+    byId('result-message').textContent = data.message || 'Hệ thống chỉ hỗ trợ chẩn đoán trên lá cây trồng (Cà chua, Khoai tây, Ngô). Ảnh chụp không phát hiện thấy phiến lá cây hoặc xuất hiện khuôn mặt người / vật thể trong phòng.';
+    byId('advisory-panels').hidden = true;
+    byId('uncertain-guidance').hidden = false;
+    fillList('guidance-list', advice.guidance_for_farmer || [
+      'Chỉ chụp cận cảnh phiến lá cây trồng (Cà chua, Khoai tây, Ngô).',
+      'Tránh để khuôn mặt người, bàn ghế, quần áo hoặc nội thất phòng lọt vào khung hình.',
+      'Đảm bảo lá đủ sáng tự nhiên, không bị mờ nhòe, chói lóa hay quá tối.',
+      'Sử dụng nút "✨ Tự động nhận diện lá & đốm bệnh" hoặc kéo khung crop ôm sát phiến lá.'
+    ]);
+    byId('disclaimer-text').textContent = 'Cảnh báo an toàn: Hệ thống từ chối phân tích các ảnh không phải lá cây trồng để đảm bảo tính chuẩn xác và không đưa ra đơn thuốc sai lệch.';
+    return;
+  }
+
   byId('disease-name').textContent = confirmed ? (prediction.is_healthy ? 'Dự đoán: lá thuộc lớp khỏe' : advice.vietnamese_name || prediction.disease_id) : (data.review_reason === 'visible_damage_conflict' ? 'Cần kiểm tra tổn thương' : data.review_reason === 'field_healthy_unverified' ? 'Chưa thể xác nhận lá khỏe' : data.review_reason ? 'Chưa xác định được tình trạng lá' : 'Chưa đủ độ tin cậy');
   byId('scientific-name').textContent = prediction.is_healthy && data.review_reason ? 'Model nghiêng về lớp khỏe, cần kiểm tra lại.' : confirmed ? advice.scientific_name || '' : `Dự đoán sơ bộ: ${advice.preliminary_assessment || 'chưa xác định'}`;
   byId('status-badge').textContent = confirmed ? (prediction.is_healthy ? 'Chưa xác nhận lá khỏe' : 'Đạt ngưỡng tham khảo') : 'Cần chụp lại';

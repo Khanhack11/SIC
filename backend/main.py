@@ -32,6 +32,7 @@ from backend.advisory_engine import AdvisoryKnowledgeBase
 from backend.leaf_detector import detect_leaf_regions, auto_crop_leaf
 from backend.chatbot_engine import AgronomyChatbot
 from backend.weather_advisory import get_agro_weather_advisory, REGIONS_CATALOG
+from backend.plant_validator import validate_plant_leaf
 
 # Initialize FastAPI Application
 @asynccontextmanager
@@ -98,9 +99,42 @@ def process_image(file_bytes, filename, threshold, crop_box=None, visible_damage
     """Run CPU work off the event loop with request-local advisory settings."""
     with inference_slots:
         validate_image_file(file_bytes, filename)
-        inference_result = inference_engine.predict(crop_upload(file_bytes,crop_box))
+        cropped_bytes = crop_upload(file_bytes, crop_box)
+
+        # Pre-inference Plant Presence Guardrail: Rejects human faces, rooms, non-plant objects
+        plant_check = validate_plant_leaf(cropped_bytes)
+        if not plant_check["is_valid_plant"]:
+            applied_cutoff = advisory_engine.threshold if threshold is None else threshold
+            return {
+                "diagnosis_status": "REJECTED_NON_PLANT",
+                "status": "NON_PLANT_IMAGE",
+                "is_plant": False,
+                "review_reason": plant_check["rejection_code"],
+                "message": plant_check["message"],
+                "prediction": {
+                    "disease_id": "Non_plant_object",
+                    "predicted_class": "Non_plant_object",
+                    "class_name_vi": "Không phải lá cây / Cây trồng",
+                    "confidence": 0.0,
+                    "threshold_applied": applied_cutoff,
+                    "latency_ms": 1.0,
+                    "is_healthy": False,
+                    "is_plant": False,
+                    "plant_ratio_pct": plant_check["plant_ratio"],
+                    "skin_ratio_pct": plant_check["skin_ratio"]
+                },
+                "advisory_details": {
+                    "vietnamese_name": "Không phát hiện lá cây trong ảnh",
+                    "scientific_name": plant_check["title"],
+                    "preliminary_assessment": plant_check["title"],
+                    "guidance_for_farmer": plant_check["guidelines"]
+                }
+            }
+
+        inference_result = inference_engine.predict(cropped_bytes)
         inference_result['visible_damage'] = visible_damage
         inference_result['field_photo'] = field_photo
+        inference_result['is_plant'] = True
         return advisory_engine.process_diagnosis(inference_result, threshold=threshold)
 
 

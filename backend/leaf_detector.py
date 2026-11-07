@@ -12,6 +12,8 @@ from typing import Dict, List, Any, Tuple, Optional
 import numpy as np
 from PIL import Image, ImageDraw, ImageOps
 
+from backend.plant_validator import validate_plant_leaf
+
 
 def detect_leaf_regions(
     image_bytes: bytes,
@@ -23,6 +25,30 @@ def detect_leaf_regions(
     and returns bounding boxes around individual leaves and diseased patches.
     """
     start_time = time.perf_counter()
+
+    # Pre-flight check: Verify plant foliage presence (reject human face, indoor rooms, non-plant objects)
+    plant_check = validate_plant_leaf(image_bytes)
+    if not plant_check["is_valid_plant"]:
+        latency_ms = round((time.perf_counter() - start_time) * 1000, 1)
+        return {
+            "has_leaves": False,
+            "is_valid_plant": False,
+            "rejection_code": plant_check["rejection_code"],
+            "title": plant_check["title"],
+            "message": plant_check["message"],
+            "guidelines": plant_check["guidelines"],
+            "plant_ratio": plant_check["plant_ratio"],
+            "skin_ratio": plant_check["skin_ratio"],
+            "total_leaves_detected": 0,
+            "count": 0,
+            "boxes": [],
+            "primary_crop_str": None,
+            "primary_box": None,
+            "annotated_image_preview": None,
+            "execution_ms": latency_ms,
+            "image_size": [0, 0]
+        }
+
     image = Image.open(io.BytesIO(image_bytes)).convert("RGB")
     orig_w, orig_h = image.size
 
@@ -33,18 +59,13 @@ def detect_leaf_regions(
     exg = 2.0 * g - r - b
 
     # 2. Disease Lesion Index: yellowing (chlorosis) or brownish rust/necrosis
-    rust_necrosis = (r - g > 0.06) & (r - b > 0.10) & (r > 0.25)
-    chlorosis_yellow = (r > 0.40) & (g > 0.35) & (b < 0.30) & (np.abs(r - g) < 0.18)
+    rust_necrosis = (r - g > 0.05) & (r - b > 0.08) & (r > 0.20) & (b < 0.35)
+    chlorosis_yellow = (r > 0.35) & (g > 0.30) & (b < 0.30) & (np.abs(r - g) < 0.18)
     lesion_mask = (rust_necrosis | chlorosis_yellow)
 
     # 3. Primary plant mask: Green vegetation OR Discolored lesions
-    plant_mask = (exg > 0.16) | lesion_mask
-
-    # Fallback for indoor/lab plain background: if vegetation mask is too sparse,
-    # segment non-neutral foreground against neutral/white background
-    if plant_mask.sum() < (orig_w * orig_h * 0.015):
-        is_neutral_bg = (np.abs(r - g) < 0.08) & (np.abs(g - b) < 0.08)
-        plant_mask = (~is_neutral_bg)
+    green_veg = (exg > 0.04) & (g > 0.12) & (g >= r * 0.88)
+    plant_mask = green_veg | lesion_mask
 
     # 4. Connected components on downsampled grid (step=2) for high speed (< 30ms)
     visited = np.zeros_like(plant_mask, dtype=bool)
@@ -103,8 +124,8 @@ def detect_leaf_regions(
                         "lesion_ratio": float(lesion_ratio)
                     })
 
-    # Fallback if no distinct box found (e.g. macro close-up of a leaf)
-    if not raw_boxes:
+    # Only if plant ratio is high (macro close-up where entire frame is a leaf) and no distinct isolated box found:
+    if not raw_boxes and plant_check["plant_ratio"] >= 30.0:
         raw_boxes.append({
             "x": int(orig_w * 0.08),
             "y": int(orig_h * 0.08),
@@ -112,7 +133,7 @@ def detect_leaf_regions(
             "h": int(orig_h * 0.84),
             "cnt": int(orig_w * orig_h * 0.5),
             "area": int(orig_w * orig_h * 0.7),
-            "lesion_ratio": 0.2
+            "lesion_ratio": 0.1
         })
 
     # Sort boxes: prioritize lesion density and leaf prominence
@@ -138,6 +159,20 @@ def detect_leaf_regions(
                     break
         if not overlap:
             final_boxes.append(candidate)
+
+    if not final_boxes:
+        elapsed_ms = round((time.perf_counter() - start_time) * 1000, 1)
+        return {
+            "has_leaves": False,
+            "is_valid_plant": True,
+            "count": 0,
+            "primary_crop_str": "0,0,1,1",
+            "primary_box": None,
+            "boxes": [],
+            "annotated_image_preview": None,
+            "execution_ms": elapsed_ms,
+            "image_size": [orig_w, orig_h]
+        }
 
     # Re-sort final boxes by size / prominence
     final_boxes.sort(key=lambda b: b["cnt"], reverse=True)
